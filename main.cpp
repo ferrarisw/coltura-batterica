@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    PilaMatrici* pila = new PilaMatrici (10, 10);
+    PilaMatrici* pila = new PilaMatrici (40, 40);
     pila->stampa();
     pila->next();
     pila->stampa();

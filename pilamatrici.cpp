@@ -78,9 +78,9 @@ int * PilaMatrici::next()
                       );
 
             if (somma == 3)
-                t2[i + j * (dimx + 2)] = vivo;
+                t2 [i + j * (dimx + 2)] = vivo;
             else if (somma < 2 || somma > 3)
-                t2[i + j * (dimx + 2)] = morto;
+                t2 [i + j * (dimx + 2)] = morto;
         }
 
     posizioneAttuale = temp;

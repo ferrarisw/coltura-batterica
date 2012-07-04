@@ -6,14 +6,14 @@ class PilaMatrici
 public:
     PilaMatrici(int x, int y);
     int * next();
-
     void stampa ();
+    int getDimx() { return dimx;}
+    int getDimy() { return dimy;}
 
 private:
 
     int dimx;   //Dimensioni della matrice
     int dimy;
-
     enum stato {morto = 0, vivo = 1};
 
     /*
