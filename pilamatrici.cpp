@@ -27,7 +27,7 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ)
 {
     Matrix* temp = new Matrix;
 
-    DEB(cout<<"Ho creato una nuova matrice allocata dinamicamente.");
+    DEB(cout<<"Ho creato una nuova matrice allocata dinamicamente."<<endl);
 
     temp->succ = succ;
     temp->prec = prec;
@@ -42,7 +42,7 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ)
         temp->tabella[j] = 0;
     }
 
-    DEB(cout<<"Ho inizializzato a 0 tutti gli elementi della matrice"<<endl);
+    DEB(cout<<"Ho inizializzato a 0 tutti gli elementi della matrice."<<endl);
 
     return temp;
 }
@@ -52,7 +52,7 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
     srand( time(0) );
     int tot = 0;
 
-    DEB(cout<<"Ora inizializzo casualmente gli elementi interni della matrice"<<endl);
+    DEB(cout<<"Ora inizializzo casualmente gli elementi interni della matrice."<<endl);
 
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
@@ -73,7 +73,7 @@ inline int PilaMatrici::getValore (int * t, int x, int y)
 
 int * PilaMatrici::next()
 {
-    DEB(cout<<"Sto per inizializzare la prossima matrice."endl);
+    DEB(cout<<"Sto per inizializzare la prossima matrice."<<endl);
 
     Matrix* temp = creaMatrice(posizioneAttuale, NULL);
 
