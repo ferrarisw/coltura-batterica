@@ -12,5 +12,7 @@ int main(int argc, char *argv[])
     pila->stampa();
     pila->next();
     pila->stampa();
+    pila->next();
+    pila->stampa();
     return a.exec();
 }
