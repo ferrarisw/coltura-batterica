@@ -11,6 +11,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    pilamatrici.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    pilamatrici.h
