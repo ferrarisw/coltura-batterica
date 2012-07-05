@@ -113,7 +113,7 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    DEB(cout<<"Stampo la matrice. Questa è solo una funzione per il debug."<<endl);
+    DEB(cout<<"Stampo la matrice. Questa è solo una funzione per il DEBug."<<endl);
 
     cout<<endl;
     for (int j = 0; j < dimy + 2; j++)
