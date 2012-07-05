@@ -44,7 +44,6 @@ public:
     PilaMatrici(int x, int y);
 
     /** Funzione next().
-      @return   temp->tabella   La tabella appena modificata
 
       Questa funzione non prende in ingresso alcun parametro perchè utilizza
       ciò che è già inizializzato nella classe.
@@ -54,7 +53,7 @@ public:
       e inizializza anche due puntatori a intero, uno per la tabella temp appena
       creata (posizioneAttuale->tabella) e uno alla tabella temporanea
       (temp->tabella) per semplificare e rendere leggibile il codice.
-      3)    Tramite la funione ::getValore, acquisisce e somma il valore di
+      3)    Tramite la funione getValore, acquisisce e somma il valore di
       tutte le 8 caselle attorno alla casella corrente (si fa un'iterazione
       su ogni casella con un doppio ciclo for).
       L'algoritmo prevede che se una cellula è morta e ve ne sono 3 vive intorno
@@ -65,6 +64,8 @@ public:
       Questo si può realizzare con due semplici controlli.
       4)    Dopo aver modificato completamente la tabella temp, setta la
       posizioneAttuale a temp, così da ritornare la nuova tabella appena creata.
+
+    @return   temp->tabella   La tabella appena modificata
       */
     int * next();
 
@@ -112,9 +113,6 @@ private:
     Matrix* posizioneAttuale;
 
     /** Funzione creaMatrice.
-      @param [in]   succ    Puntatore alla matrice successiva
-      @param [in]   prec    Puntatore alla matrice precedente
-      @param [out]  temp    Matrice appena creata ed inizializzata
 
       1)    Alloca dinamicamente una matrice temporanea delle dimensioni passate
       dall'utente.
@@ -124,11 +122,15 @@ private:
       maggiorate di 2 perchè creo anche una cornice aggiuntiva di zeri utile
       all'algoritmo nella sua esecuzione.
       4)    Inizializza tutta la matrice a 0 e la ritorna come parametro di uscita.
+
+      @param [in]   succ    Puntatore alla matrice successiva
+      @param [in]   prec    Puntatore alla matrice precedente
+      @param [in]   tempo   Indica il numero della matrice
+      @param [out]  temp    Matrice appena creata ed inizializzata
       */
-    Matrix* creaMatrice(Matrix* succ, Matrix* prec);
+    Matrix* creaMatrice(Matrix* succ, Matrix* prec, int tempo);
 
     /** Funzione riempiCasuale.
-      @param [in]   pos     Puntatore alla matrice attuale
 
       1)    Utilizzando le funzioni di cstdlib setta il seme da cui calcolare
       i numeri random tramite la funzione rand() e inizializza un intero tot
@@ -138,13 +140,12 @@ private:
       valore che sommo al risultato perchè più è vicino ad 1, più le celle
       settate saranno frequenti, altrimenti le celle settate saranno in minor
       numero.
+
+      @param [in]   pos     Puntatore alla matrice attuale
       */
     void riempiCasuale(Matrix* pos);
 
     /** Funzione getValore.
-      @param [in]   cella   Puntatore alla cella corrente
-      @param [in]   x       Colonna della cella
-      @param [in]   y       Riga della cella
 
       1)    Ritorna il valore della casella passata dai tre parametri
       Utilizzo la forma t[x + y * (dimx + 2)] perchè ho inizializzato la
@@ -152,6 +153,10 @@ private:
       indicherebbe la colonna, cui va sommato il numero della riga moltiplicato
       per in numero di colonne aumentato di due (questo perchè devo comunque
       considerare la cornice esterna.
+
+      @param [in]   cella   Puntatore alla cella corrente
+      @param [in]   x       Colonna della cella
+      @param [in]   y       Riga della cella
       */
     int getValore(int * cella, int x, int y);
 };

@@ -1,48 +1,50 @@
 #include "pilamatrici.h"
 #include "cstdlib"
 #include "ctime"
+#include "main.h"
 #include <iostream>
 
 using namespace std;
-
-#define DEB(a)  {a;}
 
 PilaMatrici::PilaMatrici(int x, int y)
 {
     this->dimx = x;
     this->dimy = y;
 
-    testa = creaMatrice(NULL, NULL);
+    testa = creaMatrice(NULL, NULL, 0);
     coda = testa;
     posizioneAttuale = testa;
 
-    DEB(cout<<"Inizio il riempimento casuale dei valori nella matrice attuale."<<endl);
+    TRACE("Riempimento casuale dei valori nella matrice attuale.");
 
     riempiCasuale(posizioneAttuale);
 
-    DEB(cout<<"Riempimento casuale completato con successo."<<endl);
+    TRACE("Riempimento casuale completato con successo.");
 }
 
-PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ)
+PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
 {
     Matrix* temp = new Matrix;
 
-    DEB(cout<<"Ho creato una nuova matrice allocata dinamicamente."<<endl);
+    TRACE("Ho creato una nuova matrice allocata dinamicamente.");
 
     temp->succ = succ;
     temp->prec = prec;
 
     temp->tabella = new int[(dimx+2) * (dimy+2)];
 
-    DEB(cout<<"Ho assegnato la matrice dinamica con le dimensioni "<<dimx);
-    DEB(cout<<" e "<<dimy<<" correttamente."<<endl);
+    TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx);
+    TRACE(" e "<<dimy<<" correttamente.")
 
     for (int j = 0; j < (dimy + 2) * (dimy + 2); j++)
     {
         temp->tabella[j] = 0;
     }
 
-    DEB(cout<<"Ho inizializzato a 0 tutti gli elementi della matrice."<<endl);
+    temp->tempo = tempo;
+
+    TRACE("Ho inizializzato a 0 tutti gli elementi della matrice e aggiornato"
+          " il tempo.");
 
     return temp;
 }
@@ -52,7 +54,7 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
     srand( time(0) );
     int tot = 0;
 
-    DEB(cout<<"Ora inizializzo casualmente gli elementi interni della matrice."<<endl);
+    TRACE("Ora inizializzo casualmente gli elementi interni della matrice.");
 
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
@@ -62,8 +64,8 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
             pos->tabella[i + j * (dimx + 2)] = temp;
         }
 
-    DEB(cout<<"Ho inizializzato tutta la matrice esclusa la cornice esterna."<<endl);
-    DEB(cout<<"La somma dei valori delle caselle è "<<tot<<" (utilizzo statistico)."<<endl);
+    TRACE("Ho inizializzato tutta la matrice esclusa la cornice esterna.");
+    TRACE("La somma dei valori delle caselle è "<<tot<<" (utilizzo statistico).");
 }
 
 inline int PilaMatrici::getValore (int * t, int x, int y)
@@ -73,18 +75,18 @@ inline int PilaMatrici::getValore (int * t, int x, int y)
 
 int * PilaMatrici::next()
 {
-    DEB(cout<<"Sto per inizializzare la prossima matrice."<<endl);
+    TRACE("Sto per inizializzare la prossima matrice.");
 
-    Matrix* temp = creaMatrice(posizioneAttuale, NULL);
+    Matrix* temp = creaMatrice(posizioneAttuale, NULL, posizioneAttuale->tempo + 1);
 
-    DEB(cout<<"Ora inizializzo due puntatori a intero, uno alla tabella attuale"<<endl);
-    DEB(cout<<"e uno alla nuova tabella. Mi serve per semplificare il codice"<<endl);
+    TRACE("Ora inizializzo due puntatori a intero, uno alla tabella attuale\n"
+          "e uno alla nuova tabella. Mi serve per semplificare il codice");
 
     int somma = 0;
     int * t1 = posizioneAttuale->tabella;
     int * t2 = temp->tabella;
 
-    DEB(cout<<"Sommo tutte le 8 caselle attorno alla casella attuale."<<endl);
+    TRACE("Sommo tutte le 8 caselle attorno alla casella attuale.");
 
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
@@ -105,7 +107,9 @@ int * PilaMatrici::next()
                 t2 [i + j * (dimx + 2)] = morto;
         }
 
-    DEB(cout<<"Rendo la matrice appena creata, quella attuale."<<endl);
+    TRACE("Rendo la matrice appena creata, quella attuale.");
+
+    posizioneAttuale->succ = temp;
     posizioneAttuale = temp;
 
     return temp->tabella;
@@ -113,7 +117,7 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    DEB(cout<<"Stampo la matrice. Questa è solo una funzione per il DEBug."<<endl);
+    TRACE("Stampo la matrice. Questa è solo una funzione per il DBGug.");
 
     cout<<endl;
     for (int j = 0; j < dimy + 2; j++)

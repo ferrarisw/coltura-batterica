@@ -15,4 +15,5 @@ SOURCES += main.cpp\
     pilamatrici.cpp
 
 HEADERS  += mainwindow.h \
-    pilamatrici.h
+    pilamatrici.h \
+    main.h
