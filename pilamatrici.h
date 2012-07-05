@@ -87,7 +87,17 @@ public:
       */
     int getDimy() { return dimy;}
 
-    //TODO DOcumentazione salva
+    /** Funzione Salva.
+
+      1)    Salva la versione del file. Nel caso cambio la funzione salva,
+      devo aggiornare la versione del file. Nella carica prima controllerò che
+      la versione del programma sia corretta così da caricare da file i giusti
+      elementi.
+      2)    Salva la posizione attuale, le dimensioni della matrice e il tempo
+      a cui dovrò arrivare nella rigenerazione
+      3)    Dopo aver salvato su file tutti gli elementi della matrice
+      chiudo il file in scrittura.
+      */
     bool salva (QString file);
 
     //TODO Documentazione carica
@@ -114,12 +124,13 @@ private:
 
     /*
       * Due puntatori, uno alla testa e uno alla coda della lista di matrici
+      * Un puntatore alla matrice attuale
       */
     Matrix* testa;
     Matrix* coda;
     Matrix* posizioneAttuale;
 
-    /** Funzione creaMatrice.
+    /** Funzione creaMatrice().
 
       1)    Alloca dinamicamente una matrice temporanea delle dimensioni passate
       dall'utente.
@@ -137,7 +148,19 @@ private:
       */
     Matrix* creaMatrice(Matrix* succ, Matrix* prec, int tempo);
 
-    //TODO Documentazione distruggiMatrice
+    /** Funziona distruggiMatrice().
+
+      1)    se la matrice attuale è la testa, aggiorna la testa alla matrice
+      successiva
+      2)    se la matrice attuale è la cosa, aggiorna la coda alla matrice
+      precedente
+      3)    se la matrice attuale è in mezzo, faccio scavalcare i puntatori
+      della precedente e della successiva.
+      4)    dealloca la tabella allocata dinamicamente
+      5)    dealloca la matrice allocata dinamicamante
+
+      @param [in]   matrice Matrice da eliminare e deallocare
+      */
     bool distruggiMatrice(Matrix* matrice);
 
     /** Funzione riempiCasuale.
@@ -155,7 +178,14 @@ private:
       */
     void riempiCasuale(Matrix* pos);
 
-    //TODO Documentazione InizializzaTabella
+    /** Funzione inizializzaTabella.
+
+      1)    assegna ad ogni elemento della tabella il valore passato come
+      parametro
+
+      @param [in]   pos     Matrice della posizione attuale
+      @param [in]   valore  Valore da applicare a tutti gli elementi
+      */
     void inizializzaTabella(Matrix* pos, int valore);
 
     /** Funzione getValore.

@@ -33,7 +33,6 @@ bool PilaMatrici::salva (QString file)
 
 PilaMatrici* PilaMatrici::carica (QString file)
 {
-
     ifstream carica (file.toStdString().data());
 
     if (!carica)

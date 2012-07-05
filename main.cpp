@@ -8,7 +8,6 @@
   * @param [in]   debug   Se vero il debug è attivo
   */
 void setDebug(bool);
-
 bool DEBUG = false;
 
 int main(int argc, char *argv[])
