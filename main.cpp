@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
 #include "pilamatrici.h"
+#include "test.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,11 +9,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    PilaMatrici* pila = new PilaMatrici (40, 40);
-    pila->stampa();
-    pila->next();
-    pila->stampa();
-    pila->next();
-    pila->stampa();
+    testPila();
+
     return a.exec();
 }
