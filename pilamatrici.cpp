@@ -3,7 +3,6 @@
 #include "ctime"
 #include "main.h"
 #include <iostream>
-
 using namespace std;
 
 PilaMatrici::PilaMatrici(int x, int y)
@@ -36,12 +35,10 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
     TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx);
     TRACE(" e "<<dimy<<" correttamente.")
 
-    for (int j = 0; j < (dimy + 2) * (dimy + 2); j++)
-    {
-        temp->tabella[j] = 0;
-    }
+    inizializzaTabella(temp, 0);
 
     temp->tempo = tempo;
+    temp->rigenerabile = false;
 
     TRACE("Ho inizializzato a 0 tutti gli elementi della matrice e aggiornato"
           " il tempo.");
@@ -66,6 +63,14 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
 
     TRACE("Ho inizializzato tutta la matrice esclusa la cornice esterna.");
     TRACE("La somma dei valori delle caselle è "<<tot<<" (utilizzo statistico).");
+}
+
+void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
+{
+    for (int j = 0; j < (dimy + 2) * (dimy + 2); j++)
+    {
+        tabellaAttuale->tabella[j] = valore;
+    }
 }
 
 inline int PilaMatrici::getValore (int * t, int x, int y)
@@ -128,4 +133,20 @@ void PilaMatrici::stampa()
         } cout<<endl;
     }
     cout<<endl;
+}
+
+bool PilaMatrici::distruggiMatrice (Matrix* matrice)
+{
+    if (matrice->prec == NULL) {
+        testa = matrice->succ;
+    } else matrice->prec->succ = matrice->succ;
+
+    if (matrice->succ == NULL) {
+        coda = matrice->prec;
+    } else matrice->succ->prec = matrice->prec;
+
+    delete matrice->tabella;
+    delete matrice;
+
+    return true;
 }

@@ -1,6 +1,8 @@
 #ifndef PILAMATRICI_H
 #define PILAMATRICI_H
 
+#include "QString"
+
 /** Descrizione della Classe PilaMatrici e delle sue strutture dati.
     La classe PilaMatrici ha una parte pubblica e privata.
     La parte pubblica contiene:
@@ -84,8 +86,12 @@ public:
       @return dimy  Numero di righe
       */
     int getDimy() { return dimy;}
-    void salvaMatrice();
-    void caricaMatrice();
+
+    //TODO DOcumentazione salva
+    bool salva (QString file);
+
+    //TODO Documentazione carica
+    static PilaMatrici* carica (QString file);
 
 private:
 
@@ -103,6 +109,7 @@ private:
         Matrix* succ;
         Matrix* prec;
         int tempo;
+        bool rigenerabile;
     };
 
     /*
@@ -130,6 +137,9 @@ private:
       */
     Matrix* creaMatrice(Matrix* succ, Matrix* prec, int tempo);
 
+    //TODO Documentazione distruggiMatrice
+    bool distruggiMatrice(Matrix* matrice);
+
     /** Funzione riempiCasuale.
 
       1)    Utilizzando le funzioni di cstdlib setta il seme da cui calcolare
@@ -144,6 +154,9 @@ private:
       @param [in]   pos     Puntatore alla matrice attuale
       */
     void riempiCasuale(Matrix* pos);
+
+    //TODO Documentazione InizializzaTabella
+    void inizializzaTabella(Matrix* pos, int valore);
 
     /** Funzione getValore.
 
