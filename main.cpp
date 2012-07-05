@@ -19,17 +19,13 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-<<<<<<< HEAD
     PilaMatrici* pila = new PilaMatrici (10, 10);
     pila->stampa();
     pila->next();
     pila->stampa();
     pila->next();
     pila->stampa();
-=======
-    testPila();
 
->>>>>>> 8ffe728201f620c5e654408022325be77eac64d1
     return a.exec();
 }
 
