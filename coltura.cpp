@@ -1,4 +1,5 @@
 #include "coltura.h"
+#include "cella.h"
 #include <QtGui>
 
 Coltura::Coltura(QWidget *parent) :
@@ -39,12 +40,14 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
     qreal H_casellaRiga    = altezza_casella*scale;
     qreal W_casellaRiga    = larghezza_casella;
 
+    int dimx=10;int dimy=10;
     for(int i=1; i<=dimx; i++)
         for(int j=1; j<=dimy; j++)
         {
             painter->save();
             painter->translate(recta->width()-W_casellaColonna/2,recta->height()-H_casellaRiga/2);
             painter->scale(W_casellaColonna,H_casellaRiga);
+            Cella *cella;
             cella->Paint(painter);
             painter->restore();
         }
@@ -55,5 +58,6 @@ void Coltura::Converti(int * matrice)
 {
     for(int i=0; i<10; i++)
         for(int j=0; j<10; j++)
-            cella->Converti(j+(i*12));
+        {Cella *cella;
+    cella->Converti(j+(i*12));}
 }

@@ -11,9 +11,9 @@ QBrush Cella::getSfondo()
     return this->coloreSfondo;
 }
 
-posizioneCella Cella::getPos()
+int Cella::getPos()
 {
-    return this->posCella;
+    return this->posizioneCella;
 }
 
 void Cella::Paint(QPainter *painter)

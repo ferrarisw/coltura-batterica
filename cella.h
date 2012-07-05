@@ -8,14 +8,15 @@ class Cella
 public:
     Cella();
     QBrush getSfondo();
-    posizioneCella getPos();
+    int getPos();
     void Paint(QPainter*);
+    void Converti(int);
 
 protected:
     void paintEvent(QPaintEvent *);
 
 private:
-    posizioneCella posCella;
+    int posizioneCella;
     QBrush coloreSfondo;
 };
 

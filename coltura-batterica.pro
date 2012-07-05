@@ -12,8 +12,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     coltura.cpp \
-    cella.cpp
+    cella.cpp \
+    mainwindow.cpp \
+    pilamatrici.cpp \
+    test.cpp
 
 HEADERS  += \
     coltura.h \
-    cella.h
+    cella.h \
+    mainwindow.h \
+    pilamatrici.h \
+    test.h

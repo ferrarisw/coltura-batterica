@@ -14,6 +14,7 @@ protected:
 private:
     QBrush background;
     void paintColtura(QPainter*, QPaintEvent *);
+    void Converti(int * matrice);
 };
 
 #endif // COLTURA_H
