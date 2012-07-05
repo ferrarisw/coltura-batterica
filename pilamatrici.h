@@ -6,7 +6,7 @@
 /** Descrizione della Classe PilaMatrici e delle sue strutture dati.
     La classe PilaMatrici ha una parte pubblica e privata.
     La parte pubblica contiene:
-        - Un costruttore per la pila di patrici
+        - Un costruttore per la pila di matrici
         - Una funzione next che crea la prossima matrice apportando le giuste
             modifiche in base alla matrice precedente. Il tipo di ritorno è un
             puntatore a intero

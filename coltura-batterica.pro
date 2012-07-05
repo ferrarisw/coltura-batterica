@@ -11,10 +11,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
+    coltura.cpp \
+    cella.cpp \
+    test.cpp \
     pilamatrici.cpp \
     pilamatrici_IO.cpp
 
 HEADERS  += mainwindow.h \
+    main.h \
+    coltura.h \
+    cella.h \
+    mainwindow.h \
     pilamatrici.h \
-    main.h
+    test.h
