@@ -1,16 +1,47 @@
 #include "coltura.h"
 #include "cella.h"
 #include <QtGui>
+#include <iostream>
+using namespace std;
 
-Coltura::Coltura(QWidget *parent) :
+
+
+Coltura::Coltura(int x, int y,int * mat,QWidget *parent) :
     QWidget(parent)
 {
+    setGeometry(375,55,x*20,y*20);
+    background=Qt::black;
+
+    this->x=x;
+    this->y=y;
+    this->matrice=new int [x*y];
+
+    matrice=mat;
+
+    GDEB(cout<<"creazione dell'oggetto coltura: controllo che l'inizializzazione sia corretta:"
+          "this.x "<<this->x<<" this.y "<<this->y<<endl);
+    GDEB(cout<<"stampo la matrice: "<<endl;
+            for(int j=0; j<x+2; j++)
+            {
+                for(int i=0; i<y+2; i++)
+                {
+                    cout<<(matrice[i+j*(x+2)])<<" ";
+                }
+                cout<<endl;
+            });
+
+}
+
+Coltura::Coltura()
+{
     setGeometry(375,55,600,500);
+    background=Qt::black;
+    GDEB(cerr<<"questo costruttore non inizializza la matrice!")
 }
 
 Coltura::~Coltura()
 {
-
+    delete matrice;
 }
 
 void Coltura::paintEvent(QPaintEvent *event)
@@ -24,40 +55,60 @@ void Coltura::paintEvent(QPaintEvent *event)
 
 void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 {
+
     const QRect *recta = &event->rect();
     painter->fillRect(event->rect(), background);
 
-    //sezione disegno caselle
-    qreal scale = 1;
-    qreal avanzo_scale = scale-1;
-    qreal num_caselle_piccole=9;
+    qreal altezza_cella  = static_cast<qreal>(recta->height())/(y);
+    qreal larghezza_cella= static_cast<qreal>(recta->width())/(x);
 
-    qreal altezza_casella = ((qreal)recta->height())/(num_caselle_piccole+scale*2);
-    qreal larghezza_casella = ((qreal)recta->width())/(num_caselle_piccole+scale*2);
+    //GDEB(cout<<"disegno una matrice di dimensioni "<<x<<" "<<y<<", senza \"bordo\""<<endl);
 
-    qreal H_casellaColonna = altezza_casella;
-    qreal W_casellaColonna = larghezza_casella*scale;
-    qreal H_casellaRiga    = altezza_casella*scale;
-    qreal W_casellaRiga    = larghezza_casella;
+    painter->save();
 
-    int dimx=10;int dimy=10;
-    for(int i=1; i<=dimx; i++)
-        for(int j=1; j<=dimy; j++)
+    painter->scale(larghezza_cella,altezza_cella);
+
+    for(int j=1; j<=x; j++)
+    {
+        for(int i=1; i<=y; i++)
         {
-            painter->save();
-            painter->translate(recta->width()-W_casellaColonna/2,recta->height()-H_casellaRiga/2);
-            painter->scale(W_casellaColonna,H_casellaRiga);
-            Cella *cella;
-            cella->Paint(painter);
-            painter->restore();
+            if(matrice[i+j*(x+2)])//cellula viva
+                painter->setBrush(Qt::white);
+            else
+                painter->setBrush(Qt::red);
+
+            painter->drawRect(-0.5,-0.5,1,1);
+            painter->translate(1,0);
         }
+        painter->translate(-1*(y),1);
+    }
 
+    painter->restore();
 }
 
-void Coltura::Converti(int * matrice)
+
+
+/* funzione di debug: disegna la matrice completa, di dimensioni fisse.
+ * la costante debug viene utilizzata solo per differenziare le funzioni
+ */
+void Coltura::paintColtura(QPainter * painter,QPaintEvent *event, const char * debug)
 {
-    for(int i=0; i<10; i++)
-        for(int j=0; j<10; j++)
-        {Cella *cella;
-    cella->Converti(j+(i*12));}
+    GDEB(cout<<"disegno una matrice di dimensioni "<<x<<" "<<y<<", con il \"bordo\""<<endl);
+
+    GDEB(for(int j=0; j<x+2; j++)
+        {
+            for(int i=0; i<y+2; i++)
+            {
+                if(matrice[i+j*(x+2)])//cellula viva
+                    painter->setBrush(Qt::white);
+                else
+                    painter->setBrush(Qt::red);
+
+                painter->translate(12,0);
+                painter->drawRect(10,10,10,10);
+            }
+            painter->translate(-12*(y+2),10);
+        });
+
 }
+

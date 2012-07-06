@@ -1,4 +1,4 @@
-#ifndef CELLA_H
+/*#ifndef CELLA_H
 #define CELLA_H
 
 #include <QtGui>
@@ -9,7 +9,7 @@ public:
     Cella();
     QBrush getSfondo();
     int getPos();
-    void Paint(QPainter*);
+    void Paint(QPainter*,int);
     void Converti(int);
 
 protected:
@@ -22,3 +22,4 @@ private:
 
 
 #endif // CELLA_H
+*/
