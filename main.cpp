@@ -3,6 +3,9 @@
 #include "pilamatrici.h"
 #include "test.h"
 
+
+
+
 /** Funzione setDebug().
   * Questa funzione setta a vero o falso il debug.
   *
@@ -11,15 +14,18 @@
 void setDebug(bool);
 bool DEBUG = false;
 
+
 int main(int argc, char *argv[])
 {
     setDebug(true);
 
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+
+
+    testGrafica();
 
     testPila();
+
 
     return a.exec();
 }
