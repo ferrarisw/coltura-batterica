@@ -109,7 +109,7 @@ private:
     int dimy;
     enum stato {morto = 0, vivo = 1};
 
-    /*
+    /**
       * La Matrice ha un puntatore ad interi per la tabella,
       * un puntatore alla tabella successiva e uno alla tabella precedente.
       * Utilizzo un singolo puntatore perchè vedo la matrice come un array
@@ -122,7 +122,7 @@ private:
         bool rigenerabile;
     };
 
-    /*
+    /**
       * Due puntatori, uno alla testa e uno alla coda della lista di matrici
       * Un puntatore alla matrice attuale
       */

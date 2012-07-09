@@ -13,18 +13,13 @@ bool DEBUG = false;
 
 int main(int argc, char *argv[])
 {
-//    setDebug(false);
+    setDebug(true);
 
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
-    PilaMatrici* pila = new PilaMatrici (10, 10);
-    pila->stampa();
-    pila->next();
-    pila->stampa();
-    pila->next();
-    pila->stampa();
+    testPila();
 
     return a.exec();
 }
