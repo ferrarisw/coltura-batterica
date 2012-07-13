@@ -1,8 +1,8 @@
+#include <iostream>
 #include "pilamatrici.h"
 #include "cstdlib"
 #include "ctime"
 #include "main.h"
-#include <iostream>
 using namespace std;
 
 PilaMatrici::PilaMatrici(int x, int y)
@@ -117,10 +117,20 @@ int * PilaMatrici::next()
 
     TRACE("Rendo la matrice appena creata, quella attuale.");
 
+    /*
+      * Aggiorno i puntatori della matrice attuale e quella successiva.
+      * Aggiorno il tempo della nuova matrice.
+      */
     posizioneAttuale->succ = temp;
+    temp->prec = posizioneAttuale;
+    temp->tempo = (posizioneAttuale->tempo + 1);
+
     posizioneAttuale = temp;
 
-    return temp->tabella;
+    /*
+      * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
+      */
+    return posizioneAttuale->tabella;
 }
 
 void PilaMatrici::stampa()

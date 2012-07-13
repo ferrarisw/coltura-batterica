@@ -4,12 +4,19 @@
 #include <iostream>
 using namespace std;
 
-extern bool DEBUG;
+#define DEBUG_MODE
 
-#define DBG(a)  {if (DEBUG) {a;}}
+#ifdef  DEBUG_MODE
+#define MASK 1
 
+#define DBG(a, b)      {if ((a) & MASK) {b; }}
+#else
+#define DBG(a, b)
+#endif
 
-#define TRACE(a)    DBG(cout<<"# "<<a<<endl)
+#define TRACE(a)         DBG(1, cout<<"# "<<a<<endl)
+#define GD1(a)           DBG(1, a)
+#define GD2(a)           DBG(2, a)
 
 /*
   * Serve per indicare la versione del programma al momento della carica

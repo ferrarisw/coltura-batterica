@@ -3,8 +3,6 @@
 #include <QtGui>
 #include "pilamatrici.h"
 
-#define GDEB(a) {a; }
-
 class Coltura : public QWidget
 {
     Q_OBJECT

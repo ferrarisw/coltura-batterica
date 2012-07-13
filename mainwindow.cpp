@@ -1,16 +1,17 @@
-#include "mainwindow.h"
-#include "coltura.h"
 #include <iostream>
 #include <QtGui>
+#include "main.h"
+#include "mainwindow.h"
+#include "coltura.h"
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
-    GDEB(cout<<"sono nel costruttore di mainwindow"<<endl);
+    GD1(cout<<"sono nel costruttore di mainwindow"<<endl);
     int x=130,y=130;
     this->coltura = new Coltura(x,y);
-    GDEB(cout<<"[mainwindow] ho creato il nuovo oggetto coltura"<<endl);
+    GD1(cout<<"[mainwindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
 
     QPushButton * stepByStep = new QPushButton("step by step");
@@ -55,5 +56,5 @@ void MainWindow::play(bool toggled)
         connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
     }
     else
-        disconnect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
+        disconnect(slider, SIGNAL(valueChanged(int)), coltura, SLOT(play(int)));
 }

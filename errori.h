@@ -2,7 +2,7 @@
 #define ERRORI_H
 
 /** Header degli errori
-  * Qui sono elencati tutti gli errori di rotorno del programma e la relativa
+  * Qui sono elencati tutti gli errori di ritorno del programma e la relativa
   * descrizione.
   */
 

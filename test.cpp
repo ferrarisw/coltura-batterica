@@ -1,9 +1,9 @@
+#include <QtGui>
+#include <iostream>
 #include "test.h"
 #include "pilamatrici.h"
 #include "coltura.h"
-#include "iostream"
 #include "mainwindow.h"
-#include <QtGui>
 using namespace std;
 
 bool testGrafica()
