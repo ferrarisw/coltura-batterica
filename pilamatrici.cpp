@@ -32,8 +32,8 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
 
     temp->tabella = new int[(dimx+2) * (dimy+2)];
 
-    TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx);
-    TRACE(" e "<<dimy<<" correttamente.")
+    TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
+          " e "<<dimy<<" correttamente.")
 
     inizializzaTabella(temp, 0);
 
@@ -127,6 +127,9 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
+    incrementaMemoriaOccupata (sizeof(temp));
+    TRACE("La memoria occupata fino ad ora è: "<<(memoriaOccupata/1000000)<<" MB");
+
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
       */
@@ -162,4 +165,9 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
     delete matrice;
 
     return true;
+}
+
+int PilaMatrici::incrementaMemoriaOccupata(int valore)
+{
+    memoriaOccupata = memoriaOccupata + valore;
 }

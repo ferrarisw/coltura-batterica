@@ -103,8 +103,10 @@ public:
     //TODO Documentazione carica
     static PilaMatrici* carica (QString file);
 
+
 private:
 
+    //int memoriaOccupata;
     int dimx;   //Dimensioni della matrice
     int dimy;
     enum stato {morto = 0, vivo = 1};
@@ -201,7 +203,11 @@ private:
       @param [in]   x       Colonna della cella
       @param [in]   y       Riga della cella
       */
+
     int getValore(int * cella, int x, int y);
+
+    //TODO Documentazione invrementaMemoriaOccupata
+    //int incrementaMemoriaOccupata(int);
 };
 
 #endif // PILAMATRICI_H
