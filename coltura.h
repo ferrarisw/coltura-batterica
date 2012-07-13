@@ -1,16 +1,17 @@
 #ifndef COLTURA_H
 #define COLTURA_H
 #include <QtGui>
-#include "cella.h"
+#include "pilamatrici.h"
 
 #define GDEB(a) {a; }
 
 class Coltura : public QWidget
 {
+    Q_OBJECT
+
 public:
-    Coltura(int x,int y,int *,QWidget * parent=0);
-    Coltura();
-    ~Coltura();
+    Coltura(int x,int y,QWidget * parent=0);
+    int getMaxTime();
 
 
 protected:
@@ -22,6 +23,13 @@ private:
     void paintColtura(QPainter *, QPaintEvent *,const char *);
     int x,y;
     int * matrice;
+    PilaMatrici *pila;
+    QTimer *timer;
+    int maxTime;
+
+public slots:
+    void aggiorna();
+    void play(int scatti);
 
 
 };

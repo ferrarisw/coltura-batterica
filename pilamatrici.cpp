@@ -67,7 +67,7 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
 
 void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
 {
-    for (int j = 0; j < (dimy + 2) * (dimy + 2); j++)
+    for (int j = 0; j < (dimx + 2) * (dimy + 2); j++)
     {
         tabellaAttuale->tabella[j] = valore;
     }
@@ -106,6 +106,9 @@ int * PilaMatrici::next()
                       getValore(t1, i + 1, j + 1)
                       );
 
+            if (somma == 2) {
+                t2[i + j * (dimx + 2)]  = t1 [i + j * (dimx + 2)];
+            }
             if (somma == 3)
                 t2 [i + j * (dimx + 2)] = vivo;
             else if (somma < 2 || somma > 3)
