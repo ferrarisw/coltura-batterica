@@ -21,4 +21,5 @@ HEADERS  += mainwindow.h \
     main.h \
     coltura.h \
     pilamatrici.h \
-    test.h
+    test.h \
+    errori.h
