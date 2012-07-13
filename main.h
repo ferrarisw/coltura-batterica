@@ -9,6 +9,7 @@ extern bool DEBUG;
 
 #define DBG(a)  {if (DEBUG) {a;}}
 
+
 #define TRACE(a)    DBG(cout<<"# "<<a<<endl)
 
 /*

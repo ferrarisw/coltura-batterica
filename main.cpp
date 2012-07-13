@@ -24,12 +24,16 @@ int main(int argc, char *argv[])
 
     testGrafica();
 
-    PilaMatrici* pila = new PilaMatrici (10, 10);
+    /*!!per favore, usa la funzione testPila()
+     *grazie =)
+     */
+
+    /*PilaMatrici* pila = new PilaMatrici (10, 10);
     pila->stampa();
     pila->next();
     pila->stampa();
     pila->next();
-    pila->stampa();
+    pila->stampa();*/
 
 
     return a.exec();
