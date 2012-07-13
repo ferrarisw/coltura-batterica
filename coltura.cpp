@@ -1,8 +1,9 @@
-#include "coltura.h"
-#include <QtGui>
 #include <iostream>
-#include "pilamatrici.h"
+#include <QtGui>
 #include <cmath>
+#include "main.h"
+#include "coltura.h"
+#include "pilamatrici.h"
 using namespace std;
 
 
@@ -11,9 +12,9 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
 {
     this->x=x;
     this->y=y;
-    GDEB(cout<<"sono nel costruttore di coltura: this.x "<<this->x<<" this.y "<<this->y<<endl);
+    GD1(cout<<"sono nel costruttore di coltura: this.x "<<this->x<<" this.y "<<this->y<<endl);
     pila=new PilaMatrici (x,y);
-    GDEB(cout<<"ho creato un nuovo oggetto PilaMatrici");
+    GD1(cout<<"ho creato un nuovo oggetto PilaMatrici");
 
 
     maxTime=1000;
@@ -30,17 +31,17 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
     matrice=pila->next();
 
 
-    GDEB(cout<<"stampo la matrice manualmente"<<endl;)
+    GD1(cout<<"stampo la matrice manualmente"<<endl;)
     for(int j=1; j<y+1; j++)
     {
         for(int i=1; i<x+1; i++)
         {
-            GDEB(cout<<(matrice[i+j*(x+2)])<<" ");
+            GD1(cout<<(matrice[i+j*(x+2)])<<" ");
         }
-        GDEB(cout<<endl);
+        GD1(cout<<endl);
     }
 
-    GDEB(cout<<"stampo la matrice utilizzando pila.stampa: "<<endl;
+    GD2(cout<<"stampo la matrice utilizzando pila.stampa: "<<endl;
         pila->stampa());
 
 }
@@ -67,7 +68,7 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 
     painter->scale(larghezza_cella,altezza_cella);
 
-    GDEB(cout<<"[Coltura::paintColtura] stampo la matrice mentre disegno il widget"<<endl)
+    GD2(cout<<"[Coltura::paintColtura] stampo la matrice mentre disegno il widget"<<endl)
     for(int j=1; j<y+1; j++)
     {
         for(int i=1; i<x+1; i++)
@@ -77,11 +78,11 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
             else
                 painter->setBrush(QBrush(QColor(0,0,30)));
 
-            GDEB(cout<<(matrice[i+j*(x+2)])<<" ");
+            GD2(cout<<(matrice[i+j*(x+2)])<<" ");
             painter->drawRect(-0.5,-0.5,1,1);
             painter->translate(1,0);
         }
-        GDEB(cout<<endl);
+        GD2(cout<<endl);
         painter->translate(-1*(y),1);
     }
 
@@ -92,12 +93,12 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 
 /* funzione di debug: disegna la matrice completa, di dimensioni fisse.
  * la costante debug viene utilizzata solo per differenziare le funzioni
- */
+ *
 void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *debug)
 {
-    GDEB(cout<<"disegno una matrice di dimensioni "<<x<<" "<<y<<", con il \"bordo\""<<endl);
+    GD1(cout<<"disegno una matrice di dimensioni "<<x<<" "<<y<<", con il \"bordo\""<<endl);
 
-    GDEB(for(int j=0; j<x+2; j++)
+    GD1(for(int j=0; j<x+2; j++)
         {
             for(int i=0; i<y+2; i++)
             {
@@ -112,7 +113,7 @@ void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *d
             painter->translate(-12*(y+2),10);
         });
 
-}
+}*/
 
 int Coltura::getMaxTime ()
 {
@@ -134,7 +135,7 @@ void Coltura::play(int scatti)
         timer->stop();
     else {
         timer->start(-((1./maxTime)*scatti*scatti)+maxTime);
-        GDEB(cout<<"valore "<<(-((1./maxTime)*scatti*scatti)+maxTime)<<"\tscatti "<<scatti<<endl);
+        GD1(cout<<"valore "<<(-((1./maxTime)*scatti*scatti)+maxTime)<<"\tscatti "<<scatti<<endl);
     }
 
 }
