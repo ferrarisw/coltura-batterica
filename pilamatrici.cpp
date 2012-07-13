@@ -1,7 +1,7 @@
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include "pilamatrici.h"
-#include "cstdlib"
-#include "ctime"
 #include "main.h"
 using namespace std;
 
@@ -62,7 +62,7 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
         }
 
     TRACE("Ho inizializzato tutta la matrice esclusa la cornice esterna.");
-    TRACE("La somma dei valori delle caselle è "<<tot<<" (utilizzo statistico).");
+    TRACE("Il numero di cellule vive è: "<<contaCelluleVive(pos)<<" / "<<dimx*dimy<<".");
 }
 
 void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
@@ -127,7 +127,9 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
-    incrementaMemoriaOccupata (sizeof(temp));
+    TRACE("Il numero di cellule vive è: "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
+
+    incrementaMemoriaOccupata(static_cast<int>(sizeof(Matrix)));
     TRACE("La memoria occupata fino ad ora è: "<<(memoriaOccupata/1000000)<<" MB");
 
     /*
@@ -138,17 +140,16 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    TRACE("Stampo la matrice. Questa è solo una funzione per il DBGug.");
+    GD2(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.");
 
-    cout<<endl;
     for (int j = 0; j < dimy + 2; j++)
     {
         for (int i = 0; i < dimx + 2; i++)
         {
-            cout<<getValore(posizioneAttuale->tabella, i, j)<<" ";
-        } cout<<endl;
+            GD2(cout<<getValore(posizioneAttuale->tabella, i, j)<<" ");
+        } GD2(cout<<endl);
     }
-    cout<<endl;
+    GD2(cout<<endl);
 }
 
 bool PilaMatrici::distruggiMatrice (Matrix* matrice)
@@ -167,7 +168,20 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
     return true;
 }
 
-int PilaMatrici::incrementaMemoriaOccupata(int valore)
+int PilaMatrici::incrementaMemoriaOccupata(int & valore)
 {
     memoriaOccupata = memoriaOccupata + valore;
+    return memoriaOccupata;
+}
+
+int PilaMatrici::contaCelluleVive(Matrix* & matrice)
+{
+    matrice->numeroCelleVive = 0;
+
+    for (int j = 0; j < (dimx + 2) * (dimy + 2); j++)
+    {
+        if (matrice->tabella[j] == vivo)
+            matrice->numeroCelleVive++;
+    }
+    return matrice->numeroCelleVive;
 }
