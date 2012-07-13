@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
     GDEB(cout<<"sono nel costruttore di mainwindow"<<endl);
-    int x=5,y=5;
+    int x=130,y=130;
     this->coltura = new Coltura(x,y);
     GDEB(cout<<"[mainwindow] ho creato il nuovo oggetto coltura"<<endl);
 
