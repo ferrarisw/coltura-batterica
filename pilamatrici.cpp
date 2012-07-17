@@ -56,7 +56,7 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
         {
-            int temp = ( rand() / static_cast<float> (RAND_MAX) + 0.35);
+            int temp = ( rand() / static_cast<float> (RAND_MAX) + 0.5);
             tot += temp;
             pos->tabella[i + j * (dimx + 2)] = temp;
         }
@@ -127,11 +127,11 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
-    TRACE("Il numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
+    LOG("\rIl numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
 
-    incrementaMemoriaOccupata(memoriaOccupata, sizeof(Matrix));
-    TRACE("La memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata)<<" Byte.");
-    TRACE("Questa e' la matrice numero: "<<posizioneAttuale->tempo);
+    incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
+    LOG("\rLa memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB.");
+    LOG("\rQuesta e' la matrice numero: "<<posizioneAttuale->tempo);
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.

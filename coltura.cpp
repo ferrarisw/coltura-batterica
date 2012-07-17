@@ -31,16 +31,16 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
     matrice=pila->next();
 
 
-    GD1(cout<<"stampo la matrice manualmente"<<endl;)
+    GD1(cout<<"stampo la matrice manualmente"<<endl;
     for(int j=1; j<y+1; j++)
     {
         for(int i=1; i<x+1; i++)
         {
-            GD1(cout<<(matrice[i+j*(x+2)])<<" ");
+            cout<<(matrice[i+j*(x+2)])<<" ";
         }
-        GD1(cout<<endl);
+        cout<<endl;
     }
-
+)
     GD2(cout<<"stampo la matrice utilizzando pila.stampa: "<<endl;
         pila->stampa());
 
