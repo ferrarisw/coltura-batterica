@@ -30,7 +30,7 @@ bool PilaMatrici::salva (QString file)
 
     return true;
 }
-
+/*
 PilaMatrici* PilaMatrici::carica (QString file)
 {
     ifstream carica (file.toStdString().data());
@@ -38,11 +38,13 @@ PilaMatrici* PilaMatrici::carica (QString file)
     if (!carica)
         return false;
 
-    //carica>>versionefile;
+    carica>>versionefile;
 
     int dimx, dimy;
 
     PilaMatrici* nuovaPila = new PilaMatrici(dimx, dimy);
 
     return nuovaPila;
+
 }
+*/

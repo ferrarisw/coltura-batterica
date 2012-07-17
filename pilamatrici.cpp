@@ -130,7 +130,7 @@ int * PilaMatrici::next()
     TRACE("Il numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
 
     incrementaMemoriaOccupata(memoriaOccupata, sizeof(Matrix));
-    TRACE("La memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB");
+    TRACE("La memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata)<<" Byte.");
     TRACE("Questa e' la matrice numero: "<<posizioneAttuale->tempo);
 
     /*
@@ -141,16 +141,16 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    GD2(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.");
+    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.");
 
     for (int j = 0; j < dimy + 2; j++)
     {
         for (int i = 0; i < dimx + 2; i++)
         {
-            GD2(cout<<getValore(posizioneAttuale->tabella, i, j)<<" ");
-        } GD2(cout<<endl);
+            GD3(cout<<getValore(posizioneAttuale->tabella, i, j)<<" ");
+        } GD3(cout<<endl);
     }
-    GD2(cout<<endl);
+    GD3(cout<<endl);
 }
 
 bool PilaMatrici::distruggiMatrice (Matrix* matrice)
