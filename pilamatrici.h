@@ -10,7 +10,7 @@
         - Una funzione next che crea la prossima matrice apportando le giuste
             modifiche in base alla matrice precedente. Il tipo di ritorno è un
             puntatore a intero
-        - Una funzione stampa con funzionalità di Debug che ritorna void
+        - Una funzione stampa con funzionalit�  di Debug che ritorna void
         - Due funzioni getDimx e getDimy che ritornano la dimensione sull'asse
             x e y della matrice. Mi servono perchè l'utente possa inserirle
             a esecuzione iniziata.
@@ -48,7 +48,7 @@ public:
     /** Funzione next().
 
       Questa funzione non prende in ingresso alcun parametro perchè utilizza
-      ciò che è già inizializzato nella classe.
+      ciò che è gi�  inizializzato nella classe.
       1)    Inizializza una nuova matrice dinamica come posizioneAttuale e
       setta il puntatore alla prossima matrice a NULL.
       2)    Inizializza un intero somma per eseguire il calcolo dell'algoritmo
@@ -100,16 +100,20 @@ public:
       */
     bool salva (QString file);
 
+    int memoriaOccupata;
+
+    //TODO Documentazione invrementaMemoriaOccupata
+    int incrementaMemoriaOccupata(int &, int);
+
     //TODO Documentazione carica
     static PilaMatrici* carica (QString file);
-
-    int memoriaOccupata;
 
 private:
 
     int dimx;   //Dimensioni della matrice
     int dimy;
     enum stato {morto = 0, vivo = 1};
+
 
     /**
       * La Matrice ha un puntatore ad interi per la tabella,
@@ -171,7 +175,7 @@ private:
       1)    Utilizzando le funzioni di cstdlib setta il seme da cui calcolare
       i numeri random tramite la funzione rand() e inizializza un intero tot
       da utilizzare per debug.
-      2)    Genera casualmente un numero, che risulterà sempre 0 < x < 1.
+      2)    Genera casualmente un numero, che risulter�  sempre 0 < x < 1.
       Posso controllare la frequenza di celle settate a 1 modificando l'ultimo
       valore che sommo al risultato perchè più è vicino ad 1, più le celle
       settate saranno frequenti, altrimenti le celle settate saranno in minor
@@ -205,9 +209,6 @@ private:
       @param [in]   y       Riga della cella
       */
     int getValore(int * cella, int x, int y);
-
-    //TODO Documentazione invrementaMemoriaOccupata
-    int incrementaMemoriaOccupata(int &);
 
     //TODO Documentazione contaCelleVive()
     int contaCelluleVive(Matrix * &);

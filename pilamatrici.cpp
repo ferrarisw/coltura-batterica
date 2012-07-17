@@ -127,10 +127,11 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
-    TRACE("Il numero di cellule vive è: "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
+    TRACE("Il numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
 
-    incrementaMemoriaOccupata(static_cast<int>(sizeof(Matrix)));
-    TRACE("La memoria occupata fino ad ora è: "<<(memoriaOccupata/1000000)<<" MB");
+    incrementaMemoriaOccupata(memoriaOccupata, sizeof(Matrix));
+    TRACE("La memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB");
+    TRACE("Questa e' la matrice numero: "<<posizioneAttuale->tempo);
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
@@ -168,9 +169,9 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
     return true;
 }
 
-int PilaMatrici::incrementaMemoriaOccupata(int & valore)
+int PilaMatrici::incrementaMemoriaOccupata(int & memoriaOccupata, int valore)
 {
-    memoriaOccupata = memoriaOccupata + valore;
+    memoriaOccupata += valore;
     return memoriaOccupata;
 }
 
