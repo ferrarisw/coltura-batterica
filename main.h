@@ -2,12 +2,33 @@
 #define MAIN_H
 
 #include <iostream>
+#include <fstream>
+#include "errors.h"
 using namespace std;
 
 #define DEBUG_MODE
-
 #ifdef  DEBUG_MODE
-#define MASK 1
+/*
+  * Per attivare i diversi livelli di debug inizializzare la maschera con i
+  * seguenti valori:
+  * 0   NESSUN LIVELLO
+  * 1   TRACE
+  * 2   GD1
+  * 3   TRACE       GD1
+  * 4   GD2
+  * 5   TRACE       GD2
+  * 6   GD1         GD2
+  * 7   TRACE       GD1     GD2
+  * 8   GD3
+  * 9   TRACE       GD3
+  * 10  GD1         GD3
+  * 11  TRACE       GD1     GD3
+  * 12  GD2         GD3
+  * 13  TRACE       GD2     GD3
+  * 14  GD1         GD2     GD3
+  * 15  TRACE       GD1     GD2     GD3
+  */
+#define MASK 0
 
 #define DBG(a, b)      {if ((a) & MASK) {b; }}
 #else
@@ -15,8 +36,36 @@ using namespace std;
 #endif
 
 #define TRACE(a)         DBG(1, cout<<"# "<<a<<endl)
-#define GD1(a)           DBG(1, a)
-#define GD2(a)           DBG(2, a)
+#define GD1(a)           DBG(2, a)
+#define GD2(a)           DBG(4, a)
+#define GD3(a)           DBG(8, a)
+
+/*############################################################################*/
+
+/*
+  * Definisco una modalità di log che stampa sul terminale i dati statistici
+  * del programma.
+  */
+#define LOG_MODE
+#ifdef LOG_MODE
+
+/*
+  * Per attivare o meno la modalità di log, assegnare a LOGMASK i
+  * seguenti valori:
+  * 0   NO LOG
+  * 1   LOG
+  */
+
+#define LOGMASK 1
+
+#define LOGDBG(a, b)      {if ((a) & LOGMASK) {b; }}
+#else
+#define LOGDBG(a, b)
+#endif
+
+#define LOG(a)          LOGDBG(1, cout<<a<<endl)
+
+/*############################################################################*/
 
 /*
   * Serve per indicare la versione del programma al momento della carica

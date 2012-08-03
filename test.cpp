@@ -16,12 +16,6 @@ bool testGrafica()
 bool testPila()
 {
     PilaMatrici* pila = new PilaMatrici (10, 40);
-    pila->stampa();
-
-    pila->next();
-    pila->stampa();
-    pila->next();
-    pila->stampa();
 
     return true;
 }

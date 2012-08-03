@@ -1,7 +1,7 @@
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include "pilamatrici.h"
-#include "cstdlib"
-#include "ctime"
 #include "main.h"
 using namespace std;
 
@@ -32,8 +32,8 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
 
     temp->tabella = new int[(dimx+2) * (dimy+2)];
 
-    TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx);
-    TRACE(" e "<<dimy<<" correttamente.")
+    TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
+          " e "<<dimy<<" correttamente.")
 
     inizializzaTabella(temp, 0);
 
@@ -56,13 +56,13 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
         {
-            int temp = ( rand() / static_cast<float> (RAND_MAX) + 0.35);
+            int temp = ( rand() / static_cast<float> (RAND_MAX) + 0.5);
             tot += temp;
             pos->tabella[i + j * (dimx + 2)] = temp;
         }
 
     TRACE("Ho inizializzato tutta la matrice esclusa la cornice esterna.");
-    TRACE("La somma dei valori delle caselle è "<<tot<<" (utilizzo statistico).");
+    TRACE("Il numero di cellule vive è: "<<contaCelluleVive(pos)<<" / "<<dimx*dimy<<".");
 }
 
 void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
@@ -127,6 +127,12 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
+    LOG("\rIl numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
+
+    incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
+    LOG("\rLa memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB.");
+    LOG("\rQuesta e' la matrice numero: "<<posizioneAttuale->tempo);
+
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
       */
@@ -135,17 +141,16 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    TRACE("Stampo la matrice. Questa è solo una funzione per il DBGug.");
+    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.");
 
-    cout<<endl;
     for (int j = 0; j < dimy + 2; j++)
     {
         for (int i = 0; i < dimx + 2; i++)
         {
-            cout<<getValore(posizioneAttuale->tabella, i, j)<<" ";
-        } cout<<endl;
+            GD3(cout<<getValore(posizioneAttuale->tabella, i, j)<<" ");
+        } GD3(cout<<endl);
     }
-    cout<<endl;
+    GD3(cout<<endl);
 }
 
 bool PilaMatrici::distruggiMatrice (Matrix* matrice)
@@ -162,4 +167,22 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
     delete matrice;
 
     return true;
+}
+
+int PilaMatrici::incrementaMemoriaOccupata(int & memoriaOccupata, int valore)
+{
+    memoriaOccupata += valore;
+    return memoriaOccupata;
+}
+
+int PilaMatrici::contaCelluleVive(Matrix* & matrice)
+{
+    matrice->numeroCelleVive = 0;
+
+    for (int j = 0; j < (dimx + 2) * (dimy + 2); j++)
+    {
+        if (matrice->tabella[j] == vivo)
+            matrice->numeroCelleVive++;
+    }
+    return matrice->numeroCelleVive;
 }
