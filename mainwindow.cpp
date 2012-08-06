@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
     GD1(cout<<"sono nel costruttore di mainwindow"<<endl) ;
-    int x = 150, y = 150;
+    int x = 120, y = 120;
     this->coltura = new Coltura(x,y);
     GD1(cout<<"[mainwindow] ho creato il nuovo oggetto coltura"<<endl) ;
 

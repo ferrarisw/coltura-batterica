@@ -31,7 +31,7 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
     matrice=pila->next();
 
 
-    GD1(cout<<"stampo la matrice manualmente"<<endl;
+    GD3(cout<<"stampo la matrice manualmente"<<endl;
     for(int j=1; j<y+1; j++)
     {
         for(int i=1; i<x+1; i++)
@@ -43,7 +43,6 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
 )
     GD2(cout<<"stampo la matrice utilizzando pila.stampa: "<<endl;
         pila->stampa());
-
 }
 
 void Coltura::paintEvent(QPaintEvent *event)
