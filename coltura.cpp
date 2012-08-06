@@ -14,10 +14,11 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
     this->y=y;
     GD1(cout<<"sono nel costruttore di coltura: this.x "<<this->x<<" this.y "<<this->y<<endl);
     pila=new PilaMatrici (x,y);
-    GD1(cout<<"ho creato un nuovo oggetto PilaMatrici");
+    GD1(cout<<"ho creato un nuovo oggetto PilaMatrici\n");
 
 
-    maxTime=1000;
+    minTime=30;
+    maxTime=1000+minTime;
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(aggiorna()));
 
@@ -115,6 +116,15 @@ int Coltura::getMaxTime ()
 }
 
 /**
+ * @brief Coltura::getMinTime
+ * @return
+ */
+int Coltura::getMinTime()
+{
+    return minTime;
+}
+
+/**
  * @brief Coltura::aggiorna
  *
  */
@@ -132,7 +142,7 @@ void Coltura::play(int scatti)
         timer->stop();
     else {
         timer->start(-((1./maxTime)*scatti*scatti)+maxTime);
-        GD1(cout<<"valore "<<(-((1./maxTime)*scatti*scatti)+maxTime)<<"\tscatti "<<scatti<<endl);
+        GD1(cout<<"millisecondi "<<(-((1./maxTime)*scatti*scatti)+maxTime)<<"\tvalore slider "<<scatti<<endl);
     }
 
 }

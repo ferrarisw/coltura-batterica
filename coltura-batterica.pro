@@ -13,13 +13,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
     mainwindow.cpp \
     coltura.cpp \
-    test.cpp \
     pilamatrici.cpp \
-    pilamatrici_IO.cpp
+    pilamatrici_IO.cpp \
+    starter.cpp
 
 HEADERS  += mainwindow.h \
     main.h \
     coltura.h \
     pilamatrici.h \
-    test.h \
-    errors.h
+    errors.h \
+    starter.h
