@@ -237,6 +237,9 @@ private:
       @param    [in]    Matrix*&    Matrice della quale contare le cellule vive
       */
     int contaCelluleVive(Matrix * &);
+
+    //TODO Documentazione funzione verificaMatriciUguali
+    bool verificaMatriciUguali(Matrix*, Matrix*);
 };
 
 #endif // PILAMATRICI_H

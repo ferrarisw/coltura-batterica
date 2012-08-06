@@ -62,7 +62,6 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
         }
 
     TRACE("Ho inizializzato tutta la matrice esclusa la cornice esterna.");
-    TRACE("Il numero di cellule vive è: "<<contaCelluleVive(pos)<<" / "<<dimx*dimy<<".");
 }
 
 void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
@@ -115,7 +114,7 @@ int * PilaMatrici::next()
                       );
 
             if (somma == 2) {
-                t2[i + j * (dimx + 2)]  = t1 [i + j * (dimx + 2)];
+                t2[i + j * (dimx + 2)] = t1 [i + j * (dimx + 2)];
             }
             if (somma == 3)
                 t2 [i + j * (dimx + 2)] = vivo;
@@ -148,16 +147,17 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.");
+    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.";
 
     for (int j = 0; j < dimy + 2; j++)
     {
         for (int i = 0; i < dimx + 2; i++)
         {
-            GD3(cout<<getValore(posizioneAttuale->tabella, i, j)<<" ");
-        } GD3(cout<<endl);
+            cout<<getValore(posizioneAttuale->tabella, i, j)<<" ";
+        } cout<<endl;
     }
-    GD3(cout<<endl);
+    cout<<endl;
+    );  //Fine di GD3
 }
 
 bool PilaMatrici::distruggiMatrice (Matrix* matrice)
@@ -192,4 +192,17 @@ int PilaMatrici::contaCelluleVive(Matrix* & matrice)
             matrice->numeroCelleVive++;
     }
     return matrice->numeroCelleVive;
+}
+
+bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaConfronto)
+{
+    if (tabellaAttuale->tempo == 0 || tabellaAttuale->tempo < tabellaConfronto->tempo)
+        return false;
+
+    for (int i = 0; i < (dimx + 2) * (dimy + 2); i++)
+    {
+        if (tabellaAttuale->tabella[i] != tabellaConfronto->tabella[i])
+            return false;
+    }
+    return true;
 }
