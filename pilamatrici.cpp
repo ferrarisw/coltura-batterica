@@ -73,6 +73,14 @@ void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
     }
 }
 
+inline bool PilaMatrici::inizializzaCasella(Matrix *tabellaAttuale, int casella, int valore)
+{
+    if (casella > (dimx + 2) * (dimy + 2) || casella < 0)
+        return false;
+    else tabellaAttuale->tabella[casella] = valore;
+    return true;
+}
+
 inline int PilaMatrici::getValore (int * t, int x, int y)
 {
     return ( t[x + y * (dimx + 2)] );
@@ -127,11 +135,10 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
-    LOG("\rIl numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
-
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
-    LOG("\rLa memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB.");
-    LOG("\rQuesta e' la matrice numero: "<<posizioneAttuale->tempo);
+    LOG("Il numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".\n"
+        "La memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB.\n"
+        "Questa e' la matrice numero: "<<posizioneAttuale->tempo);
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.

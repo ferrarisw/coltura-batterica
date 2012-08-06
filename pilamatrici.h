@@ -114,6 +114,8 @@ public:
     //TODO Documentazione carica
     static PilaMatrici* carica (QString file);
 
+
+
 private:
 
     int dimx;   //Dimensioni della matrice
@@ -193,13 +195,24 @@ private:
 
     /** Funzione inizializzaTabella.
 
-      1)    assegna ad ogni elemento della tabella il valore passato come
+      Assegna ad ogni elemento della tabella il valore passato come
       parametro
 
       @param [in]   pos     Matrice della posizione attuale
       @param [in]   valore  Valore da applicare a tutti gli elementi
       */
     void inizializzaTabella(Matrix* pos, int valore);
+
+    /** Funzione inizializzaCasella.
+
+      Assegna all'elemento della tabella indicato dal secondo parametro,
+      il valore passato come terzo parametro
+
+      @param [in]   pos     Matrice della posizione attuale
+      @param [in]   casella Casella di cui modificare il valore
+      @param [in]   valore  Valore da applicare a tutti gli elementi
+      */
+    inline bool inizializzaCasella(Matrix* pos, int casella, int valore);
 
     /** Funzione getValore.
 
