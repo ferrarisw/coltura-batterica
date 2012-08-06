@@ -102,7 +102,13 @@ public:
 
     int memoriaOccupata;
 
-    //TODO Documentazione invrementaMemoriaOccupata
+    /** Funzione incrementaMemoriaOccupata(int &, int)
+      Incrementa il valore passatogli per riferimento al primo parametro
+      del secondo valore passato per valore al secondo parametro
+
+      @param [in]   intero&    Int che indica la memoria da incrementare
+      @param [in]   intero     Valore da aggiungere alla memoria occupata
+      */
     int incrementaMemoriaOccupata(int &, int);
 
     //TODO Documentazione carica
@@ -210,7 +216,13 @@ private:
       */
     int getValore(int * cella, int x, int y);
 
-    //TODO Documentazione contaCelleVive()
+    /** Funzione contaCelleVive()
+      Per ogni matrice, setta a 0 il numero di cellule vive, e la scorre
+      completamente incrementando di 1 il numero di cellule vive ogni volta che
+      ne incontra una viva.
+
+      @param    [in]    Matrix*&    Matrice della quale contare le cellule vive
+      */
     int contaCelluleVive(Matrix * &);
 };
 
