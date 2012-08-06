@@ -46,6 +46,11 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
 
 }
 
+/**
+ * @brief Coltura::paintEvent
+ * @param event
+ * Funzione chiamata ogni volta che avviene un evento sullo schermo.
+ */
 void Coltura::paintEvent(QPaintEvent *event)
 {
     QPainter painter;
@@ -55,6 +60,16 @@ void Coltura::paintEvent(QPaintEvent *event)
     painter.end();
 }
 
+/**
+ * @brief Coltura::paintColtura
+ * @param painter
+ * @param event
+ * Funzione che disegna il widget Coltura in base alla matrice generata da
+ * pilaMatrici->next.
+ * In particolare, prende l'oggetto locale @var matrice e lo scorre fino alla fine,
+ * impostando diversamente il pennello a seconda del valore della cella, ovviamente
+ * non prima di aver correttamente impostato le dimensioni delle caselle.
+ */
 void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 {
 
@@ -89,38 +104,21 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
     painter->restore();
 }
 
+//TODO: funzione paintColtura di debug
 
-
-/* funzione di debug: disegna la matrice completa, di dimensioni fisse.
- * la costante debug viene utilizzata solo per differenziare le funzioni
- *
-void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *debug)
-{
-    GD1(cout<<"disegno una matrice di dimensioni "<<x<<" "<<y<<", con il \"bordo\""<<endl);
-
-    GD1(for(int j=0; j<x+2; j++)
-        {
-            for(int i=0; i<y+2; i++)
-            {
-                if(matrice[i+j*(x+2)])//cellula viva
-                    painter->setBrush(Qt::white);
-                else
-                    painter->setBrush(Qt::red);
-
-                painter->translate(12,0);
-                painter->drawRect(10,10,10,10);
-            }
-            painter->translate(-12*(y+2),10);
-        });
-
-}*/
-
+/**
+ * @brief Coltura::getMaxTime
+ * @return maxTime
+ */
 int Coltura::getMaxTime ()
 {
     return maxTime;
 }
 
-
+/**
+ * @brief Coltura::aggiorna
+ *
+ */
 void Coltura::aggiorna()
 {
     matrice=pila->next();
@@ -138,4 +136,9 @@ void Coltura::play(int scatti)
         GD1(cout<<"valore "<<(-((1./maxTime)*scatti*scatti)+maxTime)<<"\tscatti "<<scatti<<endl);
     }
 
+}
+
+void Coltura::changeDimension(int x)
+{
+    this->x=this->y=x;
 }

@@ -10,12 +10,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     GD1(cout<<"sono nel costruttore di mainwindow"<<endl) ;
-    int x = 150, y = 150;
+    int x = 50, y = 50;
 
     this->coltura = new Coltura(x,y);
     GD1(cout<<"[mainwindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
-
+    /*QSpinBox * dimension = new QSpinBox();
+    connect(dimension, SIGNAL(valueChanged(int)),coltura,SLOT(changeDimension(int)));
+*/
     QPushButton * stepByStep = new QPushButton("step by step");
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
 
@@ -36,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget(coltura);
     layout->addWidget(slider);
+ //   layout->addWidget(dimension);
     layout->addLayout(buttonLayout);
 
 
@@ -53,10 +56,10 @@ MainWindow::~MainWindow()
 void MainWindow::play(bool toggled)
 {
     playing = toggled;
-    if (playing == true) {
+    if (playing == true)
         coltura->play(slider->value());
-        connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
-    }
     else
-        disconnect(slider, SIGNAL(valueChanged(int)), coltura, SLOT(play(int)));
+        coltura->play(0);
+
+    connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
 }
