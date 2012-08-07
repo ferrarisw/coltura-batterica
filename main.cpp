@@ -8,8 +8,10 @@
 //TODO commenti
 //TODO makefile
 //TODO revisione classe coltura
-//TODO modalita` dio
-//TODO indietro nel tempo
+//TODO modalita` dio        Funzione implementata ma da completare
+//TODO indietro nel tempo   Funzione implementata, meglio controllarla
+
+//Idee sulla gestione degli errori con popup, soprattutto nella modalità Dio
 
 int main(int argc, char *argv[])
 {

@@ -122,9 +122,6 @@ public:
     //TODO Documentazione variabile matriciRealizzate
     int matriciRealizzate;
 
-    //TODO Documentazione funzione viaggioNelTempo
-    Matrix* viaggioNelTempo(Matrix* attuale, int tempoDesiderato);
-
 private:
 
     int dimx;   //Dimensioni della matrice
@@ -185,7 +182,7 @@ private:
 
       @param [in]   matrice Matrice da eliminare e deallocare
       */
-    bool distruggiMatrice(Matrix* matrice);
+    bool distruggiMatrice(Matrix*);
 
     /** Funzione riempiCasuale.
 
@@ -200,7 +197,7 @@ private:
 
       @param [in]   pos     Puntatore alla matrice attuale
       */
-    void riempiCasuale(Matrix* pos);
+    void riempiCasuale(Matrix*);
 
     /** Funzione inizializzaTabella.
 
@@ -210,7 +207,7 @@ private:
       @param [in]   pos     Matrice della posizione attuale
       @param [in]   valore  Valore da applicare a tutti gli elementi
       */
-    void inizializzaTabella(Matrix* pos, int valore);
+    void inizializzaTabella(Matrix*, int);
 
     /** Funzione inizializzaCasella.
 
@@ -247,11 +244,28 @@ private:
       */
     int contaCelluleVive(Matrix * &);
 
-    //TODO Documentazione funzione verificaMatriciUguali
+    /** Funzione verificamatriciUguali()
+      Questa funzione confronta due matrici e ritorna vero se sono uguali.
+      Ritorna falso se la prima tabella di confronto è anche la prima della pila
+      oppure se la prima tabela di confronto è precedente alla seconda.
+
+      @param [in]   tabellaAttuale  Prima tabella di confronto
+      @param [in]   tabellaConfronto    Seconda tabella di confronto
+      */
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
+    //TODO Documentazione funzione viaggioNelTempo
+    Matrix* viaggioNelTempo(Matrix*, int);
+
+    //TODO Documentazione variabile godModeActivity
+    bool godModeActivity;
+
+    //TODO Documentazione godModeActivityChanges
+    int godModeActivityChanges(bool &, bool);
+    int godModeActivityChanges(bool &);
+
     //TODO Documentazione funzione godMode
-    inline int godMode (Matrix* & attuale, int cellaDaModificare, int valoreDaAssegnare);
+    inline int godMode (Matrix* & matriceDaModificare, int cellaDaModificare, int valoreDaAssegnare);
 };
 
 #endif // PILAMATRICI_H

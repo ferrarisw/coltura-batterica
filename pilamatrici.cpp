@@ -19,6 +19,9 @@ PilaMatrici::PilaMatrici(int x, int y)
     riempiCasuale(posizioneAttuale);
 
     TRACE("Riempimento casuale completato con successo.");
+
+    memoriaOccupata = 0;
+    matriciRealizzate = 0;
 }
 
 PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
@@ -178,7 +181,9 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
 
 int PilaMatrici::incrementaMemoriaOccupata(int & memoriaOccupata, int valore)
 {
+    TRACE("Incremento la memoria occupata.")
     memoriaOccupata += valore;
+    TRACE("Memoria incrementata.")
     return memoriaOccupata;
 }
 
@@ -231,10 +236,54 @@ PilaMatrici::Matrix* PilaMatrici::viaggioNelTempo(Matrix* attuale, int tempoDesi
     return attuale;
 }
 
+/*
+  * L'idea è quella di utilizzare una modalità godMode. Questa è disabilitata
+  * di default, ma può essere attivata tramite l'apposito pulsante.
+  * Quando questa è attivata, la riproduzione termina e possiamo modificare la
+  * matrice che vediamo. La presenza di due funzioni ne prevede una che assegna
+  * un valore specifico alla variabile booleana godModeActivity, l'altra invece
+  * assegna il valore opposto a quello già attivo (se falso diventa vero e vice
+  * versa).
+  * La funzione godMode() viene invocata solo se la godModeActivity è vera e,
+  * una volta terminata, setta a falso godModeActivity, così da poter riprendere
+  * la riproduzione dalla matrice modificata.
+  */
+int godModeActivityChanges(bool & godModeActivity, bool value)
+{
+    godModeActivity = value;
+    return godModeChangesActivitySucc;
+}
+
+int godModeActivityChanges(bool & godModeActivity)
+{
+    if (godModeActivity == false)
+        godModeActivity = true;
+    else godModeActivity = false;
+
+    return godModeChangesActivitySwitched;
+}
+
 inline int PilaMatrici::godMode (Matrix* & matriceDaModificare, int cellaDaModificare, int valoreDaAssegnare)
 {
+    /*
+      * Generalmente la matrice da modificare è quella attuale, quindi dovrebbe
+      * per lo meno esistere, però questa implementazione estende la funzione
+      * a più utilizzi, per esempio la modifica di tabelle precedenti o future
+      * a quella attuale (sempre ammesso che esistano).
+      */
+
     if (matriceDaModificare->tempo < 0 || matriceDaModificare->tempo > matriciRealizzate)
         return notExistingMatrix;
 
+    if (cellaDaModificare > (dimx * dimy))
+        return cellsNumberOverflow;
 
+
+
+    /*
+      * In questo caso non apparirà un popup di errore, ma verrà aggiornata
+      * la grafica per visualizzare la tabella modificata.
+      */
+    matriceDaModificare->tabella[cellaDaModificare] = valoreDaAssegnare;
+    return changesOccurred;
 }
