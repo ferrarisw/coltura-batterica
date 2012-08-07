@@ -206,3 +206,35 @@ bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaC
     }
     return true;
 }
+
+//TODO Controllare funzione viaggioNelTempo
+PilaMatrici::Matrix* PilaMatrici::viaggioNelTempo(Matrix* attuale, int tempoDesiderato)
+{
+    /*
+      * Se il tempo desiderato è maggiore o uguale al tempo della matrice
+      * attuale, allora ritorno la matrice attuale
+      */
+    if (attuale->tempo == tempoDesiderato || tempoDesiderato < 0)
+        return attuale;
+
+    if (attuale->tempo < tempoDesiderato) {
+        if (tempoDesiderato > matriciRealizzate)
+            return attuale;
+
+        else if (tempoDesiderato <= matriciRealizzate)
+            return viaggioNelTempo(attuale->succ, tempoDesiderato);
+    }
+
+    if (attuale->tempo > tempoDesiderato)
+        return viaggioNelTempo(attuale->prec, tempoDesiderato);
+
+    return attuale;
+}
+
+inline int PilaMatrici::godMode (Matrix* & matriceDaModificare, int cellaDaModificare, int valoreDaAssegnare)
+{
+    if (matriceDaModificare->tempo < 0 || matriceDaModificare->tempo > matriciRealizzate)
+        return notExistingMatrix;
+
+
+}

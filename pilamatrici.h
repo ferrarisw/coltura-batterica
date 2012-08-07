@@ -100,6 +100,14 @@ public:
       */
     bool salva (QString file);
 
+    //TODO Documentazione carica
+    static PilaMatrici* carica (QString file);
+
+    /** Variabile memoriaOccupata
+      Questa variabile viene utilizzata per statistiche e indica quanta mamoria
+      viene occupata dalle matrici in ogni punto del programma. Si può vedere
+      questa statistica attivando il livello di debug LOG
+      */
     int memoriaOccupata;
 
     /** Funzione incrementaMemoriaOccupata(int &, int)
@@ -111,10 +119,11 @@ public:
       */
     int incrementaMemoriaOccupata(int &, int);
 
-    //TODO Documentazione carica
-    static PilaMatrici* carica (QString file);
+    //TODO Documentazione variabile matriciRealizzate
+    int matriciRealizzate;
 
-
+    //TODO Documentazione funzione viaggioNelTempo
+    Matrix* viaggioNelTempo(Matrix* attuale, int tempoDesiderato);
 
 private:
 
@@ -240,6 +249,9 @@ private:
 
     //TODO Documentazione funzione verificaMatriciUguali
     bool verificaMatriciUguali(Matrix*, Matrix*);
+
+    //TODO Documentazione funzione godMode
+    inline int godMode (Matrix* & attuale, int cellaDaModificare, int valoreDaAssegnare);
 };
 
 #endif // PILAMATRICI_H

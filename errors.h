@@ -5,4 +5,8 @@ enum streamErrors {
 
 };
 
+enum godModeErrors {
+    notExistingMatrix       =       -50;
+};
+
 #endif // ERRORS_H
