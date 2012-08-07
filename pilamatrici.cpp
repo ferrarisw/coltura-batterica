@@ -20,7 +20,7 @@ PilaMatrici::PilaMatrici(int x, int y)
 
     TRACE("Riempimento casuale completato con successo.");
 
-    memoriaOccupata = 0;
+    memoriaOccupata = (sizeof(Matrix) + sizeof(int)*dimx*dimy);
     matriciRealizzate = 0;
 }
 
@@ -137,10 +137,16 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
+    int numeroCelluleVive = contaCelluleVive(posizioneAttuale);
+    int numeroCelluleVivePrecedente = contaCelluleVive(posizioneAttuale->prec);
+
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
-    LOG("Il numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".\n"
-        "La memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB.\n"
-        "Questa e' la matrice numero: "<<posizioneAttuale->tempo);
+
+    LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " << dimx * dimy << ". "
+        "( " << (numeroCelluleVive * 100 / (dimx*dimy) ) << "% )\n"
+        "La memoria occupata dalle matrici fino ad ora e': " << ( memoriaOccupata / 1000 ) << " KB.\n"
+        "Questa e' la matrice numero: " << posizioneAttuale->tempo << "\n"
+        "Confronto con la matrice precedente: " << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << "%\n" );
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
