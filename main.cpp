@@ -5,6 +5,7 @@
 #include "coltura.h"
 #include "mainwindow.h"
 #include "starter.h"
+#include "main.h"
 using namespace std;
 
 
@@ -23,9 +24,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    GD1(cout<<"[main] sto per inizializzare lo starter"<<endl;)
     Starter * starter = new Starter();
     starter->show();
-
 
     return a.exec();
 }

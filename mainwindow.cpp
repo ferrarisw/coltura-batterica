@@ -5,15 +5,14 @@
 #include "coltura.h"
 using namespace std;
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(int x, int y, QWidget *parent)
     : QWidget(parent)
 {
 
-    GD1(cout<<"sono nel costruttore di mainwindow"<<endl) ;
-    dim=500;
+    GD1(cout<<"[MainWindow]: costruttore. dimensioni della matrice: "<<x<<" "<<y<<endl) ;
 
-    this->coltura = new Coltura(dim,dim);
-    GD1(cout<<"[mainwindow] ho creato il nuovo oggetto coltura"<<endl) ;
+    this->coltura = new Coltura(x,y);
+    GD1(cout<<"[MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
 
     QPushButton * stepByStep = new QPushButton("step by step");
@@ -62,8 +61,3 @@ void MainWindow::play(bool toggled)
     connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
 }
 
-void MainWindow::changeDimension(int dim)
-{
-    this->dim=dim;
-
-}

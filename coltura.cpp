@@ -4,6 +4,7 @@
 #include "main.h"
 #include "coltura.h"
 #include "pilamatrici.h"
+#include <cassert>
 using namespace std;
 
 
@@ -13,6 +14,8 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
     this->x=x;
     this->y=y;
     GD1(cout<<"sono nel costruttore di coltura: this.x "<<this->x<<" this.y "<<this->y<<endl);
+    assert(x>0);
+    assert(y>0);
     pila=new PilaMatrici (x,y);
     GD1(cout<<"ho creato un nuovo oggetto PilaMatrici\n");
 
@@ -24,7 +27,7 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
 
 
     setGeometry(375,55,x*15,y*15);
-    setMinimumSize(1*x,1*y);
+    setMinimumSize(3*x,3*y);
     background=Qt::black;
 
     matrice=new int[(x+2)*(y+2)];
@@ -93,7 +96,10 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
                 colore=(QBrush(QColor(0,0,30)));
 
             GD2(cout<<(matrice[i+j*(x+2)])<<" ");
-            painter->fillRect(-0.5,-0.5,1,1,colore);
+
+            //painter->fillRect(-0.5,-0.5,1,1,colore);
+            painter->setBrush(colore);
+            painter->drawRect(-0.5,-0.5,1,1);
             painter->translate(1,0);
         }
         GD2(cout<<endl);
