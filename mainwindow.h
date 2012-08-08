@@ -19,7 +19,7 @@ private slots:
 private:
     QSlider * slider;
     Coltura * coltura;
-
+    int dim;
     bool playing;
 };
 

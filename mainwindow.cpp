@@ -10,10 +10,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     GD1(cout<<"sono nel costruttore di mainwindow"<<endl) ;
+    dim=500;
 
-    int x = 140, y = 140;
+    this->coltura = new Coltura(dim,dim);
 
-    this->coltura = new Coltura(x,y);
     GD1(cout<<"[mainwindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
 
@@ -54,6 +54,7 @@ MainWindow::~MainWindow()
 void MainWindow::play(bool toggled)
 {
     playing = toggled;
+
     if (playing == true)
         coltura->play(slider->value());
     else
@@ -64,5 +65,6 @@ void MainWindow::play(bool toggled)
 
 void MainWindow::changeDimension(int dim)
 {
+    this->dim=dim;
 
 }

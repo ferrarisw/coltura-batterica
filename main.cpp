@@ -1,4 +1,4 @@
-#include <QtGui/QApplication>
+#include <QtGui>
 #include "mainwindow.h"
 #include "pilamatrici.h"
 #include <iostream>
@@ -23,15 +23,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-
     Starter * starter = new Starter();
     starter->show();
-
-    /*
-      * Creando l'oggetto dinamico finestra, invoco il costruttore
-      */
-    MainWindow * finestra = new MainWindow();
-    finestra->show();
 
     return a.exec();
 }

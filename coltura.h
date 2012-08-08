@@ -49,6 +49,7 @@ private:
     int * matrice;
     PilaMatrici *pila;
     QBrush background;
+    QBrush colore;
     void paintColtura(QPainter *, QPaintEvent *);
     QTimer *timer;
     int minTime;

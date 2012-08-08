@@ -1,5 +1,6 @@
 #include "starter.h"
 #include "main.h"
+#include <QtGui>
 
 Starter::Starter(QPaintEvent * event, QWidget *parent) :
     QWidget(parent)
@@ -38,10 +39,31 @@ Starter::Starter(QWidget *parent) :
     mainwindow = new MainWindow;
 
     QSpinBox * dimension = new QSpinBox();
+    dimension->setValue(50);
     connect(dimension, SIGNAL(valueChanged(int)),mainwindow,SLOT(changeDimension(int)));
+    connect(dimension, SIGNAL(valueChanged(int)),this,SLOT(changeDimension(int)));
+
+    QPushButton * ok = new QPushButton("Ok");
+    connect(ok, SIGNAL(clicked()),this,SLOT(avvio()));
+    //connect(ok, SIGNAL(clicked()),this,SLOT(close()));
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget(dimension);
+    layout->addWidget(ok);
 
     setLayout(layout);
+}
+
+void Starter::avvio()
+{
+
+    MainWindow * finestra = new MainWindow();
+    finestra->show();
+
+    this->close();
+}
+
+void Starter::changeDimension(int dim)
+{
+    this->dim=dim;
 }
