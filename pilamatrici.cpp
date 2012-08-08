@@ -142,10 +142,11 @@ int * PilaMatrici::next()
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
 
     LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " << dimx * dimy << ". "
-        "( " << (numeroCelluleVive * 100 / (dimx*dimy) ) << "% )\n"
+        "( " << (numeroCelluleVive * 100 / (dimx*dimy) ) << " % )\n"
         "La memoria occupata dalle matrici fino ad ora e': " << ( memoriaOccupata / 1000 ) << " KB.\n"
         "Questa e' la matrice numero: " << posizioneAttuale->tempo << "\n"
-        "Confronto con la matrice precedente: " << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << "%\n" );
+        "Confronto con la matrice precedente: " << numeroCelluleVive - numeroCelluleVivePrecedente << " ("
+        << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << " % )\n" );
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.

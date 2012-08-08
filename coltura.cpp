@@ -43,7 +43,8 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
     }
 )
     GD2(cout<<"stampo la matrice utilizzando pila.stampa: "<<endl;
-        pila->stampa());
+        pila->stampa()
+            );
 }
 
 /**

@@ -27,6 +27,9 @@ int main(int argc, char *argv[])
     Starter * starter = new Starter();
     starter->show();
 
+    /*
+      * Creando l'oggetto dinamico finestra, invoco il costruttore
+      */
     MainWindow * finestra = new MainWindow();
     finestra->show();
 
