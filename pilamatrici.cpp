@@ -293,13 +293,13 @@ int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
   * una volta terminata, setta a falso godModeActivity, così da poter riprendere
   * la riproduzione dalla matrice modificata.
   */
-int godModeActivityChanges(bool & godModeActivity, bool value)
+int godModeActivityEnabler(bool & godModeActivity, bool value)
 {
     godModeActivity = value;
     return godModeChangesActivitySucceded;
 }
 
-int godModeActivityChanges(bool & godModeActivity)
+int godModeActivityEnabler(bool & godModeActivity)
 {
     if (godModeActivity == false)
         godModeActivity = true;

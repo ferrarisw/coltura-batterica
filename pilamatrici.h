@@ -262,8 +262,8 @@ private:
     bool godModeActivity;
 
     //TODO Documentazione godModeActivityChanges
-    int godModeActivityChanges(bool &, bool);
-    int godModeActivityChanges(bool &);
+    int godModeActivityEnabler(bool &, bool);
+    int godModeActivityEnabler(bool &);
 
     //TODO Documentazione funzione godMode
     int godModeInitializer();
