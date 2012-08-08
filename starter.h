@@ -13,14 +13,16 @@ public:
     explicit Starter(QWidget *parent = 0);
 private:
     MainWindow * mainwindow;
-    int dim;
+    int x;
+    int y;
 
 
 signals:
     
 public slots:
     void avvio();
-    void changeDimension(int);
+    void changeXDimension(int);
+    void changeYDimension(int);
 };
 
 #endif // STARTER_H

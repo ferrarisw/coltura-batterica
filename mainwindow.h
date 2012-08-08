@@ -9,17 +9,16 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(int, int, QWidget *parent = 0);
     ~MainWindow();
-public slots:
-    void changeDimension(int);
+
 private slots:
     void play(bool toggled);
 
 private:
     QSlider * slider;
     Coltura * coltura;
-    int dim;
+    int x,y;
     bool playing;
 };
 
