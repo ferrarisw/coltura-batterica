@@ -26,6 +26,5 @@ int main(int argc, char *argv[])
     Starter * starter = new Starter();
     starter->show();
 
-
     return a.exec();
 }

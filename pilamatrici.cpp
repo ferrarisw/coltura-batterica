@@ -20,7 +20,7 @@ PilaMatrici::PilaMatrici(int x, int y)
 
     TRACE("Riempimento casuale completato con successo.");
 
-    memoriaOccupata = 0;
+    memoriaOccupata = (sizeof(Matrix) + sizeof(int)*dimx*dimy);
     matriciRealizzate = 0;
 }
 
@@ -128,19 +128,27 @@ int * PilaMatrici::next()
     TRACE("Rendo la matrice appena creata, quella attuale.");
 
     /*
+      * Setto il puntatore parallel a NULL perchè la linea del tempo è una sola
       * Aggiorno i puntatori della matrice attuale e quella successiva.
       * Aggiorno il tempo della nuova matrice.
       */
+    posizioneAttuale->parallel = NULL;
     posizioneAttuale->succ = temp;
     temp->prec = posizioneAttuale;
     temp->tempo = (posizioneAttuale->tempo + 1);
 
     posizioneAttuale = temp;
 
+    double numeroCelluleVive = static_cast<double> ( contaCelluleVive(posizioneAttuale) );
+    double numeroCelluleVivePrecedente = static_cast<double> ( contaCelluleVive(posizioneAttuale->prec) );
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
-    LOG("Il numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".\n"
-        "La memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB.\n"
-        "Questa e' la matrice numero: "<<posizioneAttuale->tempo);
+
+    LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " << dimx * dimy << ". "
+        "( " << (numeroCelluleVive * 100 / (dimx*dimy) ) << " % )\n"
+        "La memoria occupata dalle matrici fino ad ora e': " << ( memoriaOccupata / 1000 ) << " KB.\n"
+        "Questa e' la matrice numero: " << posizioneAttuale->tempo << "\n"
+        "Confronto con la matrice precedente: " << numeroCelluleVive - numeroCelluleVivePrecedente << " ("
+        << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << " % )\n" );
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
@@ -179,7 +187,7 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
     return true;
 }
 
-int PilaMatrici::incrementaMemoriaOccupata(int & memoriaOccupata, int valore)
+int PilaMatrici::incrementaMemoriaOccupata(long int & memoriaOccupata, int valore)
 {
     TRACE("Incremento la memoria occupata.")
     memoriaOccupata += valore;
@@ -263,27 +271,32 @@ int godModeActivityChanges(bool & godModeActivity)
     return godModeChangesActivitySwitched;
 }
 
-inline int PilaMatrici::godMode (Matrix* & matriceDaModificare, int cellaDaModificare, int valoreDaAssegnare)
+int PilaMatrici::godMode (int cellaDaModificare, int valoreDaAssegnare)
 {
     /*
-      * Generalmente la matrice da modificare è quella attuale, quindi dovrebbe
-      * per lo meno esistere, però questa implementazione estende la funzione
-      * a più utilizzi, per esempio la modifica di tabelle precedenti o future
-      * a quella attuale (sempre ammesso che esistano).
+      * Creo una nuova matrice dinamica perchè da questo punto proseguo su
+      * una liea del tempo parallela a quella originaria. Per questo assegno
+      * al tempo della matrice nuova, il tempo della matrice attuale. Per la
+      * progressione temporale farò in modo che la posizioneAttuale si sposti
+      * su questa pila di matrici secondaria.
+      * Tutto questo è volto all'obbiettivo di mantenere la pila originaria per
+      * eventuali viaggi indietro nel tempo, e poter proseguire liberamente su
+      * pile parallele.
       */
+    Matrix* temp = creaMatrice(posizioneAttuale->prec, NULL, posizioneAttuale->tempo);
+    posizioneAttuale->parallel = temp; // Aggancio la pila originaria alla pila parallela
+    posizioneAttuale = temp;
 
-    if (matriceDaModificare->tempo < 0 || matriceDaModificare->tempo > matriciRealizzate)
+    if (posizioneAttuale->tempo < 0 || posizioneAttuale->tempo > matriciRealizzate)
         return notExistingMatrix;
-
-    if (cellaDaModificare > (dimx * dimy))
+/*
+    if (posizioneAttuale > (dimx * dimy))
         return cellsNumberOverflow;
-
-
-
+*/
     /*
       * In questo caso non apparirà un popup di errore, ma verrà aggiornata
       * la grafica per visualizzare la tabella modificata.
       */
-    matriceDaModificare->tabella[cellaDaModificare] = valoreDaAssegnare;
+    posizioneAttuale->tabella[cellaDaModificare] = valoreDaAssegnare;
     return changesOccurred;
 }
