@@ -119,7 +119,6 @@ public:
       */
     int incrementaMemoriaOccupata(long int &, int);
 
-    //TODO Documentazione variabile matriciRealizzate
     int matriciRealizzate;
 
 private:
