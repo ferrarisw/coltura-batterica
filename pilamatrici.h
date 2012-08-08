@@ -138,6 +138,7 @@ private:
         int* tabella;
         Matrix* succ;
         Matrix* prec;
+        Matrix* parallel;
         int tempo;
         bool rigenerabile;
         int numeroCelleVive;
@@ -180,7 +181,7 @@ private:
       4)    dealloca la tabella allocata dinamicamente
       5)    dealloca la matrice allocata dinamicamante
 
-      @param [in]   matrice Matrice da eliminare e deallocare
+      @param [in]   Matrix*      Matrice da eliminare e deallocare
       */
     bool distruggiMatrice(Matrix*);
 
@@ -195,7 +196,7 @@ private:
       settate saranno frequenti, altrimenti le celle settate saranno in minor
       numero.
 
-      @param [in]   pos     Puntatore alla matrice attuale
+      @param [in]   Matrix*     Puntatore alla matrice attuale
       */
     void riempiCasuale(Matrix*);
 
@@ -204,8 +205,8 @@ private:
       Assegna ad ogni elemento della tabella il valore passato come
       parametro
 
-      @param [in]   pos     Matrice della posizione attuale
-      @param [in]   valore  Valore da applicare a tutti gli elementi
+      @param [in]   Matrix*     Matrice della posizione attuale
+      @param [in]   int         Valore da applicare a tutti gli elementi
       */
     void inizializzaTabella(Matrix*, int);
 
@@ -249,8 +250,8 @@ private:
       Ritorna falso se la prima tabella di confronto è anche la prima della pila
       oppure se la prima tabela di confronto è precedente alla seconda.
 
-      @param [in]   tabellaAttuale  Prima tabella di confronto
-      @param [in]   tabellaConfronto    Seconda tabella di confronto
+      @param [in]   Matrix*     Prima tabella di confronto
+      @param [in]   Matrix*     Seconda tabella di confronto
       */
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
@@ -265,7 +266,7 @@ private:
     int godModeActivityChanges(bool &);
 
     //TODO Documentazione funzione godMode
-    inline int godMode (Matrix* & matriceDaModificare, int cellaDaModificare, int valoreDaAssegnare);
+    int godMode (int cellaDaModificare, int valoreDaAssegnare);
 };
 
 #endif // PILAMATRICI_H

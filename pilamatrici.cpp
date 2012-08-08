@@ -128,9 +128,11 @@ int * PilaMatrici::next()
     TRACE("Rendo la matrice appena creata, quella attuale.");
 
     /*
+      * Setto il puntatore parallel a NULL perchè la linea del tempo è una sola
       * Aggiorno i puntatori della matrice attuale e quella successiva.
       * Aggiorno il tempo della nuova matrice.
       */
+    posizioneAttuale->parallel = NULL;
     posizioneAttuale->succ = temp;
     temp->prec = posizioneAttuale;
     temp->tempo = (posizioneAttuale->tempo + 1);
@@ -269,27 +271,32 @@ int godModeActivityChanges(bool & godModeActivity)
     return godModeChangesActivitySwitched;
 }
 
-inline int PilaMatrici::godMode (Matrix* & matriceDaModificare, int cellaDaModificare, int valoreDaAssegnare)
+int PilaMatrici::godMode (int cellaDaModificare, int valoreDaAssegnare)
 {
     /*
-      * Generalmente la matrice da modificare è quella attuale, quindi dovrebbe
-      * per lo meno esistere, però questa implementazione estende la funzione
-      * a più utilizzi, per esempio la modifica di tabelle precedenti o future
-      * a quella attuale (sempre ammesso che esistano).
+      * Creo una nuova matrice dinamica perchè da questo punto proseguo su
+      * una liea del tempo parallela a quella originaria. Per questo assegno
+      * al tempo della matrice nuova, il tempo della matrice attuale. Per la
+      * progressione temporale farò in modo che la posizioneAttuale si sposti
+      * su questa pila di matrici secondaria.
+      * Tutto questo è volto all'obbiettivo di mantenere la pila originaria per
+      * eventuali viaggi indietro nel tempo, e poter proseguire liberamente su
+      * pile parallele.
       */
+    Matrix* temp = creaMatrice(posizioneAttuale->prec, NULL, posizioneAttuale->tempo);
+    posizioneAttuale->parallel = temp; // Aggancio la pila originaria alla pila parallela
+    posizioneAttuale = temp;
 
-    if (matriceDaModificare->tempo < 0 || matriceDaModificare->tempo > matriciRealizzate)
+    if (posizioneAttuale->tempo < 0 || posizioneAttuale->tempo > matriciRealizzate)
         return notExistingMatrix;
-
-    if (cellaDaModificare > (dimx * dimy))
+/*
+    if (posizioneAttuale > (dimx * dimy))
         return cellsNumberOverflow;
-
-
-
+*/
     /*
       * In questo caso non apparirà un popup di errore, ma verrà aggiornata
       * la grafica per visualizzare la tabella modificata.
       */
-    matriceDaModificare->tabella[cellaDaModificare] = valoreDaAssegnare;
+    posizioneAttuale->tabella[cellaDaModificare] = valoreDaAssegnare;
     return changesOccurred;
 }
