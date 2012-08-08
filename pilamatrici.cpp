@@ -221,27 +221,63 @@ bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaC
 }
 
 //TODO Controllare funzione viaggioNelTempo
-PilaMatrici::Matrix* PilaMatrici::viaggioNelTempo(Matrix* attuale, int tempoDesiderato)
+/*
+  * Questa funzione ritorna interi per gestire il tipo di comportamento
+  * della funzione in base alla richiesta. Di conseguenza il la matrice
+  * viene passata alla funzione chiamante tramite le modifiche (visto il
+  * passaggio per riferimento del primo parametro) apportate in caso di
+  * possibilità di movimenti nel tempo.
+  */
+int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
 {
     /*
       * Se il tempo desiderato è maggiore o uguale al tempo della matrice
-      * attuale, allora ritorno la matrice attuale
+      * attuale
       */
-    if (attuale->tempo == tempoDesiderato || tempoDesiderato < 0)
-        return attuale;
+    if (attuale->tempo == tempoDesiderato)
+        return sameMatrixRequest;
 
-    if (attuale->tempo < tempoDesiderato) {
+    /*
+      * Se il tempo desiderato è minore di 0, quindi la matrice non può esistere
+      */
+    else if(tempoDesiderato < 0)
+        return notExistingTime;
+
+    /*
+      * Se il tempo desiderato è maggiore della matrice attuale, allora....
+      */
+    else if (attuale->tempo < tempoDesiderato) {
+        /*
+          * Se il tempo desiderato è maggiore delle matrici realizzate, non
+          * potrà esistere la matrice richiesta
+          */
         if (tempoDesiderato > matriciRealizzate)
-            return attuale;
-
-        else if (tempoDesiderato <= matriciRealizzate)
-            return viaggioNelTempo(attuale->succ, tempoDesiderato);
+            return notEnoughMatrix;
+        /*
+          * Se il tempo desiderato è minore delle matrici realizzate, allora la
+          * matrice esiste ed è successiva alla matrice corrente: viaggio nel
+          * futuro. Aggiorno la matrice attuale a quella successiva e chiamo
+          * ricorsivamente la funzione fino ad arrivare alla condizione in cui
+          * il tempo desiderato sarà uguale a quello dell'attuale
+          */
+        else if (tempoDesiderato <= matriciRealizzate) {
+            attuale = attuale->succ;
+            return viaggioNelTempo(attuale, tempoDesiderato);
+        }
     }
 
-    if (attuale->tempo > tempoDesiderato)
-        return viaggioNelTempo(attuale->prec, tempoDesiderato);
+    /*
+      * Se il tempo desiderato è maggiore di 0 (controllo precedente) e minore
+      * del tempo attuale, allora la matrice esiste e aggiorno la matrice attuale
+      * a quella precedente fino a che non arrivo alla condizione in cui il
+      * tempo desiderato è uguale al tempo attuale.
+      */
+    else if (attuale->tempo > tempoDesiderato) {
+        attuale = attuale->prec;
+        return viaggioNelTempo(attuale, tempoDesiderato);
+    }
 
-    return attuale;
+    return matrixFound;
 }
 
 /*
@@ -259,7 +295,7 @@ PilaMatrici::Matrix* PilaMatrici::viaggioNelTempo(Matrix* attuale, int tempoDesi
 int godModeActivityChanges(bool & godModeActivity, bool value)
 {
     godModeActivity = value;
-    return godModeChangesActivitySucc;
+    return godModeChangesActivitySucceded;
 }
 
 int godModeActivityChanges(bool & godModeActivity)

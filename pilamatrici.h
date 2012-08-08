@@ -255,7 +255,7 @@ private:
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
     //TODO Documentazione funzione viaggioNelTempo
-    Matrix* viaggioNelTempo(Matrix*, int);
+    int viaggioNelTempo(Matrix *&, int);
 
     //TODO Documentazione variabile godModeActivity
     bool godModeActivity;
