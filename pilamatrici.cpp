@@ -137,9 +137,8 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
-    int numeroCelluleVive = contaCelluleVive(posizioneAttuale);
-    int numeroCelluleVivePrecedente = contaCelluleVive(posizioneAttuale->prec);
-
+    double numeroCelluleVive = static_cast<double> ( contaCelluleVive(posizioneAttuale) );
+    double numeroCelluleVivePrecedente = static_cast<double> ( contaCelluleVive(posizioneAttuale->prec) );
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
 
     LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " << dimx * dimy << ". "
