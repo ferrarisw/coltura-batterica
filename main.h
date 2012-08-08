@@ -28,7 +28,7 @@ using namespace std;
   * 14  GD1         GD2     GD3
   * 15  TRACE       GD1     GD2     GD3
   */
-#define MASK 2
+#define MASK 15
 
 #define DBG(a, b)      {if ((a) & MASK) {b; }}
 #else
