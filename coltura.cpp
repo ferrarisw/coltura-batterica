@@ -24,11 +24,10 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
 
 
     setGeometry(375,55,x*15,y*15);
-    setMinimumSize(5*x,5*y);
+    setMinimumSize(1*x,1*y);
     background=Qt::black;
 
     matrice=new int[(x+2)*(y+2)];
-    pila->stampa();
     matrice=pila->next();
 
 
@@ -89,12 +88,12 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
         for(int i=1; i<x+1; i++)
         {
             if(matrice[i+j*(x+2)]==1)//cellula viva
-                painter->setBrush(Qt::white);
+                colore=(Qt::white);
             else
-                painter->setBrush(QBrush(QColor(0,0,30)));
+                colore=(QBrush(QColor(0,0,30)));
 
             GD2(cout<<(matrice[i+j*(x+2)])<<" ");
-            painter->drawRect(-0.5,-0.5,1,1);
+            painter->fillRect(-0.5,-0.5,1,1,colore);
             painter->translate(1,0);
         }
         GD2(cout<<endl);
