@@ -38,7 +38,8 @@ class Coltura : public QWidget
 public:
     Coltura(int x,int y,QWidget * parent=0);
     int getMaxTime();
-    void changeDimension(int);
+    int getMinTime();
+
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -50,11 +51,13 @@ private:
     QBrush background;
     void paintColtura(QPainter *, QPaintEvent *);
     QTimer *timer;
+    int minTime;
     int maxTime;
 
 public slots:
     void aggiorna();
     void play(int scatti);
+    void changeDimension(int);
 
 
 };

@@ -16,9 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->coltura = new Coltura(x,y);
     GD1(cout<<"[mainwindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
-    /*QSpinBox * dimension = new QSpinBox();
-    connect(dimension, SIGNAL(valueChanged(int)),coltura,SLOT(changeDimension(int)));
-*/
+
     QPushButton * stepByStep = new QPushButton("step by step");
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
 
@@ -28,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     this->slider = new QSlider(Qt::Horizontal);
-    this->slider->setMinimum(0);
+    this->slider->setMinimum(coltura->getMinTime());
     this->slider->setMaximum(coltura->getMaxTime());
 
 
@@ -39,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent)
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget(coltura);
     layout->addWidget(slider);
- //   layout->addWidget(dimension);
     layout->addLayout(buttonLayout);
 
 
@@ -63,4 +60,9 @@ void MainWindow::play(bool toggled)
         coltura->play(0);
 
     connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
+}
+
+void MainWindow::changeDimension(int dim)
+{
+
 }

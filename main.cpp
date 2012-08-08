@@ -1,7 +1,13 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
 #include "pilamatrici.h"
-#include "test.h"
+#include <iostream>
+#include "coltura.h"
+#include "mainwindow.h"
+#include "starter.h"
+using namespace std;
+
+
 
 //TODO widget di apertura
 //TODO pulizia main
@@ -17,9 +23,12 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    testGrafica();
 
-    testPila();
+    Starter * starter = new Starter();
+    starter->show();
+
+    MainWindow * finestra = new MainWindow();
+    finestra->show();
 
     return a.exec();
 }
