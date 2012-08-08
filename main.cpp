@@ -6,6 +6,8 @@
 #include "mainwindow.h"
 #include "starter.h"
 #include "main.h"
+#include "popup.h"
+
 using namespace std;
 
 
@@ -27,6 +29,11 @@ int main(int argc, char *argv[])
     GD1(cout<<"[main] sto per inizializzare lo starter"<<endl;)
     Starter * starter = new Starter();
     starter->show();
+
+    /*
+    Popup * popup = new Popup();
+    popup->show();
+    */
 
     return a.exec();
 }

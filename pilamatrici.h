@@ -119,7 +119,6 @@ public:
       */
     int incrementaMemoriaOccupata(long int &, int);
 
-    //TODO Documentazione variabile matriciRealizzate
     int matriciRealizzate;
 
 private:
@@ -138,7 +137,8 @@ private:
         int* tabella;
         Matrix* succ;
         Matrix* prec;
-        Matrix* parallel;
+        Matrix* parallelForward;
+        Matrix* parallelBackward;
         int tempo;
         bool rigenerabile;
         int numeroCelleVive;
@@ -256,7 +256,7 @@ private:
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
     //TODO Documentazione funzione viaggioNelTempo
-    Matrix* viaggioNelTempo(Matrix*, int);
+    int viaggioNelTempo(Matrix *&, int);
 
     //TODO Documentazione variabile godModeActivity
     bool godModeActivity;
@@ -266,7 +266,11 @@ private:
     int godModeActivityChanges(bool &);
 
     //TODO Documentazione funzione godMode
-    int godMode (int cellaDaModificare, int valoreDaAssegnare);
+    int godModeInitializer();
+    int godModeApplicator(int &, int);
+
+    //TODO Documentazione funzione returnToMainLine
+    int returnToMainLine(Matrix *&);
 };
 
 #endif // PILAMATRICI_H
