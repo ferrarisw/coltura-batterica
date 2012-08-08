@@ -100,6 +100,14 @@ public:
       */
     bool salva (QString file);
 
+    //TODO Documentazione carica
+    static PilaMatrici* carica (QString file);
+
+    /** Variabile memoriaOccupata
+      Questa variabile viene utilizzata per statistiche e indica quanta mamoria
+      viene occupata dalle matrici in ogni punto del programma. Si può vedere
+      questa statistica attivando il livello di debug LOG
+      */
     int memoriaOccupata;
 
     /** Funzione incrementaMemoriaOccupata(int &, int)
@@ -111,8 +119,8 @@ public:
       */
     int incrementaMemoriaOccupata(int &, int);
 
-    //TODO Documentazione carica
-    static PilaMatrici* carica (QString file);
+    //TODO Documentazione variabile matriciRealizzate
+    int matriciRealizzate;
 
 private:
 
@@ -174,7 +182,7 @@ private:
 
       @param [in]   matrice Matrice da eliminare e deallocare
       */
-    bool distruggiMatrice(Matrix* matrice);
+    bool distruggiMatrice(Matrix*);
 
     /** Funzione riempiCasuale.
 
@@ -189,17 +197,28 @@ private:
 
       @param [in]   pos     Puntatore alla matrice attuale
       */
-    void riempiCasuale(Matrix* pos);
+    void riempiCasuale(Matrix*);
 
     /** Funzione inizializzaTabella.
 
-      1)    assegna ad ogni elemento della tabella il valore passato come
+      Assegna ad ogni elemento della tabella il valore passato come
       parametro
 
       @param [in]   pos     Matrice della posizione attuale
       @param [in]   valore  Valore da applicare a tutti gli elementi
       */
-    void inizializzaTabella(Matrix* pos, int valore);
+    void inizializzaTabella(Matrix*, int);
+
+    /** Funzione inizializzaCasella.
+
+      Assegna all'elemento della tabella indicato dal secondo parametro,
+      il valore passato come terzo parametro
+
+      @param [in]   pos     Matrice della posizione attuale
+      @param [in]   casella Casella di cui modificare il valore
+      @param [in]   valore  Valore da applicare a tutti gli elementi
+      */
+    inline bool inizializzaCasella(Matrix* pos, int casella, int valore);
 
     /** Funzione getValore.
 
@@ -224,6 +243,29 @@ private:
       @param    [in]    Matrix*&    Matrice della quale contare le cellule vive
       */
     int contaCelluleVive(Matrix * &);
+
+    /** Funzione verificamatriciUguali()
+      Questa funzione confronta due matrici e ritorna vero se sono uguali.
+      Ritorna falso se la prima tabella di confronto è anche la prima della pila
+      oppure se la prima tabela di confronto è precedente alla seconda.
+
+      @param [in]   tabellaAttuale  Prima tabella di confronto
+      @param [in]   tabellaConfronto    Seconda tabella di confronto
+      */
+    bool verificaMatriciUguali(Matrix*, Matrix*);
+
+    //TODO Documentazione funzione viaggioNelTempo
+    Matrix* viaggioNelTempo(Matrix*, int);
+
+    //TODO Documentazione variabile godModeActivity
+    bool godModeActivity;
+
+    //TODO Documentazione godModeActivityChanges
+    int godModeActivityChanges(bool &, bool);
+    int godModeActivityChanges(bool &);
+
+    //TODO Documentazione funzione godMode
+    inline int godMode (Matrix* & matriceDaModificare, int cellaDaModificare, int valoreDaAssegnare);
 };
 
 #endif // PILAMATRICI_H

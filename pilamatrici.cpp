@@ -19,6 +19,9 @@ PilaMatrici::PilaMatrici(int x, int y)
     riempiCasuale(posizioneAttuale);
 
     TRACE("Riempimento casuale completato con successo.");
+
+    memoriaOccupata = 0;
+    matriciRealizzate = 0;
 }
 
 PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
@@ -62,7 +65,6 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
         }
 
     TRACE("Ho inizializzato tutta la matrice esclusa la cornice esterna.");
-    TRACE("Il numero di cellule vive è: "<<contaCelluleVive(pos)<<" / "<<dimx*dimy<<".");
 }
 
 void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
@@ -71,6 +73,14 @@ void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
     {
         tabellaAttuale->tabella[j] = valore;
     }
+}
+
+inline bool PilaMatrici::inizializzaCasella(Matrix *tabellaAttuale, int casella, int valore)
+{
+    if (casella > (dimx + 2) * (dimy + 2) || casella < 0)
+        return false;
+    else tabellaAttuale->tabella[casella] = valore;
+    return true;
 }
 
 inline int PilaMatrici::getValore (int * t, int x, int y)
@@ -107,7 +117,7 @@ int * PilaMatrici::next()
                       );
 
             if (somma == 2) {
-                t2[i + j * (dimx + 2)]  = t1 [i + j * (dimx + 2)];
+                t2[i + j * (dimx + 2)] = t1 [i + j * (dimx + 2)];
             }
             if (somma == 3)
                 t2 [i + j * (dimx + 2)] = vivo;
@@ -127,11 +137,10 @@ int * PilaMatrici::next()
 
     posizioneAttuale = temp;
 
-    LOG("\rIl numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".");
-
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
-    LOG("\rLa memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB.");
-    LOG("\rQuesta e' la matrice numero: "<<posizioneAttuale->tempo);
+    LOG("Il numero di cellule vive e': "<<contaCelluleVive(posizioneAttuale)<<" / "<<dimx*dimy<<".\n"
+        "La memoria occupata dalle matrici fino ad ora e': "<<(memoriaOccupata/1000)<<" KB.\n"
+        "Questa e' la matrice numero: "<<posizioneAttuale->tempo);
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
@@ -141,16 +150,17 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.");
+    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.";
 
     for (int j = 0; j < dimy + 2; j++)
     {
         for (int i = 0; i < dimx + 2; i++)
         {
-            GD3(cout<<getValore(posizioneAttuale->tabella, i, j)<<" ");
-        } GD3(cout<<endl);
+            cout<<getValore(posizioneAttuale->tabella, i, j)<<" ";
+        } cout<<endl;
     }
-    GD3(cout<<endl);
+    cout<<endl;
+    );  //Fine di GD3
 }
 
 bool PilaMatrici::distruggiMatrice (Matrix* matrice)
@@ -171,7 +181,9 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
 
 int PilaMatrici::incrementaMemoriaOccupata(int & memoriaOccupata, int valore)
 {
+    TRACE("Incremento la memoria occupata.")
     memoriaOccupata += valore;
+    TRACE("Memoria incrementata.")
     return memoriaOccupata;
 }
 
@@ -185,4 +197,93 @@ int PilaMatrici::contaCelluleVive(Matrix* & matrice)
             matrice->numeroCelleVive++;
     }
     return matrice->numeroCelleVive;
+}
+
+bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaConfronto)
+{
+    if (tabellaAttuale->tempo == 0 || tabellaAttuale->tempo < tabellaConfronto->tempo)
+        return false;
+
+    for (int i = 0; i < (dimx + 2) * (dimy + 2); i++)
+    {
+        if (tabellaAttuale->tabella[i] != tabellaConfronto->tabella[i])
+            return false;
+    }
+    return true;
+}
+
+//TODO Controllare funzione viaggioNelTempo
+PilaMatrici::Matrix* PilaMatrici::viaggioNelTempo(Matrix* attuale, int tempoDesiderato)
+{
+    /*
+      * Se il tempo desiderato è maggiore o uguale al tempo della matrice
+      * attuale, allora ritorno la matrice attuale
+      */
+    if (attuale->tempo == tempoDesiderato || tempoDesiderato < 0)
+        return attuale;
+
+    if (attuale->tempo < tempoDesiderato) {
+        if (tempoDesiderato > matriciRealizzate)
+            return attuale;
+
+        else if (tempoDesiderato <= matriciRealizzate)
+            return viaggioNelTempo(attuale->succ, tempoDesiderato);
+    }
+
+    if (attuale->tempo > tempoDesiderato)
+        return viaggioNelTempo(attuale->prec, tempoDesiderato);
+
+    return attuale;
+}
+
+/*
+  * L'idea è quella di utilizzare una modalità godMode. Questa è disabilitata
+  * di default, ma può essere attivata tramite l'apposito pulsante.
+  * Quando questa è attivata, la riproduzione termina e possiamo modificare la
+  * matrice che vediamo. La presenza di due funzioni ne prevede una che assegna
+  * un valore specifico alla variabile booleana godModeActivity, l'altra invece
+  * assegna il valore opposto a quello già attivo (se falso diventa vero e vice
+  * versa).
+  * La funzione godMode() viene invocata solo se la godModeActivity è vera e,
+  * una volta terminata, setta a falso godModeActivity, così da poter riprendere
+  * la riproduzione dalla matrice modificata.
+  */
+int godModeActivityChanges(bool & godModeActivity, bool value)
+{
+    godModeActivity = value;
+    return godModeChangesActivitySucc;
+}
+
+int godModeActivityChanges(bool & godModeActivity)
+{
+    if (godModeActivity == false)
+        godModeActivity = true;
+    else godModeActivity = false;
+
+    return godModeChangesActivitySwitched;
+}
+
+inline int PilaMatrici::godMode (Matrix* & matriceDaModificare, int cellaDaModificare, int valoreDaAssegnare)
+{
+    /*
+      * Generalmente la matrice da modificare è quella attuale, quindi dovrebbe
+      * per lo meno esistere, però questa implementazione estende la funzione
+      * a più utilizzi, per esempio la modifica di tabelle precedenti o future
+      * a quella attuale (sempre ammesso che esistano).
+      */
+
+    if (matriceDaModificare->tempo < 0 || matriceDaModificare->tempo > matriciRealizzate)
+        return notExistingMatrix;
+
+    if (cellaDaModificare > (dimx * dimy))
+        return cellsNumberOverflow;
+
+
+
+    /*
+      * In questo caso non apparirà un popup di errore, ma verrà aggiornata
+      * la grafica per visualizzare la tabella modificata.
+      */
+    matriceDaModificare->tabella[cellaDaModificare] = valoreDaAssegnare;
+    return changesOccurred;
 }
