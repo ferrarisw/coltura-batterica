@@ -5,6 +5,7 @@
 #include "coltura.h"
 #include "mainwindow.h"
 #include "starter.h"
+#include "popup.h"
 using namespace std;
 
 
@@ -25,6 +26,11 @@ int main(int argc, char *argv[])
 
     Starter * starter = new Starter();
     starter->show();
+
+    /*
+    Popup * popup = new Popup();
+    popup->show();
+    */
 
     return a.exec();
 }

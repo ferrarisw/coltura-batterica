@@ -132,7 +132,8 @@ int * PilaMatrici::next()
       * Aggiorno i puntatori della matrice attuale e quella successiva.
       * Aggiorno il tempo della nuova matrice.
       */
-    posizioneAttuale->parallel = NULL;
+    posizioneAttuale->parallelForward = NULL;
+    posizioneAttuale->parallelBackward = NULL;
     posizioneAttuale->succ = temp;
     temp->prec = posizioneAttuale;
     temp->tempo = (posizioneAttuale->tempo + 1);
@@ -307,7 +308,7 @@ int godModeActivityChanges(bool & godModeActivity)
     return godModeChangesActivitySwitched;
 }
 
-int PilaMatrici::godMode (int cellaDaModificare, int valoreDaAssegnare)
+int PilaMatrici::godModeInitializer ()
 {
     /*
       * Creo una nuova matrice dinamica perchè da questo punto proseguo su
@@ -320,19 +321,35 @@ int PilaMatrici::godMode (int cellaDaModificare, int valoreDaAssegnare)
       * pile parallele.
       */
     Matrix* temp = creaMatrice(posizioneAttuale->prec, NULL, posizioneAttuale->tempo);
-    posizioneAttuale->parallel = temp; // Aggancio la pila originaria alla pila parallela
+    posizioneAttuale->parallelForward = temp; // Aggancio la pila originaria alla pila parallela
+    temp->parallelBackward = posizioneAttuale; // Aggancio la pila parallela a quella originaria
+    posizioneAttuale->succ = NULL;
+    temp->prec == NULL;
+
     posizioneAttuale = temp;
 
     if (posizioneAttuale->tempo < 0 || posizioneAttuale->tempo > matriciRealizzate)
         return notExistingMatrix;
-/*
-    if (posizioneAttuale > (dimx * dimy))
-        return cellsNumberOverflow;
-*/
+
+    return godModeInitialized;
+}
+
+int PilaMatrici::godModeApplicator(int & cellaDaModificare, int valoreDaAssegnare)
+{
     /*
       * In questo caso non apparirà un popup di errore, ma verrà aggiornata
       * la grafica per visualizzare la tabella modificata.
       */
     posizioneAttuale->tabella[cellaDaModificare] = valoreDaAssegnare;
+
     return changesOccurred;
+}
+
+int PilaMatrici::returnToMainLine(Matrix*& attuale)
+{
+    if (attuale->parallelBackward == NULL)
+        return returnToMainLine(attuale->prec);
+
+    attuale = attuale->parallelBackward;
+    return returnedToMainLine;
 }

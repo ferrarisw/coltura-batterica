@@ -15,11 +15,13 @@ SOURCES += main.cpp\
     coltura.cpp \
     pilamatrici.cpp \
     pilamatrici_IO.cpp \
-    starter.cpp
+    starter.cpp \
+    popup.cpp
 
 HEADERS  += mainwindow.h \
     main.h \
     coltura.h \
     pilamatrici.h \
     errors.h \
-    starter.h
+    starter.h \
+    popup.h

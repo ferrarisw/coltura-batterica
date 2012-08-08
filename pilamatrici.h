@@ -137,7 +137,8 @@ private:
         int* tabella;
         Matrix* succ;
         Matrix* prec;
-        Matrix* parallel;
+        Matrix* parallelForward;
+        Matrix* parallelBackward;
         int tempo;
         bool rigenerabile;
         int numeroCelleVive;
@@ -265,7 +266,11 @@ private:
     int godModeActivityChanges(bool &);
 
     //TODO Documentazione funzione godMode
-    int godMode (int cellaDaModificare, int valoreDaAssegnare);
+    int godModeInitializer();
+    int godModeApplicator(int &, int);
+
+    //TODO Documentazione funzione returnToMainLine
+    int returnToMainLine(Matrix *&);
 };
 
 #endif // PILAMATRICI_H
