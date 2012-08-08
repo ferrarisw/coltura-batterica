@@ -108,7 +108,7 @@ public:
       viene occupata dalle matrici in ogni punto del programma. Si può vedere
       questa statistica attivando il livello di debug LOG
       */
-    int memoriaOccupata;
+    long int memoriaOccupata;
 
     /** Funzione incrementaMemoriaOccupata(int &, int)
       Incrementa il valore passatogli per riferimento al primo parametro
@@ -117,7 +117,7 @@ public:
       @param [in]   intero&    Int che indica la memoria da incrementare
       @param [in]   intero     Valore da aggiungere alla memoria occupata
       */
-    int incrementaMemoriaOccupata(int &, int);
+    int incrementaMemoriaOccupata(long int &, int);
 
     //TODO Documentazione variabile matriciRealizzate
     int matriciRealizzate;

@@ -187,7 +187,7 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
     return true;
 }
 
-int PilaMatrici::incrementaMemoriaOccupata(int & memoriaOccupata, int valore)
+int PilaMatrici::incrementaMemoriaOccupata(long int & memoriaOccupata, int valore)
 {
     TRACE("Incremento la memoria occupata.")
     memoriaOccupata += valore;
