@@ -24,7 +24,7 @@ PilaMatrici::PilaMatrici(int x, int y)
 
     TRACE("Riempimento casuale dei valori nella matrice attuale.");
 
-    //riempiCasuale(posizioneAttuale);
+    riempiCasuale(posizioneAttuale);
 
     TRACE("Riempimento casuale completato con successo.");
 

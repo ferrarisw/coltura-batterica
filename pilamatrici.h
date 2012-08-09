@@ -47,7 +47,7 @@ public:
       Questa funzione ritorna un puntatore alla tabella di matrici attuale.
       Serve per la grafica.
       */
-    int* PilaMatrici::getMatrix();
+    int* getMatrix();
 
     /** Funzione next().
 
