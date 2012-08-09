@@ -392,7 +392,10 @@ void PilaMatrici::patternModeSelector(bool selector)
         valueToInitialize = 1;
         casualFillingActivity = false;
     }
-    else valueToInitialize = 0;
+    else {
+        valueToInitialize = 0;
+        casualFillingActivity = true;
+    }
 }
 
 void PilaMatrici::casualFillingMode(bool selector)
