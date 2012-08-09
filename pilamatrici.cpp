@@ -24,7 +24,7 @@ PilaMatrici::PilaMatrici(int x, int y)
 
     TRACE("Riempimento casuale dei valori nella matrice attuale.");
 
-    riempiCasuale(posizioneAttuale);
+    //riempiCasuale(posizioneAttuale);
 
     TRACE("Riempimento casuale completato con successo.");
 
@@ -46,7 +46,7 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
     TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
           " e "<<dimy<<" correttamente.")
 
-    inizializzaTabella(temp, 0);
+    inizializzaTabella(temp, 1);
 
     temp->tempo = tempo;
     //temp->rigenerabile = false;
@@ -57,6 +57,11 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
           " il tempo.");
 
     return temp;
+}
+
+int* PilaMatrici::getMatrix()
+{
+    return posizioneAttuale->tabella;
 }
 
 void PilaMatrici::riempiCasuale(Matrix *pos)

@@ -43,6 +43,12 @@ class PilaMatrici
 public:
     PilaMatrici(int x, int y);
 
+    /** Funzione getMatrix.
+      Questa funzione ritorna un puntatore alla tabella di matrici attuale.
+      Serve per la grafica.
+      */
+    int* PilaMatrici::getMatrix();
+
     /** Funzione next().
 
       Questa funzione non prende in ingresso alcun parametro perchè utilizza
