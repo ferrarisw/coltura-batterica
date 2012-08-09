@@ -36,8 +36,8 @@ Starter::Starter(QWidget *parent) :
     qreal height=250;
     this->setGeometry(x,y,width,height);
 
-    //this->x=10;
-   // this->y=5;
+    this->x=50;
+    this->y=50;
 
 
     QSpinBox * xdimension = new QSpinBox();

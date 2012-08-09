@@ -10,9 +10,17 @@ PilaMatrici::PilaMatrici(int x, int y)
     this->dimx = x;
     this->dimy = y;
 
+    godModeActivation = false;
+
     testa = creaMatrice(NULL, NULL, 0);
     coda = testa;
     posizioneAttuale = testa;
+    /*
+      * Faccio in modo che questo puntatore punti a se stesso perchè
+      * se invoco il returnToMainLine nella linea principale, andrò in
+      * segmentation fault.
+      */
+    posizioneAttuale->parallelBackward = posizioneAttuale;
 
     TRACE("Riempimento casuale dei valori nella matrice attuale.");
 
@@ -42,6 +50,8 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
 
     temp->tempo = tempo;
     temp->rigenerabile = false;
+    temp->parallelBackward = NULL;
+    temp->parallelForward = NULL;
 
     TRACE("Ho inizializzato a 0 tutti gli elementi della matrice e aggiornato"
           " il tempo.");
@@ -293,7 +303,7 @@ int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
   * una volta terminata, setta a falso godModeActivity, così da poter riprendere
   * la riproduzione dalla matrice modificata.
   */
-int godModeActivityEnabler(bool & godModeActivity, bool value)
+int godModeActivityEnabler(bool & godModeActivity, const bool value)
 {
     godModeActivity = value;
     return godModeChangesActivitySucceded;
@@ -320,11 +330,11 @@ int PilaMatrici::godModeInitializer ()
       * eventuali viaggi indietro nel tempo, e poter proseguire liberamente su
       * pile parallele.
       */
-    Matrix* temp = creaMatrice(posizioneAttuale->prec, NULL, posizioneAttuale->tempo);
+    Matrix* temp = creaMatrice(NULL, NULL, posizioneAttuale->tempo);
+
     posizioneAttuale->parallelForward = temp; // Aggancio la pila originaria alla pila parallela
     temp->parallelBackward = posizioneAttuale; // Aggancio la pila parallela a quella originaria
     posizioneAttuale->succ = NULL;
-    temp->prec == NULL;
 
     posizioneAttuale = temp;
 
@@ -341,6 +351,10 @@ int PilaMatrici::godModeApplicator(int & cellaDaModificare, int valoreDaAssegnar
       * la grafica per visualizzare la tabella modificata.
       */
     posizioneAttuale->tabella[cellaDaModificare] = valoreDaAssegnare;
+
+    /*
+      Aggiorna Grafica
+      */
 
     return changesOccurred;
 }

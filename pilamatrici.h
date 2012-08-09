@@ -119,6 +119,10 @@ public:
       */
     int incrementaMemoriaOccupata(long int &, int);
 
+    /** Variabile matriciRealizzate
+      Questa variabile permette semplicemente di monitorare il numero di matrici
+      realizzate.
+      */
     int matriciRealizzate;
 
 private:
@@ -127,11 +131,13 @@ private:
     int dimy;
     enum stato {morto = 0, vivo = 1};
 
-
     /**
       * La Matrice ha un puntatore ad interi per la tabella,
       * un puntatore alla tabella successiva e uno alla tabella precedente.
-      * Utilizzo un singolo puntatore perchÃ¨ vedo la matrice come un array
+      * Utilizzo due puntatori alla matrice parallela successiva e precedente
+      * causati dall'utilizzo della godMode.
+      * Un intero indica il tempo della matrice e uno il numero di cellule
+      * vive, calcolate ogni volta.
       */
     struct Matrix {
         int* tabella;
@@ -140,7 +146,7 @@ private:
         Matrix* parallelForward;
         Matrix* parallelBackward;
         int tempo;
-        bool rigenerabile;
+        //bool rigenerabile;
         int numeroCelleVive;
     };
 
@@ -236,7 +242,7 @@ private:
       */
     int getValore(int * cella, int x, int y);
 
-    /** Funzione contaCelleVive()
+    /** Funzione contaCelleVive.
       Per ogni matrice, setta a 0 il numero di cellule vive, e la scorre
       completamente incrementando di 1 il numero di cellule vive ogni volta che
       ne incontra una viva.
@@ -245,7 +251,7 @@ private:
       */
     int contaCelluleVive(Matrix * &);
 
-    /** Funzione verificamatriciUguali()
+    /** Funzione verificamatriciUguali.
       Questa funzione confronta due matrici e ritorna vero se sono uguali.
       Ritorna falso se la prima tabella di confronto è anche la prima della pila
       oppure se la prima tabela di confronto è precedente alla seconda.
@@ -255,21 +261,58 @@ private:
       */
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
-    //TODO Documentazione funzione viaggioNelTempo
+    /** Funzione viaggioNelTempo.
+      Questa funzione permette di tornare ad una matrice realizzata
+      precedentemente o successivamente alla matrice attuale.
+      Sono previsti dei controlli per evitare di ritonare a matrici non esistenti.
+
+      @param [in]   Matrix*&    La matrice attuale
+      @param [in]   int         Il tempo a cui si desidera arrivare
+      @return       int         Ritorna dei valori che indicano cosa è successo nella funzione
+      */
     int viaggioNelTempo(Matrix *&, int);
 
-    //TODO Documentazione variabile godModeActivity
-    bool godModeActivity;
+    /** Variavile bool godModeActivation
+      Questa variabile determina se la godMode è attiva o no
+      */
+    bool godModeActivation;
 
-    //TODO Documentazione godModeActivityChanges
-    int godModeActivityEnabler(bool &, bool);
+    /** Funzione godModeAcrivityEnabler.
+      QUeste funzioni settano o resettano il booleano che determina l'attività
+      della funzione godMode.
+
+      @param    [in]    bool&   Valore booleano modificabile
+      @param    [in]    bool    Valore da assegnare al precedente parametro
+      @return           int     Ritorna degli interi che indicano cosa è successo
+      */
+    int godModeActivityEnabler(bool &, const bool);
     int godModeActivityEnabler(bool &);
 
-    //TODO Documentazione funzione godMode
+    /** Funzione godModeInitalizer.
+      Questa funzione prepara la nuova matrice in parallelo alla linea principale
+      per la godMode. Provvede a tutti gli agganci dei puntatori, in modo che
+      si possa sempre viaggiare nel tempo tramite le diverse linee parallele di
+      modifica della godMode.
+
+      @return       int     Ritorna degli interi che indicano cosa è successo
+      */
     int godModeInitializer();
+
+    /** Funzione godModeApplicator.
+      Questa funzione sfrutta l'operato della funzione godModeInitializer, che
+      ha modificato la posizioneAttuale e ne modifica la matrice.
+
+      @return       int     Ritorna un intero nel caso tutto abbia avuto successo
+      */
     int godModeApplicator(int &, int);
 
-    //TODO Documentazione funzione returnToMainLine
+    /** Funzione returnToMainLine.
+      Questa funzione permette di ritornare alla linea principale, prima della
+      modifica della godMode. Viene chiamata ricorsivamente finchè non trovo un
+      puntatone non nullo alla matrice parallelBackward.
+
+      @return       int     ritorna un intero che descrive cosa è successo
+      */
     int returnToMainLine(Matrix *&);
 };
 

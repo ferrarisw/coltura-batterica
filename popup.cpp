@@ -4,7 +4,6 @@
 Popup::Popup(QWidget *parent) :
     QWidget(parent)
 {
-    /*
     setGeometry(375, 355, 500, 120);    // Imposto la posizione dello schermo e la dimensione
 
     QTextEdit * error = new QTextEdit(); // Alloco dinamicamente
@@ -13,7 +12,6 @@ Popup::Popup(QWidget *parent) :
 
     error->setText("ciao");
     error->show();
-    */
 }
 
 void showMessagePopup(char*)
