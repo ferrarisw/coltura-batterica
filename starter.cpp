@@ -3,41 +3,29 @@
 #include <QtGui>
 #include "cassert"
 
-Starter::Starter(QPaintEvent * event, QWidget *parent) :
-    QWidget(parent)
-{
-    GD2(cout<<"costruttore di starter"<<endl);
-
-    const QRect *recta = &event->rect();
-    qreal x=300;
-    qreal y=250;
-    qreal width=recta->width()/2-x;
-    qreal height=recta->height()/2 -y;
-    this->setGeometry(x,y,width,height);
-
-
-    QSpinBox * dimension = new QSpinBox();
-    connect(dimension, SIGNAL(valueChanged(int)),mainwindow,SLOT(changeDimension(int)));
-
-    QVBoxLayout * layout = new QVBoxLayout;
-    layout->addWidget(dimension);
-
-    setLayout(layout);
-}
 
 Starter::Starter(QWidget *parent) :
     QWidget(parent)
 {
     GD1(cout<<"[Starter] : costruttore"<<endl);
 
-    qreal x=300;
+    qreal x=500;
     qreal y=250;
-    qreal width=300;
-    qreal height=250;
+    qreal width=250;
+    qreal height=220;
     this->setGeometry(x,y,width,height);
 
-    //this->x=10;
-   // this->y=5;
+    this->x=50;
+    this->y=50;
+
+  //  QIcon  icon;
+   // icon.addFile("./batteritrasp.png",QSize(400,344));
+   // icon.Active;
+   // setWindowIcon(icon);
+
+    QLabel * descrizione = new QLabel;
+    descrizione->setText("inserisci le dimensioni della coltura");
+    descrizione->setAlignment(Qt::AlignCenter);
 
 
     QSpinBox * xdimension = new QSpinBox();
@@ -47,6 +35,10 @@ Starter::Starter(QWidget *parent) :
     connect(xdimension, SIGNAL(valueChanged(int)),this,SLOT(changeXDimension(int)));
     GD2(cout<<"[Starter::Starter] ho inizializzato lo spinbox e connesso i segnali"<<endl);
 
+    QLabel * etichettaX = new QLabel;
+    etichettaX->setText("larghezza");
+
+
     QSpinBox * ydimension = new QSpinBox();
     ydimension->setValue(50);
     ydimension->setMinimum(0);
@@ -54,17 +46,23 @@ Starter::Starter(QWidget *parent) :
     connect(ydimension, SIGNAL(valueChanged(int)),this,SLOT(changeYDimension(int)));
     GD2(cout<<"[Starter::Starter] ho inizializzato lo spinbox e connesso i segnali"<<endl);
 
+    QLabel * etichettaY = new QLabel;
+    etichettaY->setText("altezza");
+
     GD3(cout<<"[Starter::Starter] dimensioni di x e y: "<<this->x<<" "<<this->y<<endl);
 
     QPushButton * ok = new QPushButton("Ok");
     connect(ok, SIGNAL(clicked()),this,SLOT(avvio()));
     GD2(cout<<"[Starter::Starter] inizializzato il pushbutton e connesso i segnali"<<endl);
 
-    QHBoxLayout * spinboxes = new QHBoxLayout();
-    spinboxes->addWidget(xdimension);
-    spinboxes->addWidget(ydimension);
+    QGridLayout * spinboxes = new QGridLayout();
+    spinboxes->addWidget(etichettaX,0,0,Qt::AlignHCenter );
+    spinboxes->addWidget(etichettaY,0,1,Qt::AlignHCenter );
+    spinboxes->addWidget(xdimension,1,0,Qt::AlignHCenter | Qt::AlignTop);
+    spinboxes->addWidget(ydimension,1,1,Qt::AlignHCenter | Qt::AlignTop);
 
     QVBoxLayout * layout = new QVBoxLayout();
+    layout->addWidget(descrizione);
     layout->addLayout(spinboxes);
     layout->addWidget(ok);
 
