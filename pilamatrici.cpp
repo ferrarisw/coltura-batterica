@@ -49,7 +49,7 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
     inizializzaTabella(temp, 0);
 
     temp->tempo = tempo;
-    temp->rigenerabile = false;
+    //temp->rigenerabile = false;
     temp->parallelBackward = NULL;
     temp->parallelForward = NULL;
 
@@ -103,6 +103,7 @@ int * PilaMatrici::next()
     TRACE("Sto per inizializzare la prossima matrice.");
 
     Matrix* temp = creaMatrice(posizioneAttuale, NULL, posizioneAttuale->tempo + 1);
+    matriciRealizzate += 1;
 
     TRACE("Ora inizializzo due puntatori a intero, uno alla tabella attuale\n"
           "e uno alla nuova tabella. Mi serve per semplificare il codice");
@@ -231,15 +232,7 @@ bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaC
     return true;
 }
 
-//TODO Controllare funzione viaggioNelTempo
-/*
-  * Questa funzione ritorna interi per gestire il tipo di comportamento
-  * della funzione in base alla richiesta. Di conseguenza il la matrice
-  * viene passata alla funzione chiamante tramite le modifiche (visto il
-  * passaggio per riferimento del primo parametro) apportate in caso di
-  * possibilità di movimenti nel tempo.
-  */
-int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
+int PilaMatrici::timeTripAbilitation(Matrix* & attuale, int tempoDesiderato)
 {
     /*
       * Se il tempo desiderato è maggiore o uguale al tempo della matrice
@@ -251,30 +244,40 @@ int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
     /*
       * Se il tempo desiderato è minore di 0, quindi la matrice non può esistere
       */
-    else if(tempoDesiderato < 0)
-        return notExistingTime;
+    else if (tempoDesiderato < 0)
+        return tooLowTime;
 
+    /*
+      * Se il tempo desiderato è maggiore delle matrici realizzate, non
+      * potrà esistere la matrice richiesta
+      */
+    else if (tempoDesiderato > matriciRealizzate)
+        return notEnoughMatrix;
+
+    timeTrip(attuale, tempoDesiderato);
+
+    return timeTripSucceded;
+}
+
+//TODO Controllare funzione timeTrip
+/*
+  * Questa funzione ritorna interi per gestire il tipo di comportamento
+  * della funzione in base alla richiesta. Di conseguenza il la matrice
+  * viene passata alla funzione chiamante tramite le modifiche (visto il
+  * passaggio per riferimento del primo parametro) apportate in caso di
+  * possibilità di movimenti nel tempo.
+  */
+int PilaMatrici::timeTrip(Matrix*& attuale, int tempoDesiderato)
+{
     /*
       * Se il tempo desiderato è maggiore della matrice attuale, allora....
       */
-    else if (attuale->tempo < tempoDesiderato) {
-        /*
-          * Se il tempo desiderato è maggiore delle matrici realizzate, non
-          * potrà esistere la matrice richiesta
-          */
-        if (tempoDesiderato > matriciRealizzate)
-            return notEnoughMatrix;
-        /*
-          * Se il tempo desiderato è minore delle matrici realizzate, allora la
-          * matrice esiste ed è successiva alla matrice corrente: viaggio nel
-          * futuro. Aggiorno la matrice attuale a quella successiva e chiamo
-          * ricorsivamente la funzione fino ad arrivare alla condizione in cui
-          * il tempo desiderato sarà uguale a quello dell'attuale
-          */
-        else if (tempoDesiderato <= matriciRealizzate) {
-            attuale = attuale->succ;
-            return viaggioNelTempo(attuale, tempoDesiderato);
-        }
+    if (attuale->tempo < tempoDesiderato) {
+        if (attuale->succ = NULL)
+            return lastPossibleMatrix;
+
+        attuale = attuale->succ;
+        return timeTrip(attuale, tempoDesiderato);
     }
 
     /*
@@ -284,8 +287,11 @@ int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
       * tempo desiderato è uguale al tempo attuale.
       */
     else if (attuale->tempo > tempoDesiderato) {
+        if (attuale->prec = NULL)
+            return lastPossibleMatrix;
+
         attuale = attuale->prec;
-        return viaggioNelTempo(attuale, tempoDesiderato);
+        return timeTrip(attuale, tempoDesiderato);
     }
 
     return matrixFound;

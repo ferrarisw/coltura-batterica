@@ -14,9 +14,7 @@
         - Due funzioni getDimx e getDimy che ritornano la dimensione sull'asse
             x e y della matrice. Mi servono perch√® l'utente possa inserirle
             a esecuzione iniziata.
-        - Due funzioni salvaMatrice e caricaMatrice per salvare lo stato
-            attuale e caricarne uno precedente, da cui ricominciare nel calcolo
-            di qualsiasi stato precedente.
+
     La parte privata include:
         - Le dimensioni x e y della matrice
         - Un enumeratore per facilitare la comprensione degli stati vivo e morto
@@ -98,10 +96,10 @@ public:
       3)    Dopo aver salvato su file tutti gli elementi della matrice
       chiudo il file in scrittura.
       */
-    bool salva (QString file);
+    //bool salva (QString file);
 
     //TODO Documentazione carica
-    static PilaMatrici* carica (QString file);
+    //static PilaMatrici* carica (QString file);
 
     /** Variabile memoriaOccupata
       Questa variabile viene utilizzata per statistiche e indica quanta mamoria
@@ -261,16 +259,27 @@ private:
       */
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
-    /** Funzione viaggioNelTempo.
-      Questa funzione permette di tornare ad una matrice realizzata
-      precedentemente o successivamente alla matrice attuale.
-      Sono previsti dei controlli per evitare di ritonare a matrici non esistenti.
+    /** Funzione timeTripAbilitation.
+      Questa funzione controlla se Ë possibile attivare il timeTrip.
+      Esegue i controlli e ritorna degli interi che indicano gli eventuali
+      errori riscontrati. Altrimenti ritorna un intero che indica il successo
+      della verifica.
 
       @param [in]   Matrix*&    La matrice attuale
       @param [in]   int         Il tempo a cui si desidera arrivare
       @return       int         Ritorna dei valori che indicano cosa Ë successo nella funzione
       */
-    int viaggioNelTempo(Matrix *&, int);
+    int timeTripAbilitation(Matrix* &, int);
+
+    /** Funzione timeTrip.
+      Questa funzione permette di tornare ad una matrice realizzata
+      precedentemente o successivamente alla matrice attuale.
+
+      @param [in]   Matrix*&    La matrice attuale
+      @param [in]   int         Il tempo a cui si desidera arrivare
+      @return       int         Ritorna dei valori che indicano cosa Ë successo nella funzione
+      */
+    int timeTrip(Matrix* &, int);
 
     /** Variavile bool godModeActivation
       Questa variabile determina se la godMode Ë attiva o no
