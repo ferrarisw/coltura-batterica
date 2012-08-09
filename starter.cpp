@@ -18,6 +18,7 @@ Starter::Starter(QWidget *parent) :
     this->x=50;
     this->y=50;
 
+
   //  QIcon  icon;
    // icon.addFile("./batteritrasp.png",QSize(400,344));
    // icon.Active;

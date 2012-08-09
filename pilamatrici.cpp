@@ -10,13 +10,21 @@ PilaMatrici::PilaMatrici(int x, int y)
     this->dimx = x;
     this->dimy = y;
 
+    godModeActivation = false;
+
     testa = creaMatrice(NULL, NULL, 0);
     coda = testa;
     posizioneAttuale = testa;
+    /*
+      * Faccio in modo che questo puntatore punti a se stesso perchè
+      * se invoco il returnToMainLine nella linea principale, andrò in
+      * segmentation fault.
+      */
+    posizioneAttuale->parallelBackward = posizioneAttuale;
 
     TRACE("Riempimento casuale dei valori nella matrice attuale.");
 
-    riempiCasuale(posizioneAttuale);
+    //riempiCasuale(posizioneAttuale);
 
     TRACE("Riempimento casuale completato con successo.");
 
@@ -38,15 +46,22 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
     TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
           " e "<<dimy<<" correttamente.")
 
-    inizializzaTabella(temp, 0);
+    inizializzaTabella(temp, 1);
 
     temp->tempo = tempo;
-    temp->rigenerabile = false;
+    //temp->rigenerabile = false;
+    temp->parallelBackward = NULL;
+    temp->parallelForward = NULL;
 
     TRACE("Ho inizializzato a 0 tutti gli elementi della matrice e aggiornato"
           " il tempo.");
 
     return temp;
+}
+
+int* PilaMatrici::getMatrix()
+{
+    return posizioneAttuale->tabella;
 }
 
 void PilaMatrici::riempiCasuale(Matrix *pos)
@@ -93,6 +108,7 @@ int * PilaMatrici::next()
     TRACE("Sto per inizializzare la prossima matrice.");
 
     Matrix* temp = creaMatrice(posizioneAttuale, NULL, posizioneAttuale->tempo + 1);
+    matriciRealizzate += 1;
 
     TRACE("Ora inizializzo due puntatori a intero, uno alla tabella attuale\n"
           "e uno alla nuova tabella. Mi serve per semplificare il codice");
@@ -119,10 +135,12 @@ int * PilaMatrici::next()
             if (somma == 2) {
                 t2[i + j * (dimx + 2)] = t1 [i + j * (dimx + 2)];
             }
-            if (somma == 3)
+            if (somma == 3) {
                 t2 [i + j * (dimx + 2)] = vivo;
-            else if (somma < 2 || somma > 3)
+            }
+            else if (somma < 2 || somma > 3) {
                 t2 [i + j * (dimx + 2)] = morto;
+            }
         }
 
     TRACE("Rendo la matrice appena creata, quella attuale.");
@@ -221,15 +239,7 @@ bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaC
     return true;
 }
 
-//TODO Controllare funzione viaggioNelTempo
-/*
-  * Questa funzione ritorna interi per gestire il tipo di comportamento
-  * della funzione in base alla richiesta. Di conseguenza il la matrice
-  * viene passata alla funzione chiamante tramite le modifiche (visto il
-  * passaggio per riferimento del primo parametro) apportate in caso di
-  * possibilità di movimenti nel tempo.
-  */
-int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
+int PilaMatrici::timeTripAbilitation(Matrix* & attuale, int tempoDesiderato)
 {
     /*
       * Se il tempo desiderato è maggiore o uguale al tempo della matrice
@@ -241,30 +251,40 @@ int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
     /*
       * Se il tempo desiderato è minore di 0, quindi la matrice non può esistere
       */
-    else if(tempoDesiderato < 0)
-        return notExistingTime;
+    else if (tempoDesiderato < 0)
+        return tooLowTime;
 
+    /*
+      * Se il tempo desiderato è maggiore delle matrici realizzate, non
+      * potrà esistere la matrice richiesta
+      */
+    else if (tempoDesiderato > matriciRealizzate)
+        return notEnoughMatrix;
+
+    timeTrip(attuale, tempoDesiderato);
+
+    return timeTripSucceded;
+}
+
+//TODO Controllare funzione timeTrip
+/*
+  * Questa funzione ritorna interi per gestire il tipo di comportamento
+  * della funzione in base alla richiesta. Di conseguenza il la matrice
+  * viene passata alla funzione chiamante tramite le modifiche (visto il
+  * passaggio per riferimento del primo parametro) apportate in caso di
+  * possibilità di movimenti nel tempo.
+  */
+int PilaMatrici::timeTrip(Matrix*& attuale, int tempoDesiderato)
+{
     /*
       * Se il tempo desiderato è maggiore della matrice attuale, allora....
       */
-    else if (attuale->tempo < tempoDesiderato) {
-        /*
-          * Se il tempo desiderato è maggiore delle matrici realizzate, non
-          * potrà esistere la matrice richiesta
-          */
-        if (tempoDesiderato > matriciRealizzate)
-            return notEnoughMatrix;
-        /*
-          * Se il tempo desiderato è minore delle matrici realizzate, allora la
-          * matrice esiste ed è successiva alla matrice corrente: viaggio nel
-          * futuro. Aggiorno la matrice attuale a quella successiva e chiamo
-          * ricorsivamente la funzione fino ad arrivare alla condizione in cui
-          * il tempo desiderato sarà uguale a quello dell'attuale
-          */
-        else if (tempoDesiderato <= matriciRealizzate) {
-            attuale = attuale->succ;
-            return viaggioNelTempo(attuale, tempoDesiderato);
+    if (attuale->tempo < tempoDesiderato) {
+        if (attuale->succ == NULL) {
+            return lastPossibleMatrix;
         }
+        attuale = attuale->succ;
+        return timeTrip(attuale, tempoDesiderato);
     }
 
     /*
@@ -274,8 +294,11 @@ int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
       * tempo desiderato è uguale al tempo attuale.
       */
     else if (attuale->tempo > tempoDesiderato) {
+        if (attuale->prec == NULL) {
+            return lastPossibleMatrix;
+        }
         attuale = attuale->prec;
-        return viaggioNelTempo(attuale, tempoDesiderato);
+        return timeTrip(attuale, tempoDesiderato);
     }
 
     return matrixFound;
@@ -293,13 +316,13 @@ int PilaMatrici::viaggioNelTempo(Matrix*& attuale, int tempoDesiderato)
   * una volta terminata, setta a falso godModeActivity, così da poter riprendere
   * la riproduzione dalla matrice modificata.
   */
-int godModeActivityChanges(bool & godModeActivity, bool value)
+int godModeActivityEnabler(bool & godModeActivity, const bool value)
 {
     godModeActivity = value;
     return godModeChangesActivitySucceded;
 }
 
-int godModeActivityChanges(bool & godModeActivity)
+int godModeActivityEnabler(bool & godModeActivity)
 {
     if (godModeActivity == false)
         godModeActivity = true;
@@ -320,11 +343,11 @@ int PilaMatrici::godModeInitializer ()
       * eventuali viaggi indietro nel tempo, e poter proseguire liberamente su
       * pile parallele.
       */
-    Matrix* temp = creaMatrice(posizioneAttuale->prec, NULL, posizioneAttuale->tempo);
+    Matrix* temp = creaMatrice(NULL, NULL, posizioneAttuale->tempo);
+
     posizioneAttuale->parallelForward = temp; // Aggancio la pila originaria alla pila parallela
     temp->parallelBackward = posizioneAttuale; // Aggancio la pila parallela a quella originaria
     posizioneAttuale->succ = NULL;
-    temp->prec == NULL;
 
     posizioneAttuale = temp;
 
@@ -341,6 +364,10 @@ int PilaMatrici::godModeApplicator(int & cellaDaModificare, int valoreDaAssegnar
       * la grafica per visualizzare la tabella modificata.
       */
     posizioneAttuale->tabella[cellaDaModificare] = valoreDaAssegnare;
+
+    /*
+      Aggiorna Grafica
+      */
 
     return changesOccurred;
 }

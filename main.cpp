@@ -15,6 +15,7 @@ using namespace std;
 //TODO widget di apertura
 //TODO pulizia main
 //TODO commenti
+//TODO Documentazione       aggiornata al 09/08/2012
 //TODO makefile
 //TODO revisione classe coltura
 //TODO modalita` dio        Funzione implementata ma da completare

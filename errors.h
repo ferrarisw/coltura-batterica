@@ -6,11 +6,13 @@ enum streamsReturnValues {
 };
 
 enum viaggioNelTempoReturnValues {
-    notExistingTime                 =       -40,    /* Tentativo di tornare prima della prima matrice*/
+    tooLowTime                      =       -40,    /* Tentativo di tornare prima della prima matrice*/
     sameMatrixRequest               =       -41,    /* Ritorno alla stessa matrice di partenza*/
     notEnoughMatrix                 =       -41,    /* Tentativo di andare oltre all'ultima matrice calcolata*/
+    lastPossibleMatrix              =       -42,    /* Ho finito la pila di matrici*/
 
-    matrixFound                     =       -49     /* Matrice Trovata correttamente*/
+    matrixFound                     =       -48,    /* Matrice Trovata correttamente*/
+    timeTripSucceded                =       -49     /* Viaggio nel tempo completato*/
 };
 
 enum godModeReturnValues {
