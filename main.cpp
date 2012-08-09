@@ -20,6 +20,8 @@ using namespace std;
 //TODO revisione classe coltura
 //TODO modalita` dio        Funzione implementata ma da completare
 //TODO indietro nel tempo   Funzione implementata, meglio controllarla
+//TODO restart, new
+//TODO barra del tempo
 
 //Idee sulla gestione degli errori con popup, soprattutto nella modalità Dio
 
