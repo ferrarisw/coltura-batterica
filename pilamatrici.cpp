@@ -22,7 +22,7 @@ PilaMatrici::PilaMatrici(int x, int y)
       */
     posizioneAttuale->parallelBackward = posizioneAttuale;
 
-    patternModeSelector(0);
+    patternModeSelector(1);
 
     TRACE("PatternMode Selezionata.");
 
@@ -393,8 +393,7 @@ void PilaMatrici::patternModeSelector(int selector)
         break;
 
     default:
-        inizializzaTabella(posizioneAttuale, 0);
-        riempiCasuale(posizioneAttuale);
-        break;
+        cout<<"ERRORE!!"<<endl;
+        exit(-1);
     }
 }

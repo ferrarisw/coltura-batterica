@@ -56,10 +56,14 @@ void MainWindow::play(bool toggled)
     playing = toggled;
 
     if (playing == true)
+    {
         coltura->play(slider->value());
+        connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
+    }
     else
+    {
         coltura->play(0);
-
-    connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
+        disconnect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
+    }
 }
 

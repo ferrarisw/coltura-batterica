@@ -31,7 +31,7 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
     background=Qt::black;
 
     matrice=new int[(x+2)*(y+2)];
-    matrice=pila->next();
+    matrice=pila->getMatrix();
 
 
     GD3(cout<<"stampo la matrice manualmente"<<endl;
