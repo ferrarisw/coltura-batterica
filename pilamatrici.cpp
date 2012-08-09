@@ -24,7 +24,11 @@ PilaMatrici::PilaMatrici(int x, int y)
 
     TRACE("Riempimento casuale dei valori nella matrice attuale.");
 
-    riempiCasuale(posizioneAttuale);
+    patternModeSelector(false);
+
+    if (casualFillingActivity == true) {
+        riempiCasuale(posizioneAttuale);
+    }
 
     TRACE("Riempimento casuale completato con successo.");
 
@@ -46,7 +50,7 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
     TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
           " e "<<dimy<<" correttamente.")
 
-    inizializzaTabella(temp, 1);
+    inizializzaTabella(temp, valueToInitialize);
 
     temp->tempo = tempo;
     //temp->rigenerabile = false;
@@ -156,11 +160,12 @@ int * PilaMatrici::next()
     temp->prec = posizioneAttuale;
     temp->tempo = (posizioneAttuale->tempo + 1);
 
-    posizioneAttuale = temp;
+    double numeroCelluleVive = static_cast<double> ( contaCelluleVive(temp) );
+    double numeroCelluleVivePrecedente = static_cast<double> ( contaCelluleVive(posizioneAttuale) );
 
-    double numeroCelluleVive = static_cast<double> ( contaCelluleVive(posizioneAttuale) );
-    double numeroCelluleVivePrecedente = static_cast<double> ( contaCelluleVive(posizioneAttuale->prec) );
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
+
+    posizioneAttuale = temp;
 
     LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " << dimx * dimy << ". "
         "( " << (numeroCelluleVive * 100 / (dimx*dimy) ) << " % )\n"
@@ -379,4 +384,20 @@ int PilaMatrici::returnToMainLine(Matrix*& attuale)
 
     attuale = attuale->parallelBackward;
     return returnedToMainLine;
+}
+
+void PilaMatrici::patternModeSelector(bool selector)
+{
+    if (selector == true) {
+        valueToInitialize = 1;
+        casualFillingActivity = false;
+    }
+    else valueToInitialize = 0;
+}
+
+void PilaMatrici::casualFillingMode(bool selector)
+{
+    if (selector == true)
+        casualFillingActivity = true;
+    else casualFillingActivity = false;
 }
