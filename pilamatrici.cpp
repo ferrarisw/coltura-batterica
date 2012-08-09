@@ -130,10 +130,12 @@ int * PilaMatrici::next()
             if (somma == 2) {
                 t2[i + j * (dimx + 2)] = t1 [i + j * (dimx + 2)];
             }
-            if (somma == 3)
+            if (somma == 3) {
                 t2 [i + j * (dimx + 2)] = vivo;
-            else if (somma < 2 || somma > 3)
+            }
+            else if (somma < 2 || somma > 3) {
                 t2 [i + j * (dimx + 2)] = morto;
+            }
         }
 
     TRACE("Rendo la matrice appena creata, quella attuale.");
@@ -273,9 +275,9 @@ int PilaMatrici::timeTrip(Matrix*& attuale, int tempoDesiderato)
       * Se il tempo desiderato è maggiore della matrice attuale, allora....
       */
     if (attuale->tempo < tempoDesiderato) {
-        if (attuale->succ = NULL)
+        if (attuale->succ == NULL) {
             return lastPossibleMatrix;
-
+        }
         attuale = attuale->succ;
         return timeTrip(attuale, tempoDesiderato);
     }
@@ -287,9 +289,9 @@ int PilaMatrici::timeTrip(Matrix*& attuale, int tempoDesiderato)
       * tempo desiderato è uguale al tempo attuale.
       */
     else if (attuale->tempo > tempoDesiderato) {
-        if (attuale->prec = NULL)
+        if (attuale->prec == NULL) {
             return lastPossibleMatrix;
-
+        }
         attuale = attuale->prec;
         return timeTrip(attuale, tempoDesiderato);
     }
