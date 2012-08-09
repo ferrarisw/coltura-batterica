@@ -134,8 +134,6 @@ private:
     int dimx;   //Dimensioni della matrice
     int dimy;
     enum stato {morto = 0, vivo = 1};
-    int valueToInitialize;
-    bool casualFillingActivity;
 
     /**
       * La Matrice ha un puntatore ad interi per la tabella,
@@ -333,10 +331,7 @@ private:
     int returnToMainLine(Matrix *&);
 
     //TODO
-    void patternModeSelector(bool);
-
-    //TODO
-    void casualFillingMode(bool);
+    void patternModeSelector(int);
 };
 
 #endif // PILAMATRICI_H

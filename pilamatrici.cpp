@@ -22,15 +22,9 @@ PilaMatrici::PilaMatrici(int x, int y)
       */
     posizioneAttuale->parallelBackward = posizioneAttuale;
 
-    TRACE("Riempimento casuale dei valori nella matrice attuale.");
+    patternModeSelector(0);
 
-    patternModeSelector(false);
-
-    if (casualFillingActivity == true) {
-        riempiCasuale(posizioneAttuale);
-    }
-
-    TRACE("Riempimento casuale completato con successo.");
+    TRACE("PatternMode Selezionata.");
 
     memoriaOccupata = (sizeof(Matrix) + sizeof(int)*dimx*dimy);
     matriciRealizzate = 0;
@@ -50,7 +44,7 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
     TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
           " e "<<dimy<<" correttamente.")
 
-    inizializzaTabella(temp, valueToInitialize);
+    inizializzaTabella(temp, 0);
 
     temp->tempo = tempo;
     //temp->rigenerabile = false;
@@ -386,18 +380,21 @@ int PilaMatrici::returnToMainLine(Matrix*& attuale)
     return returnedToMainLine;
 }
 
-void PilaMatrici::patternModeSelector(bool selector)
+void PilaMatrici::patternModeSelector(int selector)
 {
-    if (selector == true) {
-        valueToInitialize = 1;
-        casualFillingActivity = false;
-    }
-    else valueToInitialize = 0;
-}
+    switch (selector) {
+    case 0:
+        inizializzaTabella(posizioneAttuale, 0);
+        riempiCasuale(posizioneAttuale);
+        break;
 
-void PilaMatrici::casualFillingMode(bool selector)
-{
-    if (selector == true)
-        casualFillingActivity = true;
-    else casualFillingActivity = false;
+    case 1:
+        inizializzaTabella(posizioneAttuale, 1);
+        break;
+
+    default:
+        inizializzaTabella(posizioneAttuale, 0);
+        riempiCasuale(posizioneAttuale);
+        break;
+    }
 }
