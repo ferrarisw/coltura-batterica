@@ -41,7 +41,7 @@ Commentato il 4/7/12 alle 22.00 - Davide Ferrari
 class PilaMatrici
 {
 public:
-    PilaMatrici(int x, int y);
+    PilaMatrici(int x, int y, int pattern);
 
     /** Funzione getMatrix.
       Questa funzione ritorna un puntatore alla tabella di matrici attuale.
@@ -133,6 +133,7 @@ private:
 
     int dimx;   //Dimensioni della matrice
     int dimy;
+    int pattern;
     enum stato {morto = 0, vivo = 1};
 
     /**

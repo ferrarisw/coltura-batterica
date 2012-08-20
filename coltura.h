@@ -36,7 +36,7 @@ class Coltura : public QWidget
     Q_OBJECT
 
 public:
-    Coltura(int x,int y,QWidget * parent=0);
+    Coltura(int x,int y, int pattern, QWidget * parent=0);
     int getMaxTime();
     int getMinTime();
 
@@ -46,6 +46,7 @@ protected:
 
 private:
     int x,y;
+    int pattern;
     int * matrice;
     PilaMatrici *pila;
     QBrush background;

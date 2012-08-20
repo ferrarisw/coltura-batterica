@@ -14,6 +14,7 @@ private:
     MainWindow * mainwindow;
     int x;
     int y;
+    int pattern;
 
 
 signals:
@@ -22,6 +23,7 @@ public slots:
     void avvio();
     void changeXDimension(int);
     void changeYDimension(int);
+    void setPattern(int);
 };
 
 #endif // STARTER_H

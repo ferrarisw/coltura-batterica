@@ -5,13 +5,13 @@
 #include "coltura.h"
 using namespace std;
 
-MainWindow::MainWindow(int x, int y, QWidget *parent)
+MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
     : QWidget(parent)
 {
 
     GD1(cout<<"[MainWindow]: costruttore. dimensioni della matrice: "<<x<<" "<<y<<endl) ;
 
-    this->coltura = new Coltura(x,y);
+    this->coltura = new Coltura(x,y,pattern);
     GD1(cout<<"[MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
 

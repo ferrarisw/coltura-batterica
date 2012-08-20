@@ -5,7 +5,7 @@
 #include "main.h"
 using namespace std;
 
-PilaMatrici::PilaMatrici(int x, int y)
+PilaMatrici::PilaMatrici(int x, int y, int pattern)
 {
     this->dimx = x;
     this->dimy = y;
@@ -22,7 +22,7 @@ PilaMatrici::PilaMatrici(int x, int y)
       */
     posizioneAttuale->parallelBackward = posizioneAttuale;
 
-    patternModeSelector(1);
+    patternModeSelector(pattern);
 
     TRACE("PatternMode Selezionata.");
 
@@ -393,7 +393,7 @@ void PilaMatrici::patternModeSelector(int selector)
         break;
 
     default:
-        cout<<"ERRORE!!"<<endl;
+        cout<<"[patternModeSelector] errore: numero pattern non corretto "<<selector<<endl;
         exit(-1);
     }
 }

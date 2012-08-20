@@ -9,7 +9,7 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 public:
-    MainWindow(int, int, QWidget *parent = 0);
+    MainWindow(int, int, int, QWidget *parent = 0);
     ~MainWindow();
 
 private slots:

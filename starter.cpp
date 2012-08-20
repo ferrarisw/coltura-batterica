@@ -17,6 +17,7 @@ Starter::Starter(QWidget *parent) :
 
     this->x=50;
     this->y=50;
+    this->pattern=0;
 
 
   //  QIcon  icon;
@@ -56,6 +57,17 @@ Starter::Starter(QWidget *parent) :
     connect(ok, SIGNAL(clicked()),this,SLOT(avvio()));
     GD2(cout<<"[Starter::Starter] inizializzato il pushbutton e connesso i segnali"<<endl);
 
+    QLabel * patternDesc = new QLabel;
+    patternDesc->setText("specifica la disposizione iniziale delle cellule");
+    //patternDesc->setTextFormat(QTextFormat::PageBreak_Auto);
+
+    QComboBox * patterns = new QComboBox;
+    QStringList list;
+    list<<"casuale"<<"pieno";
+    patterns->addItems(list);
+    //patterns->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+    connect(patterns,SIGNAL(activated(int)),this,SLOT(setPattern(int)));
+
     QGridLayout * spinboxes = new QGridLayout();
     spinboxes->addWidget(etichettaX,0,0,Qt::AlignHCenter );
     spinboxes->addWidget(etichettaY,0,1,Qt::AlignHCenter );
@@ -65,6 +77,8 @@ Starter::Starter(QWidget *parent) :
     QVBoxLayout * layout = new QVBoxLayout();
     layout->addWidget(descrizione);
     layout->addLayout(spinboxes);
+    layout->addWidget(patternDesc);
+    layout->addWidget(patterns);
     layout->addWidget(ok);
 
     setLayout(layout);
@@ -78,9 +92,10 @@ void Starter::avvio()
 
     assert(x>0);
     assert(y>0);
+    assert(pattern>=0);
 
 
-    MainWindow * finestra = new MainWindow(x,y);
+    MainWindow * finestra = new MainWindow(x,y,pattern);
     finestra->show();
 
     this->close();
@@ -96,4 +111,10 @@ void Starter::changeYDimension(int dim)
 {
     GD2(cout<<"valore di y"<<y<<endl);
     this->y=dim;
+}
+
+void Starter::setPattern(int position)
+{
+    GD2(cout<<"position: "<<position);
+    this->pattern=position;
 }

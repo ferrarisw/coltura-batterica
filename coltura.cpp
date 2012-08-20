@@ -8,7 +8,7 @@
 using namespace std;
 
 
-Coltura::Coltura(int x, int y,QWidget *parent) :
+Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     QWidget(parent)
 {
     this->x=x;
@@ -16,7 +16,7 @@ Coltura::Coltura(int x, int y,QWidget *parent) :
     GD1(cout<<"sono nel costruttore di coltura: this.x "<<this->x<<" this.y "<<this->y<<endl);
     assert(x>0);
     assert(y>0);
-    pila=new PilaMatrici (x,y);
+    pila=new PilaMatrici (x,y,pattern);
     GD1(cout<<"ho creato un nuovo oggetto PilaMatrici\n");
 
 
