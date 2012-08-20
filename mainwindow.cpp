@@ -11,10 +11,11 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
 
     GD1(cout<<"[MainWindow]: costruttore. dimensioni della matrice: "<<x<<" "<<y<<endl) ;
 
+
+   // connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(timeTrip(int)));
+
     this->coltura = new Coltura(x,y,pattern);
     GD1(cout<<"[MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
-
-
 
     QPushButton * stepByStep = new QPushButton("step by step");
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
@@ -34,6 +35,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
     buttonLayout->addWidget(stepByStep);
 
     QVBoxLayout * layout = new QVBoxLayout;
+    layout->addWidget(coltura->timeSlider);
     layout->addWidget(coltura);
     layout->addWidget(slider);
     layout->addLayout(buttonLayout);

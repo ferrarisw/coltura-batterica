@@ -16,6 +16,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     GD1(cout<<"sono nel costruttore di coltura: this.x "<<this->x<<" this.y "<<this->y<<endl);
     assert(x>0);
     assert(y>0);
+
     pila=new PilaMatrici (x,y,pattern);
     GD1(cout<<"ho creato un nuovo oggetto PilaMatrici\n");
 
@@ -33,6 +34,11 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     matrice=new int[(x+2)*(y+2)];
     matrice=pila->getMatrix();
 
+    timeSlider = new QSlider(Qt::Horizontal);
+    timeSlider->setMinimum(0);
+    timeSlider->setMaximum(0);
+    timeSlider->setValue(0);
+    connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
 
     GD3(cout<<"stampo la matrice manualmente"<<endl;
     for(int j=1; j<y+1; j++)
@@ -47,10 +53,10 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     GD2(cout<<"stampo la matrice utilizzando pila.stampa: "<<endl;
         pila->stampa()
             );
+
 }
 
 /**
- * @brief Coltura::paintEvent
  * @param event
  * Funzione chiamata ogni volta che avviene un evento sullo schermo.
  */
@@ -64,7 +70,6 @@ void Coltura::paintEvent(QPaintEvent *event)
 }
 
 /**
- * @brief Coltura::paintColtura
  * @param painter
  * @param event
  * Funzione che disegna il widget Coltura in base alla matrice generata da
@@ -111,6 +116,28 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 }
 
 //TODO: funzione paintColtura di debug
+/**
+ * @brief Coltura::aggiorna
+ *
+ */
+void Coltura::aggiorna()
+{
+    matrice=pila->next();
+    int value=timeSlider->value();
+    int max=timeSlider->maximum();
+
+    if(value==max)
+    {
+        timeSlider->setMaximum(++max);
+        timeSlider->setValue(++value);
+    }
+    else
+    {
+        timeSlider->setValue(++value);
+    }
+    GD3(cout<<"value: "<<value<<" maximum: "<<max<<endl);
+    this->repaint();
+}
 
 /**
  * @brief Coltura::getMaxTime
@@ -130,16 +157,6 @@ int Coltura::getMinTime()
     return minTime;
 }
 
-/**
- * @brief Coltura::aggiorna
- *
- */
-void Coltura::aggiorna()
-{
-    matrice=pila->next();
-
-    this->repaint();
-}
 
 
 void Coltura::play(int scatti)
@@ -156,4 +173,9 @@ void Coltura::play(int scatti)
 void Coltura::changeDimension(int x)
 {
     this->x=this->y=x;
+}
+
+void Coltura::timeTrip(int time)
+{
+    GD2(cout<<"time "<<time<<endl);
 }

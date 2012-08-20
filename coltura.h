@@ -3,8 +3,8 @@
 #include <QtGui>
 #include "pilamatrici.h"
 
-/** @brief The Coltura class
- *Descrizione della classe Coltura e delle sue strutture dati.
+/**
+ Descrizione della classe Coltura e delle sue strutture dati.
     La parte pubblica contiene:
         - Il costruttore, che prende in ingresso x e y.
         - Una funzione getMaxTime, che restituisce la variabile maxTime.
@@ -39,6 +39,7 @@ public:
     Coltura(int x,int y, int pattern, QWidget * parent=0);
     int getMaxTime();
     int getMinTime();
+    QSlider *timeSlider;
 
 
 protected:
@@ -60,6 +61,7 @@ public slots:
     void aggiorna();
     void play(int scatti);
     void changeDimension(int);
+    void timeTrip(int);
 
 
 };
