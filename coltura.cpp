@@ -87,7 +87,6 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 
     painter->scale(larghezza_cella,altezza_cella);
 
-    GD3(cout<<"[Coltura::paintColtura] stampo la matrice mentre disegno il widget"<<endl)
     for(int j=1; j<y+1; j++)
     {
         for(int i=1; i<x+1; i++)
@@ -97,14 +96,12 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
             else
                 colore=(QBrush(QColor(0,0,30)));
 
-            GD3(cout<<(matrice[i+j*(x+2)])<<" ");
 
-            //painter->fillRect(-0.5,-0.5,1,1,colore);
             painter->setBrush(colore);
             painter->drawRect(-0.5,-0.5,1,1);
             painter->translate(1,0);
         }
-        GD2(cout<<endl);
+
         painter->translate(-1*(x),1);
     }
 

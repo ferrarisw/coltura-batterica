@@ -166,7 +166,7 @@ int * PilaMatrici::next()
         "La memoria occupata dalle matrici fino ad ora e': " << ( memoriaOccupata / 1000 ) << " KB.\n"
         "Questa e' la matrice numero: " << posizioneAttuale->tempo << "\n"
         "Confronto con la matrice precedente: " << numeroCelluleVive - numeroCelluleVivePrecedente << " ("
-        << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << " % )\n" );
+        << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << " % )"<<endl );
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
@@ -176,7 +176,7 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.";
+    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.\n";
 
     for (int j = 0; j < dimy + 2; j++)
     {
