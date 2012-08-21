@@ -1,7 +1,7 @@
 #ifndef PILAMATRICI_H
 #define PILAMATRICI_H
 
-#include "QString"
+#include <QtGui>
 
 /** Descrizione della Classe PilaMatrici e delle sue strutture dati.
     La classe PilaMatrici ha una parte pubblica e privata.
@@ -114,7 +114,7 @@ public:
       */
     long int memoriaOccupata;
 
-    /** Funzione incrementaMemoriaOccupata(int &, int)
+    /** Funzione incrementaMemoriaOccupata(long int &, int)
       Incrementa il valore passatogli per riferimento al primo parametro
       del secondo valore passato per valore al secondo parametro
 
@@ -288,12 +288,12 @@ private:
       */
     int timeTrip(Matrix* &, int);
 
-    /** Variavile bool godModeActivation
+    /** Variabile bool godModeActivation
       Questa variabile determina se la godMode è attiva o no
       */
     bool godModeActivation;
 
-    /** Funzione godModeAcrivityEnabler.
+    /** Funzione godModeActivityEnabler.
       QUeste funzioni settano o resettano il booleano che determina l'attività
       della funzione godMode.
 

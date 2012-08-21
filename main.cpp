@@ -25,6 +25,7 @@ using namespace std;
 
 //Idee sulla gestione degli errori con popup, soprattutto nella modalità Dio
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
     GD1(cout<<"[main] sto per inizializzare lo starter"<<endl;)
     Starter * starter = new Starter();
     starter->show();
+
 
     /*
     Popup * popup = new Popup();

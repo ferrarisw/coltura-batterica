@@ -4,12 +4,40 @@
 #include <QWidget>
 #include <QtGui>
 #include "mainwindow.h"
-
+/**
+ * Widget di apertura del programma.
+ * Tramite esso é possibile impostare le dimensioni e il pattern della coltura.
+ */
 class Starter : public QWidget
 {
     Q_OBJECT
 public:
+    /**
+     * Costruttore del widget.
+     * @param parent=0
+     */
     explicit Starter(QWidget *parent = 0);
+    ~Starter();
+
+public slots:
+    /**
+     * Funzione chiamata quando premo il pulsante "ok".
+     * Apre il widget MainWindow e chiude lo Starter.
+     */
+    void avvio();
+    /**
+     * Setta la larghezza della coltura.
+     */
+    void changeXDimension(int);
+    /**
+     * Setta l'altezza della coltura.
+     */
+    void changeYDimension(int);
+    /**
+     * Setta il pattern scelto.
+     */
+    void setPattern(int);
+
 private:
     MainWindow * mainwindow;
     int x;
@@ -17,13 +45,7 @@ private:
     int pattern;
 
 
-signals:
     
-public slots:
-    void avvio();
-    void changeXDimension(int);
-    void changeYDimension(int);
-    void setPattern(int);
 };
 
 #endif // STARTER_H

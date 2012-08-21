@@ -82,7 +82,14 @@ Starter::Starter(QWidget *parent) :
     layout->addWidget(ok);
 
     setLayout(layout);
-    GD3(cout<<"[Starter::Starter] sistemato il layout"<<endl;)
+    GD3(cout<<"[Starter::Starter] sistemato il layout\n\n");
+
+    //connect()
+
+}
+
+Starter::~Starter()
+{
 }
 
 void Starter::avvio()
@@ -99,18 +106,19 @@ void Starter::avvio()
     finestra->show();
 
     this->close();
+    this->destroy();
 }
 
 void Starter::changeXDimension(int dim)
 {
-
     this->x=dim;
+    GD2(cout<<"modificato x: "<<x<<endl);
 }
 
 void Starter::changeYDimension(int dim)
 {
-    GD2(cout<<"valore di y"<<y<<endl);
     this->y=dim;
+    GD2(cout<<"modificato y: "<<y<<endl);
 }
 
 void Starter::setPattern(int position)

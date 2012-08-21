@@ -20,12 +20,10 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     pila=new PilaMatrici (x,y,pattern);
     GD1(cout<<"ho creato un nuovo oggetto PilaMatrici\n");
 
-
     minTime=30;
     maxTime=1000+minTime;
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(aggiorna()));
-
 
     setGeometry(375,55,x*15,y*15);
     setMinimumSize(3*x,3*y);
@@ -41,6 +39,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
 
     GD3(cout<<"stampo la matrice manualmente"<<endl;
+
     for(int j=1; j<y+1; j++)
     {
         for(int i=1; i<x+1; i++)
@@ -56,10 +55,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
 
 }
 
-/**
- * @param event
- * Funzione chiamata ogni volta che avviene un evento sullo schermo.
- */
+
 void Coltura::paintEvent(QPaintEvent *event)
 {
     QPainter painter;
@@ -74,7 +70,7 @@ void Coltura::paintEvent(QPaintEvent *event)
  * @param event
  * Funzione che disegna il widget Coltura in base alla matrice generata da
  * pilaMatrici->next.
- * In particolare, prende l'oggetto locale @var matrice e lo scorre fino alla fine,
+ * In particolare, prende l'oggetto locale  matrice e lo scorre fino alla fine,
  * impostando diversamente il pennello a seconda del valore della cella, ovviamente
  * non prima di aver correttamente impostato le dimensioni delle caselle.
  */
@@ -116,10 +112,7 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 }
 
 //TODO: funzione paintColtura di debug
-/**
- * @brief Coltura::aggiorna
- *
- */
+
 void Coltura::aggiorna()
 {
     matrice=pila->next();
@@ -165,15 +158,12 @@ void Coltura::play(int scatti)
         timer->stop();
     else {
         timer->start(-((1./maxTime)*scatti*scatti)+maxTime);
+
         GD1(cout<<"millisecondi "<<(-((1./maxTime)*scatti*scatti)+maxTime)<<"\tvalore slider "<<scatti<<endl);
     }
 
 }
 
-void Coltura::changeDimension(int x)
-{
-    this->x=this->y=x;
-}
 
 void Coltura::timeTrip(int time)
 {
