@@ -1,25 +1,54 @@
 OBJ = main.o mainwindow.o pilamatrici.o starter.o coltura.o
+MOC = coltura_moc.cpp starter_moc.cpp popup_moc.cpp mainwindow_moc.cpp
+MOCOBJ = coltura_moc.o starter_moc.o popup_moc.o mainwindow_moc.o
+QTLIBS = `pkg-config --libs QtGui`
+QTFLAG = `pkg-config --cflags QtGui`
+        
+CXXFLAGS = $(QTFLAG)
+LDFLAGS = $(QTLIBS)
+        
+colturabatterica : $(OBJ) $(MOCOBJ)
+	g++ -Wall -export-dynamic -o colturabatterica $(OBJ) $(MOCOBJ) $(LDFLAGS)
 
-colturabatterica : $(OBJ)
-	g++ -o colturabatterica $(OBJ)
+main.o : main.cpp mainwindow.h pilamatrici.h coltura.h mainwindow.h starter.h main.h popup.h
 
-main.o : main.cpp QtGui iostream mainwindow.h pilamatrici.h coltura.h mainwindow.h starter.h main.h popup.h
-	g++ -c main.cpp
+mainwindow.o : mainwindow.cpp main.h mainwindow.h coltura.h
 
-mainwindow.o : mainwindow.cpp iostream QtGui main.h mainwindow.h coltura.h
-	g++ -c mainwindow.cpp
+pilamatrici.o : pilamatrici.cpp pilamatrici.h main.h
 
-pilamatrici.o : pilamatrici.cpp iostream ctime cstdlib pilamatrici.h main.h
-	g++ -c pilamatrici.cpp
+starter.o : starter.cpp starter.h main.h mainwindow.h
 
-starter.o : starter.cpp QtGui starter.h main.h cassert
-	g++ -c starter.cpp
+coltura.o : coltura.cpp coltura.h main.h pilamatrici.h
 
-coltura.o : coltura.cpp iostream QtGui cmath main.h coltura.h pilamatrici.h cassert
-	g++ -c coltura.cpp
-  
-.PHONY : clean 
+popup.o : popup.cpp popup.h
+
+#moc.o
+mainwindow_moc.o : mainwindow_moc.cpp main.h mainwindow.h coltura.h
+
+starter_moc.o : starter_moc.cpp starter.h main.h
+
+coltura_moc.o : coltura_moc.cpp main.h coltura.h pilamatrici.h
+
+popup_moc.o : popup_moc.cpp popup.h
+
+#moc.cpp
+mainwindow_moc.cpp : mainwindow.cpp mainwindow.h
+	moc mainwindow.h -o mainwindow_moc.cpp
+	
+starter_moc.cpp : starter.cpp starter.h
+	moc starter.h -o starter_moc.cpp
+	
+coltura_moc.cpp : coltura.cpp coltura.h
+	moc coltura.h -o coltura_moc.cpp
+	
+popup_moc.cpp : popup.cpp popup.h
+	moc popup.h -o popup_moc.cpp
+
+.PHONY : clean doc
 clean : 
-	rm colturabatterica $(OBJ)
+	rm -f colturabatterica $(OBJ) $(MOC) $(MOCOBJ)
+	
+doc :
+	doxygen Doxyfile
 	
 	
