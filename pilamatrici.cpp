@@ -3,10 +3,14 @@
 #include <cstdlib>
 #include "pilamatrici.h"
 #include "main.h"
+#include <assert.h>
 using namespace std;
 
 PilaMatrici::PilaMatrici(int x, int y, int pattern)
 {
+    assert(x > 0);
+    assert(y > 0);
+
     this->dimx = x;
     this->dimy = y;
 
@@ -24,7 +28,7 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
 
     patternModeSelector(pattern);
 
-    TRACE("PatternMode Selezionata.");
+    TRACE("[PilaMatrici::PilaMatrici] PatternMode Selezionata.");
 
     memoriaOccupata = (sizeof(Matrix) + sizeof(int)*dimx*dimy);
     matriciRealizzate = 0;
@@ -34,14 +38,14 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
 {
     Matrix* temp = new Matrix;
 
-    TRACE("Ho creato una nuova matrice allocata dinamicamente.");
+    TRACE("[PilaMatrici::creaMatrice] Ho creato una nuova matrice allocata dinamicamente.");
 
     temp->succ = succ;
     temp->prec = prec;
 
     temp->tabella = new int[(dimx+2) * (dimy+2)];
 
-    TRACE("Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
+    TRACE("[PilaMatrici::creaMatrice] Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
           " e "<<dimy<<" correttamente.")
 
     inizializzaTabella(temp, 0);
@@ -51,7 +55,7 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
     temp->parallelBackward = NULL;
     temp->parallelForward = NULL;
 
-    TRACE("Ho inizializzato a 0 tutti gli elementi della matrice e aggiornato"
+    TRACE("[PilaMatrici::creaMatrice] Ho inizializzato a 0 tutti gli elementi della matrice e aggiornato"
           " il tempo.");
 
     return temp;
@@ -67,7 +71,7 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
     srand( time(0) );
     int tot = 0;
 
-    TRACE("Ora inizializzo casualmente gli elementi interni della matrice.");
+    TRACE("[PilaMatrici::riempiCasuale] Ora inizializzo casualmente gli elementi interni della matrice.");
 
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
@@ -77,7 +81,7 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
             pos->tabella[i + j * (dimx + 2)] = temp;
         }
 
-    TRACE("Ho inizializzato tutta la matrice esclusa la cornice esterna.");
+    TRACE("[PilaMatrici::riempiCasuale] Ho inizializzato tutta la matrice esclusa la cornice esterna.");
 }
 
 void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
@@ -103,19 +107,19 @@ inline int PilaMatrici::getValore (int * t, int x, int y)
 
 int * PilaMatrici::next()
 {
-    TRACE("Sto per inizializzare la prossima matrice.");
+    TRACE("[PilaMatrici::next] Sto per inizializzare la prossima matrice.");
 
     Matrix* temp = creaMatrice(posizioneAttuale, NULL, posizioneAttuale->tempo + 1);
     matriciRealizzate += 1;
 
-    TRACE("Ora inizializzo due puntatori a intero, uno alla tabella attuale\n"
+    TRACE("[PilaMatrici::next] Ora inizializzo due puntatori a intero, uno alla tabella attuale\n"
           "e uno alla nuova tabella. Mi serve per semplificare il codice");
 
     int somma = 0;
     int * t1 = posizioneAttuale->tabella;
     int * t2 = temp->tabella;
 
-    TRACE("Sommo tutte le 8 caselle attorno alla casella attuale.");
+    TRACE("[PilaMatrici::next] ommo tutte le 8 caselle attorno alla casella attuale.");
 
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
@@ -141,7 +145,7 @@ int * PilaMatrici::next()
             }
         }
 
-    TRACE("Rendo la matrice appena creata, quella attuale.");
+    TRACE("[PilaMatrici::next] Rendo la matrice appena creata, quella attuale.");
 
     /*
       * Setto il puntatore parallel a NULL perchè la linea del tempo è una sola
@@ -154,8 +158,11 @@ int * PilaMatrici::next()
     temp->prec = posizioneAttuale;
     temp->tempo = (posizioneAttuale->tempo + 1);
 
+
     double numeroCelluleVive = static_cast<double> ( contaCelluleVive(temp) );
     double numeroCelluleVivePrecedente = static_cast<double> ( contaCelluleVive(posizioneAttuale) );
+
+    assert(numeroCelluleVive > 0);
 
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
 
@@ -176,7 +183,7 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    GD3(cout<<"Stampo la matrice. Questa è solo una funzione per il DBGug.\n";
+    GD3(cout<<"[PilaMatrici::stampa] Stampo la matrice. Questa è solo una funzione per il DBGug.\n";
 
     for (int j = 0; j < dimy + 2; j++)
     {
@@ -207,9 +214,11 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
 
 int PilaMatrici::incrementaMemoriaOccupata(long int & memoriaOccupata, int valore)
 {
-    TRACE("Incremento la memoria occupata.")
+    assert(valore > 0);
+
+    TRACE("[PilaMatrici::incrementaMemoriaOccupata] Incremento la memoria occupata.")
     memoriaOccupata += valore;
-    TRACE("Memoria incrementata.")
+    TRACE("[PilaMatrici::incrementaMemoriaOccupata] Memoria incrementata.")
     return memoriaOccupata;
 }
 
@@ -222,6 +231,7 @@ int PilaMatrici::contaCelluleVive(Matrix* & matrice)
         if (matrice->tabella[j] == vivo)
             matrice->numeroCelleVive++;
     }
+    assert (matrice->numeroCelleVive >= 0);
     return matrice->numeroCelleVive;
 }
 
@@ -441,6 +451,6 @@ void PilaMatrici::pattern3()
     for (int j = 0; (j + 30) < (dimx + 2) * (dimy + 2); ) {
         posizioneAttuale->tabella[j] = 1;
         posizioneAttuale->tabella[j + 30] = 1;
-        j += dimx;
+        j += dimx+1;
     }
 }

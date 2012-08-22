@@ -13,23 +13,23 @@ using namespace std;
   * seguenti valori:
   * 0   NESSUN LIVELLO
   * 1   TRACE
-  * 2   GD1
+  * 2               GD1
   * 3   TRACE       GD1
-  * 4   GD2
-  * 5   TRACE       GD2
-  * 6   GD1         GD2
+  * 4                       GD2
+  * 5   TRACE               GD2
+  * 6               GD1     GD2
   * 7   TRACE       GD1     GD2
-  * 8   GD3
-  * 9   TRACE       GD3
-  * 10  GD1         GD3
-  * 11  TRACE       GD1     GD3
-  * 12  GD2         GD3
-  * 13  TRACE       GD2     GD3
-  * 14  GD1         GD2     GD3
+  * 8                               GD3
+  * 9   TRACE                       GD3
+  * 10              GD1             GD3
+  * 11  TRACE       GD1             GD3
+  * 12                      GD2     GD3
+  * 13  TRACE               GD2     GD3
+  * 14              GD1     GD2     GD3
   * 15  TRACE       GD1     GD2     GD3
   */
 
-#define MASK 15
+extern int MASK;
 
 
 #define DBG(a, b)      {if ((a) & MASK) {b; }}
@@ -58,7 +58,7 @@ using namespace std;
   * 1   LOG
   */
 
-#define LOGMASK 1
+extern int LOGMASK;
 
 #define LOGDBG(a, b)      {if ((a) & LOGMASK) {b; }}
 #else

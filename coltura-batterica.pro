@@ -16,7 +16,8 @@ SOURCES += main.cpp\
     pilamatrici.cpp \
     pilamatrici_IO.cpp \
     starter.cpp \
-    popup.cpp
+    popup.cpp \
+    debug.cpp
 
 HEADERS  += mainwindow.h \
     main.h \
@@ -24,4 +25,5 @@ HEADERS  += mainwindow.h \
     pilamatrici.h \
     errors.h \
     starter.h \
-    popup.h
+    popup.h \
+    debug.h
