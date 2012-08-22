@@ -4,12 +4,12 @@
 #include "pilamatrici.h"
 
 /**
- * Descrizione della classe Coltura e delle sue strutture dati.
+ * Widget di visualizzazione della coltura.
  *   La parte pubblica contiene:
  *       - Il costruttore, che prende in ingresso le dimensioni e il pattern.
  *       - Una funzione getMaxTime(), che restituisce la variabile maxTime.
  *       - Una funzione getMinTime(), che restituisce la variabile minTime.
- *       - Lo slider  timeSlider, che gestisce il tempo.
+ *       - Lo slider timeSlider, che gestisce il tempo.
  *
  *   I public slots sono:
  *       - aggiorna(), che fa scorrere il tempo di un unità soltanto.
@@ -24,34 +24,30 @@ class Coltura : public QWidget
     Q_OBJECT
 
 public:
-    /**
-     * @fn
+    /** 
      * Costruttore della classe Coltura.
      * Inizializza la lista Pilamatrici e gestisce l'inizializzazione
      * della barra relativa all'istante di tempo.
-     * @param x
-     * @param y
-     * @param pattern
+     * @param x larghezza
+     * @param y altezza
+     * @param pattern disposizione iniziale delle cellule
      * @param parent=0
      */
     Coltura(int x,int y, int pattern, QWidget * parent=0);
 
     /**
-     * @fn
      * Ritorna la velocità massima del tempo.
      * @return ::maxTime
      */
-    int getMaxTime();
+     int getMaxTime();
 
     /**
-     * @fn
      * Ritorna la velocità minima del tempo.
      * @return minTime
      */
-    int getMinTime();
+     int getMinTime();
 
     /**
-     * @var
      * Slider che gestisce il salto nel tempo.
      */
     QSlider *timeSlider;
@@ -59,7 +55,6 @@ public:
 
 public slots:
     /**
-     *
      * Slot che determina il passaggio in un quanto di tempo.
      * Gestisce sia il timeSlider, modificandone sia valore che valore massimo,
      * che l'effettivo passaggio al nuovo stato, sia che si stia seguendo il
@@ -91,6 +86,7 @@ private:
     QBrush background;
     QBrush colore;
     void paintColtura(QPainter *, QPaintEvent *);
+    void paintColtura(QPainter *, QPaintEvent *, char * debug);
     QTimer *timer;
     int minTime;
     int maxTime;
