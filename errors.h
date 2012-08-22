@@ -26,4 +26,10 @@ enum godModeReturnValues {
     returnedToMainLine              =       -59     /* Ritornato alla linea principale*/
 };
 
+enum debugActivityReturnValues {
+    maskValueChangedSuccesfully     =       -60,    /* Maschera di DBG modificata con successo*/
+    logMaskValueChangedSuccesfully  =       -61,    /* Maschera di LOG modificata con successo*/
+    releaseVersionApplied           =       -62     /* Disattivato tutto il debug*/
+};
+
 #endif // ERRORS_H

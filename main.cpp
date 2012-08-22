@@ -7,6 +7,7 @@
 #include "starter.h"
 #include "main.h"
 #include "popup.h"
+#include "debug.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ using namespace std;
 //TODO widget di apertura
 //TODO pulizia main
 //TODO commenti
-//TODO Documentazione       aggiornata al 09/08/2012
+//TODO Documentazione       aggiornata al 22/08/2012
 //TODO makefile
 //TODO revisione classe coltura
 //TODO modalita` dio        Funzione implementata ma da completare
@@ -34,6 +35,8 @@ int main(int argc, char *argv[])
     Starter * starter = new Starter();
     starter->show();
 
+    Debug * debug = new Debug();
+    debug->show();
 
     /*
     Popup * popup = new Popup();
