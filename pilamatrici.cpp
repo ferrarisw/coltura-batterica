@@ -389,11 +389,58 @@ void PilaMatrici::patternModeSelector(int selector)
         break;
 
     case 1:
-        inizializzaTabella(posizioneAttuale, 1);
+        pattern1();
+        break;
+
+    case 2:
+        pattern2();
+        break;
+
+    case 3:
+        pattern3();
+        break;
+
+        /*
+          * Questo caso serve per quando carico la matrice dal file.
+          * Invocando di nuovo il costruttore, devo garantire che la selezione
+          * del pattern non modifichi la matrice caricata, altrimenti non
+          * servirebbe più a nulla.
+          */
+    case 99:
         break;
 
     default:
         cout<<"[patternModeSelector] errore: numero pattern non corretto "<<selector<<endl;
         exit(-1);
+    }
+}
+
+void PilaMatrici::pattern1()
+{
+    for (int j = 0; j < (dimx + 2) * (dimy + 2); ) {
+        posizioneAttuale->tabella[j] = 1;
+        j += 2;
+    }
+}
+
+void PilaMatrici::pattern2()
+{
+    for (int j = 0; j < (dimx + 2) * (dimy + 2); ) {
+        posizioneAttuale->tabella[j] = 1;
+        j += (dimx + 1);
+    }
+
+    for (int j = 0; j < (dimx + 2) * (dimy + 2); ) {
+        posizioneAttuale->tabella[j] = 1;
+        j += (dimx + 3);
+    }
+}
+
+void PilaMatrici::pattern3()
+{
+    for (int j = 0; j < (dimx + 2) * (dimy + 2); ) {
+        for (int i = j; i < (dimx + 2) * (dimy + 2); ) {
+            posizioneAttuale->tabella[i] = 1;
+        }
     }
 }

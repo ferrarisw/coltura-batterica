@@ -43,13 +43,13 @@ class PilaMatrici
 public:
     PilaMatrici(int x, int y, int pattern);
 
-    /** Funzione getMatrix.
+    /** Per ritornare un puntatore alla matrice attuale.
       Questa funzione ritorna un puntatore alla tabella di matrici attuale.
       Serve per la grafica.
       */
     int* getMatrix();
 
-    /** Funzione next().
+    /** Per calcolare la matrice successiva.
 
       Questa funzione non prende in ingresso alcun parametro perch√® utilizza
       ci√≤ che √® gi√  inizializzato nella classe.
@@ -75,18 +75,18 @@ public:
       */
     int * next();
 
-    /** Funzione stampa().
+    /** Stampa su stdout la matrice.
       Semplice funzione di stampa su stdout della matrice in posizioneAttuale.
       Utilizzo per il debug.
       */
     void stampa ();
 
-    /** Funzione getDimx().
+    /** Ritorna la larghezza della matrice.
       @return dimx  Lunghezza di ogni riga
       */
     int getDimx() { return dimx;}
 
-    /** Funzione getDimy().
+    /** Ritorna l'altezza della matrice.
       @return dimy  Numero di righe
       */
     int getDimy() { return dimy;}
@@ -102,19 +102,19 @@ public:
       3)    Dopo aver salvato su file tutti gli elementi della matrice
       chiudo il file in scrittura.
       */
-    //bool salva (QString file);
+    bool salva (QString file);
 
     //TODO Documentazione carica
-    //static PilaMatrici* carica (QString file);
+    PilaMatrici* carica (QString file);
 
-    /** Variabile memoriaOccupata
+    /** Per calcolare la memoria occupata dalle matrici.
       Questa variabile viene utilizzata per statistiche e indica quanta mamoria
       viene occupata dalle matrici in ogni punto del programma. Si puÚ vedere
       questa statistica attivando il livello di debug LOG
       */
     long int memoriaOccupata;
 
-    /** Funzione incrementaMemoriaOccupata(long int &, int)
+    /** Per incrementare la memoria occupata dalle matrici ad ogni iterazione
       Incrementa il valore passatogli per riferimento al primo parametro
       del secondo valore passato per valore al secondo parametro
 
@@ -123,7 +123,7 @@ public:
       */
     int incrementaMemoriaOccupata(long int &, int);
 
-    /** Variabile matriciRealizzate
+    /** Numero di matrici realizzate.
       Questa variabile permette semplicemente di monitorare il numero di matrici
       realizzate.
       */
@@ -163,7 +163,7 @@ private:
     Matrix* coda;
     Matrix* posizioneAttuale;
 
-    /** Funzione creaMatrice().
+    /* Funzione creaMatrice().
 
       1)    Alloca dinamicamente una matrice temporanea delle dimensioni passate
       dall'utente.
@@ -181,7 +181,7 @@ private:
       */
     Matrix* creaMatrice(Matrix* succ, Matrix* prec, int tempo);
 
-    /** Funziona distruggiMatrice().
+    /* Funziona distruggiMatrice().
 
       1)    se la matrice attuale √® la testa, aggiorna la testa alla matrice
       successiva
@@ -196,7 +196,7 @@ private:
       */
     bool distruggiMatrice(Matrix*);
 
-    /** Funzione riempiCasuale.
+    /* Funzione riempiCasuale.
 
       1)    Utilizzando le funzioni di cstdlib setta il seme da cui calcolare
       i numeri random tramite la funzione rand() e inizializza un intero tot
@@ -211,7 +211,7 @@ private:
       */
     void riempiCasuale(Matrix*);
 
-    /** Funzione inizializzaTabella.
+    /* Funzione inizializzaTabella.
 
       Assegna ad ogni elemento della tabella il valore passato come
       parametro
@@ -221,7 +221,7 @@ private:
       */
     void inizializzaTabella(Matrix*, int);
 
-    /** Funzione inizializzaCasella.
+    /* Funzione inizializzaCasella.
 
       Assegna all'elemento della tabella indicato dal secondo parametro,
       il valore passato come terzo parametro
@@ -232,7 +232,7 @@ private:
       */
     inline bool inizializzaCasella(Matrix* pos, int casella, int valore);
 
-    /** Funzione getValore.
+    /* Funzione getValore.
 
       1)    Ritorna il valore della casella passata dai tre parametri
       Utilizzo la forma t[x + y * (dimx + 2)] perch√® ho inizializzato la
@@ -247,7 +247,7 @@ private:
       */
     int getValore(int * cella, int x, int y);
 
-    /** Funzione contaCelleVive.
+    /* Funzione contaCelleVive.
       Per ogni matrice, setta a 0 il numero di cellule vive, e la scorre
       completamente incrementando di 1 il numero di cellule vive ogni volta che
       ne incontra una viva.
@@ -256,7 +256,7 @@ private:
       */
     int contaCelluleVive(Matrix * &);
 
-    /** Funzione verificamatriciUguali.
+    /* Funzione verificamatriciUguali.
       Questa funzione confronta due matrici e ritorna vero se sono uguali.
       Ritorna falso se la prima tabella di confronto Ë anche la prima della pila
       oppure se la prima tabela di confronto Ë precedente alla seconda.
@@ -266,7 +266,7 @@ private:
       */
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
-    /** Funzione timeTripAbilitation.
+    /* Funzione timeTripAbilitation.
       Questa funzione controlla se Ë possibile attivare il timeTrip.
       Esegue i controlli e ritorna degli interi che indicano gli eventuali
       errori riscontrati. Altrimenti ritorna un intero che indica il successo
@@ -278,7 +278,7 @@ private:
       */
     int timeTripAbilitation(Matrix* &, int);
 
-    /** Funzione timeTrip.
+    /* Funzione timeTrip.
       Questa funzione permette di tornare ad una matrice realizzata
       precedentemente o successivamente alla matrice attuale.
 
@@ -288,12 +288,12 @@ private:
       */
     int timeTrip(Matrix* &, int);
 
-    /** Variabile bool godModeActivation
+    /* Variabile bool godModeActivation
       Questa variabile determina se la godMode Ë attiva o no
       */
     bool godModeActivation;
 
-    /** Funzione godModeActivityEnabler.
+    /* Funzione godModeActivityEnabler.
       QUeste funzioni settano o resettano il booleano che determina l'attivit‡
       della funzione godMode.
 
@@ -304,7 +304,7 @@ private:
     int godModeActivityEnabler(bool &, const bool);
     int godModeActivityEnabler(bool &);
 
-    /** Funzione godModeInitalizer.
+    /* Funzione godModeInitalizer.
       Questa funzione prepara la nuova matrice in parallelo alla linea principale
       per la godMode. Provvede a tutti gli agganci dei puntatori, in modo che
       si possa sempre viaggiare nel tempo tramite le diverse linee parallele di
@@ -314,7 +314,7 @@ private:
       */
     int godModeInitializer();
 
-    /** Funzione godModeApplicator.
+    /* Funzione godModeApplicator.
       Questa funzione sfrutta l'operato della funzione godModeInitializer, che
       ha modificato la posizioneAttuale e ne modifica la matrice.
 
@@ -322,7 +322,7 @@ private:
       */
     int godModeApplicator(int &, int);
 
-    /** Funzione returnToMainLine.
+    /* Funzione returnToMainLine.
       Questa funzione permette di ritornare alla linea principale, prima della
       modifica della godMode. Viene chiamata ricorsivamente finchË non trovo un
       puntatone non nullo alla matrice parallelBackward.
@@ -333,6 +333,10 @@ private:
 
     //TODO
     void patternModeSelector(int);
+
+    void pattern1();
+    void pattern2();
+    void pattern3();
 };
 
 #endif // PILAMATRICI_H

@@ -63,7 +63,7 @@ Starter::Starter(QWidget *parent) :
 
     QComboBox * patterns = new QComboBox;
     QStringList list;
-    list<<"casuale"<<"pieno";
+    list<<"Casuale"<<"Pattern 1"<<"Pattern 2"<<"Pattern 3";
     patterns->addItems(list);
     //patterns->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
     connect(patterns,SIGNAL(activated(int)),this,SLOT(setPattern(int)));
