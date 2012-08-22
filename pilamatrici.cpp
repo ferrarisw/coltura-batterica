@@ -438,9 +438,9 @@ void PilaMatrici::pattern2()
 
 void PilaMatrici::pattern3()
 {
-    for (int j = 0; j < (dimx + 2) * (dimy + 2); ) {
-        for (int i = j; i < (dimx + 2) * (dimy + 2); ) {
-            posizioneAttuale->tabella[i] = 1;
-        }
+    for (int j = 0; (j + 30) < (dimx + 2) * (dimy + 2); ) {
+        posizioneAttuale->tabella[j] = 1;
+        posizioneAttuale->tabella[j + 30] = 1;
+        j += dimx;
     }
 }
