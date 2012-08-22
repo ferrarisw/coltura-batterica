@@ -3,6 +3,7 @@
 #include "main.h"
 #include "mainwindow.h"
 #include "coltura.h"
+#include "starter.h"
 using namespace std;
 
 MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
@@ -17,6 +18,14 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
     this->coltura = new Coltura(x,y,pattern);
     GD1(cout<<"[MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
+    QMenu * file = new QMenu("&File");
+    file->addAction("Nuova partita",this,SLOT(newGame()));
+
+    QMenuBar * menu = new QMenuBar();
+    menu->addMenu(file);
+    menu->addMenu("Modifica");
+    menu->addMenu("Help");
+    
     QPushButton * stepByStep = new QPushButton("step by step");
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
 
@@ -35,6 +44,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
     buttonLayout->addWidget(stepByStep);
 
     QVBoxLayout * layout = new QVBoxLayout;
+    layout->addWidget(menu);
     layout->addWidget(coltura->timeSlider);
     layout->addWidget(coltura);
     layout->addWidget(slider);
@@ -66,5 +76,12 @@ void MainWindow::play(bool toggled)
         coltura->play(0);
         disconnect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
     }
+}
+void MainWindow::newGame()
+{
+    this->close();
+
+    Starter * starter = new Starter();
+    starter->show();
 }
 

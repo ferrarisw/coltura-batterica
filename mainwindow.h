@@ -26,6 +26,7 @@ public:
 
 private slots:
     void play(bool toggled);
+    void newGame();
 
 private:
     QSlider * slider;

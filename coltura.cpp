@@ -65,14 +65,14 @@ void Coltura::paintEvent(QPaintEvent *event)
     painter.end();
 }
 
-/**
+/*
  * @param painter
  * @param event
  * Funzione che disegna il widget Coltura in base alla matrice generata da
  * pilaMatrici->next.
  * In particolare, prende l'oggetto locale  matrice e lo scorre fino alla fine,
- * impostando diversamente il pennello a seconda del valore della cella, ovviamente
- * non prima di aver correttamente impostato le dimensioni delle caselle.
+ * impostando diversamente il pennello a seconda del valore della cella.
+ *
  */
 void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 {
@@ -97,19 +97,52 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
                 colore=(QBrush(QColor(0,0,30)));
 
 
-            painter->setBrush(colore);
-            painter->drawRect(-0.5,-0.5,1,1);
+	    painter->fillRect(-0.5,-0.5,1,1,colore);
+            //painter->setBrush(colore);
+            //painter->drawRect(-0.5,-0.5,1,1);
             painter->translate(1,0);
         }
 
-        painter->translate(-1*(x),1);
+        painter->translate(-x,1);
     }
 
     painter->restore();
 }
 
-//TODO: funzione paintColtura di debug
 
+void Coltura::paintColtura(QPainter * painter,QPaintEvent *event,char * debug)
+{
+
+    const QRect *recta = &event->rect();
+    painter->fillRect(event->rect(), background);
+
+    qreal altezza_cella  = static_cast<qreal>(recta->height())/(y+2);
+    qreal larghezza_cella= static_cast<qreal>(recta->width())/(x+2);
+
+    painter->save();
+
+    painter->scale(larghezza_cella,altezza_cella);
+
+    for(int j=0; j<y+2; j++)
+    {
+        for(int i=0; i<x+2; i++)
+        {
+            if(matrice[i+j*(x+2)]==1)//cellula viva
+                colore=(Qt::white);
+            else
+                colore=(QBrush(QColor(0,0,30)));
+
+	    //painter->fillRect(-0.5,-0.5,1,1,colore);
+            //painter->setBrush(colore);
+            //painter->drawRect(-0.5,-0.5,1,1);
+            painter->translate(1,0);
+        }
+
+        painter->translate(-x-2,1);
+    }
+
+    painter->restore();
+}
 void Coltura::aggiorna()
 {
     matrice=pila->next();
