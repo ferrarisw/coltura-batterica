@@ -27,10 +27,12 @@ public slots:
     void avvio();
     /**
      * Setta la larghezza della coltura.
+     * Invocato ad ogni cambiamento di valore dello spinbox.
      */
     void changeXDimension(int);
     /**
      * Setta l'altezza della coltura.
+     * Invocato ad ogni cambiamento di valore dello spinbox.
      */
     void changeYDimension(int);
     /**
