@@ -470,8 +470,6 @@ void PilaMatrici::pattern4()
          i++, j++) {
         posizioneAttuale->tabella[i] = 1;
     }
-
-
 }
 
 void PilaMatrici::pattern5()
