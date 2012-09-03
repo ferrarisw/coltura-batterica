@@ -6,7 +6,7 @@
 
 class Debug : public QWidget
 {
-    //Q_OBJECT
+    Q_OBJECT
 public:
     explicit Debug(QWidget *parent = 0);
 
