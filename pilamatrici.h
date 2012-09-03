@@ -2,6 +2,12 @@
 #define PILAMATRICI_H
 
 #include <QtGui>
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <fstream>
+#include "main.h"
+using namespace std;
 
 /** Descrizione della Classe PilaMatrici e delle sue strutture dati.
     La classe PilaMatrici ha una parte pubblica e privata.

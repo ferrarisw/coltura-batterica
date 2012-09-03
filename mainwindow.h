@@ -1,8 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "pilamatrici.h"
 #include <QtGui>
+#include <iostream>
 #include "coltura.h"
+using namespace std;
+
+class Coltura;
 
 /**
  *
@@ -27,6 +32,7 @@ public:
 private slots:
     void play(bool toggled);
     void newGame();
+    void save();
 
 private:
     QSlider * slider;

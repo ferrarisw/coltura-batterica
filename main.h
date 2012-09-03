@@ -4,6 +4,13 @@
 #include <iostream>
 #include <fstream>
 #include "errors.h"
+#include <QtGui>
+#include "mainwindow.h"
+#include "pilamatrici.h"
+#include "coltura.h"
+#include "starter.h"
+#include "popup.h"
+#include "debug.h"
 using namespace std;
 
 #define DEBUG_MODE
@@ -38,9 +45,9 @@ extern int MASK;
 #endif
 
 #define TRACE(a)         DBG(1, cout<<"# "<<a<<endl)
-#define GD1(a)           DBG(2, a)
-#define GD2(a)           DBG(4, a)
-#define GD3(a)           DBG(8, a)
+#define GD1(a)           DBG(2, cout<<"G1 ";{a;})
+#define GD2(a)           DBG(4, cout<<"G2 ";{a;})
+#define GD3(a)           DBG(8, cout<<"G3 ";{a;})
 
 /*############################################################################*/
 

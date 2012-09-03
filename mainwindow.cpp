@@ -1,35 +1,28 @@
-#include <iostream>
-#include <QtGui>
 #include "main.h"
-#include "mainwindow.h"
-#include "coltura.h"
-#include "starter.h"
+
 using namespace std;
 
 MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
     : QWidget(parent)
 {
-
-    GD1(cout<<"[MainWindow]: costruttore. dimensioni della matrice: "<<x<<" "<<y<<endl) ;
-
-
-   // connect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(timeTrip(int)));
+    GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
 
     this->coltura = new Coltura(x,y,pattern);
-    GD1(cout<<"[MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
+    GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
-    QMenu * file = new QMenu("&File");
-    file->addAction("Nuova partita",this,SLOT(newGame()));
+    QMenu * file = new QMenu(tr("&File"));
+    file->addAction(tr("&Nuova partita"),this,SLOT(newGame()));
+    file->addAction(tr("&Salva"),this,SLOT(save()));
 
     QMenuBar * menu = new QMenuBar();
     menu->addMenu(file);
     menu->addMenu("Modifica");
     menu->addMenu("Help");
     
-    QPushButton * stepByStep = new QPushButton("step by step");
+    QPushButton * stepByStep = new QPushButton(tr("step by step"));
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
 
-    QPushButton * play = new QPushButton("play");
+    QPushButton * play = new QPushButton(tr("play"));
     play->setCheckable(true);
     connect(play, SIGNAL(toggled(bool)), this, SLOT(play(bool)));
 
@@ -76,12 +69,18 @@ void MainWindow::play(bool toggled)
         coltura->play(0);
         disconnect(slider,SIGNAL(valueChanged(int)),coltura,SLOT(play(int)));
     }
+
 }
 void MainWindow::newGame()
 {
-    this->close();
+    this->deleteLater();
 
     Starter * starter = new Starter();
     starter->show();
 }
 
+void MainWindow::save()
+{
+    QString s = QFileDialog::getSaveFileName();
+    coltura->save(s);
+}

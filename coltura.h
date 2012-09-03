@@ -2,7 +2,13 @@
 #define COLTURA_H
 #include <QtGui>
 #include "pilamatrici.h"
+#include <iostream>
+#include <cmath>
+#include "main.h"
+#include <cassert>
+using namespace std;
 
+class PilaMatrici;
 /**
  * Widget di visualizzazione della coltura.
  *   La parte pubblica contiene:
@@ -52,6 +58,8 @@ public:
      */
     QSlider *timeSlider;
 
+    bool save(QString s);
+
 
 public slots:
     /**
@@ -82,14 +90,14 @@ private:
     int x,y;
     int pattern;
     int * matrice;
-    PilaMatrici *pila;
     QBrush background;
     QBrush colore;
     void paintColtura(QPainter *, QPaintEvent *);
-    void paintColtura(QPainter *, QPaintEvent *, char * debug);
+    void paintColtura(QPainter *, QPaintEvent *, const char *);
     QTimer *timer;
     int minTime;
     int maxTime;
+    PilaMatrici *pila;
 
 
 };

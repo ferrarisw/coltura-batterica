@@ -1,17 +1,7 @@
-#include <QtGui>
-#include "mainwindow.h"
-#include "pilamatrici.h"
-#include <iostream>
-#include "coltura.h"
-#include "mainwindow.h"
-#include "starter.h"
 #include "main.h"
-#include "popup.h"
-#include "debug.h"
+
 
 using namespace std;
-
-
 
 //TODO widget di apertura
 //TODO pulizia main
@@ -38,10 +28,8 @@ int main(int argc, char *argv[])
     Debug * debug = new Debug();
     debug->show();
 
-    /*
     Popup * popup = new Popup();
-    popup->show();
-    */
+    popup->showErrorMessage(popup, "CIAO");
 
     return a.exec();
 }

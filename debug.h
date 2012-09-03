@@ -1,8 +1,10 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#include<QtGui>
-#include<QWidget>
+#include <QtGui>
+#include <iostream>
+#include "main.h"
+using namespace std;
 
 class Debug : public QWidget
 {
@@ -12,7 +14,7 @@ public:
 
 public slots:
     //TODO Documentazione changeMaskValue
-    void changeMaskValue(int);
+    void changeMaskValue(int value);
     void changeLogMaskValue(int);
     void releaseVersion();
 };
