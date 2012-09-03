@@ -9,12 +9,12 @@ using namespace std;
 //TODO pulizia main
 //TODO commenti
 //TODO Documentazione       aggiornata al 22/08/2012
-//TODO makefile
+//TODO makefile             aggiornato e funzionante al 29/08/2012
 //TODO revisione classe coltura
 //TODO modalita` dio        Funzione implementata ma da completare
 //TODO indietro nel tempo   Funzione implementata, meglio controllarla
 //TODO restart, new
-//TODO barra del tempo
+//TODO barra del tempo      Esistente ma non funzionante
 
 //Idee sulla gestione degli errori con popup, soprattutto nella modalità Dio
 

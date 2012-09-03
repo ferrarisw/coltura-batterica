@@ -159,7 +159,7 @@ int * PilaMatrici::next()
     double numeroCelluleVive = static_cast<double> ( contaCelluleVive(temp) );
     double numeroCelluleVivePrecedente = static_cast<double> ( contaCelluleVive(posizioneAttuale) );
 
-    assert(numeroCelluleVive > 0);
+    assert(numeroCelluleVive >= 0);
 
     incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
 
@@ -407,6 +407,14 @@ void PilaMatrici::patternModeSelector(int selector)
         pattern3();
         break;
 
+    case 4:
+        pattern4();
+        break;
+
+    case 5:
+        pattern5();
+        break;
+
         /*
           * Questo caso serve per quando carico la matrice dal file.
           * Invocando di nuovo il costruttore, devo garantire che la selezione
@@ -445,9 +453,23 @@ void PilaMatrici::pattern2()
 
 void PilaMatrici::pattern3()
 {
-    for (int j = 0; (j + 30) < (dimx + 2) * (dimy + 2); ) {
-        posizioneAttuale->tabella[j] = 1;
-        posizioneAttuale->tabella[j + 30] = 1;
-        j += dimx+1;
+    for (int i = 0; (i + 15) < (dimx + 2) * (dimy + 2); ) {
+        posizioneAttuale->tabella[i] = 1;
+        posizioneAttuale->tabella[i + 15] = 1;
+        i += 4;
     }
+}
+
+void PilaMatrici::pattern4()
+{
+    for (int i = ((dimx + 2) * (dimy + 2) / 2 ) - (dimx / 2) , j = 0;
+         j < dimx;
+         i++, j++) {
+        posizioneAttuale->tabella[i] = 1;
+    }
+}
+
+void PilaMatrici::pattern5()
+{
+
 }
