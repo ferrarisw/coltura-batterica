@@ -4,6 +4,10 @@
 #include <QWidget>
 #include <QtGui>
 #include "mainwindow.h"
+#include "main.h"
+#include "cassert"
+
+class MainWindow;
 /**
  * Widget di apertura del programma.
  * Tramite esso é possibile impostare le dimensioni e il pattern della coltura.

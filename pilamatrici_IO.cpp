@@ -1,5 +1,3 @@
-#include <fstream>
-#include "main.h"
 #include "pilamatrici.h"
 
 using namespace std;
@@ -33,7 +31,7 @@ PilaMatrici* PilaMatrici::carica (QString file)
     ifstream carica (file.toStdString().data());
 
     if (!carica)
-        return false;
+        return static_cast<PilaMatrici*>(false);
 
     //carica>>versionefile;
 
