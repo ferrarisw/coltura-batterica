@@ -1,8 +1,4 @@
 #include"debug.h"
-#include"main.h"
-#include"errors.h"
-#include<assert.h>
-#include<QtGui>
 
 int MASK = 0;
 int LOGMASK = 0;

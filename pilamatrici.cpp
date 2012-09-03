@@ -1,9 +1,5 @@
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
 #include "pilamatrici.h"
-#include "main.h"
-#include <assert.h>
+
 using namespace std;
 
 PilaMatrici::PilaMatrici(int x, int y, int pattern)
@@ -33,6 +29,7 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
     memoriaOccupata = (sizeof(Matrix) + sizeof(int)*dimx*dimy);
     matriciRealizzate = 0;
 }
+
 
 PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
 {

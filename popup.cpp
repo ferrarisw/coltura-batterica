@@ -1,4 +1,3 @@
-#include <QtGui>
 #include "popup.h"
 
 Popup::Popup(QWidget *parent) :

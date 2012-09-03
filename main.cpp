@@ -1,13 +1,5 @@
-#include <QtGui>
-#include "mainwindow.h"
-#include "pilamatrici.h"
-#include <iostream>
-#include "coltura.h"
-#include "mainwindow.h"
-#include "starter.h"
 #include "main.h"
-#include "popup.h"
-#include "debug.h"
+
 
 using namespace std;
 

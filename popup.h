@@ -1,7 +1,7 @@
 #ifndef POPUP_H
 #define POPUP_H
 
-#include <QWidget>
+#include <QtGui>
 
 class Popup : public QWidget
 {

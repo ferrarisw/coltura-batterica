@@ -1,11 +1,4 @@
-#include <iostream>
-#include <QtGui>
-#include <cmath>
-#include "main.h"
 #include "coltura.h"
-#include "pilamatrici.h"
-#include <cassert>
-using namespace std;
 
 
 Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
@@ -13,12 +6,12 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
 {
     this->x=x;
     this->y=y;
-    GD1(cout<<"sono nel costruttore di coltura: this.x "<<this->x<<" this.y "<<this->y<<endl);
+    GD1(cout<<"[Coltura::Coltura] this.x "<<this->x<<" this.y "<<this->y<<endl);
     assert(x>0);
     assert(y>0);
 
     pila=new PilaMatrici (x,y,pattern);
-    GD1(cout<<"ho creato un nuovo oggetto PilaMatrici\n");
+    GD1(cout<<"[Coltura::Coltura] ho creato un nuovo oggetto PilaMatrici\n");
 
     minTime=30;
     maxTime=1000+minTime;
@@ -38,7 +31,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timeSlider->setValue(0);
     connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
 
-    GD3(cout<<"stampo la matrice manualmente"<<endl;
+    GD3(cout<<"[Coltura::Coltura] stampo la matrice manualmente"<<endl;
 
     for(int j=1; j<y+1; j++)
     {
@@ -49,7 +42,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
         cout<<endl;
     }
 )
-    GD2(cout<<"stampo la matrice utilizzando pila.stampa: "<<endl;
+    GD2(cout<<"[Coltura::Coltura] stampo la matrice utilizzando pila.stampa: "<<endl;
         pila->stampa()
             );
 
@@ -61,7 +54,10 @@ void Coltura::paintEvent(QPaintEvent *event)
     QPainter painter;
     painter.begin(this);
     //painter.setRenderHint(QPainter::Antialiasing);
-    paintColtura(&painter, event);
+    if(MASK>=8)//livello GD3 attivo
+        paintColtura(&painter, event, "debug");
+    else
+        paintColtura(&painter, event);
     painter.end();
 }
 
@@ -97,9 +93,9 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
                 colore=(QBrush(QColor(0,0,30)));
 
 
-	    painter->fillRect(-0.5,-0.5,1,1,colore);
-            //painter->setBrush(colore);
-            //painter->drawRect(-0.5,-0.5,1,1);
+            //painter->fillRect(-0.5,-0.5,1,1,colore);
+            painter->setBrush(colore);
+            painter->drawRect(-0.5,-0.5,1,1);
             painter->translate(1,0);
         }
 
@@ -110,7 +106,10 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 }
 
 
-void Coltura::paintColtura(QPainter * painter,QPaintEvent *event,char * debug)
+/******************************************************
+ * !! attenzione!!!! funzione prettamente di debug!!! *
+ ******************************************************/
+void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *)
 {
 
     const QRect *recta = &event->rect();
@@ -132,7 +131,7 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event,char * debug)
             else
                 colore=(QBrush(QColor(0,0,30)));
 
-	    //painter->fillRect(-0.5,-0.5,1,1,colore);
+            painter->fillRect(-0.5,-0.5,1,1,colore);
             //painter->setBrush(colore);
             //painter->drawRect(-0.5,-0.5,1,1);
             painter->translate(1,0);
@@ -143,6 +142,7 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event,char * debug)
 
     painter->restore();
 }
+
 void Coltura::aggiorna()
 {
     matrice=pila->next();
@@ -158,28 +158,21 @@ void Coltura::aggiorna()
     {
         timeSlider->setValue(++value);
     }
-    GD3(cout<<"value: "<<value<<" maximum: "<<max<<endl);
+    GD3(cout<<"[Coltura::aggiorna] value: "<<value<<" maximum: "<<max<<endl);
     this->repaint();
 }
 
-/**
- * @brief Coltura::getMaxTime
- * @return maxTime
- */
+
 int Coltura::getMaxTime ()
 {
     return maxTime;
 }
 
-/**
- * @brief Coltura::getMinTime
- * @return
- */
+
 int Coltura::getMinTime()
 {
     return minTime;
 }
-
 
 
 void Coltura::play(int scatti)
@@ -189,7 +182,9 @@ void Coltura::play(int scatti)
     else {
         timer->start(-((1./maxTime)*scatti*scatti)+maxTime);
 
-        GD1(cout<<"millisecondi "<<(-((1./maxTime)*scatti*scatti)+maxTime)<<"\tvalore slider "<<scatti<<endl);
+        GD1(cout<<"[Coltura::play] millisecondi "<<
+            (-((1./maxTime)*scatti*scatti)+maxTime)<<
+            "\tvalore slider "<<scatti<<endl);
     }
 
 }
@@ -197,5 +192,12 @@ void Coltura::play(int scatti)
 
 void Coltura::timeTrip(int time)
 {
-    GD2(cout<<"time "<<time<<endl);
+    GD2(cout<<"[Coltura::timeTrip] time "<<time<<endl);
+}
+
+bool Coltura::save(QString s)
+{
+    if(pila->salva(s))
+        return true;
+    return false;
 }
