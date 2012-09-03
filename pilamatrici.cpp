@@ -175,6 +175,8 @@ int * PilaMatrici::next()
         "Confronto con la matrice precedente: " << numeroCelluleVive - numeroCelluleVivePrecedente << " ("
         << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << " % )"<<endl );
 
+
+
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
       */

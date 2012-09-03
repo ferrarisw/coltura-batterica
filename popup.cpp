@@ -1,20 +1,42 @@
 #include <QtGui>
+#include <QWidget>
 #include "popup.h"
+#include "errors.h"
+#include "main.h"
 
 Popup::Popup(QWidget *parent) :
     QWidget(parent)
 {
+    GD1(cout<<"[Popup::Popup] Costruttore di Popup");
+
     setGeometry(375, 355, 500, 120);    // Imposto la posizione dello schermo e la dimensione
 
-    QTextEdit * error = new QTextEdit(); // Alloco dinamicamente
+    QLabel * descrizione = new QLabel;
+    descrizione->setText(errorMessage);
 
-    error->setReadOnly(true);   // Imposto la sola lettura
+    QPushButton * ok = new QPushButton("OK");
+    connect(ok, SIGNAL(clicked()),this,SLOT(closeErrorMessage()));
 
-    error->setText("ciao");
-    error->show();
+    QVBoxLayout * errorLayout = new QVBoxLayout();
+    errorLayout->addWidget(descrizione);
+    errorLayout->addWidget(ok);
+
+    setLayout(errorLayout);
 }
 
-void showMessagePopup(char*)
+Popup::~Popup()
 {
+    this->destroy();
+}
 
+void Popup::closeErrorMessage()
+{
+    this->close();
+}
+
+void Popup::showErrorMessage(Popup* popup, QString testo)
+{
+    popup->errorMessage = testo;
+
+    popup->show();
 }
