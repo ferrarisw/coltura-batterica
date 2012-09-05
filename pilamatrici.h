@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <fstream>
 #include "main.h"
+#include "popup.h"
 using namespace std;
 
 /** Descrizione della Classe PilaMatrici e delle sue strutture dati.

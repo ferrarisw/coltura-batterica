@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <fstream>
-#include "errors.h"
 #include <QtGui>
+#include "errors.h"
 #include "mainwindow.h"
 #include "pilamatrici.h"
 #include "coltura.h"
@@ -73,12 +73,5 @@ extern int LOGMASK;
 #endif
 
 #define LOG(a)          LOGDBG(1, cout<<a<<endl)
-
-/*############################################################################*/
-
-/*
-  * Serve per indicare la versione del programma al momento della carica
-  */
-#define versionefile 1
 
 #endif // MAIN_H

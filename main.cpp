@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 using namespace std;
 
 //TODO widget di apertura
@@ -22,14 +21,12 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     GD1(cout<<"[main] sto per inizializzare lo starter"<<endl;)
+
     Starter * starter = new Starter();
     starter->show();
 
     Debug * debug = new Debug();
     debug->show();
-
-    Popup * popup = new Popup();
-    popup->showErrorMessage(popup, "CIAO");
 
     return a.exec();
 }

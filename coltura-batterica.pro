@@ -9,7 +9,6 @@ QT       += core gui
 TARGET = coltura-batterica
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
     mainwindow.cpp \
     coltura.cpp \

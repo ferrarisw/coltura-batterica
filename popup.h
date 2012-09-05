@@ -10,9 +10,7 @@ class Popup : public QWidget
 public:
     explicit Popup(QWidget *parent = 0);
     ~Popup();
-    //void changeErrorMessage(QString);
-    void showErrorMessage(Popup*, QString);
-    QString errorMessage;
+    void showErrorMessage(QString);
 
 private:
 

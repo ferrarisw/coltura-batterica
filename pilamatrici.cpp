@@ -30,7 +30,6 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
     matriciRealizzate = 0;
 }
 
-
 PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
 {
     Matrix* temp = new Matrix;
@@ -473,5 +472,9 @@ void PilaMatrici::pattern4()
 
 void PilaMatrici::pattern5()
 {
-
+    for (int i = ((dimx + 2) * (dimy + 2) / 2 ) - (dimx / 2) , j = 0;
+         j < dimx;
+         i++, j++) {
+        posizioneAttuale->tabella[i++] = 1;
+    }
 }

@@ -10,18 +10,6 @@ Popup::Popup(QWidget *parent) :
     GD1(cout<<"[Popup::Popup] Costruttore di Popup");
 
     setGeometry(375, 355, 500, 120);    // Imposto la posizione dello schermo e la dimensione
-
-    QLabel * descrizione = new QLabel;
-    descrizione->setText(errorMessage);
-
-    QPushButton * ok = new QPushButton("OK");
-    connect(ok, SIGNAL(clicked()),this,SLOT(closeErrorMessage()));
-
-    QVBoxLayout * errorLayout = new QVBoxLayout();
-    errorLayout->addWidget(descrizione);
-    errorLayout->addWidget(ok);
-
-    setLayout(errorLayout);
 }
 
 Popup::~Popup()
@@ -34,9 +22,21 @@ void Popup::closeErrorMessage()
     this->close();
 }
 
-void Popup::showErrorMessage(Popup* popup, QString testo)
+void Popup::showErrorMessage(QString testo)
 {
-    popup->errorMessage = testo;
+    //Popup* popup = new Popup;
 
-    popup->show();
+    QLabel * descrizione = new QLabel;
+    descrizione->setText(testo);
+
+    QPushButton * ok = new QPushButton("OK");
+    connect(ok, SIGNAL(clicked()),this,SLOT(closeErrorMessage()));
+
+    QVBoxLayout * errorLayout = new QVBoxLayout();
+    errorLayout->addWidget(descrizione);
+    errorLayout->addWidget(ok);
+
+    setLayout(errorLayout);
+
+    this->show();
 }

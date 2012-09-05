@@ -63,11 +63,11 @@ Starter::Starter(QWidget *parent) :
     QComboBox   * patterns      =   new QComboBox;
     QStringList list;
     list<<"Casuale"<<
-          "Pattern 1"<<
-          "Pattern 2"<<
-          "Pattern 3"<<
-          "Pattern 4 (ideale con larghezza dispari)"<<
-          "Pattern 5";
+          "Righe Verticali (ideale con larghezza pari)"<<
+          "Incrocio"<<
+          "Righe Verticali Spesse (ideale con larghezza pari)"<<
+          "Linea Retta (ideale con altezza dispari)"<<
+          "Doppia Retta Centrale (ideale con altezza e larghezza dispari)";
 
     patterns->addItems(list);
     //patterns->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
