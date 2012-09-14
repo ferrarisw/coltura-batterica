@@ -1,7 +1,6 @@
 #include "main.h"
 using namespace std;
 
-
 //TODO widget di apertura
 //TODO pulizia main
 //TODO commenti
@@ -27,10 +26,8 @@ int main(int argc, char *argv[])
     Debug * debug = new Debug();
     debug->show();
 
-    /*
     Popup * popup = new Popup();
-    popup->show();
-    */
+    popup->showErrorMessage(popup, "CIAO");
 
     return a.exec();
 }
