@@ -33,10 +33,20 @@ private slots:
     void play(bool toggled);
     void newGame();
     void save();
+    void load();
+   /* void about();
+    void guide();*/
 
 private:
     QSlider * slider;
     Coltura * coltura;
+    QMenu * file;
+    QMenu * help;
+    QMenuBar * menu;
+    QPushButton * stepByStep;
+    QPushButton * playButton;
+    QHBoxLayout * buttonLayout;
+    QVBoxLayout * layout;
     int x,y;
     bool playing;
 };
