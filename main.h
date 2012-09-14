@@ -11,7 +11,6 @@
 #include "starter.h"
 #include "popup.h"
 #include "debug.h"
-using namespace std;
 
 #define DEBUG_MODE
 #ifdef  DEBUG_MODE
@@ -36,6 +35,7 @@ using namespace std;
   * 15  TRACE       GD1     GD2     GD3
   */
 
+
 extern int MASK;
 
 
@@ -44,10 +44,10 @@ extern int MASK;
 #define DBG(a, b)
 #endif
 
-#define TRACE(a)         DBG(1, cout<<"# "<<a<<endl)
-#define GD1(a)           DBG(2, cout<<"G1 ";{a;})
-#define GD2(a)           DBG(4, cout<<"G2 ";{a;})
-#define GD3(a)           DBG(8, cout<<"G3 ";{a;})
+#define TRACE(a)         DBG(1, std::cout<<"# "<<a<<endl)
+#define GD1(a)           DBG(2, std::cout<<"G1 ";{a;})
+#define GD2(a)           DBG(4, std::cout<<"G2 ";{a;})
+#define GD3(a)           DBG(8, std::cout<<"G3 ";{a;})
 
 /*############################################################################*/
 
@@ -72,7 +72,7 @@ extern int LOGMASK;
 #define LOGDBG(a, b)
 #endif
 
-#define LOG(a)          LOGDBG(1, cout<<a<<endl)
+#define LOG(a)          LOGDBG(1, std::cout<<a<<endl)
 
 /*############################################################################*/
 

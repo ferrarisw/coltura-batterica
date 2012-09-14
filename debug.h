@@ -13,7 +13,7 @@ public:
     explicit Debug(QWidget *parent = 0);
 
 public slots:
-    //TODO Documentazione changeMaskValue
+    //TODO Documentazione
     void changeMaskValue(int value);
     void changeLogMaskValue(int);
     void releaseVersion();

@@ -1,8 +1,5 @@
 #include "main.h"
-
-
 using namespace std;
-
 
 
 //TODO widget di apertura
@@ -37,3 +34,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
