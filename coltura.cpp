@@ -18,7 +18,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(aggiorna()));
 
-    setGeometry(375,55,x*15,y*15);
+
     setMinimumSize(3*x,3*y);
     background=Qt::black;
 
@@ -48,6 +48,13 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
 
 }
 
+Coltura::~Coltura()
+{//TODO memory leak!!
+    delete pila;
+    delete timer;
+    delete matrice;
+    delete timeSlider;
+}
 
 void Coltura::paintEvent(QPaintEvent *event)
 {
@@ -66,7 +73,7 @@ void Coltura::paintEvent(QPaintEvent *event)
  * @param event
  * Funzione che disegna il widget Coltura in base alla matrice generata da
  * pilaMatrici->next.
- * In particolare, prende l'oggetto locale  matrice e lo scorre fino alla fine,
+ * In particolare, prende l'oggetto locale matrice e lo scorre fino alla fine,
  * impostando diversamente il pennello a seconda del valore della cella.
  *
  */
@@ -195,9 +202,7 @@ void Coltura::timeTrip(int time)
     GD2(cout<<"[Coltura::timeTrip] time "<<time<<endl);
 }
 
-bool Coltura::save(QString s)
-{
-    if(pila->salva(s))
-        return true;
-    return false;
-}
+
+
+
+

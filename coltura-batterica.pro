@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     pilamatrici_IO.cpp \
     starter.cpp \
     popup.cpp \
-    debug.cpp
+    debug.cpp \
+    coltura_IO.cpp
 
 HEADERS  += mainwindow.h \
     main.h \
