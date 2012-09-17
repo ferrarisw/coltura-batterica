@@ -6,6 +6,7 @@ using namespace std;
 //TODO commenti
 //TODO Documentazione       aggiornata al 22/08/2012
 //TODO makefile             aggiornato e funzionante al 29/08/2012
+                          //15/09/2012 non funzionante
 //TODO revisione classe coltura
 //TODO modalita` dio        Funzione implementata ma da completare
 //TODO indietro nel tempo   Funzione implementata, meglio controllarla
@@ -23,11 +24,10 @@ int main(int argc, char *argv[])
     Starter * starter = new Starter();
     starter->show();
 
-    Debug * debug = new Debug();
-    debug->show();
-
-    Popup * popup = new Popup();
-    popup->showErrorMessage(popup, "CIAO");
+#ifdef DEBUG_MODE
+#endif
+   /* Popup * popup = new Popup();
+    popup->showErrorMessage(popup, "CIAO");*/
 
     return a.exec();
 }

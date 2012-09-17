@@ -81,4 +81,7 @@ extern int LOGMASK;
   */
 #define versionefile 1
 
+void gestione_chiusura(QCloseEvent * closeEvent);
+
+
 #endif // MAIN_H

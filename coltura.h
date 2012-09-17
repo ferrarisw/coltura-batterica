@@ -2,11 +2,8 @@
 #define COLTURA_H
 #include <QtGui>
 #include "pilamatrici.h"
-#include <iostream>
-#include <cmath>
 #include "main.h"
-#include <cassert>
-using namespace std;
+
 
 class PilaMatrici;
 /**
@@ -102,6 +99,7 @@ private:
     QTimer *timer;
     int minTime;
     int maxTime;
+    void draw(QPainter *);
     //void setMinimumSize(int minw);
 
 

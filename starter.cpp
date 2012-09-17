@@ -1,5 +1,5 @@
 #include "starter.h"
-
+#include "debug.h"
 
 Starter::Starter(QWidget *parent) :
     QWidget(parent)
@@ -86,8 +86,19 @@ Starter::Starter(QWidget *parent) :
     layout->addWidget(patterns);
     layout->addWidget(ok);
 
+    debug = new Debug();
+    //QFrame * frame= new QFrame();
 
-    setLayout(layout);
+    //QHBoxLayout * frameLayout = new QHBoxLayout();
+    //frameLayout->addWidget(debug);
+    //frame->setLayout(frameLayout);
+
+    QHBoxLayout * setting       =   new QHBoxLayout();
+    setting->addLayout(layout);
+    //setting->addWidget(frame);
+    setting->addWidget(debug);
+
+    setLayout(setting);
 
     GD3(cout<<"[Starter::Starter] layout settato\n\n");
 
@@ -109,11 +120,10 @@ void Starter::avvio()
     assert(pattern>=0);
 
 
-    MainWindow * finestra = new MainWindow(x,y,pattern);
+    MainWindow * finestra = new MainWindow(x,y,pattern,debug);
     finestra->show();
 
-    this->close();
-    this->destroy();
+    this->deleteLater();
 }
 
 
@@ -135,4 +145,25 @@ void Starter::setPattern(int position)
 {
     this->pattern=position;
     GD2(cout<<"position: "<<position);
+}
+
+//TODO codice replicato con mainwindow
+void Starter::closeEvent(QCloseEvent * closeEvent)
+{
+    closeEvent->ignore();
+
+    TRACE("[Starter::closeEvent]");
+    closingalert = new ClosingAlert();
+
+    connect(closingalert->buttons,SIGNAL(accepted()),this,SLOT(closing()));
+    connect(closingalert->buttons,SIGNAL(rejected()),closingalert,SLOT(close()));
+
+    closingalert->show();
+
+}
+//TODO codice replicato con mainwindow
+void Starter::closing()
+{
+    this->deleteLater();
+    closingalert->deleteLater();
 }

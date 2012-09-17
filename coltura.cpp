@@ -1,5 +1,8 @@
 #include "coltura.h"
-
+#include <cmath>
+#include <cassert>
+#include <iostream>
+using namespace std;
 
 Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     QWidget(parent)
@@ -149,6 +152,17 @@ void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *)
 
     painter->restore();
 }
+void Coltura::draw(QPainter * painter)
+{
+
+   /* if(3*x>screen_width || 3*y>screen_height)
+        painter->fillRect(-0.5,-0.5,1,1,colore);
+    else
+    {
+        painter->setBrush(colore);
+        painter->drawRect(-0.5,-0.5,1,1);
+    }*/
+}
 
 void Coltura::aggiorna()
 {
@@ -200,6 +214,7 @@ void Coltura::play(int scatti)
 void Coltura::timeTrip(int time)
 {
     GD2(cout<<"[Coltura::timeTrip] time "<<time<<endl);
+ //   pila->timeTrip(time);
 }
 
 
