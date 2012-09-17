@@ -1,8 +1,9 @@
 #include "main.h"
 
+
 using namespace std;
 
-MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
+MainWindow::MainWindow(int x, int y, int pattern, QWidget * debug, QWidget *parent)
     : QWidget(parent)
 {
     GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
@@ -10,21 +11,26 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
     this->coltura = new Coltura(x,y,pattern);
     GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
-    QMenu * file = new QMenu(tr("&File"));
-    file->addAction(tr("&Nuova partita"),this,SLOT(newGame()));
-    file->addAction(tr("&Salva"),this,SLOT(save()));
+    file = new QMenu(tr("&File"));
+    file->addAction(tr("&Nuova partita"),   this,   SLOT(newGame()  ));
+    file->addAction(tr("&Salva"),           this,   SLOT(save()     ));
+    file->addAction(tr("&Carica"),          this,   SLOT(load()     ));
 
-    QMenuBar * menu = new QMenuBar();
+    help = new QMenu(tr("&Aiuto"));
+    //help->addAction(tr("&About"),          this,   SLOT(about()     ));
+    //help->addAction(tr("&Guida"),           this,   SLOT(guide()    ));
+
+    menu = new QMenuBar();
     menu->addMenu(file);
     menu->addMenu("Modifica");
-    menu->addMenu("Help");
+    menu->addMenu(help);
     
-    QPushButton * stepByStep = new QPushButton(tr("step by step"));
+    stepByStep = new QPushButton(tr("passo passo"));
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
 
-    QPushButton * play = new QPushButton(tr("play"));
-    play->setCheckable(true);
-    connect(play, SIGNAL(toggled(bool)), this, SLOT(play(bool)));
+    playButton = new QPushButton(tr("play"));
+    playButton->setCheckable(true);
+    connect(playButton, SIGNAL(toggled(bool)), this, SLOT(play(bool)));
 
 
     this->slider = new QSlider(Qt::Horizontal);
@@ -32,26 +38,38 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent)
     this->slider->setMaximum(coltura->getMaxTime());
 
 
-    QHBoxLayout * buttonLayout = new QHBoxLayout;
-    buttonLayout->addWidget(play);
+    buttonLayout = new QHBoxLayout;
+    buttonLayout->addWidget(playButton);
     buttonLayout->addWidget(stepByStep);
 
-    QVBoxLayout * layout = new QVBoxLayout;
+    layout = new QVBoxLayout;
     layout->addWidget(menu);
-    layout->addWidget(coltura->timeSlider);
+    layout->addWidget(coltura->timeSlider,0,Qt::AlignVCenter);
     layout->addWidget(coltura);
     layout->addWidget(slider);
     layout->addLayout(buttonLayout);
 
+    QHBoxLayout * setting = new QHBoxLayout();
+    setting->addLayout(layout);
+    setting->addWidget(debug);
 
-    setLayout(layout);
+    setLayout(setting);
 
 
     setWindowTitle(tr("Coltura batterica"));
 }
 
 MainWindow::~MainWindow()
-{
+{//TODO memory leak!
+    delete coltura;
+    delete slider;
+    delete file;
+    delete help;
+    delete menu;
+    delete stepByStep;
+    delete playButton;
+    delete buttonLayout;
+    delete layout;
 
 }
 
@@ -71,6 +89,7 @@ void MainWindow::play(bool toggled)
     }
 
 }
+
 void MainWindow::newGame()
 {
     this->deleteLater();
@@ -83,4 +102,29 @@ void MainWindow::save()
 {
     QString s = QFileDialog::getSaveFileName();
     coltura->save(s);
+}
+
+void MainWindow::load()
+{
+    QString s = QFileDialog::getOpenFileName(0,"",tr("../saves"),"txt");
+    coltura->load(s);
+}
+
+void MainWindow::closeEvent(QCloseEvent * closeEvent)
+{
+    closeEvent->ignore();
+
+    TRACE("[MainWindow::closeEvent]");
+    closingalert = new ClosingAlert();
+
+    connect(closingalert->buttons,SIGNAL(accepted()),this,SLOT(closing()));
+    connect(closingalert->buttons,SIGNAL(rejected()),closingalert,SLOT(close()));
+
+    closingalert->show();
+}
+
+void MainWindow::closing()
+{
+    this->deleteLater();
+    closingalert->deleteLater();
 }

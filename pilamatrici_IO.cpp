@@ -35,8 +35,8 @@ PilaMatrici* PilaMatrici::carica (QString file)
 
     //carica>>versionefile;
 
-    int dimx, dimy;
     carica>>dimx>>dimy;
+    TRACE("[PilaMatrici::carica] modificati dimx e dimy");
 
     PilaMatrici* nuovaPila = new PilaMatrici(dimx, dimy, 99);
 
@@ -48,6 +48,9 @@ PilaMatrici* PilaMatrici::carica (QString file)
             carica>>posizioneAttuale->tabella[i + j * (dimx + 2)];
         }
     }
+
+    GD3(cout<<"[PilaMatrici::carica] tabella:"<<endl);
+    this->stampa();
 
     return nuovaPila;
 }

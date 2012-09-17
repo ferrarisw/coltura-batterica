@@ -2,11 +2,8 @@
 #define COLTURA_H
 #include <QtGui>
 #include "pilamatrici.h"
-#include <iostream>
-#include <cmath>
 #include "main.h"
-#include <cassert>
-using namespace std;
+
 
 class PilaMatrici;
 /**
@@ -16,6 +13,7 @@ class PilaMatrici;
  *       - Una funzione getMaxTime(), che restituisce la variabile maxTime.
  *       - Una funzione getMinTime(), che restituisce la variabile minTime.
  *       - Lo slider timeSlider, che gestisce il tempo.
+ *       - La funzione save(Qstring),
  *
  *   I public slots sono:
  *       - aggiorna(), che fa scorrere il tempo di un unità soltanto.
@@ -41,6 +39,8 @@ public:
      */
     Coltura(int x,int y, int pattern, QWidget * parent=0);
 
+    ~Coltura();
+
     /**
      * Ritorna la velocità massima del tempo.
      * @return ::maxTime
@@ -59,6 +59,7 @@ public:
     QSlider *timeSlider;
 
     bool save(QString s);
+    bool load(QString s);
 
 
 public slots:
@@ -90,14 +91,16 @@ private:
     int x,y;
     int pattern;
     int * matrice;
-    QBrush background;
-    QBrush colore;
     void paintColtura(QPainter *, QPaintEvent *);
     void paintColtura(QPainter *, QPaintEvent *, const char *);
+    PilaMatrici *pila;
+    QBrush colore;
+    QBrush background;
     QTimer *timer;
     int minTime;
     int maxTime;
-    PilaMatrici *pila;
+    void draw(QPainter *);
+    //void setMinimumSize(int minw);
 
 
 };

@@ -6,9 +6,10 @@ int LOGMASK = 0;
 Debug::Debug(QWidget *parent) :
   QWidget(parent)
 {
+
     QLabel * DBGLabel = new QLabel;
-    DBGLabel->setText("Stabilire i livelli di Debug (0 - 15)");
-    DBGLabel->setAlignment(Qt::AlignCenter);
+    DBGLabel->setText("Stabilire:\n\n Livello di Debug (0 - 15)");
+    DBGLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
 
     QSpinBox * maskValue = new QSpinBox();
     maskValue->setValue(0);
@@ -18,8 +19,8 @@ Debug::Debug(QWidget *parent) :
     GD2(cout<<"[Debug::Debug] ho inizializzato lo spinbox e connesso i segnali"<<endl);
 
     QLabel * LDBGLabel = new QLabel;
-    LDBGLabel->setText("Stabilire il livello di Log (0 - 1)");
-    LDBGLabel->setAlignment(Qt::AlignCenter);
+    LDBGLabel->setText("Livello di Log (0 - 1)");
+    LDBGLabel->setAlignment(Qt::AlignCenter | Qt::AlignBottom);
 
     QSpinBox * logMaskValue = new QSpinBox();
     logMaskValue->setValue(0);
@@ -28,11 +29,17 @@ Debug::Debug(QWidget *parent) :
     connect(logMaskValue, SIGNAL(valueChanged(int)), this,SLOT(changeLogMaskValue(int)));
     GD2(cout<<"[Debug::Debug] ho inizializzato lo spinbox  e connesso i segnali"<<endl);
 
+    QWidget * spacer = new QWidget();
+    QWidget * spacer2 = new QWidget();
+
     QVBoxLayout * layout = new QVBoxLayout();
     layout->addWidget(DBGLabel);
     layout->addWidget(maskValue);
     layout->addWidget(LDBGLabel);
     layout->addWidget(logMaskValue);
+    layout->addWidget(spacer);
+    layout->addWidget(spacer2);
+    //TODO soluzione migliore per lo spazio
 
     setLayout(layout);
 

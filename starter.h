@@ -6,8 +6,11 @@
 #include "mainwindow.h"
 #include "main.h"
 #include "cassert"
+#include "debug.h"
+#include "closingalert.h"
 
 class MainWindow;
+class Debug;
 /**
  * Widget di apertura del programma.
  * Tramite esso é possibile impostare le dimensioni e il pattern della coltura.
@@ -44,13 +47,19 @@ public slots:
      */
     void setPattern(int);
 
+protected:
+    void closeEvent(QCloseEvent *);
+
 private:
     MainWindow * mainwindow;
     int x;
     int y;
     int pattern;
+    ClosingAlert * closingalert;
+    Debug * debug;
 
-
+private slots:
+    void closing();
     
 };
 
