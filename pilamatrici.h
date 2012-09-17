@@ -273,27 +273,14 @@ private:
       */
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
-    /* Funzione timeTripAbilitation.
-      Questa funzione controlla se è possibile attivare il timeTrip.
-      Esegue i controlli e ritorna degli interi che indicano gli eventuali
-      errori riscontrati. Altrimenti ritorna un intero che indica il successo
-      della verifica.
-
-      @param [in]   Matrix*&    La matrice attuale
-      @param [in]   int         Il tempo a cui si desidera arrivare
-      @return       int         Ritorna dei valori che indicano cosa è successo nella funzione
-      */
-    int timeTripAbilitation(Matrix* &, int);
-
     /* Funzione timeTrip.
       Questa funzione permette di tornare ad una matrice realizzata
       precedentemente o successivamente alla matrice attuale.
 
-      @param [in]   Matrix*&    La matrice attuale
       @param [in]   int         Il tempo a cui si desidera arrivare
       @return       int         Ritorna dei valori che indicano cosa è successo nella funzione
       */
-    int timeTrip(Matrix* &, int);
+    int timeTrip(int);
 
     /* Variabile bool godModeActivation
       Questa variabile determina se la godMode è attiva o no

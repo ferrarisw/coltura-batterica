@@ -246,33 +246,6 @@ bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaC
     return true;
 }
 
-int PilaMatrici::timeTripAbilitation(Matrix* & attuale, int tempoDesiderato)
-{
-    /*
-      * Se il tempo desiderato è maggiore o uguale al tempo della matrice
-      * attuale
-      */
-    if (attuale->tempo == tempoDesiderato)
-        return sameMatrixRequest;
-
-    /*
-      * Se il tempo desiderato è minore di 0, quindi la matrice non può esistere
-      */
-    else if (tempoDesiderato < 0)
-        return tooLowTime;
-
-    /*
-      * Se il tempo desiderato è maggiore delle matrici realizzate, non
-      * potrà esistere la matrice richiesta
-      */
-    else if (tempoDesiderato > matriciRealizzate)
-        return notEnoughMatrix;
-
-    timeTrip(attuale, tempoDesiderato);
-
-    return timeTripSucceded;
-}
-
 //TODO Controllare funzione timeTrip
 /*
   * Questa funzione ritorna interi per gestire il tipo di comportamento
@@ -281,17 +254,17 @@ int PilaMatrici::timeTripAbilitation(Matrix* & attuale, int tempoDesiderato)
   * passaggio per riferimento del primo parametro) apportate in caso di
   * possibilità di movimenti nel tempo.
   */
-int PilaMatrici::timeTrip(Matrix*& attuale, int tempoDesiderato)
+int PilaMatrici::timeTrip(int tempoDesiderato)
 {
     /*
       * Se il tempo desiderato è maggiore della matrice attuale, allora....
       */
-    if (attuale->tempo < tempoDesiderato) {
-        if (attuale->succ == NULL) {
+    if (posizioneAttuale->tempo < tempoDesiderato) {
+        if (posizioneAttuale->succ == NULL) {
             return lastPossibleMatrix;
         }
-        attuale = attuale->succ;
-        return timeTrip(attuale, tempoDesiderato);
+        posizioneAttuale = posizioneAttuale->succ;
+        return timeTrip(tempoDesiderato);
     }
 
     /*
@@ -300,12 +273,12 @@ int PilaMatrici::timeTrip(Matrix*& attuale, int tempoDesiderato)
       * a quella precedente fino a che non arrivo alla condizione in cui il
       * tempo desiderato è uguale al tempo attuale.
       */
-    else if (attuale->tempo > tempoDesiderato) {
-        if (attuale->prec == NULL) {
+    else if (posizioneAttuale->tempo > tempoDesiderato) {
+        if (posizioneAttuale->prec == NULL) {
             return lastPossibleMatrix;
         }
-        attuale = attuale->prec;
-        return timeTrip(attuale, tempoDesiderato);
+        posizioneAttuale = posizioneAttuale->prec;
+        return timeTrip(tempoDesiderato);
     }
 
     return matrixFound;
