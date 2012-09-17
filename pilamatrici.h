@@ -114,7 +114,7 @@ public:
     bool salva (QString file);
 
     //TODO Documentazione carica
-    PilaMatrici* carica (QString file);
+    void carica (QString file);
 
     /** Per calcolare la memoria occupata dalle matrici.
       Questa variabile viene utilizzata per statistiche e indica quanta mamoria

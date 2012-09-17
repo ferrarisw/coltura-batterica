@@ -26,32 +26,33 @@ bool PilaMatrici::salva (QString file)
     return true;
 }
 
-PilaMatrici* PilaMatrici::carica (QString file)
+void PilaMatrici::carica (QString file)
 {
     ifstream carica (file.toStdString().data());
 
     if (!carica)
         return static_cast<PilaMatrici*>(false);
 
-    //carica>>versionefile;
-
     carica>>dimx>>dimy;
     TRACE("[PilaMatrici::carica] modificati dimx e dimy");
 
-    PilaMatrici* nuovaPila = new PilaMatrici(dimx, dimy, 99);
+    testa = creaMatrice(NULL, NULL, 0);
+    coda = testa;
+    posizioneAttuale = testa;
+
+    memoriaOccupata = (sizeof(Matrix) + sizeof(int)*dimx*dimy);
+    matriciRealizzate = 0;
 
     carica>>posizioneAttuale->tempo;
 
     for (int j = 1; j < dimy + 1; j++) {
-        for (int i = 1; i < dimx + 1; i++)
-        {
+        for (int i = 1; i < dimx + 1; i++) {
             carica>>posizioneAttuale->tabella[i + j * (dimx + 2)];
         }
     }
 
-    GD3(cout<<"[PilaMatrici::carica] tabella:"<<endl);
-    this->stampa();
-
-    return nuovaPila;
+    GD3(cout<<"[PilaMatrici::carica] tabella:"<<endl;
+        this->stampa();
+        );
 }
 
