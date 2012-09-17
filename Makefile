@@ -1,4 +1,4 @@
-OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o debug.o closingalert.o
+OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o debug.o closingalert.o popup.o
 MOC = coltura_moc.cpp starter_moc.cpp popup_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
 MOCOBJ = coltura_moc.o starter_moc.o popup_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
 QTLIBS = `pkg-config --libs QtGui`
@@ -30,6 +30,7 @@ debug.o : debug.cpp debug.h main.h errors.h
 
 closingalert.o : closingalert.cpp closingalert.h
 
+#-include dependencies
 #moc.o
 mainwindow_moc.o : mainwindow_moc.cpp main.h mainwindow.h coltura.h
 
@@ -68,5 +69,11 @@ clean :
 	
 doc :
 	doxygen Doxyfile
+
+depend:
+	#creo la parte relativa ai "normali" file oggetto
+	g++ -MM  *.cpp > dependencies
+	
+
 	
 	
