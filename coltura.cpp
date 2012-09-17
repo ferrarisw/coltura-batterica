@@ -53,9 +53,9 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
 
 Coltura::~Coltura()
 {//TODO memory leak!!
+    //delete matrice; ***double free or corruption***
     delete pila;
     delete timer;
-    delete matrice;
     delete timeSlider;
 }
 
@@ -82,6 +82,7 @@ void Coltura::paintEvent(QPaintEvent *event)
  */
 void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 {
+    matrice=pila->getMatrix();
 
     const QRect *recta = &event->rect();
     painter->fillRect(event->rect(), background);
@@ -214,7 +215,8 @@ void Coltura::play(int scatti)
 void Coltura::timeTrip(int time)
 {
     GD2(cout<<"[Coltura::timeTrip] time "<<time<<endl);
- //   pila->timeTrip(time);
+    pila->timeTrip(time);
+    repaint();
 }
 
 

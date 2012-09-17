@@ -11,14 +11,14 @@ bool Coltura::save(QString s)
 
 bool Coltura::load(QString s)
 {
-
+    delete pila;
     pila->carica(s);
 
     ifstream fcin (s.toStdString().data());
     cout<<s.toStdString().data()<<endl;
     fcin>>x>>y;
 
-    delete matrice;
+    //delete [] matrice; ***presumo sempre duoble free or corruption
     matrice = new int[x*2+y*2];
     matrice = pila->getMatrix();
 

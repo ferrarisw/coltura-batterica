@@ -138,6 +138,15 @@ public:
       */
     int matriciRealizzate;
 
+    /* Funzione timeTrip.
+      Questa funzione permette di tornare ad una matrice realizzata
+      precedentemente o successivamente alla matrice attuale.
+
+      @param [in]   int         Il tempo a cui si desidera arrivare
+      @return       int         Ritorna dei valori che indicano cosa è successo nella funzione
+      */
+    int timeTrip(int);
+
 private:
 
     int dimx;   //Dimensioni della matrice
@@ -274,15 +283,6 @@ private:
       @param [in]   Matrix*     Seconda tabella di confronto
       */
     bool verificaMatriciUguali(Matrix*, Matrix*);
-
-    /* Funzione timeTrip.
-      Questa funzione permette di tornare ad una matrice realizzata
-      precedentemente o successivamente alla matrice attuale.
-
-      @param [in]   int         Il tempo a cui si desidera arrivare
-      @return       int         Ritorna dei valori che indicano cosa è successo nella funzione
-      */
-    int timeTrip(int);
 
     /* Variabile bool godModeActivation
       Questa variabile determina se la godMode è attiva o no

@@ -31,7 +31,7 @@ void PilaMatrici::carica (QString file)
     ifstream carica (file.toStdString().data());
 
     if (!carica)
-        return static_cast<PilaMatrici*>(false);
+        return;
 
     carica>>dimx>>dimy;
     TRACE("[PilaMatrici::carica] modificati dimx e dimy");
