@@ -30,6 +30,15 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
     matriciRealizzate = 0;
 }
 
+PilaMatrici::~PilaMatrici()
+{
+    int i = posizioneAttuale->tempo;
+    for (; i > 0; i--) {
+        posizioneAttuale = posizioneAttuale->prec;
+        distruggiMatrice(posizioneAttuale->succ);
+    }
+}
+
 PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
 {
     Matrix* temp = new Matrix;

@@ -50,6 +50,8 @@ class PilaMatrici
 public:
     PilaMatrici(int x, int y, int pattern);
 
+    ~PilaMatrici();
+
     /** Per ritornare un puntatore alla matrice attuale.
       Questa funzione ritorna un puntatore alla tabella di matrici attuale.
       Serve per la grafica.
