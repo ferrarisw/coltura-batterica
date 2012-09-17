@@ -28,5 +28,8 @@ int main(int argc, char *argv[])
     Debug * debug = new Debug();
     debug->show();
 
+    GD1(cout<<"1");
+    GD2(cout<<"2");
+    GD3(cout<<"3");
     return a.exec();
 }

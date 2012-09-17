@@ -1,10 +1,6 @@
 #ifndef ERRORS_H
 #define ERRORS_H
 
-enum streamsReturnValues {
-
-};
-
 enum viaggioNelTempoReturnValues {
     tooLowTime                      =       -40,    /* Tentativo di tornare prima della prima matrice*/
     sameMatrixRequest               =       -41,    /* Ritorno alla stessa matrice di partenza*/

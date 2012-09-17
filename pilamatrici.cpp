@@ -115,7 +115,7 @@ int * PilaMatrici::next()
     int * t1 = posizioneAttuale->tabella;
     int * t2 = temp->tabella;
 
-    TRACE("[PilaMatrici::next] ommo tutte le 8 caselle attorno alla casella attuale.");
+    TRACE("[PilaMatrici::next] Sommo tutte le 8 caselle attorno alla casella attuale.");
 
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
