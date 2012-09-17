@@ -12,7 +12,6 @@ bool Coltura::save(QString s)
 bool Coltura::load(QString s)
 {
 
-    delete pila;
     pila->carica(s);
 
     ifstream fcin (s.toStdString().data());
