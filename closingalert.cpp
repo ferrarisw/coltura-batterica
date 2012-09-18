@@ -15,3 +15,4 @@ ClosingAlert::ClosingAlert(QWidget * parent):
     setLayout(alertlayout);
 
 }
+
