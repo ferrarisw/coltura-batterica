@@ -3,28 +3,24 @@
 
 using namespace std;
 
-MainWindow::MainWindow(int x, int y, int pattern, QWidget * debug, QWidget *parent)
-    : QWidget(parent)
+MainWindow::MainWindow(int x, int y, int pattern, QWidget * debug, QWidget *parent):
+    QMainWindow(parent)
 {
     GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
 
     this->coltura = new Coltura(x,y,pattern);
     GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
-    file = new QMenu(tr("&File"));
+    file = menuBar()->addMenu(tr("&File"));
     file->addAction(tr("&Nuova partita"),   this,   SLOT(newGame()  ));
     file->addAction(tr("&Salva"),           this,   SLOT(save()     ));
     file->addAction(tr("&Carica"),          this,   SLOT(load()     ));
 
-    help = new QMenu(tr("&Aiuto"));
+    help = menuBar()->addMenu(tr("&Aiuto"));
     //help->addAction(tr("&About"),          this,   SLOT(about()     ));
     //help->addAction(tr("&Guida"),           this,   SLOT(guide()    ));
-
-    menu = new QMenuBar();
-    menu->addMenu(file);
-    menu->addMenu("Modifica");
-    menu->addMenu(help);
     
+
     stepByStep = new QPushButton(tr("passo passo"));
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
 
@@ -42,8 +38,8 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget * debug, QWidget *pare
     buttonLayout->addWidget(playButton);
     buttonLayout->addWidget(stepByStep);
 
+    //coltura->timeSlider->setSizePolicy(QSizePolicy(QSizePolicy::Slider));
     layout = new QVBoxLayout;
-    layout->addWidget(menu);
     layout->addWidget(coltura->timeSlider,0,Qt::AlignVCenter);
     layout->addWidget(coltura);
     layout->addWidget(slider);
@@ -53,7 +49,10 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget * debug, QWidget *pare
     setting->addLayout(layout);
     setting->addWidget(debug);
 
-    setLayout(setting);
+    QWidget * central = new QWidget();
+    central->setLayout(setting);
+
+    this->setCentralWidget(central);
 
 
     setWindowTitle(tr("Coltura batterica"));
@@ -65,7 +64,6 @@ MainWindow::~MainWindow()
     delete slider;
     delete file;
     delete help;
-    delete menu;
     delete stepByStep;
     delete playButton;
     delete buttonLayout;
