@@ -18,7 +18,7 @@ bool Coltura::load(QString s)
     cout<<s.toStdString().data()<<endl;
     fcin>>x>>y;
 
-    //delete [] matrice; ***presumo sempre duoble free or corruption
+    //delete [] matrice; //***presumo sempre double free or corruption***
     matrice = new int[x*2+y*2];
     matrice = pila->getMatrix();
 
