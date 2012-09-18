@@ -271,7 +271,6 @@ private:
     void pattern2();
     void pattern3();
     void pattern4();
-    void pattern5();
 };
 
 #endif // PILAMATRICI_H
