@@ -64,7 +64,7 @@ Starter::Starter(QWidget *parent) :
     QStringList list;
     list<<"Casuale"<<
           "Righe Verticali (ideale con larghezza pari)"<<
-          "Incrocio"<<
+          "Diagonali"<<
           "Righe Verticali Spesse (ideale con larghezza pari)"<<
           "Linea Retta (ideale con altezza dispari)"<<
           "Doppia Retta Centrale (ideale con altezza e larghezza dispari)";
