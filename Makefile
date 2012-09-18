@@ -48,10 +48,12 @@ closingalert_moc.cpp : closingalert.cpp closingalert.h
 .PHONY : clean cleanall doc depends
 
 clean : 
+
 	rm -f *.o *_moc.cpp
 
 cleanall:
 	rm -f colturabatterica dependencies *.o *_moc.cpp
+
 	
 doc :
 	doxygen Doxyfile

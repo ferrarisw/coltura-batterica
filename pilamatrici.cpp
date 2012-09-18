@@ -286,10 +286,6 @@ void PilaMatrici::patternModeSelector(int selector)
         pattern4();
         break;
 
-    case 5:
-        pattern5();
-        break;
-
         /*
           * Questo caso serve per quando carico la matrice dal file.
           * Invocando di nuovo il costruttore, devo garantire che la selezione
@@ -344,11 +340,3 @@ void PilaMatrici::pattern4()
     }
 }
 
-void PilaMatrici::pattern5()
-{
-    for (int i = ((dimx + 2) * (dimy + 2) / 2 ) - (dimx / 2) , j = 0;
-         j < dimx;
-         i++, j++) {
-        posizioneAttuale->tabella[i++] = 1;
-    }
-}
