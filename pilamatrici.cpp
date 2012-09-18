@@ -10,32 +10,22 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
     this->dimx = x;
     this->dimy = y;
 
-    godModeActivation = false;
-
     testa = creaMatrice(NULL, NULL, 0);
     coda = testa;
     posizioneAttuale = testa;
-    /*
-      * Faccio in modo che questo puntatore punti a se stesso perchè
-      * se invoco il returnToMainLine nella linea principale, andrò in
-      * segmentation fault.
-      */
-    posizioneAttuale->parallelBackward = posizioneAttuale;
 
     patternModeSelector(pattern);
 
     TRACE("[PilaMatrici::PilaMatrici] PatternMode Selezionata.");
 
-    memoriaOccupata = (sizeof(Matrix) + sizeof(int)*dimx*dimy);
     matriciRealizzate = 0;
 }
 
 PilaMatrici::~PilaMatrici()
 {
-    int i = posizioneAttuale->tempo;
-    for (; i > 0; i--) {
-        posizioneAttuale = posizioneAttuale->prec;
-        distruggiMatrice(posizioneAttuale->succ);
+    for (; posizioneAttuale->prec == NULL; posizioneAttuale = posizioneAttuale->prec) {
+        delete posizioneAttuale->succ->tabella;
+        delete posizioneAttuale->succ;
     }
 }
 
@@ -56,9 +46,6 @@ PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int te
     inizializzaTabella(temp, 0);
 
     temp->tempo = tempo;
-    //temp->rigenerabile = false;
-    temp->parallelBackward = NULL;
-    temp->parallelForward = NULL;
 
     TRACE("[PilaMatrici::creaMatrice] Ho inizializzato a 0 tutti gli elementi della matrice e aggiornato"
           " il tempo.");
@@ -153,12 +140,9 @@ int * PilaMatrici::next()
     TRACE("[PilaMatrici::next] Rendo la matrice appena creata, quella attuale.");
 
     /*
-      * Setto il puntatore parallel a NULL perchè la linea del tempo è una sola
       * Aggiorno i puntatori della matrice attuale e quella successiva.
       * Aggiorno il tempo della nuova matrice.
       */
-    posizioneAttuale->parallelForward = NULL;
-    posizioneAttuale->parallelBackward = NULL;
     posizioneAttuale->succ = temp;
     temp->prec = posizioneAttuale;
     temp->tempo = (posizioneAttuale->tempo + 1);
@@ -169,18 +153,13 @@ int * PilaMatrici::next()
 
     assert(numeroCelluleVive >= 0);
 
-    incrementaMemoriaOccupata(memoriaOccupata, (sizeof(Matrix) + dimx*dimy*sizeof(int)));
-
     posizioneAttuale = temp;
 
     LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " << dimx * dimy << ". "
         "( " << (numeroCelluleVive * 100 / (dimx*dimy) ) << " % )\n"
-        "La memoria occupata dalle matrici fino ad ora e': " << ( memoriaOccupata / 1000 ) << " KB.\n"
         "Questa e' la matrice numero: " << posizioneAttuale->tempo << "\n"
         "Confronto con la matrice precedente: " << numeroCelluleVive - numeroCelluleVivePrecedente << " ("
         << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << " % )"<<endl );
-
-
 
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
@@ -217,16 +196,6 @@ bool PilaMatrici::distruggiMatrice (Matrix* matrice)
     delete matrice;
 
     return true;
-}
-
-int PilaMatrici::incrementaMemoriaOccupata(long int & memoriaOccupata, int valore)
-{
-    assert(valore > 0);
-
-    TRACE("[PilaMatrici::incrementaMemoriaOccupata] Incremento la memoria occupata.")
-    memoriaOccupata += valore;
-    TRACE("[PilaMatrici::incrementaMemoriaOccupata] Memoria incrementata.")
-    return memoriaOccupata;
 }
 
 int PilaMatrici::contaCelluleVive(Matrix* & matrice)
@@ -291,83 +260,6 @@ int PilaMatrici::timeTrip(int tempoDesiderato)
     }
 
     return matrixFound;
-}
-
-/*
-  * L'idea è quella di utilizzare una modalità godMode. Questa è disabilitata
-  * di default, ma può essere attivata tramite l'apposito pulsante.
-  * Quando questa è attivata, la riproduzione termina e possiamo modificare la
-  * matrice che vediamo. La presenza di due funzioni ne prevede una che assegna
-  * un valore specifico alla variabile booleana godModeActivity, l'altra invece
-  * assegna il valore opposto a quello già attivo (se falso diventa vero e vice
-  * versa).
-  * La funzione godMode() viene invocata solo se la godModeActivity è vera e,
-  * una volta terminata, setta a falso godModeActivity, così da poter riprendere
-  * la riproduzione dalla matrice modificata.
-  */
-int godModeActivityEnabler(bool & godModeActivity, const bool value)
-{
-    godModeActivity = value;
-    return godModeChangesActivitySucceded;
-}
-
-int godModeActivityEnabler(bool & godModeActivity)
-{
-    if (godModeActivity == false)
-        godModeActivity = true;
-    else godModeActivity = false;
-
-    return godModeChangesActivitySwitched;
-}
-
-int PilaMatrici::godModeInitializer ()
-{
-    /*
-      * Creo una nuova matrice dinamica perchè da questo punto proseguo su
-      * una liea del tempo parallela a quella originaria. Per questo assegno
-      * al tempo della matrice nuova, il tempo della matrice attuale. Per la
-      * progressione temporale farò in modo che la posizioneAttuale si sposti
-      * su questa pila di matrici secondaria.
-      * Tutto questo è volto all'obbiettivo di mantenere la pila originaria per
-      * eventuali viaggi indietro nel tempo, e poter proseguire liberamente su
-      * pile parallele.
-      */
-    Matrix* temp = creaMatrice(NULL, NULL, posizioneAttuale->tempo);
-
-    posizioneAttuale->parallelForward = temp; // Aggancio la pila originaria alla pila parallela
-    temp->parallelBackward = posizioneAttuale; // Aggancio la pila parallela a quella originaria
-    posizioneAttuale->succ = NULL;
-
-    posizioneAttuale = temp;
-
-    if (posizioneAttuale->tempo < 0 || posizioneAttuale->tempo > matriciRealizzate)
-        return notExistingMatrix;
-
-    return godModeInitialized;
-}
-
-int PilaMatrici::godModeApplicator(int & cellaDaModificare, int valoreDaAssegnare)
-{
-    /*
-      * In questo caso non apparirà un popup di errore, ma verrà aggiornata
-      * la grafica per visualizzare la tabella modificata.
-      */
-    posizioneAttuale->tabella[cellaDaModificare] = valoreDaAssegnare;
-
-    /*
-      Aggiorna Grafica
-      */
-
-    return changesOccurred;
-}
-
-int PilaMatrici::returnToMainLine(Matrix*& attuale)
-{
-    if (attuale->parallelBackward == NULL)
-        return returnToMainLine(attuale->prec);
-
-    attuale = attuale->parallelBackward;
-    return returnedToMainLine;
 }
 
 void PilaMatrici::patternModeSelector(int selector)

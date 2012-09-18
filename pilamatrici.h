@@ -114,23 +114,7 @@ public:
     bool salva (QString file);
 
     //TODO Documentazione carica
-    void carica (QString file);
-
-    /** Per calcolare la memoria occupata dalle matrici.
-      Questa variabile viene utilizzata per statistiche e indica quanta mamoria
-      viene occupata dalle matrici in ogni punto del programma. Si può vedere
-      questa statistica attivando il livello di debug LOG
-      */
-    long int memoriaOccupata;
-
-    /** Per incrementare la memoria occupata dalle matrici ad ogni iterazione
-      Incrementa il valore passatogli per riferimento al primo parametro
-      del secondo valore passato per valore al secondo parametro
-
-      @param [in]   intero&    Int che indica la memoria da incrementare
-      @param [in]   intero     Valore da aggiungere alla memoria occupata
-      */
-    int incrementaMemoriaOccupata(long int &, int);
+    bool carica (QString file);
 
     /** Numero di matrici realizzate.
       Questa variabile permette semplicemente di monitorare il numero di matrici
@@ -157,8 +141,6 @@ private:
     /**
       * La Matrice ha un puntatore ad interi per la tabella,
       * un puntatore alla tabella successiva e uno alla tabella precedente.
-      * Utilizzo due puntatori alla matrice parallela successiva e precedente
-      * causati dall'utilizzo della godMode.
       * Un intero indica il tempo della matrice e uno il numero di cellule
       * vive, calcolate ogni volta.
       */
@@ -166,8 +148,6 @@ private:
         int* tabella;
         Matrix* succ;
         Matrix* prec;
-        Matrix* parallelForward;
-        Matrix* parallelBackward;
         int tempo;
         //bool rigenerabile;
         int numeroCelleVive;
@@ -284,6 +264,7 @@ private:
       */
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
+<<<<<<< HEAD
     /* Variabile bool godModeActivation
       Questa variabile determina se la godMode è attiva o no
       */
@@ -326,6 +307,16 @@ private:
       @return       int     ritorna un intero che descrive cosa è successo
       */
     int returnToMainLine(Matrix *&);
+=======
+    /* Funzione timeTrip.
+      Questa funzione permette di tornare ad una matrice realizzata
+      precedentemente o successivamente alla matrice attuale.
+
+      @param [in]   int         Il tempo a cui si desidera arrivare
+      @return       int         Ritorna dei valori che indicano cosa è successo nella funzione
+      */
+    int timeTrip(int);
+>>>>>>> davide
 
     //TODO
     void patternModeSelector(int);
