@@ -114,23 +114,7 @@ public:
     bool salva (QString file);
 
     //TODO Documentazione carica
-    void carica (QString file);
-
-    /** Per calcolare la memoria occupata dalle matrici.
-      Questa variabile viene utilizzata per statistiche e indica quanta mamoria
-      viene occupata dalle matrici in ogni punto del programma. Si può vedere
-      questa statistica attivando il livello di debug LOG
-      */
-    long int memoriaOccupata;
-
-    /** Per incrementare la memoria occupata dalle matrici ad ogni iterazione
-      Incrementa il valore passatogli per riferimento al primo parametro
-      del secondo valore passato per valore al secondo parametro
-
-      @param [in]   intero&    Int che indica la memoria da incrementare
-      @param [in]   intero     Valore da aggiungere alla memoria occupata
-      */
-    int incrementaMemoriaOccupata(long int &, int);
+    bool carica (QString file);
 
     /** Numero di matrici realizzate.
       Questa variabile permette semplicemente di monitorare il numero di matrici
@@ -148,8 +132,6 @@ private:
     /**
       * La Matrice ha un puntatore ad interi per la tabella,
       * un puntatore alla tabella successiva e uno alla tabella precedente.
-      * Utilizzo due puntatori alla matrice parallela successiva e precedente
-      * causati dall'utilizzo della godMode.
       * Un intero indica il tempo della matrice e uno il numero di cellule
       * vive, calcolate ogni volta.
       */
@@ -157,8 +139,6 @@ private:
         int* tabella;
         Matrix* succ;
         Matrix* prec;
-        Matrix* parallelForward;
-        Matrix* parallelBackward;
         int tempo;
         //bool rigenerabile;
         int numeroCelleVive;
@@ -283,49 +263,6 @@ private:
       @return       int         Ritorna dei valori che indicano cosa è successo nella funzione
       */
     int timeTrip(int);
-
-    /* Variabile bool godModeActivation
-      Questa variabile determina se la godMode è attiva o no
-      */
-    bool godModeActivation;
-
-    /* Funzione godModeActivityEnabler.
-      QUeste funzioni settano o resettano il booleano che determina l'attività
-      della funzione godMode.
-
-      @param    [in]    bool&   Valore booleano modificabile
-      @param    [in]    bool    Valore da assegnare al precedente parametro
-      @return           int     Ritorna degli interi che indicano cosa è successo
-      */
-    int godModeActivityEnabler(bool &, const bool);
-    int godModeActivityEnabler(bool &);
-
-    /* Funzione godModeInitalizer.
-      Questa funzione prepara la nuova matrice in parallelo alla linea principale
-      per la godMode. Provvede a tutti gli agganci dei puntatori, in modo che
-      si possa sempre viaggiare nel tempo tramite le diverse linee parallele di
-      modifica della godMode.
-
-      @return       int     Ritorna degli interi che indicano cosa è successo
-      */
-    int godModeInitializer();
-
-    /* Funzione godModeApplicator.
-      Questa funzione sfrutta l'operato della funzione godModeInitializer, che
-      ha modificato la posizioneAttuale e ne modifica la matrice.
-
-      @return       int     Ritorna un intero nel caso tutto abbia avuto successo
-      */
-    int godModeApplicator(int &, int);
-
-    /* Funzione returnToMainLine.
-      Questa funzione permette di ritornare alla linea principale, prima della
-      modifica della godMode. Viene chiamata ricorsivamente finchè non trovo un
-      puntatone non nullo alla matrice parallelBackward.
-
-      @return       int     ritorna un intero che descrive cosa è successo
-      */
-    int returnToMainLine(Matrix *&);
 
     //TODO
     void patternModeSelector(int);
