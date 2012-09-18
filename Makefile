@@ -65,7 +65,7 @@ closingalert_moc.cpp : closingalert.cpp closingalert.h
 	
 .PHONY : clean doc
 clean : 
-	rm -f colturabatterica $(OBJ) $(MOC) $(MOCOBJ)
+	rm -f colturabatterica $(OBJ) $(MOC) $(MOCOBJ) coltura_IO_moc.o
 	
 doc :
 	doxygen Doxyfile

@@ -66,8 +66,7 @@ Starter::Starter(QWidget *parent) :
           "Righe Verticali (ideale con larghezza pari)"<<
           "Diagonali"<<
           "Righe Verticali Spesse (ideale con larghezza pari)"<<
-          "Linea Retta (ideale con altezza dispari)"<<
-          "Doppia Retta Centrale (ideale con altezza e larghezza dispari)";
+          "Linea Retta (ideale con altezza dispari)";
 
     patterns->addItems(list);
     //patterns->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
