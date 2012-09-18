@@ -48,7 +48,6 @@ closingalert_moc.cpp : closingalert.cpp closingalert.h
 .PHONY : clean cleanall doc depends
 
 clean : 
-
 	rm -f *.o *_moc.cpp
 
 cleanall:
