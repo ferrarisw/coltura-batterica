@@ -23,14 +23,6 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
 
 PilaMatrici::~PilaMatrici()
 {
-<<<<<<< HEAD
-    for (; posizioneAttuale->prec == NULL; ) {
-        cout<<"dentro al ciclo"<<endl;
-        delete posizioneAttuale->tabella;
-        Matrix * tmp = posizioneAttuale;
-        delete posizioneAttuale;
-        posizioneAttuale=tmp->prec;
-=======
     if (posizioneAttuale->tempo == 0) {
         delete posizioneAttuale->tabella;
         delete posizioneAttuale;
@@ -40,7 +32,7 @@ PilaMatrici::~PilaMatrici()
             delete posizioneAttuale->succ->tabella;
             delete posizioneAttuale->succ;
         }
->>>>>>> b8a767c7cf7191dd0922d45795b377bb3b9039ef
+
     }
     cout<<"fuori dal ciclo"<<endl;
 }
