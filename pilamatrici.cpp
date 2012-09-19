@@ -23,12 +23,24 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
 
 PilaMatrici::~PilaMatrici()
 {
+<<<<<<< HEAD
     for (; posizioneAttuale->prec == NULL; ) {
         cout<<"dentro al ciclo"<<endl;
         delete posizioneAttuale->tabella;
         Matrix * tmp = posizioneAttuale;
         delete posizioneAttuale;
         posizioneAttuale=tmp->prec;
+=======
+    if (posizioneAttuale->tempo == 0) {
+        delete posizioneAttuale->tabella;
+        delete posizioneAttuale;
+    } else {
+        posizioneAttuale = posizioneAttuale->prec;
+        for (; posizioneAttuale->tempo <= 0; posizioneAttuale = posizioneAttuale->prec) {
+            delete posizioneAttuale->succ->tabella;
+            delete posizioneAttuale->succ;
+        }
+>>>>>>> b8a767c7cf7191dd0922d45795b377bb3b9039ef
     }
     cout<<"fuori dal ciclo"<<endl;
 }
@@ -96,7 +108,7 @@ inline bool PilaMatrici::inizializzaCasella(Matrix *tabellaAttuale, int casella,
     return true;
 }
 
-inline int PilaMatrici::getValore (int * t, int x, int y)
+inline int PilaMatrici::getValore(int * t, int x, int y)
 {
     return ( t[x + y * (dimx + 2)] );
 }
@@ -228,22 +240,14 @@ bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaC
     return true;
 }
 
-//TODO Controllare funzione timeTrip
-/*
-  * Questa funzione ritorna interi per gestire il tipo di comportamento
-  * della funzione in base alla richiesta. Di conseguenza il la matrice
-  * viene passata alla funzione chiamante tramite le modifiche (visto il
-  * passaggio per riferimento del primo parametro) apportate in caso di
-  * possibilità di movimenti nel tempo.
-  */
-int PilaMatrici::timeTrip(int tempoDesiderato)
+bool PilaMatrici::timeTrip(int tempoDesiderato)
 {
     /*
       * Se il tempo desiderato è maggiore della matrice attuale, allora....
       */
     if (posizioneAttuale->tempo < tempoDesiderato) {
         if (posizioneAttuale->succ == NULL) {
-            return lastPossibleMatrix;
+            return false;
         }
         posizioneAttuale = posizioneAttuale->succ;
         return timeTrip(tempoDesiderato);
@@ -257,13 +261,13 @@ int PilaMatrici::timeTrip(int tempoDesiderato)
       */
     else if (posizioneAttuale->tempo > tempoDesiderato) {
         if (posizioneAttuale->prec == NULL) {
-            return lastPossibleMatrix;
+            return false;
         }
         posizioneAttuale = posizioneAttuale->prec;
         return timeTrip(tempoDesiderato);
     }
 
-    return matrixFound;
+    return true;
 }
 
 void PilaMatrici::patternModeSelector(int selector)

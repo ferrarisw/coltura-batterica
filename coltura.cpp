@@ -53,7 +53,6 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
 
 Coltura::~Coltura()
 {//TODO memory leak!!
-    //delete matrice;
     delete pila;
     delete timer;
     delete timeSlider;

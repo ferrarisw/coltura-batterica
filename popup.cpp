@@ -1,7 +1,6 @@
 #include <QtGui>
 #include <QWidget>
 #include "popup.h"
-#include "errors.h"
 #include "main.h"
 
 Popup::Popup(QWidget *parent) :

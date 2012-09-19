@@ -48,18 +48,18 @@ closingalert_moc.cpp : closingalert.cpp closingalert.h
 .PHONY : clean cleanall doc depends
 
 clean : 
+
 	rm -f *.o *_moc.cpp
 
 cleanall:
 	rm -f colturabatterica dependencies *.o *_moc.cpp
-
 	
 doc :
 	doxygen Doxyfile
 
 depends:
 	#creo la parte relativa ai "normali" file oggetto
-	g++ -MM $(shell ls *.cpp | grep -v '.*._moc.cpp') > dependencies
+	g++ -MM $(shell ls *.cpp | grep -v '.*_moc.cpp') > dependencies
 	
 
 	
