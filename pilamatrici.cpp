@@ -23,9 +23,15 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
 
 PilaMatrici::~PilaMatrici()
 {
-    for (; posizioneAttuale->prec == NULL; posizioneAttuale = posizioneAttuale->prec) {
-        delete posizioneAttuale->succ->tabella;
-        delete posizioneAttuale->succ;
+    if (posizioneAttuale->tempo == 0) {
+        delete posizioneAttuale->tabella;
+        delete posizioneAttuale;
+    } else {
+        posizioneAttuale = posizioneAttuale->prec;
+        for (; posizioneAttuale->tempo <= 0; posizioneAttuale = posizioneAttuale->prec) {
+            delete posizioneAttuale->succ->tabella;
+            delete posizioneAttuale->succ;
+        }
     }
 }
 
@@ -92,7 +98,7 @@ inline bool PilaMatrici::inizializzaCasella(Matrix *tabellaAttuale, int casella,
     return true;
 }
 
-inline int PilaMatrici::getValore (int * t, int x, int y)
+inline int PilaMatrici::getValore(int * t, int x, int y)
 {
     return ( t[x + y * (dimx + 2)] );
 }
@@ -224,14 +230,14 @@ bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaC
     return true;
 }
 
-int PilaMatrici::timeTrip(int tempoDesiderato)
+bool PilaMatrici::timeTrip(int tempoDesiderato)
 {
     /*
       * Se il tempo desiderato è maggiore della matrice attuale, allora....
       */
     if (posizioneAttuale->tempo < tempoDesiderato) {
         if (posizioneAttuale->succ == NULL) {
-            return lastPossibleMatrix;
+            return false;
         }
         posizioneAttuale = posizioneAttuale->succ;
         return timeTrip(tempoDesiderato);
@@ -245,13 +251,13 @@ int PilaMatrici::timeTrip(int tempoDesiderato)
       */
     else if (posizioneAttuale->tempo > tempoDesiderato) {
         if (posizioneAttuale->prec == NULL) {
-            return lastPossibleMatrix;
+            return false;
         }
         posizioneAttuale = posizioneAttuale->prec;
         return timeTrip(tempoDesiderato);
     }
 
-    return matrixFound;
+    return true;
 }
 
 void PilaMatrici::patternModeSelector(int selector)

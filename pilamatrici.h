@@ -129,7 +129,7 @@ public:
       @param [in]   int         Il tempo a cui si desidera arrivare
       @return       int         Ritorna dei valori che indicano cosa è successo nella funzione
       */
-    int timeTrip(int);
+    bool timeTrip(int);
 
 private:
 

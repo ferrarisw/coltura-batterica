@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <QtGui>
-#include "errors.h"
 #include "mainwindow.h"
 #include "pilamatrici.h"
 #include "coltura.h"

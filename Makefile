@@ -59,7 +59,7 @@ doc :
 
 depends:
 	#creo la parte relativa ai "normali" file oggetto
-	g++ -MM $(shell ls *.cpp | grep -v '.*._moc.cpp') > dependencies
+	g++ -MM $(shell ls *.cpp | grep -v '.*_moc.cpp') > dependencies
 	
 
 	
