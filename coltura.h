@@ -9,17 +9,41 @@ class PilaMatrici;
 /**
  * La classe coltura si occupa della visualizzazione grafica della coltura.
  *   La parte pubblica contiene:
- *       - Il costruttore, che prende in ingresso le dimensioni e il pattern.
- *       - Una funzione getMaxTime(), che restituisce la variabile maxTime.
- *       - Una funzione getMinTime(), che restituisce la variabile minTime.
- *       - Lo slider timeSlider, che gestisce il tempo.
- *       - La funzione save(Qstring),
+ *       - Coltura(int x, int y, int pattern, Qwidget * parent=0).
+ *       - ~Coltura().
+ *       - int getMaxTime(), che restituisce la variabile maxTime.
+ *       - int getMinTime(), che restituisce la variabile minTime.
+ *       - QSlider * timeSlider, che gestisce il tempo.
+ *       - bool save(QString s), che gestisce il salvataggio su file.
+ *       - bool load(QString s), che gestisce il caricamento su file.
  *
  *   I public slots sono:
- *       - aggiorna(), che fa scorrere il tempo di un unità soltanto.
- *       - play(int), che fa scorrere il tempo (indefinitamente) della velocità
- *           voluta se impostato ad un qualsiasi valore diverso da zero,
- *           altrimenti "ferma il tempo".
+ *       - void aggiorna(), che fa scorrere il tempo di un unità soltanto.
+ *       - void play(int) , che fa scorrere il tempo (indefinitamente) della
+ *           velocità voluta se impostato ad un qualsiasi valore diverso da
+ *           zero, altrimenti "ferma il tempo".
+ *       - void timeTrip(int), che gestisce il salto nel tempo.
+ *
+ *   La parte protected contiene:
+ *       - void paintEvent(QPaintEvent * event), chiamata ad ogni necessità di
+ *           ridisegnare il widget sullo schermo.
+ *
+ *   La parte privata contiene:
+ *       - int x,y, le dimensioni della coltura.
+ *       - int pattern, il tipo di coltura che voglio ottenere.
+ *       - int * matrice, la rappresentazione in 0 e 1 della coltura.
+ *       - void paintColtura(QPainter *, QPaintEvent *), che gestisce la
+ *          visualizzazione grafica della coltura.
+ *       - void paintColtura(QPainter *, QPaintEvent *, const char * debug),
+ *          come sopra ma utilizzata solamente nel debug.
+ *       - PilaMatrici * pila, variabile della classe PilaMatrici.
+ *       - QBrush colore, il colore attribuito ad ogni casella.
+ *       - QBrush background, il colore di sfondo. //TODO elimina
+ *       - QTimer * timer, che gestisce la velocità del tempo.
+ *       - int minTime, il valore minimo della velocità del tempo.
+ *       - int maxTime, il valore massimo della velocità del tempo.
+ *       - void draw(QPainter *), che gestisce i dettagli relativi al disegno
+ *          delle singole cellule.
  * @author Serena Ziviani.
   */
 
@@ -39,6 +63,7 @@ public:
      */
     Coltura(int x,int y, int pattern, QWidget * parent=0);
 
+    //TODO documentazione
     ~Coltura();
 
     /**
@@ -97,7 +122,7 @@ public slots:
 
 
 protected:
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent * event);
 
 
 private:

@@ -32,8 +32,8 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timeSlider->setMinimum(0);
     timeSlider->setMaximum(0);
     timeSlider->setValue(0);
-    connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
-
+    //connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
+    connect(timeSlider,SIGNAL(valueChanged(int)),this,SLOT(timeTrip(int)));
     GD3(cout<<"[Coltura::Coltura] stampo la matrice manualmente"<<endl;
 
     for(int j=1; j<y+1; j++)
@@ -53,7 +53,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
 
 Coltura::~Coltura()
 {//TODO memory leak!!
-    delete matrice; //***double free or corruption***
+    //delete matrice;
     delete pila;
     delete timer;
     delete timeSlider;
