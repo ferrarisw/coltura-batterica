@@ -1,4 +1,4 @@
-OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o debug.o closingalert.o popup.o
+OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o popup.o debug.o closingalert.o 
 MOC = coltura_moc.cpp starter_moc.cpp popup_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
 MOCOBJ = coltura_moc.o starter_moc.o popup_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
 QTLIBS = `pkg-config --libs QtGui`
@@ -8,29 +8,11 @@ CXXFLAGS = $(QTFLAG)
 LDFLAGS = $(QTLIBS)
         
 colturabatterica : $(OBJ) $(MOCOBJ)
-	g++ -Wall -export-dynamic -o colturabatterica $(OBJ) $(MOCOBJ) $(LDFLAGS)
+	g++ -Wall -export-dynamic -o colturabatterica $+ $(LDFLAGS)
 
-main.o : main.cpp mainwindow.h pilamatrici.h coltura.h mainwindow.h starter.h main.h popup.h
 
-mainwindow.o : mainwindow.cpp main.h mainwindow.h coltura.h
+-include dependencies
 
-pilamatrici.o : pilamatrici.cpp pilamatrici.h main.h
-
-pilamatrici_IO.o : pilamatrici_IO.cpp pilamatrici.h
-
-starter.o : starter.cpp starter.h main.h mainwindow.h
-
-coltura.o : coltura.cpp coltura.h main.h pilamatrici.h
-
-coltura_IO.o : coltura_IO.cpp coltura.h
-
-popup.o : popup.cpp popup.h
-
-debug.o : debug.cpp debug.h main.h errors.h
-
-closingalert.o : closingalert.cpp closingalert.h
-
-#-include dependencies
 #moc.o
 mainwindow_moc.o : mainwindow_moc.cpp main.h mainwindow.h coltura.h
 
@@ -63,16 +45,21 @@ debug_moc.cpp : debug.cpp debug.h
 closingalert_moc.cpp : closingalert.cpp closingalert.h
 	moc closingalert.h -o closingalert_moc.cpp
 	
-.PHONY : clean doc
+.PHONY : clean cleanall doc depends
+
 clean : 
-	rm -f colturabatterica $(OBJ) $(MOC) $(MOCOBJ)
+
+	rm -f *.o *_moc.cpp
+
+cleanall:
+	rm -f colturabatterica dependencies *.o *_moc.cpp
 	
 doc :
 	doxygen Doxyfile
 
-depend:
+depends:
 	#creo la parte relativa ai "normali" file oggetto
-	g++ -MM  *.cpp > dependencies
+	g++ -MM $(shell ls *.cpp | grep -v '.*._moc.cpp') > dependencies
 	
 
 	

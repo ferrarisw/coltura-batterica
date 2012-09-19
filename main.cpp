@@ -17,6 +17,7 @@ using namespace std;
 //Idee sulla gestione degli errori con popup, soprattutto nella modalità Dio
 
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -28,3 +29,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+

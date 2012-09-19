@@ -13,7 +13,7 @@ class Coltura;
 /**
  *
  */
-class MainWindow : public QWidget
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -47,7 +47,6 @@ private:
     Coltura * coltura;
     QMenu * file;
     QMenu * help;
-    QMenuBar * menu;
     QPushButton * stepByStep;
     QPushButton * playButton;
     QHBoxLayout * buttonLayout;

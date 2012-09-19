@@ -7,7 +7,7 @@
 
 class PilaMatrici;
 /**
- * Widget di visualizzazione della coltura.
+ * La classe coltura si occupa della visualizzazione grafica della coltura.
  *   La parte pubblica contiene:
  *       - Il costruttore, che prende in ingresso le dimensioni e il pattern.
  *       - Una funzione getMaxTime(), che restituisce la variabile maxTime.
@@ -58,7 +58,18 @@ public:
      */
     QSlider *timeSlider;
 
+    /**
+     * Gestisce il salvataggio della coltura su file.
+     * @param s
+     * @return bool
+     */
     bool save(QString s);
+
+    /**
+     * Gestisce il caricamento da file della coltura.
+     * @param s
+     * @return
+     */
     bool load(QString s);
 
 
@@ -70,6 +81,7 @@ public slots:
      * normale scorrere del tempo sia che si stia viaggiando nel tempo.
      */
     void aggiorna();
+
     /**
      * Slot che gestisce lo scorrere del tempo.
      * Modifica il quanto di tempo del timer, utilizzando come input la
@@ -77,8 +89,9 @@ public slots:
      * @param scatti
      */
     void play(int);
+
     /**
-     * //TODO scrivere documentazione su timetrip
+     * Slot che gestisce la possibilità di tornare indietro nel tempo
      */
     void timeTrip(int);
 

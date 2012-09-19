@@ -8,8 +8,8 @@ Starter::Starter(QWidget *parent) :
 
     qreal x=500;
     qreal y=250;
-    qreal width=250;
-    qreal height=220;
+    qreal width=20;
+    qreal height=10;
     this->setGeometry(x,y,width,height);
 
     this->x=50;
@@ -69,7 +69,7 @@ Starter::Starter(QWidget *parent) :
           "Linea Retta (ideale con altezza dispari)";
 
     patterns->addItems(list);
-    //patterns->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+    patterns->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
     connect(patterns,SIGNAL(activated(int)),this,SLOT(setPattern(int)));
 
     QGridLayout * spinboxes     =   new QGridLayout();
@@ -79,7 +79,7 @@ Starter::Starter(QWidget *parent) :
     spinboxes->addWidget(ydimension,1,1,Qt::AlignHCenter | Qt::AlignTop);
 
     QVBoxLayout * layout        =   new QVBoxLayout();
-    layout->addWidget(descrizione);
+    layout->addWidget(descrizione,Qt::AlignCenter);
     layout->addLayout(spinboxes);
     layout->addWidget(patternDesc);
     layout->addWidget(patterns);
@@ -152,6 +152,7 @@ void Starter::closeEvent(QCloseEvent * closeEvent)
     closeEvent->ignore();
 
     TRACE("[Starter::closeEvent]");
+
     closingalert = new ClosingAlert();
 
     connect(closingalert->buttons,SIGNAL(accepted()),this,SLOT(closing()));

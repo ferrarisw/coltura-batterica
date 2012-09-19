@@ -75,7 +75,5 @@ extern int LOGMASK;
 #define LOG(a)          LOGDBG(1, std::cout<<a<<endl)
 
 
-void gestione_chiusura(QCloseEvent * closeEvent);
-
 
 #endif // MAIN_H
