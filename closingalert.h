@@ -13,7 +13,15 @@ class ClosingAlert : public QWidget
 {
     Q_OBJECT
 public:
+    /**
+     * Costruttore del widget ClosingAlert.
+     * @param parent=0
+     */
     ClosingAlert(QWidget *parent = 0);
+
+    /**
+     * Variabile che definisce i bottoni del widget.
+     */
     QDialogButtonBox * buttons;
 
 
