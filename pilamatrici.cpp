@@ -224,14 +224,6 @@ bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaC
     return true;
 }
 
-//TODO Controllare funzione timeTrip
-/*
-  * Questa funzione ritorna interi per gestire il tipo di comportamento
-  * della funzione in base alla richiesta. Di conseguenza il la matrice
-  * viene passata alla funzione chiamante tramite le modifiche (visto il
-  * passaggio per riferimento del primo parametro) apportate in caso di
-  * possibilità di movimenti nel tempo.
-  */
 int PilaMatrici::timeTrip(int tempoDesiderato)
 {
     /*
