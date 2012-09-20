@@ -21,21 +21,22 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(aggiorna()));
 
-
-    setMinimumSize(3*x,3*y);
+    if(x<300 && y<200)
+        setMinimumSize(3*x,3*y);
+    else
+        setMinimumSize(1.5*x,1.5*y);
     background=Qt::black;
 
     matrice=new int[(x+2)*(y+2)];
     matrice=pila->getMatrix();
 
     timeSlider = new QSlider(Qt::Horizontal);
-    timeSlider->setMaximumHeight(20);
-    timeSlider->setMinimumHeight(20);
+    timeSlider->setFixedHeight(20);
     timeSlider->setMinimum(0);
     timeSlider->setMaximum(0);
     timeSlider->setValue(0);
-    //connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
-    connect(timeSlider,SIGNAL(valueChanged(int)),this,SLOT(timeTrip(int)));
+    connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
+    //connect(timeSlider,SIGNAL(valueChanged(int)),this,SLOT(timeTrip(int)));
     GD3(cout<<"[Coltura::Coltura] stampo la matrice manualmente"<<endl;
 
     for(int j=1; j<y+1; j++)
@@ -61,9 +62,10 @@ Coltura::~Coltura()
 
 void Coltura::paintEvent(QPaintEvent *event)
 {
+    matrice=pila->getMatrix();
+
     QPainter painter;
     painter.begin(this);
-    //painter.setRenderHint(QPainter::Antialiasing);
 
     if(MASK>=8)//livello GD3 attivo
         paintColtura(&painter, event, "debug");
@@ -74,7 +76,6 @@ void Coltura::paintEvent(QPaintEvent *event)
 
 void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
 {
-    matrice=pila->getMatrix();
 
     const QRect *recta = &event->rect();
     painter->fillRect(event->rect(), background);
@@ -95,10 +96,7 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
             else
                 colore=(QBrush(QColor(0,0,30)));
 
-
-            //painter->fillRect(-0.5,-0.5,1,1,colore);
-            painter->setBrush(colore);
-            painter->drawRect(-0.5,-0.5,1,1);
+            draw(painter);
             painter->translate(1,0);
         }
 
@@ -130,9 +128,8 @@ void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *)
             else
                 colore=(QBrush(QColor(0,0,30)));
 
-            painter->fillRect(-0.5,-0.5,1,1,colore);
-            //painter->setBrush(colore);
-            //painter->drawRect(-0.5,-0.5,1,1);
+            draw(painter);
+
             painter->translate(1,0);
         }
 
@@ -145,13 +142,13 @@ void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *)
 void Coltura::draw(QPainter * painter)
 {
 
-   /* if(3*x>screen_width || 3*y>screen_height)
+    if(x>300 || y>200)
         painter->fillRect(-0.5,-0.5,1,1,colore);
     else
     {
         painter->setBrush(colore);
         painter->drawRect(-0.5,-0.5,1,1);
-    }*/
+    }
 }
 
 void Coltura::aggiorna()
