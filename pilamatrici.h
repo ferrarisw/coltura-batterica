@@ -7,61 +7,60 @@
 #include <cstdlib>
 #include <fstream>
 #include "main.h"
-#include "popup.h"
 using namespace std;
 
-/** Descrizione della Classe PilaMatrici e delle sue strutture dati.
-    La classe PilaMatrici ha una parte pubblica e privata.
-    La parte pubblica contiene:
-        - Un costruttore per la pila di matrici
+/** La parte pubblica contiene:
+        - Un costruttore e un decostruttore per la pila di matrici
         - Una funzione next che crea la prossima matrice apportando le giuste
-            modifiche in base alla matrice precedente. Il tipo di ritorno è un
-            puntatore a intero
-        - Una funzione stampa con funzionalit�  di Debug che ritorna void
+            modifiche in base alla matrice precedente.
+        - Una funzione stampa con funzionalita' di Debug.
         - Due funzioni getDimx e getDimy che ritornano la dimensione sull'asse
-            x e y della matrice. Mi servono perchè l'utente possa inserirle
-            a esecuzione iniziata.
+            x e y della matrice.
+        - Una funzione Salva e una Carica per gestire i file.
+        - Una funzione timeTrip che permette di passare a matrici precedenti o successive
 
-    La parte privata include:
-        - Le dimensioni x e y della matrice
-        - Un enumeratore per facilitare la comprensione degli stati vivo e morto
-        - Una struttura Matrix contenente:
-            - tabella: puntatore ad interi, vedo la matrice come un array
-            - succ e prec: due puntatore a Matrix che puntano alla matrice
-                successiva e precedente.
-            - tempo: un intero che indica la successione delle diverse matrici.
-                Mi serve quando torno indietro nelle configurazioni e nel
-                salvataggio e caricamento della tabella.
-        - Un puntatore a Matrix per la testa della lista di matrici
-        - Un puntatore a Matrix per la coda della matrice generata
-        - Un puntatore per la matrice attuale
-        - Una funzione creaMatrice con valore di ritorno un puntatore a Matrix
-            che inizializza una nuova matrice da cui partire a fare i calcoli
-        - una funzione void riempiCasuale che riempie casualmente la matrice
-            (escluso il bordo esterno).
-        - una funzione getValore che ritorna un intero corrispondente al valore
-            di ogni singola cella per cui lo invoco.
-
-Commentato il 4/7/12 alle 22.00 - Davide Ferrari
+    @brief The PilaMatrici class
   */
 
 class PilaMatrici
 {
 public:
+    /**
+     * @brief PilaMatrici costruttore
+     *
+     * Il costruttore inizializza una nuova matrice settando opportunamente tutti
+     * i puntatori e il pattern da applicarvi.
+     *
+     * @param x La larghezza della matrice
+     * @param y L'altezza della matrice
+     * @param pattern Il pattern da applicare alla matrice
+     */
     PilaMatrici(int x, int y, int pattern);
 
+    /**
+     * @brief PilaMatrici decostruttore
+     *
+     *Il decostruttore controlla a che punto della lista di matrici e' la
+     *posizione attuale. Se e' maggiore di zero, allora sposta la posizione
+     *attuale alla matrice precedente per non perdere l'aggancio alla lista
+     *ed elimina iterativamente la matrice posizione attuale dell'iterazione
+     *precedente.
+     *Se il primo controllo non ha successo, si verifica il caso in cui la
+     *posizione attuale sia l'ultima matrice della lista. In questo caso posso
+     *deallocare dalla memoria dinamica tutti gli oggetti allocati senza problemi
+     *di pending pointer.
+     */
     ~PilaMatrici();
 
-    /** Per ritornare un puntatore alla matrice attuale.
-      Questa funzione ritorna un puntatore alla tabella di matrici attuale.
-      Serve per la grafica.
-      */
-    int* getMatrix();
+    /**
+     * @brief Per ottenere la tabella attuale
+     * @return Ritorna un puntatore ad intero
+     */
+    int * getMatrix();
 
-    /** Per calcolare la matrice successiva.
-
-      Questa funzione non prende in ingresso alcun parametro perchè utilizza
-      ciò che è gi�  inizializzato nella classe.
+    /**
+     *Questa funzione non prende in ingresso alcun parametro perche' utilizza
+      cio' che e' gia'  inizializzato nella classe.
       1)    Inizializza una nuova matrice dinamica come posizioneAttuale e
       setta il puntatore alla prossima matrice a NULL.
       2)    Inizializza un intero somma per eseguire il calcolo dell'algoritmo
@@ -71,64 +70,87 @@ public:
       3)    Tramite la funione getValore, acquisisce e somma il valore di
       tutte le 8 caselle attorno alla casella corrente (si fa un'iterazione
       su ogni casella con un doppio ciclo for).
-      L'algoritmo prevede che se una cellula è morta e ve ne sono 3 vive intorno
-      questa prende vita, al contrario, se la cellula è viva e ce ne sono più
+      L'algoritmo prevede che se una cellula e' morta e ve ne sono 3 vive intorno
+      questa prende vita, al contrario, se la cellula e' viva e ce ne sono piu'
       di 3 o meno di 2 questa muore. Semplicemente sommando i valori delle
       cellule attorno alla cellula attuale ottengo il numero di cellule vive.
-      Se le cellule vive sono 3 allora la cellula è viva, altrimenti morta.
-      Questo si può realizzare con due semplici controlli.
+      Se le cellule vive sono 3 allora la cellula e' viva, altrimenti morta.
+      Questo si puu' realizzare con due semplici controlli.
       4)    Dopo aver modificato completamente la tabella temp, setta la
-      posizioneAttuale a temp, così da ritornare la nuova tabella appena creata.
+      posizioneAttuale a temp, cosi' da ritornare la nuova tabella appena creata.
 
-    @return   temp->tabella   La tabella appena modificata
+      @brief    Premette di avanzare alla matrice successiva
+      @return   temp->tabella   La tabella appena modificata
       */
     int * next();
 
-    /** Stampa su stdout la matrice.
-      Semplice funzione di stampa su stdout della matrice in posizioneAttuale.
-      Utilizzo per il debug.
-      */
+    /**
+     * @brief Stampa su stdout l'intera tabella
+     * @return void
+     */
     void stampa ();
 
-    /** Ritorna la larghezza della matrice.
-      @return dimx  Lunghezza di ogni riga
-      */
+    /**
+     * @brief Ritorna la dimensione orizzontale della matrice
+     * @return dimx
+     */
     int getDimx() { return dimx;}
 
-    /** Ritorna l'altezza della matrice.
-      @return dimy  Numero di righe
-      */
+    /**
+     * @brief Ritorna la dimensione verticale della matrice
+     * @return dimy
+     */
     int getDimy() { return dimy;}
 
-    /** Funzione Salva.
-
-      1)    Salva la versione del file. Nel caso cambio la funzione salva,
-      devo aggiornare la versione del file. Nella carica prima controllerò che
-      la versione del programma sia corretta così da caricare da file i giusti
-      elementi.
-      2)    Salva la posizione attuale, le dimensioni della matrice e il tempo
-      a cui dovrò arrivare nella rigenerazione
-      3)    Dopo aver salvato su file tutti gli elementi della matrice
-      chiudo il file in scrittura.
-      */
+    /**
+     * @brief Salvataggio su File della matrice
+     * @param File Nome del file su cui salvare
+     * @return True se il salvataggio termina correttamente
+     * @return False se l'input stream non si apre correttamente
+     *
+     *La funzione utilizza la QString passatagli per argomento come
+     *percorso e il nome del file da salvare.
+     *Salva le dimensioni della matrice, il numero della matrice
+     *e l'intera tabella.
+     *Ritorna true se la funzione termina correttamente, falso se
+     *lo stream in uscita non viene creato correttamente.
+     */
     bool salva (QString file);
 
-    //TODO Documentazione carica
+    /**
+     * @brief Caricamento da File della matrice
+     * @param File Nome del file da caricare
+     * @return True se la carica e' avvenuta correttamente
+     * @return False se l'output stream non si apre correttamente
+     *
+     *La funzione apre uno stream in input utilizzando come file
+     *la QString passata per argomento. Dopo aver caricato le dimensioni
+     *la funzione crea una nuova lista di matrici con le opportune
+     *inizializzazioni e carica l'intera matrice di input.
+     *Il valore di ritorno e' true se la carica si conclude con successo
+     *e false se lo stream in input non viene creato correttamente.
+     */
     bool carica (QString file);
 
-    /** Numero di matrici realizzate.
-      Questa variabile permette semplicemente di monitorare il numero di matrici
-      realizzate.
-      */
+    /**
+     * @brief Numero di matrici realizzate (utilita' statistica)
+     *
+     *Questa e' una variabile statistica
+     */
     int matriciRealizzate;
 
-    /* Funzione timeTrip.
-      Questa funzione permette di tornare ad una matrice realizzata
-      precedentemente o successivamente alla matrice attuale.
-
-      @param [in]   int         Il tempo a cui si desidera arrivare
-      @return       int         Ritorna dei valori che indicano cosa � successo nella funzione
-      */
+    /**
+     * @brief Viaggio nel tempo
+     * @return True se il viaggio nel tempo termina correttamente
+     * @return False se il tempo desiderato passato per argomento non rispetta
+     *le condizioni di esistenza
+     *
+     *La funzione controlla che il tempo desiderato sia nel range delle matrici
+     *realizzate. In tal caso valuta se deve andare avanti o indietro nella lista.
+     *Lo spostamento avviene tramite i puntatori della lista e chiamate ricorsive.
+     *Nel caso i controlli di esistenza della matrice richiesta diano errore, la
+     *funzione ritorna falso.
+     */
     bool timeTrip(int);
 
 private:
@@ -138,7 +160,7 @@ private:
     int pattern;
     enum stato {morto = 0, vivo = 1};
 
-    /**
+    /*
       * La Matrice ha un puntatore ad interi per la tabella,
       * un puntatore alla tabella successiva e uno alla tabella precedente.
       * Un intero indica il tempo della matrice e uno il numero di cellule
@@ -149,11 +171,10 @@ private:
         Matrix* succ;
         Matrix* prec;
         int tempo;
-        //bool rigenerabile;
         int numeroCelleVive;
     };
 
-    /**
+    /*
       * Due puntatori, uno alla testa e uno alla coda della lista di matrici
       * Un puntatore alla matrice attuale
       */
@@ -264,7 +285,6 @@ private:
       */
     bool verificaMatriciUguali(Matrix*, Matrix*);
 
-    //TODO
     void patternModeSelector(int);
 
     void pattern1();

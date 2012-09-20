@@ -23,16 +23,15 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
 
 PilaMatrici::~PilaMatrici()
 {
-    if (posizioneAttuale->tempo == 0) {
-        delete posizioneAttuale->tabella;
-        delete posizioneAttuale;
-    } else {
+    if (posizioneAttuale->tempo != 0) {
         posizioneAttuale = posizioneAttuale->prec;
         for (; posizioneAttuale->tempo <= 0; posizioneAttuale = posizioneAttuale->prec) {
             delete posizioneAttuale->succ->tabella;
             delete posizioneAttuale->succ;
         }
-
+    } else if (posizioneAttuale->tempo == 0) {
+        delete posizioneAttuale->tabella;
+        delete posizioneAttuale;
     }
 
 }
@@ -339,4 +338,3 @@ void PilaMatrici::pattern4()
         posizioneAttuale->tabella[i] = 1;
     }
 }
-

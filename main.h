@@ -8,38 +8,40 @@
 #include "pilamatrici.h"
 #include "coltura.h"
 #include "starter.h"
-#include "popup.h"
+#include "newgame.h"
 #include "debug.h"
 
 
 extern int MASK;
 
 #define DEBUG_MODE
+#ifdef  DEBUG_MODE
+
+/**
+ * @brief Maschera di bit per i livelli di debug
+ *
+ *Qusesta maschera abilita o disabilita i livelli di debug a seconda del
+ *valore che assume:
+ * 0   NESSUN LIVELLO;
+ * 1   TRACE;
+ * 2               GD1;
+ * 3   TRACE       GD1;
+ * 4                       GD2;
+ * 5   TRACE               GD2;
+ * 6               GD1     GD2;
+ * 7   TRACE       GD1     GD2;
+ * 8                               GD3;
+ * 9   TRACE                       GD3;
+ * 10              GD1             GD3;
+ * 11  TRACE       GD1             GD3;
+ * 12                      GD2     GD3;
+ * 13  TRACE               GD2     GD3;
+ * 14              GD1     GD2     GD3;
+ * 15  TRACE       GD1     GD2     GD3;
+ */
+extern int MASK;
+
 #ifndef  DEBUG_MODE
-/*
-  * Per attivare i diversi livelli di debug inizializzare la maschera con i
-  * seguenti valori:
-  * 0   NESSUN LIVELLO
-  * 1   TRACE
-  * 2               GD1
-  * 3   TRACE       GD1
-  * 4                       GD2
-  * 5   TRACE               GD2
-  * 6               GD1     GD2
-  * 7   TRACE       GD1     GD2
-  * 8                               GD3
-  * 9   TRACE                       GD3
-  * 10              GD1             GD3
-  * 11  TRACE       GD1             GD3
-  * 12                      GD2     GD3
-  * 13  TRACE               GD2     GD3
-  * 14              GD1     GD2     GD3
-  * 15  TRACE       GD1     GD2     GD3
-  */
-
-
-
-
 #define DBG(a, b)      {if ((a) & MASK) {b; }}
 #else
 #define DBG(a, b)
@@ -59,13 +61,12 @@ extern int MASK;
 #define LOG_MODE
 #ifdef LOG_MODE
 
-/*
-  * Per attivare o meno la modalità di log, assegnare a LOGMASK i
-  * seguenti valori:
-  * 0   NO LOG
-  * 1   LOG
-  */
-
+/**
+ * @brief Maschera di bit per le funzioni di log
+ *
+ *Se questa maschera e' settata a 1 allora il log statistico e' abilitato,
+ *altrimenti no.
+ */
 extern int LOGMASK;
 
 #define LOGDBG(a, b)      {if ((a) & LOGMASK) {b; }}
@@ -76,5 +77,5 @@ extern int LOGMASK;
 #define LOG(a)          LOGDBG(1, std::cout<<a<<endl)
 
 
-
+#endif
 #endif // MAIN_H

@@ -11,8 +11,9 @@ using namespace std;
 class Coltura;
 
 /**
+ * @brief The MainWindow class.
+ *
  * La classe MainWindow si occupa di gestione e coordinazione dei widget.
- * La parte pubblica contiene:
  */
 class MainWindow : public QMainWindow
 {
