@@ -41,6 +41,7 @@ extern int MASK;
  * 15  TRACE       GD1     GD2     GD3;
  */
 extern int MASK;
+
 #ifndef  DEBUG_MODE
 #define DBG(a, b)      {if ((a) & MASK) {b; }}
 #else
