@@ -7,9 +7,7 @@
 #include "mainwindow.h"
 #include "pilamatrici.h"
 #include "coltura.h"
-#include "starter.h"
 #include "newgame.h"
-#include "popup.h"
 #include "debug.h"
 
 
@@ -78,5 +76,5 @@ extern int LOGMASK;
 #define LOG(a)          LOGDBG(1, std::cout<<a<<endl)
 
 
-
+#endif
 #endif // MAIN_H

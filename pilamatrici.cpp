@@ -29,13 +29,9 @@ PilaMatrici::~PilaMatrici()
             delete posizioneAttuale->succ->tabella;
             delete posizioneAttuale->succ;
         }
-<<<<<<< HEAD
     } else if (posizioneAttuale->tempo == 0) {
         delete posizioneAttuale->tabella;
         delete posizioneAttuale;
-=======
-
->>>>>>> b7c5bc358b1ea1e2641a7f70ac651761ab7b057b
     }
 
 }
