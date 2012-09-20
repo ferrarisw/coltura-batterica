@@ -37,7 +37,6 @@
  */
 extern int MASK;
 
-
 #define DBG(a, b)      {if ((a) & MASK) {b; }}
 #else
 #define DBG(a, b)
