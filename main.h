@@ -10,9 +10,6 @@
 #include "starter.h"
 #include "debug.h"
 
-
-extern int MASK;
-
 #define DEBUG_MODE
 #ifdef  DEBUG_MODE
 
@@ -40,7 +37,6 @@ extern int MASK;
  */
 extern int MASK;
 
-#ifndef  DEBUG_MODE
 #define DBG(a, b)      {if ((a) & MASK) {b; }}
 #else
 #define DBG(a, b)
@@ -76,5 +72,5 @@ extern int LOGMASK;
 #define LOG(a)          LOGDBG(1, std::cout<<a<<endl)
 
 
-#endif
+
 #endif // MAIN_H

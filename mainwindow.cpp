@@ -20,7 +20,6 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     //help->addAction(tr("&About"),          this,   SLOT(about()     ));
     //help->addAction(tr("&Guida"),           this,   SLOT(guide()    ));
     
-
     stepByStep = new QPushButton(tr("passo passo"));
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
 
@@ -39,9 +38,8 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     buttonLayout->addWidget(playButton);
     buttonLayout->addWidget(stepByStep);
 
-    //coltura->timeSlider->setSizePolicy(QSizePolicy(QSizePolicy::Slider));
     layout = new QVBoxLayout;
-    layout->addWidget(coltura->timeSlider,0,Qt::AlignVCenter);
+    layout->addWidget(coltura->timeSlider);
     layout->addWidget(coltura);
     layout->addWidget(slider);
     layout->addLayout(buttonLayout);
