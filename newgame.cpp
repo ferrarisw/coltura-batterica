@@ -1,10 +1,10 @@
-#include "starter.h"
+#include "newgame.h"
 #include "debug.h"
 
-Starter::Starter(QWidget *parent) :
-    QWidget(parent)
+NewGame::NewGame(QWidget *parent) :
+    QMainWindow(parent)
 {
-    GD1(cout<<"[Starter] : costruttore"<<endl);
+    GD1(cout<<"[NewGame] : costruttore"<<endl);
 
     qreal x=500;
     qreal y=250;
@@ -16,7 +16,6 @@ Starter::Starter(QWidget *parent) :
     this->y=50;
     this->pattern=0;
 
-
     QLabel      * descrizione   =   new QLabel;
     descrizione->setText(tr("inserisci le dimensioni della coltura"));
     descrizione->setAlignment(Qt::AlignCenter);
@@ -27,9 +26,7 @@ Starter::Starter(QWidget *parent) :
     xdimension->setMinimum(0);
     xdimension->setMaximum(500);
     connect(xdimension, SIGNAL(valueChanged(int)),this,SLOT(changeXDimension(int)));
-
-    GD2(cout<<"[Starter::Starter] ho inizializzato lo spinbox e connesso i segnali"<<endl);
-
+    GD2(cout<<"[NewGame::NewGame] ho inizializzato lo spinbox e connesso i segnali"<<endl);
 
     QLabel      * etichettaX    =   new QLabel;
     etichettaX->setText(tr("larghezza"));
@@ -40,20 +37,17 @@ Starter::Starter(QWidget *parent) :
     ydimension->setMinimum(0);
     ydimension->setMaximum(500);
     connect(ydimension, SIGNAL(valueChanged(int)),this,SLOT(changeYDimension(int)));
-
-    GD2(cout<<"[Starter::Starter] ho inizializzato lo spinbox e connesso i segnali"<<endl);
-
+    GD2(cout<<"[NewGame::NewGame] ho inizializzato lo spinbox e connesso i segnali"<<endl);
 
     QLabel      * etichettaY    =   new QLabel;
     etichettaY->setText(tr("altezza"));
 
-    GD3(cout<<"[Starter::Starter] dimensioni di x e y: "<<this->x<<" "<<this->y<<endl);
+    GD3(cout<<"[NewGame::NewGame] dimensioni di x e y: "<<this->x<<" "<<this->y<<endl);
 
 
     QPushButton * ok            =   new QPushButton(tr("Ok"));
     connect(ok, SIGNAL(clicked()),this,SLOT(avvio()));
-
-    GD2(cout<<"[Starter::Starter] inizializzato il pushbutton e connesso i segnali"<<endl);
+    GD2(cout<<"[NewGame::NewGame] inizializzato il pushbutton e connesso i segnali"<<endl);
 
 
     QLabel      * patternDesc   =   new QLabel;
@@ -85,31 +79,22 @@ Starter::Starter(QWidget *parent) :
     layout->addWidget(patterns);
     layout->addWidget(ok);
 
-    debug = new Debug();
-    //QFrame * frame= new QFrame();
+    QWidget * central = new QWidget();
+    central->setLayout(layout);
 
-    //QHBoxLayout * frameLayout = new QHBoxLayout();
-    //frameLayout->addWidget(debug);
-    //frame->setLayout(frameLayout);
+    this->setCentralWidget(central);
 
-    QHBoxLayout * setting       =   new QHBoxLayout();
-    setting->addLayout(layout);
-    //setting->addWidget(frame);
-    setting->addWidget(debug);
-
-    setLayout(setting);
-
-    GD3(cout<<"[Starter::Starter] layout settato\n\n");
+    GD3(cout<<"[NewGame::NewGame] layout settato\n\n");
 
 
 }
 
-Starter::~Starter()
+NewGame::~NewGame()
 {//TODO memory leak!!
 
 }
 
-void Starter::avvio()
+void NewGame::avvio()
 {
 
     GD2(cout<<x<<" "<<y<<endl);
@@ -119,39 +104,39 @@ void Starter::avvio()
     assert(pattern>=0);
 
 
-    MainWindow * finestra = new MainWindow(x,y,pattern,debug);
+    MainWindow * finestra = new MainWindow(x,y,pattern);
     finestra->show();
 
     this->deleteLater();
 }
 
 
-void Starter::changeXDimension(int dim)
+void NewGame::changeXDimension(int dim)
 {
     this->x=dim;
     GD2(cout<<"modificato x: "<<x<<endl);
 }
 
 
-void Starter::changeYDimension(int dim)
+void NewGame::changeYDimension(int dim)
 {
     this->y=dim;
     GD2(cout<<"modificato y: "<<y<<endl);
 }
 
 
-void Starter::setPattern(int position)
+void NewGame::setPattern(int position)
 {
     this->pattern=position;
     GD2(cout<<"position: "<<position);
 }
 
 //TODO codice replicato con mainwindow
-void Starter::closeEvent(QCloseEvent * closeEvent)
+void NewGame::closeEvent(QCloseEvent * closeEvent)
 {
     closeEvent->ignore();
 
-    TRACE("[Starter::closeEvent]");
+    TRACE("[NewGame::closeEvent]");
 
     closingalert = new ClosingAlert();
 
@@ -162,7 +147,7 @@ void Starter::closeEvent(QCloseEvent * closeEvent)
 
 }
 //TODO codice replicato con mainwindow
-void Starter::closing()
+void NewGame::closing()
 {
     this->deleteLater();
     closingalert->deleteLater();

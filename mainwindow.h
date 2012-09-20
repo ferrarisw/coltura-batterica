@@ -11,7 +11,12 @@ using namespace std;
 class Coltura;
 
 /**
+<<<<<<< HEAD
  * @brief The MainWindow class
+=======
+ * La classe MainWindow si occupa di gestione e coordinazione dei widget.
+ * La parte pubblica contiene:
+>>>>>>> b7c5bc358b1ea1e2641a7f70ac651761ab7b057b
  */
 class MainWindow : public QMainWindow
 {
@@ -27,25 +32,57 @@ public:
      * @param pattern
      * @param parent
      */
-    MainWindow(int, int, int, QWidget *debug, QWidget *parent = 0);
+    MainWindow(int, int, int, QWidget *parent = 0);
+    MainWindow(QWidget *parent = 0);
+    /**
+     * Decostruttore.
+     */
     ~MainWindow();
+
 protected:
+    /**
+     * Funzione chiamata ogni volta che si genera un evento di chiusura.
+     * Apre il widget ClosingAlert.
+     * @param closeEvent
+     */
     void closeEvent(QCloseEvent *closeEvent);
 
 private slots:
+    /**
+     * Gestisce il bottone playButton.
+     * @param toggled
+     */
     void play(bool toggled);
+
+    /**
+     * Crea una nuova partita, eliminando l'attuale.
+     */
     void newGame();
+
+    /**
+     * Salva la coltura attuale su un file .runner.
+     */
     void save();
+
+    /**
+     * Carica una coltura da un file .runner.
+     */
     void load();
+
+    /**
+     * Gestisce la chiusura del programma.
+     */
     void closing();
    /* void about();
     void guide();*/
 
 private:
+    void struttura();
     QSlider * slider;
     ClosingAlert * closingalert;
     Coltura * coltura;
     QMenu * file;
+    QMenu * modifica;
     QMenu * help;
     QPushButton * stepByStep;
     QPushButton * playButton;

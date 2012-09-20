@@ -7,10 +7,19 @@
 #include "mainwindow.h"
 #include "pilamatrici.h"
 #include "coltura.h"
+<<<<<<< HEAD
 #include "starter.h"
+=======
+#include "newgame.h"
+#include "popup.h"
+>>>>>>> b7c5bc358b1ea1e2641a7f70ac651761ab7b057b
 #include "debug.h"
 
+
+extern int MASK;
+
 #define DEBUG_MODE
+<<<<<<< HEAD
 #ifdef  DEBUG_MODE
 
 /**
@@ -36,6 +45,31 @@
  * 15  TRACE       GD1     GD2     GD3;
  */
 extern int MASK;
+=======
+#ifndef  DEBUG_MODE
+/*
+  * Per attivare i diversi livelli di debug inizializzare la maschera con i
+  * seguenti valori:
+  * 0   NESSUN LIVELLO
+  * 1   TRACE
+  * 2               GD1
+  * 3   TRACE       GD1
+  * 4                       GD2
+  * 5   TRACE               GD2
+  * 6               GD1     GD2
+  * 7   TRACE       GD1     GD2
+  * 8                               GD3
+  * 9   TRACE                       GD3
+  * 10              GD1             GD3
+  * 11  TRACE       GD1             GD3
+  * 12                      GD2     GD3
+  * 13  TRACE               GD2     GD3
+  * 14              GD1     GD2     GD3
+  * 15  TRACE       GD1     GD2     GD3
+  */
+
+
+>>>>>>> b7c5bc358b1ea1e2641a7f70ac651761ab7b057b
 
 
 #define DBG(a, b)      {if ((a) & MASK) {b; }}

@@ -18,8 +18,6 @@ bool Coltura::load(QString s)
     GD1(cout<<"file caricato"<<s.toStdString().data()<<endl);
     fcin>>x>>y;
 
-    delete matrice; //***presumo sempre double free or corruption***
-    matrice = new int[x*2+y*2];
     matrice = pila->getMatrix();
 
     pila->stampa();

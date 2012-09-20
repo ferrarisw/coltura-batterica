@@ -7,9 +7,9 @@ using namespace std;
 Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     QWidget(parent)
 {
+    GD1(cout<<"[Coltura::Coltura] x "<<x<<" y "<<y<<endl);
     this->x=x;
     this->y=y;
-    GD1(cout<<"[Coltura::Coltura] this.x "<<this->x<<" this.y "<<this->y<<endl);
     assert(x>0);
     assert(y>0);
 
@@ -21,7 +21,6 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(aggiorna()));
 
-
     setMinimumSize(3*x,3*y);
     background=Qt::black;
 
@@ -32,10 +31,10 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timeSlider->setMinimum(0);
     timeSlider->setMaximum(0);
     timeSlider->setValue(0);
-    connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
+    //connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
+    connect(timeSlider,SIGNAL(valueChanged(int)),this,SLOT(timeTrip(int)));
 
     GD3(cout<<"[Coltura::Coltura] stampo la matrice manualmente"<<endl;
-
     for(int j=1; j<y+1; j++)
     {
         for(int i=1; i<x+1; i++)
@@ -46,8 +45,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     }
 )
     GD2(cout<<"[Coltura::Coltura] stampo la matrice utilizzando pila.stampa: "<<endl;
-        pila->stampa()
-            );
+        pila->stampa());
 
 }
 
@@ -63,6 +61,7 @@ void Coltura::paintEvent(QPaintEvent *event)
     QPainter painter;
     painter.begin(this);
     //painter.setRenderHint(QPainter::Antialiasing);
+
     if(MASK>=8)//livello GD3 attivo
         paintColtura(&painter, event, "debug");
     else
