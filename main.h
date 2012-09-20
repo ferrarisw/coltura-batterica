@@ -7,9 +7,7 @@
 #include "mainwindow.h"
 #include "pilamatrici.h"
 #include "coltura.h"
-#include "starter.h"
 #include "newgame.h"
-#include "popup.h"
 #include "debug.h"
 
 
