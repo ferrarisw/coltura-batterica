@@ -1,6 +1,6 @@
-OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o debug.o closingalert.o 
-MOC = coltura_moc.cpp starter_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
-MOCOBJ = coltura_moc.o starter_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
+OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o newgame.o coltura.o coltura_IO.o debug.o closingalert.o 
+MOC = coltura_moc.cpp newgame_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
+MOCOBJ = coltura_moc.o newgame_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
 QTLIBS = `pkg-config --libs QtGui`
 QTFLAG = `pkg-config --cflags QtGui`
         

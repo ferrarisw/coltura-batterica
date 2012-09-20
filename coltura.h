@@ -7,6 +7,9 @@
 class PilaMatrici;
 
 /**
+ * @author Serena Ziviani.
+ * @brief The Coltura class
+ *
  * La classe coltura si occupa della visualizzazione grafica della coltura.
  *   La parte pubblica contiene:
  *       - Coltura(int x, int y, int pattern, Qwidget * parent=0).
@@ -44,8 +47,6 @@ class PilaMatrici;
  *       - int maxTime, il valore massimo della velocità del tempo.
  *       - void draw(QPainter *), che gestisce i dettagli relativi al disegno
  *          delle singole cellule.
- * @author Serena Ziviani.
- * @brief The Coltura class
   */
 
 class PilaMatrici;

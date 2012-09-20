@@ -15,7 +15,7 @@ class Debug;
 /**
  * Widget di apertura del programma.
  * Tramite esso é possibile impostare le dimensioni e il pattern della coltura.
- *@brief The Starter class
+ *@brief The NewGame class
  */
 class NewGame : public QMainWindow
 {
