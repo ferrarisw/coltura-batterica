@@ -60,7 +60,7 @@ extern int MASK;
  * @brief Maschera di bit per le funzioni di log
  *
  *Se questa maschera e' settata a 1 allora il log statistico e' abilitato,
- *altrimenti no
+ *altrimenti no.
  */
 extern int LOGMASK;
 
