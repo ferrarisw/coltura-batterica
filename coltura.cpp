@@ -29,6 +29,8 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     matrice=pila->getMatrix();
 
     timeSlider = new QSlider(Qt::Horizontal);
+    timeSlider->setMaximumHeight(20);
+    timeSlider->setMinimumHeight(20);
     timeSlider->setMinimum(0);
     timeSlider->setMaximum(0);
     timeSlider->setValue(0);

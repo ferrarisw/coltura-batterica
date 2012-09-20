@@ -113,7 +113,7 @@ public:
 
 public slots:
     /**
-     * @brief Aggiornamento della tabella disegnata.
+     * @brief Slot che determina il passaggio in un quanto di tempo
      *
      *Utilizzando la funzione next della classe ::PilaMatrici, realizza l'elemento
      *successivo della lista di matrici e aggiorna la grafica rappresentando
@@ -122,18 +122,18 @@ public slots:
     void aggiorna();
 
     /**
-     * @brief Play
+     * @brief Slot che gestisce lo scorrere del tempo
      * @param scatti sono gli intervalli di aggiornamento
      *
-     *Questo slot utilizza un timer e il valore impostato da timeSlider per settare
-     *una velocita' di aggiornamento della pila di matrici.
-     *Quindi e' possibile mettere in play con una velocita' positiva e stop con
-     *una velocita' nulla.
+     * Questo slot utilizza un timer e il valore impostato da timeSlider per settare
+     * una velocita' di aggiornamento della pila di matrici.
+     * Quindi e' possibile mettere in play con una velocita' positiva e stop con
+     * una velocita' nulla.
      */
     void play(int);
 
     /**
-     * @brief timeTrip Slot
+     * @brief Slot che gestisce la possibilità di tornare indietro nel tempo
      * @param Tempo di arrivo desiderato della timeTrip
      *
      *Questo slot si aggancia alla funzione timeTrip per abilitarla e renderla

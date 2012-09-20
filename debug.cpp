@@ -29,17 +29,15 @@ Debug::Debug(QWidget *parent) :
     connect(logMaskValue, SIGNAL(valueChanged(int)), this,SLOT(changeLogMaskValue(int)));
     GD2(cout<<"[Debug::Debug] ho inizializzato lo spinbox  e connesso i segnali"<<endl);
 
-    QWidget * spacer = new QWidget();
-    QWidget * spacer2 = new QWidget();
-
     QVBoxLayout * layout = new QVBoxLayout();
     layout->addWidget(DBGLabel);
     layout->addWidget(maskValue);
     layout->addWidget(LDBGLabel);
     layout->addWidget(logMaskValue);
-    layout->addWidget(spacer);
-    layout->addWidget(spacer2);
-    //TODO soluzione migliore per lo spazio
+
+
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
 
     setLayout(layout);
 
