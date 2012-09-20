@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
 
     GD1(cout<<"[main] sto per inizializzare lo starter"<<endl;)
 
-    MainWindow * lifeRunner = new MainWindow(1,1,99);
-    lifeRunner->show();
+    Starter * starter = new Starter();
+    starter->show();
 
     return a.exec();
 }

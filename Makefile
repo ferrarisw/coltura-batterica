@@ -1,14 +1,14 @@
-OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o newgame.o coltura.o coltura_IO.o popup.o debug.o closingalert.o 
-MOC = coltura_moc.cpp newgame_moc.cpp popup_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
-MOCOBJ = coltura_moc.o newgame_moc.o popup_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
+OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o popup.o debug.o closingalert.o 
+MOC = coltura_moc.cpp starter_moc.cpp popup_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
+MOCOBJ = coltura_moc.o starter_moc.o popup_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
 QTLIBS = `pkg-config --libs QtGui`
 QTFLAG = `pkg-config --cflags QtGui`
         
-CXXFLAGS = $(QTFLAG)
+CXXFLAGS = $(QTFLAG) -Wall
 LDFLAGS = $(QTLIBS)
         
 colturabatterica : $(OBJ) $(MOCOBJ)
-	g++ -Wall -export-dynamic -o colturabatterica $+ $(LDFLAGS)
+	g++ -export-dynamic -o colturabatterica $+ $(LDFLAGS)
 
 
 -include dependencies
@@ -16,7 +16,7 @@ colturabatterica : $(OBJ) $(MOCOBJ)
 #moc.o
 mainwindow_moc.o : mainwindow_moc.cpp main.h mainwindow.h coltura.h
 
-newgame_moc.o : newgame_moc.cpp newgame.h main.h
+starter_moc.o : starter_moc.cpp starter.h main.h
 
 coltura_moc.o : coltura_moc.cpp main.h coltura.h pilamatrici.h
 
@@ -30,8 +30,8 @@ closingalert_moc.o : closingalert_moc.cpp closingalert.h
 mainwindow_moc.cpp : mainwindow.cpp mainwindow.h
 	moc mainwindow.h -o mainwindow_moc.cpp
 	
-newgame_moc.cpp : newgame.cpp newgame.h
-	moc newgame.h -o newgame_moc.cpp
+starter_moc.cpp : starter.cpp starter.h
+	moc starter.h -o starter_moc.cpp
 	
 coltura_moc.cpp : coltura.cpp coltura.h
 	moc coltura.h -o coltura_moc.cpp
@@ -45,7 +45,7 @@ debug_moc.cpp : debug.cpp debug.h
 closingalert_moc.cpp : closingalert.cpp closingalert.h
 	moc closingalert.h -o closingalert_moc.cpp
 	
-.PHONY : clean cleanall doc depends
+.PHONY : clean cleanall doc depends debug
 
 clean : 
 
@@ -60,6 +60,10 @@ doc :
 depends:
 	#creo la parte relativa ai "normali" file oggetto
 	g++ -MM $(shell ls *.cpp | grep -v '.*_moc.cpp') > dependencies
+
+debug:
+	g++ -export-dynamic -g -D DEBUG_MODE -o colturabatterica $(LDFLAGS) $(OBJ) $(MOCOBJ) 
+
 	
 
 	

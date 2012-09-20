@@ -11,45 +11,15 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     this->coltura = new Coltura(x,y,pattern);
     GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
 
-    struttura();
-
-    coltura->load("../coltura-batterica/ProgPattern2");
-
-    setWindowTitle(tr("Coltura batterica"));
-}
-
-MainWindow::MainWindow(QWidget *parent):
-    QMainWindow(parent)
-{
-    GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
-
-    this->coltura = new Coltura(x=1,y=1,99);
-
-    struttura();
-
-    coltura->load("../coltura-batterica/ProgPattern2");
-
-    setWindowTitle(tr("Coltura batterica"));
-}
-
-void MainWindow::struttura()
-{
-    GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
-
     file = menuBar()->addMenu(tr("&File"));
     file->addAction(tr("&Nuova partita"),   this,   SLOT(newGame()  ));
     file->addAction(tr("&Salva"),           this,   SLOT(save()     ));
     file->addAction(tr("&Carica"),          this,   SLOT(load()     ));
-    file->addAction(tr("&Chiudi"),          this,   SLOT(closing()  ));
-
-    modifica = menuBar()->addMenu(tr("&Modifica"));
-    modifica->addAction(tr("Debug.."),      this,   SLOT(Debug::debug()));
-    modifica->addAction(tr("Log.."),        this,   SLOT(Debug::log()));
 
     help = menuBar()->addMenu(tr("&Aiuto"));
     //help->addAction(tr("&About"),          this,   SLOT(about()     ));
     //help->addAction(tr("&Guida"),           this,   SLOT(guide()    ));
-
+    
 
     stepByStep = new QPushButton(tr("passo passo"));
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
@@ -63,6 +33,7 @@ void MainWindow::struttura()
     this->slider->setMinimum(coltura->getMinTime());
     this->slider->setMaximum(coltura->getMaxTime());
 
+    Debug * debug = new Debug();
 
     buttonLayout = new QHBoxLayout;
     buttonLayout->addWidget(playButton);
@@ -75,11 +46,17 @@ void MainWindow::struttura()
     layout->addWidget(slider);
     layout->addLayout(buttonLayout);
 
+    QHBoxLayout * setting = new QHBoxLayout();
+    setting->addLayout(layout);
+    setting->addWidget(debug);
+
     QWidget * central = new QWidget();
-    central->setLayout(layout);
+    central->setLayout(setting);
 
     this->setCentralWidget(central);
 
+
+    setWindowTitle(tr("Coltura batterica"));
 }
 
 MainWindow::~MainWindow()
@@ -116,7 +93,7 @@ void MainWindow::newGame()
 {
     this->deleteLater();
 
-    NewGame * starter = new NewGame();
+    Starter * starter = new Starter();
     starter->show();
 }
 

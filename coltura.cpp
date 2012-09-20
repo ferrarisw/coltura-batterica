@@ -21,6 +21,7 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(aggiorna()));
 
+
     setMinimumSize(3*x,3*y);
     background=Qt::black;
 
@@ -33,8 +34,8 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timeSlider->setValue(0);
     //connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
     connect(timeSlider,SIGNAL(valueChanged(int)),this,SLOT(timeTrip(int)));
-
     GD3(cout<<"[Coltura::Coltura] stampo la matrice manualmente"<<endl;
+
     for(int j=1; j<y+1; j++)
     {
         for(int i=1; i<x+1; i++)

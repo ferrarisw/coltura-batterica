@@ -29,7 +29,6 @@ public:
      * @param parent
      */
     MainWindow(int, int, int, QWidget *parent = 0);
-    MainWindow(QWidget *parent = 0);
     /**
      * Decostruttore.
      */
@@ -73,12 +72,10 @@ private slots:
     void guide();*/
 
 private:
-    void struttura();
     QSlider * slider;
     ClosingAlert * closingalert;
     Coltura * coltura;
     QMenu * file;
-    QMenu * modifica;
     QMenu * help;
     QPushButton * stepByStep;
     QPushButton * playButton;
