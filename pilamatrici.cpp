@@ -176,7 +176,7 @@ int * PilaMatrici::next()
 
 void PilaMatrici::stampa()
 {
-    GD3(cout<<"[PilaMatrici::stampa] Stampo la matrice. Questa è solo una funzione per il DBGug.\n";
+    cout<<"[PilaMatrici::stampa] Stampo la matrice. Questa è solo una funzione per il DBGug.\n";
 
     for (int j = 0; j < dimy + 2; j++)
     {
@@ -186,7 +186,6 @@ void PilaMatrici::stampa()
         } cout<<endl;
     }
     cout<<endl;
-    );  //Fine di GD3
 }
 
 bool PilaMatrici::distruggiMatrice (Matrix* matrice)
