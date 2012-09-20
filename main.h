@@ -8,7 +8,6 @@
 #include "pilamatrici.h"
 #include "coltura.h"
 #include "starter.h"
-#include "newgame.h"
 #include "debug.h"
 
 
