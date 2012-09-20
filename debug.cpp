@@ -1,5 +1,5 @@
+#include "main.h"
 #include"debug.h"
-
 int MASK = 0;
 int LOGMASK = 0;
 
@@ -71,3 +71,4 @@ void Debug::releaseVersion()
     GD2(cout<<"[Debug::releaseVersion] Valore di MASK: "<<MASK<<endl);
     GD2(cout<<"[Debug::releaseVersion] Valore di LOGMASK: "<<LOGMASK<<endl);
 }
+

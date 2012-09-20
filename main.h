@@ -7,12 +7,15 @@
 #include "mainwindow.h"
 #include "pilamatrici.h"
 #include "coltura.h"
-#include "starter.h"
+#include "newgame.h"
 #include "popup.h"
 #include "debug.h"
 
+
+extern int MASK;
+
 #define DEBUG_MODE
-#ifdef  DEBUG_MODE
+#ifndef  DEBUG_MODE
 /*
   * Per attivare i diversi livelli di debug inizializzare la maschera con i
   * seguenti valori:
@@ -35,7 +38,6 @@
   */
 
 
-extern int MASK;
 
 
 #define DBG(a, b)      {if ((a) & MASK) {b; }}

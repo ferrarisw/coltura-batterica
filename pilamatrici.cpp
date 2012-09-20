@@ -34,7 +34,7 @@ PilaMatrici::~PilaMatrici()
         }
 
     }
-    cout<<"fuori dal ciclo"<<endl;
+
 }
 
 PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)

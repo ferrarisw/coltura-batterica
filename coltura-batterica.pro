@@ -14,17 +14,17 @@ SOURCES += main.cpp\
     coltura.cpp \
     pilamatrici.cpp \
     pilamatrici_IO.cpp \
-    starter.cpp \
     popup.cpp \
     debug.cpp \
     coltura_IO.cpp \
-    closingalert.cpp
+    closingalert.cpp \
+    newgame.cpp
 
 HEADERS  += mainwindow.h \
     main.h \
     coltura.h \
     pilamatrici.h \
-    starter.h \
     popup.h \
     debug.h \
-    closingalert.h
+    closingalert.h \
+    newgame.h

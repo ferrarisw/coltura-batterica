@@ -5,7 +5,6 @@
 #include "main.h"
 
 
-class PilaMatrici;
 /**
  * La classe coltura si occupa della visualizzazione grafica della coltura.
  *   La parte pubblica contiene:
@@ -46,6 +45,8 @@ class PilaMatrici;
  *          delle singole cellule.
  * @author Serena Ziviani.
   */
+
+class PilaMatrici;
 
 class Coltura : public QWidget
 {

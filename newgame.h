@@ -1,5 +1,5 @@
-#ifndef STARTER_H
-#define STARTER_H
+#ifndef NEWGAME_H
+#define NEWGAME_H
 
 #include <QWidget>
 #include <QtGui>
@@ -15,7 +15,7 @@ class Debug;
  * Widget di apertura del programma.
  * Tramite esso é possibile impostare le dimensioni e il pattern della coltura.
  */
-class Starter : public QWidget
+class NewGame : public QMainWindow
 {
     Q_OBJECT
 public:
@@ -23,13 +23,13 @@ public:
      * Costruttore del widget.
      * @param parent=0
      */
-    explicit Starter(QWidget *parent = 0);
-    ~Starter();
+    explicit NewGame(QWidget *parent = 0);
+    ~NewGame();
 
 public slots:
     /**
      * Funzione chiamata quando premo il pulsante "ok".
-     * Apre il widget MainWindow e chiude lo Starter.
+     * Apre il widget MainWindow e chiude lo NewGame.
      */
     void avvio();
     /**
@@ -63,4 +63,4 @@ private slots:
     
 };
 
-#endif // STARTER_H
+#endif // NEWGAME_H
