@@ -4,12 +4,8 @@
 #include "pilamatrici.h"
 #include "main.h"
 
-
-<<<<<<< HEAD
 class PilaMatrici;
 
-=======
->>>>>>> b7c5bc358b1ea1e2641a7f70ac651761ab7b057b
 /**
  * La classe coltura si occupa della visualizzazione grafica della coltura.
  *   La parte pubblica contiene:
@@ -145,14 +141,10 @@ public slots:
     void timeTrip(int);
 
 protected:
-<<<<<<< HEAD
     /**
      * @brief Disegna l'interfaccia della coltura
      */
     void paintEvent(QPaintEvent *);
-=======
-    void paintEvent(QPaintEvent * event);
->>>>>>> b7c5bc358b1ea1e2641a7f70ac651761ab7b057b
 
 private:
     int x,y;
