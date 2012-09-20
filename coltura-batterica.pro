@@ -15,7 +15,6 @@ SOURCES += main.cpp\
     pilamatrici.cpp \
     pilamatrici_IO.cpp \
     starter.cpp \
-    popup.cpp \
     debug.cpp \
     coltura_IO.cpp \
     closingalert.cpp
@@ -25,6 +24,5 @@ HEADERS  += mainwindow.h \
     coltura.h \
     pilamatrici.h \
     starter.h \
-    popup.h \
     debug.h \
     closingalert.h

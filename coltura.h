@@ -6,6 +6,7 @@
 
 
 class PilaMatrici;
+
 /**
  * La classe coltura si occupa della visualizzazione grafica della coltura.
  *   La parte pubblica contiene:
@@ -21,6 +22,7 @@ class PilaMatrici;
  *           voluta se impostato ad un qualsiasi valore diverso da zero,
  *           altrimenti "ferma il tempo".
  * @author Serena Ziviani.
+ * @brief The Coltura class
   */
 
 class Coltura : public QWidget
@@ -29,81 +31,108 @@ class Coltura : public QWidget
 
 public:
     /** 
-     * Costruttore della classe Coltura.
-     * Inizializza la lista Pilamatrici e gestisce l'inizializzazione
-     * della barra relativa all'istante di tempo.
-     * @param x larghezza
-     * @param y altezza
-     * @param pattern disposizione iniziale delle cellule
+     * @brief Coltura costruttore
+     * @param Larghezza della matrice
+     * @param Altezza della matrice
+     * @param pattern di disposizione iniziale delle cellule
      * @param parent=0
+     *
+     *Costruttore della classe Coltura.
+     *Inizializza la lista Pilamatrici e gestisce l'inizializzazione
+     *della barra relativa all'istante di tempo.
      */
     Coltura(int x,int y, int pattern, QWidget * parent=0);
 
     ~Coltura();
 
     /**
-     * Ritorna la velocità massima del tempo.
-     * @return ::maxTime
-     */
+      * @brief Ritorna il valore della velocità massima di play
+      * @return ::maxTime
+      */
      int getMaxTime();
 
-    /**
-     * Ritorna la velocità minima del tempo.
-     * @return minTime
-     */
+     /**
+      * @brief Ritorna il valore della velocità minima di play
+      * @return ::minTime
+      */
      int getMinTime();
 
-    /**
-     * Slider che gestisce il salto nel tempo.
+     /**
+     * @brief Lo slider che gestisce il valore della velocità del play
      */
     QSlider *timeSlider;
 
     /**
-     * Gestisce il salvataggio della coltura su file.
-     * @param s
-     * @return bool
+     * @brief Funzionalita' di salvataggio su file
+     * @param File su cui salvare la sessione
+     * @return True se il salavataggio avviene correttamente
+     * @return False se il salvataggio non avviene
+     *
+     *Questa funzione chiama la funzione salva della classe PilaMatrici, ma serve
+     *per connetterla ad una voce del menu.
      */
-    bool save(QString s);
+    bool save(QString);
 
     /**
-     * Gestisce il caricamento da file della coltura.
-     * @param s
-     * @return
+     * @brief Funzionalita' di caricamento da file
+     * @param File da cui caricare la sessione
+     * @return True se il caricamento avviene correttamente
+     * @return False se il caricamento non avviene
+     *
+     *Questa funzione chiama la funzione carica della classe PilaMatrici, ma serve
+     *per connetterla ad una voce del menu.
      */
     bool load(QString s);
 
-
 public slots:
     /**
-     * Slot che determina il passaggio in un quanto di tempo.
-     * Gestisce sia il timeSlider, modificandone sia valore che valore massimo,
-     * che l'effettivo passaggio al nuovo stato, sia che si stia seguendo il
-     * normale scorrere del tempo sia che si stia viaggiando nel tempo.
+     * @brief Aggiornamento della tabella disegnata.
+     *
+     *Utilizzando la funzione next della classe ::PilaMatrici, realizza l'elemento
+     *successivo della lista di matrici e aggiorna la grafica rappresentando
+     *la matrice successiva.
      */
     void aggiorna();
 
     /**
-     * Slot che gestisce lo scorrere del tempo.
-     * Modifica il quanto di tempo del timer, utilizzando come input la
-     * posizione dello slider, tramite l'algoritmo (-1/maxTime*scatti^2+maxTime)
-     * @param scatti
+     * @brief Play
+     * @param scatti sono gli intervalli di aggiornamento
+     *
+     *Questo slot utilizza un timer e il valore impostato da timeSlider per settare
+     *una velocita' di aggiornamento della pila di matrici.
+     *Quindi e' possibile mettere in play con una velocita' positiva e stop con
+     *una velocita' nulla.
      */
     void play(int);
 
     /**
-     * Slot che gestisce la possibilità di tornare indietro nel tempo
+     * @brief timeTrip Slot
+     * @param Tempo di arrivo desiderato della timeTrip
+     *
+     *Questo slot si aggancia alla funzione timeTrip per abilitarla e renderla
+     *effettiva nella grafica.
      */
     void timeTrip(int);
 
-
 protected:
+    /**
+     * @brief Disegna l'interfaccia della coltura
+     */
     void paintEvent(QPaintEvent *);
-
 
 private:
     int x,y;
     int pattern;
     int * matrice;
+    /*
+     * @param painter
+     * @param event
+     * Funzione che disegna il widget Coltura in base alla matrice generata da
+     * pilaMatrici->next.
+     * In particolare, prende l'oggetto locale matrice e lo scorre fino alla fine,
+     * impostando diversamente il pennello a seconda del valore della cella.
+     *
+     */
     void paintColtura(QPainter *, QPaintEvent *);
     void paintColtura(QPainter *, QPaintEvent *, const char *);
     PilaMatrici *pila;
@@ -113,9 +142,6 @@ private:
     int minTime;
     int maxTime;
     void draw(QPainter *);
-    //void setMinimumSize(int minw);
-
-
 };
 
 #endif // COLTURA_H

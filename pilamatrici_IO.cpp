@@ -9,8 +9,6 @@ bool PilaMatrici::salva (QString file)
     if (!salva)
         return false;
 
-    //salva<<versionefile<<endl;
-
     salva<<this->dimx<<" "<<this->dimy<<endl;
 
     salva<<posizioneAttuale->tempo<<endl;
@@ -31,7 +29,6 @@ bool PilaMatrici::carica (QString file)
     ifstream carica (file.toStdString().data());
 
     if (!carica)
-
         return false;
 
     carica>>dimx>>dimy;

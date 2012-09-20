@@ -11,7 +11,7 @@ using namespace std;
 class Coltura;
 
 /**
- *
+ * @brief The MainWindow class
  */
 class MainWindow : public QMainWindow
 {

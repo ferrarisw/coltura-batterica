@@ -11,9 +11,11 @@
 
 class MainWindow;
 class Debug;
+
 /**
  * Widget di apertura del programma.
  * Tramite esso é possibile impostare le dimensioni e il pattern della coltura.
+ *@brief The Starter class
  */
 class Starter : public QWidget
 {
