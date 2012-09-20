@@ -7,12 +7,9 @@
 #include "mainwindow.h"
 #include "pilamatrici.h"
 #include "coltura.h"
-<<<<<<< HEAD
 #include "starter.h"
-=======
 #include "newgame.h"
 #include "popup.h"
->>>>>>> b7c5bc358b1ea1e2641a7f70ac651761ab7b057b
 #include "debug.h"
 
 
@@ -45,7 +42,6 @@ extern int MASK;
  */
 extern int MASK;
 #ifndef  DEBUG_MODE
-
 #define DBG(a, b)      {if ((a) & MASK) {b; }}
 #else
 #define DBG(a, b)
