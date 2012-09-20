@@ -189,7 +189,7 @@ private:
       2)    Aggancia la matrice allocata dinamicamente alle due matrici passate come
       parametro.
       3)    Inizializza il campo tabella della matrice creata, le dimensioni sono
-      maggiorate di 2 perchè creo anche una cornice aggiuntiva di zeri utile
+      maggiorate di 2 perche' creo anche una cornice aggiuntiva di zeri utile
       all'algoritmo nella sua esecuzione.
       4)    Inizializza tutta la matrice a 0 e la ritorna come parametro di uscita.
 
@@ -202,11 +202,11 @@ private:
 
     /* Funziona distruggiMatrice().
 
-      1)    se la matrice attuale è la testa, aggiorna la testa alla matrice
+      1)    se la matrice attuale e' la testa, aggiorna la testa alla matrice
       successiva
-      2)    se la matrice attuale è la cosa, aggiorna la coda alla matrice
+      2)    se la matrice attuale e' la coda, aggiorna la coda alla matrice
       precedente
-      3)    se la matrice attuale è in mezzo, faccio scavalcare i puntatori
+      3)    se la matrice attuale e' in mezzo, faccio scavalcare i puntatori
       della precedente e della successiva.
       4)    dealloca la tabella allocata dinamicamente
       5)    dealloca la matrice allocata dinamicamante
@@ -220,9 +220,9 @@ private:
       1)    Utilizzando le funzioni di cstdlib setta il seme da cui calcolare
       i numeri random tramite la funzione rand() e inizializza un intero tot
       da utilizzare per debug.
-      2)    Genera casualmente un numero, che risulter�  sempre 0 < x < 1.
+      2)    Genera casualmente un numero, che risultera'  sempre 0 < x < 1.
       Posso controllare la frequenza di celle settate a 1 modificando l'ultimo
-      valore che sommo al risultato perchè più è vicino ad 1, più le celle
+      valore che sommo al risultato perche' piu' e' vicino ad 1, piu' le celle
       settate saranno frequenti, altrimenti le celle settate saranno in minor
       numero.
 
@@ -254,10 +254,10 @@ private:
     /* Funzione getValore.
 
       1)    Ritorna il valore della casella passata dai tre parametri
-      Utilizzo la forma t[x + y * (dimx + 2)] perchè ho inizializzato la
+      Utilizzo la forma t[x + y * (dimx + 2)] perche' ho inizializzato la
       matrice come un array e non come un array di array, di conseguenza la x
       indicherebbe la colonna, cui va sommato il numero della riga moltiplicato
-      per in numero di colonne aumentato di due (questo perchè devo comunque
+      per in numero di colonne aumentato di due (questo perche' devo comunque
       considerare la cornice esterna.
 
       @param [in]   cella   Puntatore alla cella corrente

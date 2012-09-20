@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o  debug.o closingalert.o 
 MOC = coltura_moc.cpp starter_moc.cpp  mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
 MOCOBJ = coltura_moc.o starter_moc.o  mainwindow_moc.o debug_moc.o closingalert_moc.o
+=======
+OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o debug.o closingalert.o 
+MOC = coltura_moc.cpp starter_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
+MOCOBJ = coltura_moc.o starter_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
+>>>>>>> 40d1306b50b7a595ec5b47b26c6e820079c3ea54
 
 QTLIBS = `pkg-config --libs QtGui`
 QTFLAG = `pkg-config --cflags QtGui`
@@ -10,7 +16,6 @@ LDFLAGS = $(QTLIBS)
         
 colturabatterica : $(OBJ) $(MOCOBJ)
 	g++ -export-dynamic -o colturabatterica $+ $(LDFLAGS)
-
 
 -include dependencies
 
@@ -59,5 +64,5 @@ depends:
 debug: $(MOC)
 	g++ -g -D DEBUG_MODE -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) *.cpp 
 
-	
+
 

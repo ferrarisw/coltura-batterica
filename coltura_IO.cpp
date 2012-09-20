@@ -20,7 +20,7 @@ bool Coltura::load(QString s)
 
     matrice = pila->getMatrix();
 
-    pila->stampa();
+    GD3(pila->stampa());
 
     GD2(cout<<"[Coltura::load] nuova matrice:"<<endl;
             for(int j=1; j<y+1; j++)
