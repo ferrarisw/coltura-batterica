@@ -76,5 +76,5 @@ extern int LOGMASK;
 #define LOG(a)          LOGDBG(1, std::cout<<a<<endl)
 
 
-
+#endif
 #endif // MAIN_H
