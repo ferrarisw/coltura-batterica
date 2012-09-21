@@ -24,16 +24,37 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
 PilaMatrici::~PilaMatrici()
 {
     if (posizioneAttuale->tempo != 0) {
-        posizioneAttuale = posizioneAttuale->prec;
-        for (; posizioneAttuale->tempo <= 0; posizioneAttuale = posizioneAttuale->prec) {
+        for (posizioneAttuale = posizioneAttuale->prec;
+             posizioneAttuale->tempo < 0;
+             posizioneAttuale = posizioneAttuale->prec) {
+
             delete posizioneAttuale->succ->tabella;
             delete posizioneAttuale->succ;
-        }
-    } else if (posizioneAttuale->tempo == 0) {
-        delete posizioneAttuale->tabella;
-        delete posizioneAttuale;
-    }
 
+        }
+    } else
+
+    if (posizioneAttuale->tempo < coda->tempo) {
+        for(coda = coda->prec;
+            coda->tempo != posizioneAttuale->tempo;
+            coda = coda->prec) {
+
+            delete coda->succ->tabella;
+            delete coda->succ;
+
+        }
+    } else
+
+    if (posizioneAttuale->tempo == 1) {
+        posizioneAttuale = posizioneAttuale->prec;
+        delete posizioneAttuale->succ->tabella;
+        delete posizioneAttuale->succ;
+    } else
+
+    if (posizioneAttuale->tempo == 0) {
+            delete posizioneAttuale->tabella;
+            delete posizioneAttuale;
+    }
 }
 
 PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
@@ -152,6 +173,7 @@ int * PilaMatrici::next()
       */
     posizioneAttuale->succ = temp;
     temp->prec = posizioneAttuale;
+    coda = temp;
     temp->tempo = (posizioneAttuale->tempo + 1);
 
 

@@ -3,12 +3,10 @@
 
 using namespace std;
 
-//TODO questione memoria dinamica / memory leak
+
 //TODO pulizia main
 //TODO commenti
 //TODO revisione classe coltura
-//TODO memory leak
-
 qreal x=500;
 qreal y=250;
 qreal width=20;

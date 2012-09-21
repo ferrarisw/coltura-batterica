@@ -107,7 +107,7 @@ Starter::Starter(QWidget *parent) :
 }
 
 Starter::~Starter()
-{//TODO memory leak!!
+{
 
 }
 
