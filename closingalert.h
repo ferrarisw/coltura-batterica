@@ -6,30 +6,33 @@
 /**
  * @brief The ClosingAlert class
  *
- *Questa classe permette di utilizzare un widget per chiudere il programma
- *durante la sua esecuzione.
- *La parte pubblica contiene:
- *  - Costruttore
- *  - QDialogButtonBox contenete i due pulsanti OK e ANNULLA
+ * Questa classe permette di utilizzare un widget per chiudere il programma
+ * durante la sua esecuzione.
+ *  La parte pubblica contiene:
+ *      - ClosingAlert(QWidget parent = 0), costruttore
+ *      - ~ClosingAlert(), decostruttore
+ *      - QDialogButtonBox * buttons, contenente i due pulsanti "Ok" e "Annulla"
  */
 class ClosingAlert : public QWidget
 {
     Q_OBJECT
 public:
     /**
-     * @brief ClosingAlert costruttore
-     * @param parent
+     * @brief Costruttore della classe ClosingAlert
+     * @param parent 0
      *
-     *Il costruttore della classe ClosingAlert inizializza e disegna la
-     *finestra che permette di chiudere il programma.
+     * Il costruttore della classe ClosingAlert inizializza e disegna la
+     * finestra che permette di chiudere il programma.
      */
     ClosingAlert(QWidget *parent = 0);
 
+    ~ClosingAlert();
+
     /**
-     * @brief PushButtons di dialogo
+     * @brief Variabile che definisce i bottoni del widget
      *
-     *Questi due bottoni sono i classici OK/ANNULLA che attivano o meno
-     *la chiusura del programma.
+     * Questi due bottoni sono i classici "Ok/Annulla", che in questo caso
+     * attivano o meno la chiusura del programma.
      */
     QDialogButtonBox * buttons;
 

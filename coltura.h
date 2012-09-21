@@ -6,17 +6,18 @@
 
 class PilaMatrici;
 
+class PilaMatrici;
+
 /**
- * @author Serena Ziviani.
- * @brief The Coltura class
+ * @brief The Coltura class.
  *
  * La classe coltura si occupa della visualizzazione grafica della coltura.
  *   La parte pubblica contiene:
- *       - Coltura(int x, int y, int pattern, Qwidget * parent=0).
+ *       - Coltura(int x, int y, int pattern, Qwidget * parent=0), costruttore
  *       - ~Coltura().
  *       - int getMaxTime(), che restituisce la variabile maxTime.
  *       - int getMinTime(), che restituisce la variabile minTime.
- *       - QSlider * timeSlider, che gestisce il tempo.
+ *       - @var QSlider * timeSlider, che gestisce il tempo.
  *       - bool save(QString s), che gestisce il salvataggio su file.
  *       - bool load(QString s), che gestisce il caricamento su file.
  *
@@ -35,79 +36,76 @@ class PilaMatrici;
  *       - int x,y, le dimensioni della coltura.
  *       - int pattern, il tipo di coltura che voglio ottenere.
  *       - int * matrice, la rappresentazione in 0 e 1 della coltura.
- *       - void paintColtura(QPainter *, QPaintEvent *), che gestisce la
- *          visualizzazione grafica della coltura.
- *       - void paintColtura(QPainter *, QPaintEvent *, const char * debug),
- *          come sopra ma utilizzata solamente nel debug.
+ *       - int magnifier, la "dimensione" delle singole caselle.
  *       - PilaMatrici * pila, variabile della classe PilaMatrici.
+ *       - void paintColtura(QPainter * painter, QPaintEvent * event),
+ *          che gestisce la visualizzazione grafica della coltura.
+ *       - void paintColtura(QPainter * painter, QPaintEvent * event,
+ *                           const char * debug),
+ *          come sopra ma utilizzata solamente nel debug.
+ *       - void draw(QPainter * painter), che gestisce i dettagli relativi al
+ *          disegno delle singole cellule.
  *       - QBrush colore, il colore attribuito ad ogni casella.
- *       - QBrush background, il colore di sfondo. //TODO elimina
  *       - QTimer * timer, che gestisce la velocità del tempo.
  *       - int minTime, il valore minimo della velocità del tempo.
  *       - int maxTime, il valore massimo della velocità del tempo.
- *       - void draw(QPainter *), che gestisce i dettagli relativi al disegno
- *          delle singole cellule.
-  */
-
-class PilaMatrici;
-
+ *
+ */
 class Coltura : public QWidget
 {
     Q_OBJECT
 
 public:
     /** 
-     * @brief Coltura costruttore
-     * @param Larghezza della matrice
-     * @param Altezza della matrice
-     * @param pattern di disposizione iniziale delle cellule
-     * @param parent=0
+     * @brief Costruttore della classe Coltura
+     * @param x Larghezza della matrice
+     * @param y Altezza della matrice
+     * @param pattern Determina la disposizione iniziale delle cellule
+     * @param parent 0, nullo
      *
-     *Costruttore della classe Coltura.
-     *Inizializza la lista Pilamatrici e gestisce l'inizializzazione
-     *della barra relativa all'istante di tempo.
+     * Inizializza la lista Pilamatrici e gestisce l'inizializzazione
+     * della barra relativa all'istante di tempo.
      */
     Coltura(int x,int y, int pattern, QWidget * parent=0);
 
-    //TODO documentazione
     ~Coltura();
 
     /**
-      * @brief Ritorna il valore della velocità massima di play
-      * @return ::maxTime
+      * @brief Ritorna la velocità massima di play
+      * @return maxTime
       */
      int getMaxTime();
 
      /**
-      * @brief Ritorna il valore della velocità minima di play
-      * @return ::minTime
+      * @brief Ritorna la velocità minima di play
+      * @return minTime
       */
      int getMinTime();
 
      /**
-     * @brief Lo slider che gestisce il valore della velocità del play
+     * @brief Slider che gestisce la possibilità di tornare indietro nel tempo
      */
     QSlider *timeSlider;
 
     /**
      * @brief Funzionalita' di salvataggio su file
-     * @param File su cui salvare la sessione
-     * @return True se il salavataggio avviene correttamente
+     * @param QString s File su cui salvare la sessione
+     * @return True se il salvataggio avviene correttamente
      * @return False se il salvataggio non avviene
      *
-     *Questa funzione chiama la funzione salva della classe PilaMatrici, ma serve
-     *per connetterla ad una voce del menu.
+     * Questa funzione chiama la funzione salva della classe PilaMatrici, ma
+     * serve per connetterla ad una voce del menu.
      */
-    bool save(QString);
+    bool save(QString s);
 
     /**
      * @brief Funzionalita' di caricamento da file
-     * @param File da cui caricare la sessione
+     * @param QString s File da cui caricare la sessione
      * @return True se il caricamento avviene correttamente
      * @return False se il caricamento non avviene
      *
-     *Questa funzione chiama la funzione carica della classe PilaMatrici, ma serve
-     *per connetterla ad una voce del menu.
+     * Questa funzione chiama la funzione carica della classe PilaMatrici e
+     * reistanzia le parti critiche della classe Coltura
      */
     bool load(QString s);
 
@@ -115,9 +113,11 @@ public slots:
     /**
      * @brief Slot che determina il passaggio in un quanto di tempo
      *
-     *Utilizzando la funzione next della classe ::PilaMatrici, realizza l'elemento
-     *successivo della lista di matrici e aggiorna la grafica rappresentando
-     *la matrice successiva.
+     * Utilizzando la funzione next della classe PilaMatrici, realizza
+     * l'elemento successivo della lista di matrici e aggiorna la grafica
+     * rappresentando la matrice successiva.
+     * Aggiorna inoltre il timeSlider affinchè possa mantenere il valore
+     * corretto.
      */
     void aggiorna();
 
@@ -125,25 +125,26 @@ public slots:
      * @brief Slot che gestisce lo scorrere del tempo
      * @param scatti sono gli intervalli di aggiornamento
      *
-     * Questo slot utilizza un timer e il valore impostato da timeSlider per settare
-     * una velocita' di aggiornamento della pila di matrici.
-     * Quindi e' possibile mettere in play con una velocita' positiva e stop con
-     * una velocita' nulla.
+     * Questo slot utilizza un timer e il valore impostato da
+     * MainWindow::slider per settare la velocita' di aggiornamento della pila
+     * di matrici.
+     * Se la velocità impostata è nulla mette in pausa il tempo.
      */
     void play(int);
 
     /**
-     * @brief Slot che gestisce la possibilità di tornare indietro nel tempo
-     * @param Tempo di arrivo desiderato della timeTrip
+     * @brief Slot che gestisce il salto nel tempo
+     * @param time Tempo di arrivo desiderato della timeTrip
      *
-     *Questo slot si aggancia alla funzione timeTrip per abilitarla e renderla
-     *effettiva nella grafica.
+     * Questo slot abilita la funzione PilaMatrici->timeTrip
+     * e la rende effettiva nella grafica.
      */
     void timeTrip(int);
 
 protected:
     /**
-     * @brief Disegna l'interfaccia della coltura
+     * @brief Imposta i dati necessari per disegnare la coltura
+     * @param QPaintEvent * event
      */
     void paintEvent(QPaintEvent *);
 
@@ -151,23 +152,28 @@ private:
     int x,y;
     int pattern;
     int * matrice;
+    int magnifier;
     /*
      * @param painter
      * @param event
-     * Funzione che disegna il widget Coltura in base alla matrice generata da
+     * Funzione che disegna la coltura in base alla matrice generata da
      * pilaMatrici->next.
      * In particolare, prende l'oggetto locale matrice e lo scorre fino alla fine,
-     * impostando diversamente il pennello a seconda del valore della cella.
+     * impostando il pennello a seconda del valore della cella.
      *
      */
     void paintColtura(QPainter *, QPaintEvent *);
     void paintColtura(QPainter *, QPaintEvent *, const char *);
     PilaMatrici *pila;
     QBrush colore;
-    QBrush background;
     QTimer *timer;
     int minTime;
     int maxTime;
+    /*
+     * @brief Funzione di appoggio a paintColtura.
+     * Gestisce i dettagli riguardanti le dimensioni del widget sullo schermo.
+     * (!!pre-alpha!!)
+     */
     void draw(QPainter *);
 };
 

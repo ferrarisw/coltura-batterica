@@ -3,6 +3,8 @@
 int MASK = 0;
 int LOGMASK = 0;
 
+#ifdef DEBUG_MODE
+
 Debug::Debug(QWidget *parent) :
   QWidget(parent)
 {
@@ -42,6 +44,10 @@ Debug::Debug(QWidget *parent) :
     setLayout(layout);
 
 }
+Debug::~Debug()
+{
+
+}
 
 void Debug::changeMaskValue(int value)
 {
@@ -60,7 +66,7 @@ void Debug::changeLogMaskValue(int value)
 
     GD2(cout<<"[Debug::changeLogMaskValue] Valore di LOGMASK: "<<LOGMASK<<endl);
 }
-
+//TODO viene mai chiamata????
 void Debug::releaseVersion()
 {
     MASK = 0;
@@ -70,3 +76,4 @@ void Debug::releaseVersion()
     GD2(cout<<"[Debug::releaseVersion] Valore di LOGMASK: "<<LOGMASK<<endl);
 }
 
+#endif

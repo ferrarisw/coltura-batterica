@@ -4,9 +4,11 @@
 ClosingAlert::ClosingAlert(QWidget * parent):
     QWidget(parent)
 {
-    QLabel * label = new QLabel("Vuoi veramente chiudere l'applicazione?");
+    this->setGeometry(500,250,1,1);
+    QLabel * label = new QLabel(tr("Vuoi veramente chiudere l'applicazione?"));
+
     buttons = new QDialogButtonBox(QDialogButtonBox::Ok |
-                                                      QDialogButtonBox::Cancel);
+                                                    QDialogButtonBox::Cancel);
 
     QVBoxLayout * alertlayout = new QVBoxLayout();
     alertlayout->addWidget(label);
@@ -14,4 +16,9 @@ ClosingAlert::ClosingAlert(QWidget * parent):
 
     setLayout(alertlayout);
 
+}
+
+ClosingAlert::~ClosingAlert()
+{
+    delete buttons;
 }

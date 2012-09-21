@@ -6,6 +6,7 @@ using namespace std;
 MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     QMainWindow(parent)
 {
+    this->setGeometry(500,250,1,1);
     GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
 
     this->coltura = new Coltura(x,y,pattern);
@@ -17,8 +18,8 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     file->addAction(tr("&Carica"),          this,   SLOT(load()     ));
 
     help = menuBar()->addMenu(tr("&Aiuto"));
-    //help->addAction(tr("&About"),          this,   SLOT(about()     ));
-    //help->addAction(tr("&Guida"),           this,   SLOT(guide()    ));
+    help->addAction(tr("&About"),          this,   SLOT(about()     ));
+
     
     stepByStep = new QPushButton(tr("passo passo"));
     connect(stepByStep, SIGNAL(clicked()), coltura, SLOT(aggiorna()));
@@ -32,27 +33,32 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     this->slider->setMinimum(coltura->getMinTime());
     this->slider->setMaximum(coltura->getMaxTime());
 
-    Debug * debug = new Debug();
-
     buttonLayout = new QHBoxLayout;
     buttonLayout->addWidget(playButton);
     buttonLayout->addWidget(stepByStep);
 
-    layout = new QVBoxLayout;
+    QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget(coltura->timeSlider);
     layout->addWidget(coltura);
     layout->addWidget(slider);
     layout->addLayout(buttonLayout);
 
+    QWidget * central = new QWidget();
+
+#ifdef DEBUG_MODE
+    Debug * debug = new Debug();
+
     QHBoxLayout * setting = new QHBoxLayout();
     setting->addLayout(layout);
     setting->addWidget(debug);
 
-    QWidget * central = new QWidget();
     central->setLayout(setting);
+#else
+    central->setLayout(layout);
+#endif
 
     this->setCentralWidget(central);
-
+    this->resize(minimumSize());
 
     setWindowTitle(tr("Coltura batterica"));
 }
@@ -66,8 +72,6 @@ MainWindow::~MainWindow()
     delete stepByStep;
     delete playButton;
     delete buttonLayout;
-    delete layout;
-
 }
 
 void MainWindow::play(bool toggled)
@@ -97,14 +101,32 @@ void MainWindow::newGame()
 
 void MainWindow::save()
 {
-    QString s = QFileDialog::getSaveFileName();
+    QString s = QFileDialog::getSaveFileName(this, tr("Apri File"),"./saves",tr("Runner file (*.runner)"));
     coltura->save(s);
 }
 
 void MainWindow::load()
 {
-    QString s = QFileDialog::getOpenFileName(0,"CAPTION","DIR","FILTER");
+    QString s = QFileDialog::getOpenFileName(this, tr("Apri File"),"./saves",tr("Runner file (*.runner)"));
     coltura->load(s);
+    this->resize(minimumSize());
+}
+
+void MainWindow::about()
+{
+    QWidget * about = new QWidget();
+    about->setGeometry(500,250,1,1);
+    QLabel * label = new QLabel(tr("//TODO about"));
+    QPushButton * ok = new QPushButton(tr("ok"));
+    connect(ok,SIGNAL(clicked()),about,SLOT(deleteLater()));
+
+    QVBoxLayout layout;
+    layout.addWidget(label);
+    layout.addWidget(ok);
+
+    about->setLayout(&layout);
+    about->show();
+
 }
 
 void MainWindow::closeEvent(QCloseEvent * closeEvent)

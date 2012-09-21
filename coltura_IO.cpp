@@ -33,6 +33,7 @@ bool Coltura::load(QString s)
             });
 
     setMinimumSize(3*x,3*y);
+    this->resize(minimumSize());
 
     int attuale;
     fcin>>attuale;

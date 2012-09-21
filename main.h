@@ -10,14 +10,20 @@
 #include "starter.h"
 #include "debug.h"
 
-#define DEBUG_MODE
-#ifdef  DEBUG_MODE
+//TODO questa soluzione invece dei numeri
+extern qreal x;
+extern qreal y;
+extern qreal width;
+extern qreal height;
 
+#ifdef  DEBUG_MODE
+//TODO questione del javadoc compatible
+//TODO controllare i livelli
 /**
  * @brief Maschera di bit per i livelli di debug
  *
- *Qusesta maschera abilita o disabilita i livelli di debug a seconda del
- *valore che assume:
+ * Questa maschera abilita o disabilita i livelli di debug a seconda del
+ * valore che assume:
  * 0   NESSUN LIVELLO;
  * 1   TRACE;
  * 2               GD1;
@@ -53,14 +59,15 @@ extern int MASK;
   * Definisco una modalità di log che stampa sul terminale i dati statistici
   * del programma.
   */
+//TODO aggiungiamo l'opzione al makefile o la abilitiamo con DEBUG_MODE?
 #define LOG_MODE
 #ifdef LOG_MODE
 
 /**
  * @brief Maschera di bit per le funzioni di log
  *
- *Se questa maschera e' settata a 1 allora il log statistico e' abilitato,
- *altrimenti no.
+ * Se questa maschera e' settata a 1 allora il log statistico e' abilitato,
+ * altrimenti no.
  */
 extern int LOGMASK;
 

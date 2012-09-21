@@ -1,16 +1,18 @@
+
 #include "main.h"
 
 using namespace std;
 
-//TODO widget di apertura
+//TODO questione memoria dinamica / memory leak
 //TODO pulizia main
 //TODO commenti
-//TODO Documentazione       aggiornata al 20/09/2012
-//TODO makefile             aggiornato e funzionante al 29/08/2012
-                            //15/09/2012 non funzionante
-                            //20/09/2012 funzionante
 //TODO revisione classe coltura
-//TODO restart, new
+//TODO memory leak
+
+qreal x=500;
+qreal y=250;
+qreal width=20;
+qreal height=10;
 
 int main(int argc, char *argv[])
 {

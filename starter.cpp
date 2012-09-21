@@ -16,6 +16,9 @@ Starter::Starter(QWidget *parent) :
     this->y=50;
     this->pattern=0;
 
+    menuBar()->addAction(tr("&Carica.."),       this,   SLOT(load()     ));
+
+    menuBar()->addAction(tr("&About"),          this,   SLOT(about()     ));
 
     QLabel      * descrizione   =   new QLabel;
     descrizione->setText(tr("inserisci le dimensioni della coltura"));
@@ -87,16 +90,10 @@ Starter::Starter(QWidget *parent) :
 
     QHBoxLayout * setting       =   new QHBoxLayout();
     setting->addLayout(layout);
-//#ifdef DEBUG_MODE
+#ifdef DEBUG_MODE
     debug = new Debug();
-    //QFrame * frame= new QFrame();
-
-    //QHBoxLayout * frameLayout = new QHBoxLayout();
-    //frameLayout->addWidget(debug);
-    //frame->setLayout(frameLayout);
-    //setting->addWidget(frame);
     setting->addWidget(debug);
-//#endif
+#endif
 
 
     QWidget * central = new QWidget();
@@ -123,9 +120,8 @@ void Starter::avvio()
     assert(y>0);
     assert(pattern>=0);
 
-
-    MainWindow * finestra = new MainWindow(x,y,pattern);
-    finestra->show();
+    mainwindow = new MainWindow(x,y,pattern);
+    mainwindow->show();
 
     this->deleteLater();
 }
@@ -151,7 +147,33 @@ void Starter::setPattern(int position)
     GD2(cout<<"position: "<<position);
 }
 
-//TODO codice replicato con mainwindow
+//TODO non funziona
+void Starter::load()
+{
+    mainwindow = new MainWindow(1,1,99);
+    mainwindow->load();
+    mainwindow->show();
+
+    this->deleteLater();
+}
+
+//TODO lo trasformo in widget?
+void Starter::about()
+{
+    QWidget * about = new QWidget();
+    about->setGeometry(500,250,1,1);
+    QLabel * label = new QLabel(tr("//TODO about"));
+    QPushButton * ok = new QPushButton(tr("ok"));
+    connect(ok,SIGNAL(clicked()),about,SLOT(deleteLater()));
+
+    QVBoxLayout layout;
+    layout.addWidget(label);
+    layout.addWidget(ok);
+
+    about->setLayout(&layout);
+    about->show();
+}
+
 void Starter::closeEvent(QCloseEvent * closeEvent)
 {
     closeEvent->ignore();
@@ -166,9 +188,10 @@ void Starter::closeEvent(QCloseEvent * closeEvent)
     closingalert->show();
 
 }
-//TODO codice replicato con mainwindow
+
 void Starter::closing()
 {
     this->deleteLater();
     closingalert->deleteLater();
 }
+
