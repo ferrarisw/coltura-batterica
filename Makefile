@@ -1,4 +1,5 @@
 OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o debug.o closingalert.o 
+SRC = $(OBJ:.o=.cpp)
 MOC = coltura_moc.cpp starter_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
 DMOC = coltura_dmoc.cpp starter_dmoc.cpp mainwindow_dmoc.cpp debug_dmoc.cpp closingalert_dmoc.cpp
 MOCOBJ = coltura_moc.o starter_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
@@ -65,10 +66,10 @@ clean :
 	rm -f *.o *moc.cpp
 
 cleanall:
-	rm -f -r colturabatterica dependencies *.o *moc.cpp html
-	
+	rm -f -r colturabatterica dependencies *.o *moc.cpp doc
+
 doc :
-	$(shell doxygen Doxyfile > /dev/null)
+	doxygen Doxyfile
 
 depends:
 	#creo la parte relativa ai "normali" file oggetto
@@ -76,7 +77,7 @@ depends:
 
 debug: $(shell ls *.cpp | grep -v '.*_moc.cpp')
 	rm -f *_moc.cpp
-	g++ -g $(DFLAG) -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) *.cpp 
+	g++ -g $(DFLAG) -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) $(SRC)
 
 
 
