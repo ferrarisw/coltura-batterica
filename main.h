@@ -1,5 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
+#define DEBUG_MODE
 
 #include <iostream>
 #include <fstream>

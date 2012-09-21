@@ -1,5 +1,6 @@
 #include "main.h"
 #include"debug.h"
+
 int MASK = 0;
 int LOGMASK = 0;
 
@@ -44,6 +45,7 @@ Debug::Debug(QWidget *parent) :
     setLayout(layout);
 
 }
+
 Debug::~Debug()
 {
 
