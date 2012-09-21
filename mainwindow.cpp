@@ -6,7 +6,6 @@ using namespace std;
 MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     QMainWindow(parent)
 {
-    this->setGeometry(500,250,1,1);
     GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
 
     this->coltura = new Coltura(x,y,pattern);
@@ -101,15 +100,17 @@ void MainWindow::newGame()
 
 void MainWindow::save()
 {
-    QString s = QFileDialog::getSaveFileName(this, tr("Apri File"),"./saves",tr("Runner file (*.runner)"));
+    QString s = QFileDialog::getSaveFileName(this, tr("Apri File"),"saves/",tr("Runner file (*.runner)"));
     coltura->save(s);
 }
 
-void MainWindow::load()
+bool MainWindow::load()
 {
-    QString s = QFileDialog::getOpenFileName(this, tr("Apri File"),"./saves",tr("Runner file (*.runner)"));
-    coltura->load(s);
+    QString s = QFileDialog::getOpenFileName(this, tr("Apri File"),"./saves/",tr("Runner file (*.runner)"));
+    bool ret = coltura->load(s);
+    GD1(cout<<"[MainWindow::load] stato load: "<<ret<<endl;)
     this->resize(minimumSize());
+    return ret;
 }
 
 void MainWindow::about()

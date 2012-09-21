@@ -40,15 +40,15 @@ public:
     /**
      * @brief PilaMatrici decostruttore
      *
-     *Il decostruttore controlla a che punto della lista di matrici e' la
-     *posizione attuale. Se e' maggiore di zero, allora sposta la posizione
-     *attuale alla matrice precedente per non perdere l'aggancio alla lista
-     *ed elimina iterativamente la matrice posizione attuale dell'iterazione
-     *precedente.
-     *Se il primo controllo non ha successo, si verifica il caso in cui la
-     *posizione attuale sia l'ultima matrice della lista. In questo caso posso
-     *deallocare dalla memoria dinamica tutti gli oggetti allocati senza problemi
-     *di pending pointer.
+     * Il decostruttore controlla a che punto della lista di matrici e' la
+     * posizione attuale. Se e' maggiore di zero, allora sposta la posizione
+     * attuale alla matrice precedente per non perdere l'aggancio alla lista
+     * ed elimina iterativamente la matrice posizione attuale dell'iterazione
+     * precedente.
+     * Se il primo controllo non ha successo, si verifica il caso in cui la
+     * posizione attuale sia l'ultima matrice della lista. In questo caso posso
+     * deallocare dalla memoria dinamica tutti gli oggetti allocati senza problemi
+     * di pending pointer.
      */
     ~PilaMatrici();
 
@@ -59,29 +59,29 @@ public:
     int * getMatrix();
 
     /**
-     *Questa funzione non prende in ingresso alcun parametro perche' utilizza
-      cio' che e' gia'  inizializzato nella classe.
-      1)    Inizializza una nuova matrice dinamica come posizioneAttuale e
-      setta il puntatore alla prossima matrice a NULL.
-      2)    Inizializza un intero somma per eseguire il calcolo dell'algoritmo
-      e inizializza anche due puntatori a intero, uno per la tabella temp appena
-      creata (posizioneAttuale->tabella) e uno alla tabella temporanea
-      (temp->tabella) per semplificare e rendere leggibile il codice.
-      3)    Tramite la funione getValore, acquisisce e somma il valore di
-      tutte le 8 caselle attorno alla casella corrente (si fa un'iterazione
-      su ogni casella con un doppio ciclo for).
-      L'algoritmo prevede che se una cellula e' morta e ve ne sono 3 vive intorno
-      questa prende vita, al contrario, se la cellula e' viva e ce ne sono piu'
-      di 3 o meno di 2 questa muore. Semplicemente sommando i valori delle
-      cellule attorno alla cellula attuale ottengo il numero di cellule vive.
-      Se le cellule vive sono 3 allora la cellula e' viva, altrimenti morta.
-      Questo si puu' realizzare con due semplici controlli.
-      4)    Dopo aver modificato completamente la tabella temp, setta la
-      posizioneAttuale a temp, cosi' da ritornare la nuova tabella appena creata.
-
-      @brief    Premette di avanzare alla matrice successiva
-      @return   temp->tabella   La tabella appena modificata
-      */
+     * @brief    Permette di avanzare alla matrice successiva
+     * @return   temp->tabella   La tabella appena modificata
+     *
+     * Questa funzione non prende in ingresso alcun parametro perche' utilizza
+     * cio' che e' gia'  inizializzato nella classe.
+     * 1)    Inizializza una nuova matrice dinamica come posizioneAttuale e
+     * setta il puntatore alla prossima matrice a NULL.
+     * 2)    Inizializza un intero somma per eseguire il calcolo dell'algoritmo
+     * e inizializza anche due puntatori a intero, uno per la tabella temp appena
+     * creata (posizioneAttuale->tabella) e uno alla tabella temporanea
+     * (temp->tabella) per semplificare e rendere leggibile il codice.
+     * 3)    Tramite la funione getValore, acquisisce e somma il valore di
+     * tutte le 8 caselle attorno alla casella corrente (si fa un'iterazione
+     * su ogni casella con un doppio ciclo for).
+     * L'algoritmo prevede che se una cellula e' morta e ve ne sono 3 vive intorno
+     * questa prende vita, al contrario, se la cellula e' viva e ce ne sono piu'
+     * di 3 o meno di 2 questa muore. Semplicemente sommando i valori delle
+     * cellule attorno alla cellula attuale ottengo il numero di cellule vive.
+     * Se le cellule vive sono 3 allora la cellula e' viva, altrimenti morta.
+     * Questo si puu' realizzare con due semplici controlli.
+     * 4)    Dopo aver modificato completamente la tabella temp, setta la
+     * posizioneAttuale a temp, cosi' da ritornare la nuova tabella appena creata.
+     */
     int * next();
 
     /**
@@ -104,22 +104,22 @@ public:
 
     /**
      * @brief Salvataggio su File della matrice
-     * @param File Nome del file su cui salvare
+     * @param file Nome del file su cui salvare
      * @return True se il salvataggio termina correttamente
      * @return False se l'input stream non si apre correttamente
      *
-     *La funzione utilizza la QString passatagli per argomento come
-     *percorso e il nome del file da salvare.
-     *Salva le dimensioni della matrice, il numero della matrice
-     *e l'intera tabella.
-     *Ritorna true se la funzione termina correttamente, falso se
-     *lo stream in uscita non viene creato correttamente.
+     * La funzione utilizza la QString passatagli per argomento come
+     * percorso e il nome del file da salvare.
+     * Salva le dimensioni della matrice, il numero della matrice
+     * e l'intera tabella.
+     * Ritorna true se la funzione termina correttamente, falso se
+     * lo stream in uscita non viene creato correttamente.
      */
     bool salva (QString file);
 
     /**
      * @brief Caricamento da File della matrice
-     * @param File Nome del file da caricare
+     * @param file Nome del file da caricare
      * @return True se la carica e' avvenuta correttamente
      * @return False se l'output stream non si apre correttamente
      *

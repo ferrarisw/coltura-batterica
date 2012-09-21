@@ -107,7 +107,7 @@ public slots:
     /**
      * @brief Carica una coltura da un file .runner.
      */
-    void load();
+    bool load();
 
 private:
     QSlider * slider;

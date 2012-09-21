@@ -147,14 +147,19 @@ void Starter::setPattern(int position)
     GD2(cout<<"position: "<<position);
 }
 
-//TODO non funziona
+
 void Starter::load()
 {
     mainwindow = new MainWindow(1,1,99);
-    mainwindow->load();
-    mainwindow->show();
-
-    this->deleteLater();
+    if(mainwindow->load())
+    {
+        mainwindow->show();
+        this->deleteLater();
+    }
+    else
+    {
+        delete mainwindow;
+    }
 }
 
 //TODO lo trasformo in widget?

@@ -49,7 +49,7 @@ class Starter : public QMainWindow
 public:
     /**
      * @brief Costruttore della classe Starter.
-     * @param parent=0
+     * @param parent 0
      */
     explicit Starter(QWidget *parent = 0);
 
