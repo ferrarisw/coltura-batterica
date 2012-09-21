@@ -17,7 +17,7 @@ class PilaMatrici;
  *       - ~Coltura().
  *       - int getMaxTime(), che restituisce la variabile maxTime.
  *       - int getMinTime(), che restituisce la variabile minTime.
- *       - @var QSlider * timeSlider, che gestisce il tempo.
+ *       - QSlider * timeSlider, che gestisce il tempo.
  *       - bool save(QString s), che gestisce il salvataggio su file.
  *       - bool load(QString s), che gestisce il caricamento su file.
  *
@@ -49,7 +49,6 @@ class PilaMatrici;
  *       - QTimer * timer, che gestisce la velocità del tempo.
  *       - int minTime, il valore minimo della velocità del tempo.
  *       - int maxTime, il valore massimo della velocità del tempo.
- *
  */
 class Coltura : public QWidget
 {
@@ -85,11 +84,11 @@ public:
      /**
      * @brief Slider che gestisce la possibilità di tornare indietro nel tempo
      */
-    QSlider *timeSlider;
+    QSlider * timeSlider;
 
     /**
      * @brief Funzionalita' di salvataggio su file
-     * @param QString s File su cui salvare la sessione
+     * @param s File su cui salvare la sessione
      * @return True se il salvataggio avviene correttamente
      * @return False se il salvataggio non avviene
      *
@@ -100,7 +99,7 @@ public:
 
     /**
      * @brief Funzionalita' di caricamento da file
-     * @param QString s File da cui caricare la sessione
+     * @param s File da cui caricare la sessione
      * @return True se il caricamento avviene correttamente
      * @return False se il caricamento non avviene
      *
@@ -144,9 +143,9 @@ public slots:
 protected:
     /**
      * @brief Imposta i dati necessari per disegnare la coltura
-     * @param QPaintEvent * event
+     * @param *event evento generato automaticamente
      */
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent * event);
 
 private:
     int x,y;

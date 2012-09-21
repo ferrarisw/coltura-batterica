@@ -10,13 +10,13 @@ using namespace std;
 
 /**
  * @brief The Debug class.
+ *
  * La parte pubblica contiene:
  *      - Debug(Qwidget *parent = 0), costruttore
  *      - ~Debug(), decostruttore
  * I public slots sono:
  *      - void changeMaskValue(int value), che cambia il livello di debug
  *      - void changeLogMaskValue(int value), che attiva/disattiva il log
- *      - void releaseVersion()
  */
 class Debug : public QWidget
 {
@@ -52,10 +52,7 @@ public slots:
      *della maschera di bit per attivare o disattivare il log statistico.
      */
     void changeLogMaskValue(int value);
-    /**
-     * @brief scrive informazioni sulla versione di release
-     */
-    void releaseVersion();
+
 };
 
 #endif // DEBUG_H

@@ -18,8 +18,8 @@ extern qreal width;
 extern qreal height;
 
 #ifdef  DEBUG_MODE
-//TODO questione del javadoc compatible
-//TODO controllare i livelli
+//TODO questione del javadoc compatible OK!!
+
 /**
  * @brief Maschera di bit per i livelli di debug
  *
@@ -60,9 +60,7 @@ extern int MASK;
   * Definisco una modalità di log che stampa sul terminale i dati statistici
   * del programma.
   */
-//TODO aggiungiamo l'opzione al makefile o la abilitiamo con DEBUG_MODE?
-#define LOG_MODE
-#ifdef LOG_MODE
+#ifdef DEBUG_MODE
 
 /**
  * @brief Maschera di bit per le funzioni di log
