@@ -69,7 +69,6 @@ public:
      */
     Coltura(int x,int y, int pattern, QWidget * parent=0);
 
-    //TODO documentazione
     ~Coltura();
 
     /**

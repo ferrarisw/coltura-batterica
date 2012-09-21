@@ -58,7 +58,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
 }
 
 MainWindow::~MainWindow()
-{//TODO memory leak!
+{
     delete coltura;
     delete slider;
     delete file;

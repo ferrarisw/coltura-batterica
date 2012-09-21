@@ -2,7 +2,6 @@
 
 using namespace std;
 
-//TODO widget di apertura
 //TODO pulizia main
 //TODO commenti
 //TODO Documentazione       aggiornata al 20/09/2012
@@ -10,7 +9,6 @@ using namespace std;
                             //15/09/2012 non funzionante
                             //20/09/2012 funzionante
 //TODO revisione classe coltura
-//TODO restart, new
 
 int main(int argc, char *argv[])
 {
