@@ -160,12 +160,14 @@ private:
     int pattern;
     enum stato {morto = 0, vivo = 1};
 
-    /*
-      * La Matrice ha un puntatore ad interi per la tabella,
-      * un puntatore alla tabella successiva e uno alla tabella precedente.
-      * Un intero indica il tempo della matrice e uno il numero di cellule
-      * vive, calcolate ogni volta.
-      */
+    /**
+     * @brief The Matrix struct
+     *
+     * La struttura matrice e' ciò su cui si basa la parte computazionale del
+     * programma. Contiene un puntatore ad interi che rappresenta la tabella,
+     * due puntatori a Matrix per collegare ogni oggetto in una lista doppia,
+     * un tempo caratteristico di ogni matrice e il numero di cellule vive.
+     */
     struct Matrix {
         int* tabella;
         Matrix* succ;

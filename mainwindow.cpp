@@ -116,7 +116,8 @@ void MainWindow::about()
 {
     QWidget * about = new QWidget();
     about->setGeometry(500,250,1,1);
-    QLabel * label = new QLabel(tr("//TODO about"));
+    QLabel * label = new QLabel(tr("Life Runner (v 1.0)\n"
+                                   "Davide Ferrari e Serena Ziviani."));
     QPushButton * ok = new QPushButton(tr("ok"));
     connect(ok,SIGNAL(clicked()),about,SLOT(deleteLater()));
 

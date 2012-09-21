@@ -126,20 +126,17 @@ void Starter::avvio()
     this->deleteLater();
 }
 
-
 void Starter::changeXDimension(int dim)
 {
     this->x=dim;
     GD2(cout<<"modificato x: "<<x<<endl);
 }
 
-
 void Starter::changeYDimension(int dim)
 {
     this->y=dim;
     GD2(cout<<"modificato y: "<<y<<endl);
 }
-
 
 void Starter::setPattern(int position)
 {
@@ -162,8 +159,9 @@ void Starter::about()
 {
     QWidget * about = new QWidget();
     about->setGeometry(500,250,1,1);
-    QLabel * label = new QLabel(tr("//TODO about"));
-    QPushButton * ok = new QPushButton(tr("ok"));
+    QLabel * label = new QLabel(tr("Life Runner (v 1.0)\n"
+                                   "Davide Ferrari e Serena Ziviani."));
+    QPushButton * ok = new QPushButton(tr("OK"));
     connect(ok,SIGNAL(clicked()),about,SLOT(deleteLater()));
 
     QVBoxLayout layout;
