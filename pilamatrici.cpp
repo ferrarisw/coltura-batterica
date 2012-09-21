@@ -20,7 +20,7 @@ PilaMatrici::PilaMatrici(int x, int y, int pattern)
 
     matriciRealizzate = 0;
 }
-//TODO segmentation fault con 1 solo step; posso decidere di salvar anche una matrice intermedia
+
 PilaMatrici::~PilaMatrici()
 {
     if (posizioneAttuale->tempo != 0) {

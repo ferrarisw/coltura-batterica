@@ -1,10 +1,11 @@
+#include "main.h"
+
 #ifdef DEBUG_MODE
 #ifndef DEBUG_H
 #define DEBUG_H
 
 #include <QtGui>
 #include <iostream>
-#include "main.h"
 using namespace std;
 
 /**
