@@ -68,14 +68,5 @@ void Debug::changeLogMaskValue(int value)
 
     GD2(cout<<"[Debug::changeLogMaskValue] Valore di LOGMASK: "<<LOGMASK<<endl);
 }
-//TODO viene mai chiamata????
-void Debug::releaseVersion()
-{
-    MASK = 0;
-    LOGMASK = 0;
-
-    GD2(cout<<"[Debug::releaseVersion] Valore di MASK: "<<MASK<<endl);
-    GD2(cout<<"[Debug::releaseVersion] Valore di LOGMASK: "<<LOGMASK<<endl);
-}
 
 #endif

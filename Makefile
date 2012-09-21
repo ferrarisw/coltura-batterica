@@ -68,14 +68,14 @@ clean :
 cleanall:
 	rm -f -r colturabatterica dependencies *.o *moc.cpp doc
 
-doc :
+doc: clean
 	doxygen Doxyfile
 
 depends:
 	#creo la parte relativa ai "normali" file oggetto
 	g++ -MM $(shell ls *.cpp | grep -v '.*moc.cpp') > dependencies
 
-debug: $(shell ls *.cpp | grep -v '.*_moc.cpp')
+debug: $(shell ls *.cpp | grep -v '.*_moc.cpp') $(DMOC)
 	rm -f *_moc.cpp
 	g++ -g $(DFLAG) -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) $(SRC)
 

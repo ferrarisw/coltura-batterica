@@ -11,8 +11,8 @@ bool Coltura::save(QString s)
 
 bool Coltura::load(QString s)
 {
-    //delete pila;
-    pila->carica(s);
+    if(!pila->carica(s))
+        return false;
 
     ifstream fcin (s.toStdString().data());
     GD1(cout<<"file caricato"<<s.toStdString().data()<<endl);
