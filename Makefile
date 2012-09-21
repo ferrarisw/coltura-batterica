@@ -76,7 +76,7 @@ depends:
 
 debug: $(DMOC)
 	rm -f *_moc.cpp
-	g++ -g $(DFLAG)  -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) *.cpp 
+	g++ -g $(DFLAG) -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) *.cpp 
 
 
 
