@@ -11,8 +11,6 @@ bool PilaMatrici::salva (QString file)
 
     salva<<this->dimx<<" "<<this->dimy<<endl;
 
-    salva<<posizioneAttuale->tempo<<endl;
-
     for (int j = 1; j < dimy + 1; j++) {
         for (int i = 1; i < dimx + 1; i++) {
             salva<<posizioneAttuale->tabella[i + j * (dimx + 2)]<<" ";
@@ -39,8 +37,6 @@ bool PilaMatrici::carica (QString file)
     posizioneAttuale = testa;
 
     matriciRealizzate = 0;
-
-    carica>>posizioneAttuale->tempo;
 
     for (int j = 1; j < dimy + 1; j++) {
         for (int i = 1; i < dimx + 1; i++) {
