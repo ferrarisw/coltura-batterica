@@ -22,7 +22,7 @@ Starter::Starter(QWidget *parent) :
     menuBar()->addAction(tr("&About"),          this,   SLOT(about()     ));
 
     QLabel      * descrizione   =   new QLabel;
-    descrizione->setText(tr("inserisci le dimensioni della coltura"));
+    descrizione->setText(tr("Inserisci le dimensioni della coltura"));
     descrizione->setAlignment(Qt::AlignCenter);
 
 
@@ -36,7 +36,7 @@ Starter::Starter(QWidget *parent) :
 
 
     QLabel      * etichettaX    =   new QLabel;
-    etichettaX->setText(tr("larghezza"));
+    etichettaX->setText(tr("Larghezza"));
 
 
     QSpinBox    * ydimension    =   new QSpinBox();
@@ -49,7 +49,7 @@ Starter::Starter(QWidget *parent) :
 
 
     QLabel      * etichettaY    =   new QLabel;
-    etichettaY->setText(tr("altezza"));
+    etichettaY->setText(tr("Altezza"));
 
     GD3(cout<<"[Starter::Starter] dimensioni di x e y: "<<this->x<<" "<<this->y<<endl);
 
@@ -61,7 +61,7 @@ Starter::Starter(QWidget *parent) :
 
 
     QLabel      * patternDesc   =   new QLabel;
-    patternDesc->setText(tr("specifica la disposizione iniziale delle cellule"));
+    patternDesc->setText(tr("Specifica la disposizione iniziale delle cellule"));
     //patternDesc->setTextFormat(QTextFormat::PageBreak_Auto);
 
     QComboBox   * patterns      =   new QComboBox;

@@ -92,7 +92,6 @@ private slots:
      */
     void save();
 
-
     /**
      *  Gestisce la chiusura del programma.
      */
