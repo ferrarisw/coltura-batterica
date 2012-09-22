@@ -15,7 +15,7 @@ class Debug;
 #endif
 
 /**
- * @brief The Starter class.
+ *  The Starter class.
  *
  * Widget di apertura del programma.
  * Tramite esso é possibile impostare le dimensioni e il pattern della coltura.
@@ -48,7 +48,7 @@ class Starter : public QMainWindow
     Q_OBJECT
 public:
     /**
-     * @brief Costruttore della classe Starter.
+     *  Costruttore della classe Starter.
      * @param parent 0
      */
     explicit Starter(QWidget *parent = 0);
@@ -57,40 +57,40 @@ public:
 
 private slots:
     /**
-     * @brief Funzione che apre il widget MainWindow e chiude lo Starter.
+     *  Funzione che apre il widget MainWindow e chiude lo Starter.
      * Viene chiamata quando premo il pulsante "ok".
      */
     void avvio();
 
     /**
-     * @brief Setta la larghezza della coltura.
+     *  Setta la larghezza della coltura.
      * Invocato ad ogni cambiamento di valore dello spinbox.
      */
     void changeXDimension(int);
 
     /**
-     * @brief Setta l'altezza della coltura.
+     *  Setta l'altezza della coltura.
      * Invocato ad ogni cambiamento di valore dello spinbox.
      */
     void changeYDimension(int);
 
     /**
-     * @brief Setta il pattern scelto.
+     *  Setta il pattern scelto.
      */
     void setPattern(int);
 
     /**
-     * @brief Carica una coltura da file.
+     *  Carica una coltura da file.
      */
     void load();
 
     /**
-     * @brief Visualizza le informazioni sul programma.
+     *  Visualizza le informazioni sul programma.
      */
     void about();
 
     /**
-     * @brief Gestisce la chiusura del programma.
+     *  Gestisce la chiusura del programma.
      */
     void closing();
 
@@ -103,6 +103,7 @@ private:
     int y;
     int pattern;
     ClosingAlert * closingalert;
+    QMenu * file;
 #ifdef DEBUG_MODE
     Debug * debug;
 #endif

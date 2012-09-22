@@ -1,14 +1,16 @@
 #include "closingalert.h"
+#include "main.h"
 #include <QtGui>
 
 ClosingAlert::ClosingAlert(QWidget * parent):
     QWidget(parent)
 {
-    this->setGeometry(500,250,1,1);
+    this->move(screenX,screenY);
+
     QLabel * label = new QLabel(tr("Vuoi veramente chiudere l'applicazione?"));
 
     buttons = new QDialogButtonBox(QDialogButtonBox::Ok |
-                                                    QDialogButtonBox::Cancel);
+                                   QDialogButtonBox::Cancel);
 
     QVBoxLayout * alertlayout = new QVBoxLayout();
     alertlayout->addWidget(label);
@@ -21,4 +23,5 @@ ClosingAlert::ClosingAlert(QWidget * parent):
 ClosingAlert::~ClosingAlert()
 {
     delete buttons;
+    GD1(cout<<"[ClosingAlert:~ClosingAlert] oggetto deallocato correttamente"<<endl);
 }

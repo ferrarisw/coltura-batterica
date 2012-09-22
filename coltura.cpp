@@ -21,9 +21,48 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(aggiorna()));
 
+    setMagnifier();
+    setMinimumSize(magnifier*x, magnifier*y);
+
+    matrice=new int[(x+2)*(y+2)];
+    matrice=pila->getMatrix();
+
+    timeSlider = new QSlider(Qt::Horizontal);
+    timeSlider->setFixedHeight(20);
+    timeSlider->setMinimum(0);
+    timeSlider->setMaximum(0);
+    timeSlider->setValue(0);
+    connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
+    GD3(cout<<"[Coltura::Coltura] stampo la matrice manualmente"<<endl;
+
+    for(int j=1; j<y+1; j++)
+    {
+        for(int i=1; i<x+1; i++)
+        {
+            cout<<(matrice[i+j*(x+2)])<<" ";
+        }
+        cout<<endl;
+    }
+)
+    GD2(cout<<"[Coltura::Coltura] stampo la matrice utilizzando pila.stampa: "<<endl;
+        pila->stampa());
+
+}
+
+Coltura::~Coltura()
+{//TODO a posto
+    delete pila;
+    delete timer;
+    delete timeSlider;
+    GD1(cout<<"[Debug:~Debug] oggetto deallocato correttamente"<<endl);
+}
+
+void Coltura::setMagnifier()
+{
     /*effettuo questa discriminazione per garantire una maggiore scelta delle
      *dimensioni della coltura
      */
+
     /*valore dell'espressione:
      *  0 nessuna delle 2 è verificata (x<266)
      *  1 è verificata solo la prima (x>266 && x<400)
@@ -70,39 +109,6 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
         cerr<<"errore di dimensionamento, secondo livello"<<endl;
     }
 
-    setMinimumSize(magnifier*x, magnifier*y);
-
-
-    matrice=new int[(x+2)*(y+2)];
-    matrice=pila->getMatrix();
-
-    timeSlider = new QSlider(Qt::Horizontal);
-    timeSlider->setFixedHeight(20);
-    timeSlider->setMinimum(0);
-    timeSlider->setMaximum(0);
-    timeSlider->setValue(0);
-    connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(timeTrip(int)));
-    GD3(cout<<"[Coltura::Coltura] stampo la matrice manualmente"<<endl;
-
-    for(int j=1; j<y+1; j++)
-    {
-        for(int i=1; i<x+1; i++)
-        {
-            cout<<(matrice[i+j*(x+2)])<<" ";
-        }
-        cout<<endl;
-    }
-)
-    GD2(cout<<"[Coltura::Coltura] stampo la matrice utilizzando pila.stampa: "<<endl;
-        pila->stampa());
-
-}
-
-Coltura::~Coltura()
-{//TODO a posto
-    delete pila;
-    delete timer;
-    delete timeSlider;
 }
 
 void Coltura::paintEvent(QPaintEvent *event)

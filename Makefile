@@ -1,4 +1,6 @@
-OBJ = main.o mainwindow.o pilamatrici.o pilamatrici_IO.o starter.o coltura.o coltura_IO.o debug.o closingalert.o 
+# lista dei sorgenti separati da spazi
+SOURCES = main.cpp mainwindow.cpp pilamatrici.cpp pilamatrici_IO.cpp starter.cpp coltura.cpp coltura_IO.cpp debug.cpp closingalert.cpp 
+OBJ = $(SOURCES:.cpp=.o)
 MOC = coltura_moc.cpp starter_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
 DMOC = coltura_dmoc.cpp starter_dmoc.cpp mainwindow_dmoc.cpp debug_dmoc.cpp closingalert_dmoc.cpp
 MOCOBJ = coltura_moc.o starter_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
@@ -12,7 +14,7 @@ LDFLAGS = $(QTLIBS)
 DFLAG = -D DEBUG_MODE
         
 colturabatterica : $(OBJ) $(MOCOBJ)
-	g++ -export-dynamic -o colturabatterica $+ $(LDFLAGS)
+	g++ -export-dynamic -o liferunner $+ $(LDFLAGS)
 
 -include dependencies
 
@@ -59,7 +61,7 @@ debug_dmoc.cpp : debug.cpp debug.h
 closingalert_dmoc.cpp : closingalert.cpp closingalert.h
 	moc $(DFLAG) closingalert.h -o closingalert_dmoc.cpp
 
-.PHONY : clean cleanall doc depends debug
+.PHONY : clean cleanall doc depend debug
 
 clean : 
 	rm -f *.o *moc.cpp
@@ -70,7 +72,7 @@ cleanall:
 doc: clean
 	doxygen Doxyfile
 
-depends:
+depend: *.cpp
 	#creo la parte relativa ai "normali" file oggetto
 	g++ -MM $(shell ls *.cpp | grep -v '.*moc.cpp') > dependencies
 

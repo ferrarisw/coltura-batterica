@@ -55,7 +55,9 @@ PilaMatrici::~PilaMatrici()
             delete posizioneAttuale->tabella;
             delete posizioneAttuale;
     }
+    GD1(cout<<"[Debug:~Debug] oggetto deallocato correttamente"<<endl);
 }
+
 
 PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
 {
@@ -176,26 +178,28 @@ int * PilaMatrici::next()
     coda = temp;
     temp->tempo = (posizioneAttuale->tempo + 1);
 
-
+#ifdef DEBUG_MODE
     double numeroCelluleVive = static_cast<double> ( contaCelluleVive(temp) );
     double numeroCelluleVivePrecedente = static_cast<double> ( contaCelluleVive(posizioneAttuale) );
 
     assert(numeroCelluleVive >= 0);
 
-    posizioneAttuale = temp;
 
     LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " << dimx * dimy << ". "
         "( " << (numeroCelluleVive * 100 / (dimx*dimy) ) << " % )\n"
-        "Questa e' la matrice numero: " << posizioneAttuale->tempo << "\n"
+        "Questa e' la matrice numero: " << temp->tempo << "\n"
         "Confronto con la matrice precedente: " << numeroCelluleVive - numeroCelluleVivePrecedente << " ("
         << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << " % )"<<endl );
+#endif
 
+    posizioneAttuale = temp;
     /*
       * Ritorno la nuova posizione attuale, appena aggiornata. Prima era next.
       */
     return posizioneAttuale->tabella;
 }
 
+#ifdef DEBUG_MODE
 void PilaMatrici::stampa()
 {
     cout<<"[PilaMatrici::stampa] Stampo la matrice. Questa è solo una funzione per il DBGug.\n";
@@ -210,22 +214,6 @@ void PilaMatrici::stampa()
     cout<<endl;
 }
 
-bool PilaMatrici::distruggiMatrice (Matrix* matrice)
-{
-    if (matrice->prec == NULL) {
-        testa = matrice->succ;
-    } else matrice->prec->succ = matrice->succ;
-
-    if (matrice->succ == NULL) {
-        coda = matrice->prec;
-    } else matrice->succ->prec = matrice->prec;
-
-    delete matrice->tabella;
-    delete matrice;
-
-    return true;
-}
-
 int PilaMatrici::contaCelluleVive(Matrix* & matrice)
 {
     matrice->numeroCelleVive = 0;
@@ -238,6 +226,8 @@ int PilaMatrici::contaCelluleVive(Matrix* & matrice)
     assert (matrice->numeroCelleVive >= 0);
     return matrice->numeroCelleVive;
 }
+
+#endif
 
 bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaConfronto)
 {

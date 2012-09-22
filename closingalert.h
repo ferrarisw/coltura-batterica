@@ -4,7 +4,7 @@
 #include <QtGui>
 
 /**
- * @brief The ClosingAlert class
+ *  The ClosingAlert class
  *
  * Questa classe permette di utilizzare un widget per chiudere il programma
  * durante la sua esecuzione.
@@ -18,7 +18,7 @@ class ClosingAlert : public QWidget
     Q_OBJECT
 public:
     /**
-     * @brief Costruttore della classe ClosingAlert
+     *  Costruttore della classe ClosingAlert
      * @param parent 0
      *
      * Il costruttore della classe ClosingAlert inizializza e disegna la
@@ -29,7 +29,7 @@ public:
     ~ClosingAlert();
 
     /**
-     * @brief Variabile che definisce i bottoni del widget
+     *  Variabile che definisce i bottoni del widget
      *
      * Questi due bottoni sono i classici "Ok/Annulla", che in questo caso
      * attivano o meno la chiusura del programma.

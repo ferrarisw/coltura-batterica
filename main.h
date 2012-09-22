@@ -1,6 +1,5 @@
 #ifndef MAIN_H
 #define MAIN_H
-#define DEBUG_MODE
 
 #include <iostream>
 #include <fstream>
@@ -11,17 +10,25 @@
 #include "starter.h"
 #include "debug.h"
 
-//TODO questa soluzione invece dei numeri
-extern qreal x;
-extern qreal y;
-extern qreal width;
-extern qreal height;
+//*************************************
+//TODO: lista
+/*riguardare documentazione
+ *eliminare tutti i todo
+ *testare la release version
+ *controllare cose strane
+ *controllare make debug
+ *questione del javadoc compatible spazio in pi# in pilamatrici
+ *about con le regole che avevamo visto al tempo da valente (quelle non dell'esame)
+ *guardare la manpage del moc
+ */
+
+extern int screenX;
+extern int screenY;
 
 #ifdef  DEBUG_MODE
-//TODO questione del javadoc compatible OK!!
 
 /**
- * @brief Maschera di bit per i livelli di debug
+ *  Maschera di bit per i livelli di debug
  *
  * Questa maschera abilita o disabilita i livelli di debug a seconda del
  * valore che assume:
@@ -56,14 +63,14 @@ extern int MASK;
 
 /*############################################################################*/
 
-/*
+ /*
   * Definisco una modalità di log che stampa sul terminale i dati statistici
   * del programma.
   */
 #ifdef DEBUG_MODE
 
 /**
- * @brief Maschera di bit per le funzioni di log
+ *  Maschera di bit per le funzioni di log
  *
  * Se questa maschera e' settata a 1 allora il log statistico e' abilitato,
  * altrimenti no.

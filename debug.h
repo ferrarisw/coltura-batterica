@@ -9,7 +9,7 @@
 using namespace std;
 
 /**
- * @brief The Debug class.
+ *  The Debug class.
  *
  * La parte pubblica contiene:
  *      - Debug(Qwidget *parent = 0), costruttore
@@ -23,7 +23,7 @@ class Debug : public QWidget
     Q_OBJECT
 public:
     /**
-     * @brief Costruttore della classe Debug
+     *  Costruttore della classe Debug
      * @param parent 0
      *
      * Il costruttore della classe Debug inizializza la finestra che permette
@@ -35,7 +35,7 @@ public:
 
 public slots:
     /**
-     * @brief Settaggio del valore della maschera di bit per il Debug
+     *  Settaggio del valore della maschera di bit per il Debug
      * @param value valore da assegnare alla maschera
      *
      * Chiamando questo slot si ha la possibilita' di settare il valore
@@ -45,7 +45,7 @@ public slots:
     void changeMaskValue(int value);
 
     /**
-     * @brief Settaggio del valore della maschera di bit per il log statistico
+     *  Settaggio del valore della maschera di bit per il log statistico
      * @param value valore da assegnare alla maschera
      *
      *Chiamando questo slot si ha la possibilita' di settare il valore

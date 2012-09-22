@@ -32,7 +32,9 @@ bool Coltura::load(QString s)
                 cout<<endl;
             });
 
-    setMinimumSize(3*x,3*y);
+    setMagnifier();
+
+    setMinimumSize(magnifier*x,magnifier*y);
     this->resize(minimumSize());
 
     int attuale;

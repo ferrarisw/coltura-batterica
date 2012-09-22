@@ -9,7 +9,7 @@ class PilaMatrici;
 class PilaMatrici;
 
 /**
- * @brief The Coltura class.
+ *  The Coltura class.
  *
  * La classe coltura si occupa della visualizzazione grafica della coltura.
  *   La parte pubblica contiene:
@@ -56,7 +56,7 @@ class Coltura : public QWidget
 
 public:
     /** 
-     * @brief Costruttore della classe Coltura
+     *  Costruttore della classe Coltura
      * @param x Larghezza della matrice
      * @param y Altezza della matrice
      * @param pattern Determina la disposizione iniziale delle cellule
@@ -70,24 +70,24 @@ public:
     ~Coltura();
 
     /**
-      * @brief Ritorna la velocità massima di play
+      *  Ritorna la velocità massima di play
       * @return maxTime
       */
      int getMaxTime();
 
      /**
-      * @brief Ritorna la velocità minima di play
+      *  Ritorna la velocità minima di play
       * @return minTime
       */
      int getMinTime();
 
      /**
-     * @brief Slider che gestisce la possibilità di tornare indietro nel tempo
+     *  Slider che gestisce la possibilità di tornare indietro nel tempo
      */
     QSlider * timeSlider;
 
     /**
-     * @brief Funzionalita' di salvataggio su file
+     *  Funzionalita' di salvataggio su file
      * @param s File su cui salvare la sessione
      * @return True se il salvataggio avviene correttamente
      * @return False se il salvataggio non avviene
@@ -98,7 +98,7 @@ public:
     bool save(QString s);
 
     /**
-     * @brief Funzionalita' di caricamento da file
+     *  Funzionalita' di caricamento da file
      * @param s File da cui caricare la sessione
      * @return True se il caricamento avviene correttamente
      * @return False se il caricamento non avviene
@@ -110,7 +110,7 @@ public:
 
 public slots:
     /**
-     * @brief Slot che determina il passaggio in un quanto di tempo
+     *  Slot che determina il passaggio in un quanto di tempo
      *
      * Utilizzando la funzione next della classe PilaMatrici, realizza
      * l'elemento successivo della lista di matrici e aggiorna la grafica
@@ -121,7 +121,7 @@ public slots:
     void aggiorna();
 
     /**
-     * @brief Slot che gestisce lo scorrere del tempo
+     *  Slot che gestisce lo scorrere del tempo
      * @param scatti sono gli intervalli di aggiornamento
      *
      * Questo slot utilizza un timer e il valore impostato da
@@ -132,7 +132,7 @@ public slots:
     void play(int);
 
     /**
-     * @brief Slot che gestisce il salto nel tempo
+     *  Slot che gestisce il salto nel tempo
      * @param time Tempo di arrivo desiderato della timeTrip
      *
      * Questo slot abilita la funzione PilaMatrici->timeTrip
@@ -142,7 +142,7 @@ public slots:
 
 protected:
     /**
-     * @brief Imposta i dati necessari per disegnare la coltura
+     *  Imposta i dati necessari per disegnare la coltura
      * @param *event evento generato automaticamente
      */
     void paintEvent(QPaintEvent * event);
@@ -152,6 +152,7 @@ private:
     int pattern;
     int * matrice;
     int magnifier;
+    void setMagnifier();
     /*
      * @param painter
      * @param event
@@ -169,7 +170,7 @@ private:
     int minTime;
     int maxTime;
     /*
-     * @brief Funzione di appoggio a paintColtura.
+     *  Funzione di appoggio a paintColtura.
      * Gestisce i dettagli riguardanti le dimensioni del widget sullo schermo.
      * (!!pre-alpha!!)
      */

@@ -11,7 +11,7 @@ using namespace std;
 class Coltura;
 
 /**
- * @brief The MainWindow class.
+ *  The MainWindow class.
  *
  * La classe MainWindow si occupa di gestione e coordinazione dei widget.
  *
@@ -83,41 +83,43 @@ private slots:
     void play(bool toggled);
 
     /**
-     * @brief Crea una nuova partita, eliminando l'attuale.
+     *  Crea una nuova partita, eliminando l'attuale.
      */
     void newGame();
 
     /**
-     * @brief Salva la coltura attuale su un file .runner.
+     *  Salva la coltura attuale su un file .runner.
      */
     void save();
 
 
     /**
-     * @brief Gestisce la chiusura del programma.
+     *  Gestisce la chiusura del programma.
      */
     void closing();
 
     /**
-     * @brief Mostra informazioni sul programma.
+     *  Mostra informazioni sul programma.
      */
     void about();
 
 public slots:
     /**
-     * @brief Carica una coltura da un file .runner.
+     *  Carica una coltura da un file .runner.
      */
     bool load();
 
 private:
-    QSlider * slider;
     ClosingAlert * closingalert;
+    QSlider * slider;
     Coltura * coltura;
     QMenu * file;
     QMenu * help;
     QPushButton * stepByStep;
     QPushButton * playButton;
+    QWidget * central;
     QHBoxLayout * buttonLayout;
+    QVBoxLayout * layout;
     int x,y;
     bool playing;
 };

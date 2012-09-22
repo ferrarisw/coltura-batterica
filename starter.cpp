@@ -6,17 +6,18 @@ Starter::Starter(QWidget *parent) :
 {
     GD1(cout<<"[Starter] : costruttore"<<endl);
 
-    qreal x=500;
-    qreal y=250;
-    qreal width=20;
-    qreal height=10;
-    this->setGeometry(x,y,width,height);
+    this->move(screenX,screenY);
+
+    closingalert = new ClosingAlert();
 
     this->x=50;
     this->y=50;
     this->pattern=0;
 
-    menuBar()->addAction(tr("&Carica.."),       this,   SLOT(load()     ));
+    file = new QMenu();
+    file = menuBar()->addMenu(tr("&File"));
+    file->addAction(tr("&Carica"),       this,   SLOT(load()     ));
+    file->addAction(tr("&Chiudi"),       this,   SLOT(closing()  ));
 
     menuBar()->addAction(tr("&About"),          this,   SLOT(about()     ));
 
@@ -107,8 +108,10 @@ Starter::Starter(QWidget *parent) :
 }
 
 Starter::~Starter()
-{
-
+{//TODO a posto
+    delete closingalert;
+    delete file;
+    GD1(cout<<"[Starter:~Starter] oggetto deallocato correttamente"<<endl);
 }
 
 void Starter::avvio()
@@ -163,7 +166,9 @@ void Starter::load()
 void Starter::about()
 {
     QWidget * about = new QWidget();
-    about->setGeometry(500,250,1,1);
+
+    about->move(screenX + this->width()/2,  screenY - this->height()/2);
+
     QLabel * label = new QLabel(tr("Life Runner (v 1.0)\n"
                                    "Davide Ferrari e Serena Ziviani."));
     QPushButton * ok = new QPushButton(tr("OK"));
@@ -183,7 +188,6 @@ void Starter::closeEvent(QCloseEvent * closeEvent)
 
     TRACE("[Starter::closeEvent]");
 
-    closingalert = new ClosingAlert();
 
     connect(closingalert->buttons,SIGNAL(accepted()),this,SLOT(closing()));
     connect(closingalert->buttons,SIGNAL(rejected()),closingalert,SLOT(close()));

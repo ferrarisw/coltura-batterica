@@ -48,7 +48,7 @@ Debug::Debug(QWidget *parent) :
 
 Debug::~Debug()
 {
-
+    GD1(cout<<"[Debug:~Debug] oggetto deallocato correttamente"<<endl);
 }
 
 void Debug::changeMaskValue(int value)

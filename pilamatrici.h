@@ -19,14 +19,14 @@ using namespace std;
         - Una funzione Salva e una Carica per gestire i file.
         - Una funzione timeTrip che permette di passare a matrici precedenti o successive
 
-    @brief The PilaMatrici class
+     The PilaMatrici class
   */
 
 class PilaMatrici
 {
 public:
     /**
-     * @brief PilaMatrici costruttore
+     *  PilaMatrici costruttore
      *
      * Il costruttore inizializza una nuova matrice settando opportunamente tutti
      * i puntatori e il pattern da applicarvi.
@@ -38,7 +38,7 @@ public:
     PilaMatrici(int x, int y, int pattern);
 
     /**
-     * @brief PilaMatrici decostruttore
+     *  PilaMatrici decostruttore
      *
      * Il decostruttore controlla a che punto della lista di matrici e' la
      * posizione attuale. Se e' maggiore di zero, allora sposta la posizione
@@ -53,13 +53,13 @@ public:
     ~PilaMatrici();
 
     /**
-     * @brief Per ottenere la tabella attuale
+     *  Per ottenere la tabella attuale
      * @return Ritorna un puntatore ad intero
      */
     int * getMatrix();
 
     /**
-     * @brief    Permette di avanzare alla matrice successiva
+     *     Permette di avanzare alla matrice successiva
      * @return   temp->tabella   La tabella appena modificata
      *
      * Questa funzione non prende in ingresso alcun parametro perche' utilizza
@@ -85,25 +85,25 @@ public:
     int * next();
 
     /**
-     * @brief Stampa su stdout l'intera tabella
+     *  Stampa su stdout l'intera tabella
      * @return void
      */
     void stampa ();
 
     /**
-     * @brief Ritorna la dimensione orizzontale della matrice
+     *  Ritorna la dimensione orizzontale della matrice
      * @return dimx
      */
     int getDimx() { return dimx;}
 
     /**
-     * @brief Ritorna la dimensione verticale della matrice
+     *  Ritorna la dimensione verticale della matrice
      * @return dimy
      */
     int getDimy() { return dimy;}
 
     /**
-     * @brief Salvataggio su File della matrice
+     *  Salvataggio su File della matrice
      * @param file Nome del file su cui salvare
      * @return True se il salvataggio termina correttamente
      * @return False se l'input stream non si apre correttamente
@@ -118,7 +118,7 @@ public:
     bool salva (QString file);
 
     /**
-     * @brief Caricamento da File della matrice
+     *  Caricamento da File della matrice
      * @param file Nome del file da caricare
      * @return True se la carica e' avvenuta correttamente
      * @return False se l'output stream non si apre correttamente
@@ -133,14 +133,14 @@ public:
     bool carica (QString file);
 
     /**
-     * @brief Numero di matrici realizzate (utilita' statistica)
+     *  Numero di matrici realizzate (utilita' statistica)
      *
      *Questa e' una variabile statistica
      */
     int matriciRealizzate;
 
     /**
-     * @brief Viaggio nel tempo
+     *  Viaggio nel tempo
      * @return True se il viaggio nel tempo termina correttamente
      * @return False se il tempo desiderato passato per argomento non rispetta
      *le condizioni di esistenza
@@ -161,9 +161,9 @@ private:
     enum stato {morto = 0, vivo = 1};
 
     /**
-     * @brief The Matrix struct
+     *  The Matrix struct
      *
-     * La struttura matrice e' ciò su cui si basa la parte computazionale del
+     * La struttura matrice e' ci su cui si basa la parte computazionale del
      * programma. Contiene un puntatore ad interi che rappresenta la tabella,
      * due puntatori a Matrix per collegare ogni oggetto in una lista doppia,
      * un tempo caratteristico di ogni matrice e il numero di cellule vive.
@@ -201,21 +201,6 @@ private:
       @param [out]  temp    Matrice appena creata ed inizializzata
       */
     Matrix* creaMatrice(Matrix* succ, Matrix* prec, int tempo);
-
-    /* Funziona distruggiMatrice().
-
-      1)    se la matrice attuale e' la testa, aggiorna la testa alla matrice
-      successiva
-      2)    se la matrice attuale e' la coda, aggiorna la coda alla matrice
-      precedente
-      3)    se la matrice attuale e' in mezzo, faccio scavalcare i puntatori
-      della precedente e della successiva.
-      4)    dealloca la tabella allocata dinamicamente
-      5)    dealloca la matrice allocata dinamicamante
-
-      @param [in]   Matrix*      Matrice da eliminare e deallocare
-      */
-    bool distruggiMatrice(Matrix*);
 
     /* Funzione riempiCasuale.
 
@@ -279,8 +264,8 @@ private:
 
     /* Funzione verificamatriciUguali.
       Questa funzione confronta due matrici e ritorna vero se sono uguali.
-      Ritorna falso se la prima tabella di confronto è anche la prima della pila
-      oppure se la prima tabela di confronto è precedente alla seconda.
+      Ritorna falso se la prima tabella di confronto  anche la prima della pila
+      oppure se la prima tabela di confronto  precedente alla seconda.
 
       @param [in]   Matrix*     Prima tabella di confronto
       @param [in]   Matrix*     Seconda tabella di confronto

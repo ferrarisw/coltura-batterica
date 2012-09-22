@@ -6,7 +6,11 @@ using namespace std;
 MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     QMainWindow(parent)
 {
+    this->move(screenX + 50, screenY);
+
     GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
+
+    closingalert = new ClosingAlert();
 
     this->coltura = new Coltura(x,y,pattern);
     GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
@@ -15,6 +19,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     file->addAction(tr("&Nuova partita"),   this,   SLOT(newGame()  ));
     file->addAction(tr("&Salva"),           this,   SLOT(save()     ));
     file->addAction(tr("&Carica"),          this,   SLOT(load()     ));
+    file->addAction(tr("&Chiudi"),          this,   SLOT(closing()  ));
 
     help = menuBar()->addMenu(tr("&Aiuto"));
     help->addAction(tr("&About"),          this,   SLOT(about()     ));
@@ -28,21 +33,21 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     connect(playButton, SIGNAL(toggled(bool)), this, SLOT(play(bool)));
 
 
-    this->slider = new QSlider(Qt::Horizontal);
-    this->slider->setMinimum(coltura->getMinTime());
-    this->slider->setMaximum(coltura->getMaxTime());
+    slider = new QSlider(Qt::Horizontal);
+    slider->setMinimum(coltura->getMinTime());
+    slider->setMaximum(coltura->getMaxTime());
 
-    buttonLayout = new QHBoxLayout;
+    buttonLayout = new QHBoxLayout();
     buttonLayout->addWidget(playButton);
     buttonLayout->addWidget(stepByStep);
 
-    QVBoxLayout * layout = new QVBoxLayout;
+    layout = new QVBoxLayout;
     layout->addWidget(coltura->timeSlider);
     layout->addWidget(coltura);
     layout->addWidget(slider);
     layout->addLayout(buttonLayout);
 
-    QWidget * central = new QWidget();
+    central = new QWidget();
 
 #ifdef DEBUG_MODE
     Debug * debug = new Debug();
@@ -71,6 +76,10 @@ MainWindow::~MainWindow()
     delete stepByStep;
     delete playButton;
     delete buttonLayout;
+    delete layout;
+    delete closingalert;
+    delete central;
+    GD1(cout<<"[Debug:~Debug] oggetto deallocato correttamente"<<endl);
 }
 
 void MainWindow::play(bool toggled)
@@ -116,7 +125,7 @@ bool MainWindow::load()
 void MainWindow::about()
 {
     QWidget * about = new QWidget();
-    about->setGeometry(500,250,1,1);
+    about->move(screenX + this->width()/2,  screenY - this->height()/4);
     QLabel * label = new QLabel(tr("Life Runner (v 1.0)\n"
                                    "Davide Ferrari e Serena Ziviani."));
     QPushButton * ok = new QPushButton(tr("ok"));
@@ -136,7 +145,6 @@ void MainWindow::closeEvent(QCloseEvent * closeEvent)
     closeEvent->ignore();
 
     TRACE("[MainWindow::closeEvent]");
-    closingalert = new ClosingAlert();
 
     connect(closingalert->buttons,SIGNAL(accepted()),this,SLOT(closing()));
     connect(closingalert->buttons,SIGNAL(rejected()),closingalert,SLOT(close()));
