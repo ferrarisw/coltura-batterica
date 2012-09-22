@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-TARGET = coltura-batterica
+TARGET = liferunner
 TEMPLATE = app
 
 SOURCES += main.cpp\
@@ -14,15 +14,15 @@ SOURCES += main.cpp\
     coltura.cpp \
     pilamatrici.cpp \
     pilamatrici_IO.cpp \
-    debug.cpp \
     coltura_IO.cpp \
     closingalert.cpp \
-    starter.cpp
+    starter.cpp \
+    wdebug.cpp
 
 HEADERS  += mainwindow.h \
-    main.h \
     coltura.h \
     pilamatrici.h \
-    debug.h \
     closingalert.h \
-    starter.h
+    starter.h \
+    wdebug.h \
+    main.h

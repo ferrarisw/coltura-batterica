@@ -50,7 +50,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     central = new QWidget();
 
 #ifdef DEBUG_MODE
-    Debug * debug = new Debug();
+    WDebug * debug = new WDebug();
 
     QHBoxLayout * setting = new QHBoxLayout();
     setting->addLayout(layout);
@@ -79,7 +79,7 @@ MainWindow::~MainWindow()
     delete layout;
     delete closingalert;
     delete central;
-    GD1(cout<<"[Debug:~Debug] oggetto deallocato correttamente"<<endl);
+    GD1(cout<<"[WDebug:~WDebug] oggetto deallocato correttamente"<<endl);
 }
 
 void MainWindow::play(bool toggled)

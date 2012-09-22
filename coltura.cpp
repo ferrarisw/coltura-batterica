@@ -54,7 +54,7 @@ Coltura::~Coltura()
     delete pila;
     delete timer;
     delete timeSlider;
-    GD1(cout<<"[Debug:~Debug] oggetto deallocato correttamente"<<endl);
+    GD1(cout<<"[WDebug:~WDebug] oggetto deallocato correttamente"<<endl);
 }
 
 void Coltura::setMagnifier()

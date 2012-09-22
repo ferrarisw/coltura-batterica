@@ -1,41 +1,40 @@
-#include "main.h"
-
 #ifdef DEBUG_MODE
 #ifndef DEBUG_H
 #define DEBUG_H
 
+#include "main.h"
 #include <QtGui>
 #include <iostream>
 using namespace std;
 
 /**
- *  The Debug class.
+ *  The WDebug class.
  *
  * La parte pubblica contiene:
- *      - Debug(Qwidget *parent = 0), costruttore
- *      - ~Debug(), decostruttore
+ *      - WDebug(Qwidget *parent = 0), costruttore
+ *      - ~WDebug(), decostruttore
  * I public slots sono:
  *      - void changeMaskValue(int value), che cambia il livello di debug
  *      - void changeLogMaskValue(int value), che attiva/disattiva il log
  */
-class Debug : public QWidget
+class WDebug : public QWidget
 {
     Q_OBJECT
 public:
     /**
-     *  Costruttore della classe Debug
+     *  Costruttore della classe WDebug
      * @param parent 0
      *
-     * Il costruttore della classe Debug inizializza la finestra che permette
+     * Il costruttore della classe WDebug inizializza la finestra che permette
      * di attivare, disattivare o modificare le funzionalita' di debug.
      */
-    explicit Debug(QWidget *parent = 0);
+    explicit WDebug(QWidget *parent = 0);
 
-    ~Debug();
+    ~WDebug();
 
 public slots:
     /**
-     *  Settaggio del valore della maschera di bit per il Debug
+     *  Settaggio del valore della maschera di bit per il WDebug
      * @param value valore da assegnare alla maschera
      *
      * Chiamando questo slot si ha la possibilita' di settare il valore

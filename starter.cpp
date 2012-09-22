@@ -1,5 +1,5 @@
 #include "starter.h"
-#include "debug.h"
+#include "wdebug.h"
 
 Starter::Starter(QWidget *parent) :
     QMainWindow(parent)
@@ -92,7 +92,7 @@ Starter::Starter(QWidget *parent) :
     QHBoxLayout * setting       =   new QHBoxLayout();
     setting->addLayout(layout);
 #ifdef DEBUG_MODE
-    debug = new Debug();
+    debug = new WDebug();
     setting->addWidget(debug);
 #endif
 

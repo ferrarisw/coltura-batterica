@@ -37,11 +37,8 @@ bool Coltura::load(QString s)
     setMinimumSize(magnifier*x,magnifier*y);
     this->resize(minimumSize());
 
-    int attuale;
-    fcin>>attuale;
-
-    timeSlider->setMaximum(attuale);
-    timeSlider->setValue(attuale);
+    timeSlider->setMaximum(0);
+    timeSlider->setValue(0);
 
     repaint();
 

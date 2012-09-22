@@ -6,12 +6,12 @@
 #include "mainwindow.h"
 #include "main.h"
 #include "cassert"
-#include "debug.h"
+#include "wdebug.h"
 #include "closingalert.h"
 
 class MainWindow;
 #ifdef DEBUG_MODE
-class Debug;
+class WDebug;
 #endif
 
 /**
@@ -41,7 +41,7 @@ class Debug;
  *      - int y;
  *      - int pattern;
  *      - ClosingAlert * closingalert;
- *      - Debug * debug, solo se in modalità debug
+ *      - WDebug * debug, solo se in modalità debug
  */
 class Starter : public QMainWindow
 {
@@ -105,7 +105,7 @@ private:
     ClosingAlert * closingalert;
     QMenu * file;
 #ifdef DEBUG_MODE
-    Debug * debug;
+    WDebug * debug;
 #endif
 
     
