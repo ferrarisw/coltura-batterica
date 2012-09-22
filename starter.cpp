@@ -32,7 +32,8 @@ Starter::Starter(QWidget *parent) :
     xdimension->setValue(50);
     xdimension->setMinimum(0);
     xdimension->setMaximum(500);
-    connect(xdimension, SIGNAL(valueChanged(int)),this,SLOT(changeXDimension(int)));
+    connect(xdimension, SIGNAL(valueChanged(int)),this,SLOT(changeXDimension
+                                                            (int)));
 
     GD2(cout<<"[Starter::Starter] ho inizializzato lo spinbox e connesso i segnali"<<endl);
 
@@ -45,15 +46,17 @@ Starter::Starter(QWidget *parent) :
     ydimension->setValue(50);
     ydimension->setMinimum(0);
     ydimension->setMaximum(500);
-    connect(ydimension, SIGNAL(valueChanged(int)),this,SLOT(changeYDimension(int)));
+    connect(ydimension, SIGNAL(valueChanged(int)),this,SLOT(changeYDimension
+                                                            (int)));
 
-    GD2(cout<<"[Starter::Starter] ho inizializzato lo spinbox e connesso i segnali"<<endl);
+    GD2(cout<<"[Starter::Starter] ho inizializzato lo spinbox e connesso segnali"<<endl);
 
 
     QLabel      * etichettaY    =   new QLabel;
     etichettaY->setText(tr("Altezza"));
 
-    GD3(cout<<"[Starter::Starter] dimensioni di x e y: "<<this->x<<" "<<this->y<<endl);
+    GD3(cout<<"[Starter::Starter] dimensioni di x e y: "<<this->x<<" "<<
+        this->y<<endl);
 
 
     QPushButton * ok            =   new QPushButton(tr("Ok"));
@@ -63,8 +66,8 @@ Starter::Starter(QWidget *parent) :
 
 
     QLabel      * patternDesc   =   new QLabel;
-    patternDesc->setText(tr("Specifica la disposizione iniziale delle cellule"));
-    //patternDesc->setTextFormat(QTextFormat::PageBreak_Auto);
+    patternDesc->setText(tr("Specifica la disposizione iniziale delle cellule"
+                            ));
 
     QComboBox   * patterns      =   new QComboBox;
     QStringList list;
@@ -178,7 +181,8 @@ void Starter::closeEvent(QCloseEvent * closeEvent)
     TRACE("[Starter::closeEvent]");
 
     connect(closingalert->buttons,SIGNAL(accepted()),this,SLOT(closing()));
-    connect(closingalert->buttons,SIGNAL(rejected()),closingalert,SLOT(close()));
+    connect(closingalert->buttons,SIGNAL(rejected()),closingalert,
+            SLOT(close()));
 
     closingalert->show();
 

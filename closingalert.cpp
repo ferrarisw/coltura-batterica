@@ -23,5 +23,6 @@ ClosingAlert::ClosingAlert(QWidget * parent):
 ClosingAlert::~ClosingAlert()
 {
     delete buttons;
-    GD1(cout<<"[ClosingAlert:~ClosingAlert] oggetto deallocato correttamente"<<endl);
+    GD1(cout<<"[ClosingAlert:~ClosingAlert] oggetto deallocato correttamente"
+        <<endl);
 }

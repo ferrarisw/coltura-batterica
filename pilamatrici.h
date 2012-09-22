@@ -17,7 +17,8 @@ using namespace std;
         - Due funzioni getDimx e getDimy che ritornano la dimensione sull'asse
             x e y della matrice.
         - Una funzione Salva e una Carica per gestire i file.
-        - Una funzione timeTrip che permette di passare a matrici precedenti o successive
+        - Una funzione timeTrip che permette di passare a matrici precedenti o
+            successive
 
      The PilaMatrici class
   */
@@ -28,8 +29,8 @@ public:
     /**
      *  PilaMatrici costruttore
      *
-     * Il costruttore inizializza una nuova matrice settando opportunamente tutti
-     * i puntatori e il pattern da applicarvi.
+     * Il costruttore inizializza una nuova matrice settando opportunamente
+     * tutti i puntatori e il pattern da applicarvi.
      *
      * @param x La larghezza della matrice
      * @param y L'altezza della matrice
@@ -47,8 +48,8 @@ public:
      * precedente.
      * Se il primo controllo non ha successo, si verifica il caso in cui la
      * posizione attuale sia l'ultima matrice della lista. In questo caso posso
-     * deallocare dalla memoria dinamica tutti gli oggetti allocati senza problemi
-     * di pending pointer.
+     * deallocare dalla memoria dinamica tutti gli oggetti allocati senza
+     * problemi di pending pointer.
      */
     ~PilaMatrici();
 
@@ -67,20 +68,22 @@ public:
      * 1)    Inizializza una nuova matrice dinamica come posizioneAttuale e
      * setta il puntatore alla prossima matrice a NULL.
      * 2)    Inizializza un intero somma per eseguire il calcolo dell'algoritmo
-     * e inizializza anche due puntatori a intero, uno per la tabella temp appena
-     * creata (posizioneAttuale->tabella) e uno alla tabella temporanea
+     * e inizializza anche due puntatori a intero, uno per la tabella temp
+     * appena creata (posizioneAttuale->tabella) e uno alla tabella temporanea
      * (temp->tabella) per semplificare e rendere leggibile il codice.
      * 3)    Tramite la funione getValore, acquisisce e somma il valore di
      * tutte le 8 caselle attorno alla casella corrente (si fa un'iterazione
      * su ogni casella con un doppio ciclo for).
-     * L'algoritmo prevede che se una cellula e' morta e ve ne sono 3 vive intorno
-     * questa prende vita, al contrario, se la cellula e' viva e ce ne sono piu'
-     * di 3 o meno di 2 questa muore. Semplicemente sommando i valori delle
-     * cellule attorno alla cellula attuale ottengo il numero di cellule vive.
+     * L'algoritmo prevede che se una cellula e' morta e ve ne sono 3 vive
+     * intorno questa prende vita, al contrario, se la cellula e' viva e ce ne
+     * sono piu' di 3 o meno di 2 questa muore. Semplicemente sommando i valori
+     * delle cellule attorno alla cellula attuale ottengo il numero di cellule
+     * vive.
      * Se le cellule vive sono 3 allora la cellula e' viva, altrimenti morta.
      * Questo si puu' realizzare con due semplici controlli.
      * 4)    Dopo aver modificato completamente la tabella temp, setta la
-     * posizioneAttuale a temp, cosi' da ritornare la nuova tabella appena creata.
+     * posizioneAttuale a temp, cosi' da ritornare la nuova tabella appena
+     * creata.
      */
     int * next();
 
@@ -123,12 +126,12 @@ public:
      * @return True se la carica e' avvenuta correttamente
      * @return False se l'output stream non si apre correttamente
      *
-     *La funzione apre uno stream in input utilizzando come file
-     *la QString passata per argomento. Dopo aver caricato le dimensioni
-     *la funzione crea una nuova lista di matrici con le opportune
-     *inizializzazioni e carica l'intera matrice di input.
-     *Il valore di ritorno e' true se la carica si conclude con successo
-     *e false se lo stream in input non viene creato correttamente.
+     * La funzione apre uno stream in input utilizzando come file
+     * la QString passata per argomento. Dopo aver caricato le dimensioni
+     * la funzione crea una nuova lista di matrici con le opportune
+     * inizializzazioni e carica l'intera matrice di input.
+     * Il valore di ritorno e' true se la carica si conclude con successo
+     * e false se lo stream in input non viene creato correttamente.
      */
     bool carica (QString file);
 
@@ -143,13 +146,15 @@ public:
      *  Viaggio nel tempo
      * @return True se il viaggio nel tempo termina correttamente
      * @return False se il tempo desiderato passato per argomento non rispetta
-     *le condizioni di esistenza
+     * le condizioni di esistenza
      *
-     *La funzione controlla che il tempo desiderato sia nel range delle matrici
-     *realizzate. In tal caso valuta se deve andare avanti o indietro nella lista.
-     *Lo spostamento avviene tramite i puntatori della lista e chiamate ricorsive.
-     *Nel caso i controlli di esistenza della matrice richiesta diano errore, la
-     *funzione ritorna falso.
+     * La funzione controlla che il tempo desiderato sia nel range delle
+     * matrici realizzate. In tal caso valuta se deve andare avanti o indietro
+     * nella lista.
+     * Lo spostamento avviene tramite i puntatori della lista e chiamate
+     * ricorsive.
+     * Nel caso i controlli di esistenza della matrice richiesta diano errore,
+     * la funzione ritorna falso.
      */
     bool timeTrip(int);
 
@@ -186,14 +191,15 @@ private:
 
     /* Funzione creaMatrice().
 
-      1)    Alloca dinamicamente una matrice temporanea delle dimensioni passate
-      dall'utente.
-      2)    Aggancia la matrice allocata dinamicamente alle due matrici passate come
-      parametro.
-      3)    Inizializza il campo tabella della matrice creata, le dimensioni sono
-      maggiorate di 2 perche' creo anche una cornice aggiuntiva di zeri utile
-      all'algoritmo nella sua esecuzione.
-      4)    Inizializza tutta la matrice a 0 e la ritorna come parametro di uscita.
+      1)    Alloca dinamicamente una matrice temporanea delle dimensioni
+      passate dall'utente.
+      2)    Aggancia la matrice allocata dinamicamente alle due matrici passate
+      come parametro.
+      3)    Inizializza il campo tabella della matrice creata, le dimensioni
+      sono maggiorate di 2 perche' creo anche una cornice aggiuntiva di zeri
+      utile all'algoritmo nella sua esecuzione.
+      4)    Inizializza tutta la matrice a 0 e la ritorna come parametro di
+      uscita.
 
       @param [in]   succ    Puntatore alla matrice successiva
       @param [in]   prec    Puntatore alla matrice precedente

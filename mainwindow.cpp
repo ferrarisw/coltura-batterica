@@ -8,13 +8,15 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
 {
     this->move(screenX + 50, screenY);
 
-    GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
+    GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "
+        <<x<<" "<<y<<endl) ;
 
     closingalert = new ClosingAlert();
     about = new About();
 
     this->coltura = new Coltura(x,y,pattern);
-    GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
+    GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"
+        <<endl) ;
 
     file = menuBar()->addMenu(tr("&File"));
     file->addAction(tr("&Nuova partita"),   this,   SLOT(newGame()  ));
@@ -82,7 +84,8 @@ MainWindow::~MainWindow()
     delete closingalert;
     delete about;
     delete central;
-    GD1(cout<<"[WDebug:~WDebug] oggetto deallocato correttamente"<<endl);
+    GD1(cout<<"[MainWindow:~MainWindow] oggetto deallocato correttamente"
+        <<endl);
 }
 
 void MainWindow::play(bool toggled)
@@ -112,13 +115,15 @@ void MainWindow::newGame()
 
 void MainWindow::save()
 {
-    QString s = QFileDialog::getSaveFileName(this, tr("Apri File"),"saves/",tr("Runner file (*.runner)"));
+    QString s = QFileDialog::getSaveFileName(this, tr("Salva"),"saves",
+                                        "Runner file (*.runner);;all (*.*)");
     coltura->save(s);
 }
 
 bool MainWindow::load()
 {
-    QString s = QFileDialog::getOpenFileName(this, tr("Apri File"),"./saves/",tr("Runner file (*.runner)"));
+    QString s = QFileDialog::getOpenFileName(this, tr("Carica"),"saves",
+                                        "Runner file (*.runner);;all (*.*");
     bool ret = coltura->load(s);
     GD1(cout<<"[MainWindow::load] stato load: "<<ret<<endl;)
     this->resize(minimumSize());
@@ -137,7 +142,8 @@ void MainWindow::closeEvent(QCloseEvent * closeEvent)
     TRACE("[MainWindow::closeEvent]");
 
     connect(closingalert->buttons,SIGNAL(accepted()),this,SLOT(closing()));
-    connect(closingalert->buttons,SIGNAL(rejected()),closingalert,SLOT(close()));
+    connect(closingalert->buttons,SIGNAL(rejected()),closingalert,
+            SLOT(close()));
 
     closingalert->show();
 }

@@ -55,30 +55,33 @@ PilaMatrici::~PilaMatrici()
             delete posizioneAttuale->tabella;
             delete posizioneAttuale;
     }
-    GD1(cout<<"[WDebug:~WDebug] oggetto deallocato correttamente"<<endl);
+    GD1(cout<<"[PilaMatrici:~PilaMatrici] oggetto deallocato correttamente"
+        <<endl);
 }
 
 
-PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ, int tempo)
+PilaMatrici::Matrix* PilaMatrici::creaMatrice(Matrix *prec, Matrix *succ,
+                                              int tempo)
 {
     Matrix* temp = new Matrix;
 
-    TRACE("[PilaMatrici::creaMatrice] Ho creato una nuova matrice allocata dinamicamente.");
+    TRACE("[PilaMatrici::creaMatrice] Ho creato una nuova matrice allocata"<<
+          "dinamicamente.");
 
     temp->succ = succ;
     temp->prec = prec;
 
     temp->tabella = new int[(dimx+2) * (dimy+2)];
 
-    TRACE("[PilaMatrici::creaMatrice] Ho assegnato la matrice dinamica con le dimensioni "<<dimx<<
-          " e "<<dimy<<" correttamente.")
+    TRACE("[PilaMatrici::creaMatrice] Ho assegnato la matrice dinamica con"<<
+          "le dimensioni "<<dimx<<" e "<<dimy<<" correttamente.")
 
     inizializzaTabella(temp, 0);
 
     temp->tempo = tempo;
 
-    TRACE("[PilaMatrici::creaMatrice] Ho inizializzato a 0 tutti gli elementi della matrice e aggiornato"
-          " il tempo.");
+    TRACE("[PilaMatrici::creaMatrice] Ho inizializzato a 0 la matrice"<<
+          "e aggiornato il tempo.");
 
     return temp;
 }
@@ -93,7 +96,8 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
     srand( time(0) );
     int tot = 0;
 
-    TRACE("[PilaMatrici::riempiCasuale] Ora inizializzo casualmente gli elementi interni della matrice.");
+    TRACE("[PilaMatrici::riempiCasuale] Ora inizializzo casualmente gli"<<
+          "elementi interni della matrice.");
 
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
@@ -103,7 +107,8 @@ void PilaMatrici::riempiCasuale(Matrix *pos)
             pos->tabella[i + j * (dimx + 2)] = temp;
         }
 
-    TRACE("[PilaMatrici::riempiCasuale] Ho inizializzato tutta la matrice esclusa la cornice esterna.");
+    TRACE("[PilaMatrici::riempiCasuale] Ho inizializzato tutta la matrice"<<
+          "esclusa la cornice esterna.");
 }
 
 void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
@@ -114,7 +119,8 @@ void PilaMatrici::inizializzaTabella(Matrix *tabellaAttuale, int valore)
     }
 }
 
-inline bool PilaMatrici::inizializzaCasella(Matrix *tabellaAttuale, int casella, int valore)
+inline bool PilaMatrici::inizializzaCasella(Matrix *tabellaAttuale,
+                                            int casella, int valore)
 {
     if (casella > (dimx + 2) * (dimy + 2) || casella < 0)
         return false;
@@ -131,17 +137,20 @@ int * PilaMatrici::next()
 {
     TRACE("[PilaMatrici::next] Sto per inizializzare la prossima matrice.");
 
-    Matrix* temp = creaMatrice(posizioneAttuale, NULL, posizioneAttuale->tempo + 1);
+    Matrix* temp = creaMatrice(posizioneAttuale, NULL,
+                               posizioneAttuale->tempo + 1);
     matriciRealizzate += 1;
 
-    TRACE("[PilaMatrici::next] Ora inizializzo due puntatori a intero, uno alla tabella attuale\n"
-          "e uno alla nuova tabella. Mi serve per semplificare il codice");
+    TRACE("[PilaMatrici::next] Ora inizializzo due puntatori a intero, uno"<<
+          "alla tabella attuale\n e uno alla nuova tabella."<<
+          "Mi serve per semplificare il codice");
 
     int somma = 0;
     int * t1 = posizioneAttuale->tabella;
     int * t2 = temp->tabella;
 
-    TRACE("[PilaMatrici::next] Sommo tutte le 8 caselle attorno alla casella attuale.");
+    TRACE("[PilaMatrici::next] Sommo tutte le 8 caselle attorno alla casella"<<
+          "attuale.");
 
     for (int j = 1; j < dimy + 1; j++)
         for (int i = 1; i < dimx + 1; i++)
@@ -167,7 +176,7 @@ int * PilaMatrici::next()
             }
         }
 
-    TRACE("[PilaMatrici::next] Rendo la matrice appena creata, quella attuale.");
+    TRACE("[PilaMatrici::next] Rendo la matrice appena creata");
 
     /*
       * Aggiorno i puntatori della matrice attuale e quella successiva.
@@ -180,16 +189,19 @@ int * PilaMatrici::next()
 
 #ifdef DEBUG_MODE
     double numeroCelluleVive = static_cast<double> ( contaCelluleVive(temp) );
-    double numeroCelluleVivePrecedente = static_cast<double> ( contaCelluleVive(posizioneAttuale) );
+    double numeroCelluleVivePrecedente = static_cast<double>
+            ( contaCelluleVive(posizioneAttuale) );
 
     assert(numeroCelluleVive >= 0);
 
 
-    LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " << dimx * dimy << ". "
-        "( " << (numeroCelluleVive * 100 / (dimx*dimy) ) << " % )\n"
-        "Questa e' la matrice numero: " << temp->tempo << "\n"
-        "Confronto con la matrice precedente: " << numeroCelluleVive - numeroCelluleVivePrecedente << " ("
-        << ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100 << " % )"<<endl );
+    LOG("Il numero di cellule vive e': " << numeroCelluleVive << " / " <<
+        dimx * dimy << ". ( " << (numeroCelluleVive * 100 / (dimx*dimy) )
+        << " % )\nQuesta e' la matrice numero: " << temp->tempo << "\n"
+        "Confronto con la matrice precedente: " << numeroCelluleVive -
+        numeroCelluleVivePrecedente << " ("<<
+        ( numeroCelluleVive * 100 / numeroCelluleVivePrecedente ) - 100
+        << " % )"<<endl );
 #endif
 
     posizioneAttuale = temp;
@@ -202,7 +214,7 @@ int * PilaMatrici::next()
 #ifdef DEBUG_MODE
 void PilaMatrici::stampa()
 {
-    cout<<"[PilaMatrici::stampa] Stampo la matrice. Questa è solo una funzione per il DBGug.\n";
+    cout<<"[PilaMatrici::stampa] Stampo la matrice. Funzione di debug.\n";
 
     for (int j = 0; j < dimy + 2; j++)
     {
@@ -229,9 +241,11 @@ int PilaMatrici::contaCelluleVive(Matrix* & matrice)
 
 #endif
 
-bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale, Matrix* tabellaConfronto)
+bool PilaMatrici::verificaMatriciUguali(Matrix* tabellaAttuale,
+                                        Matrix* tabellaConfronto)
 {
-    if (tabellaAttuale->tempo == 0 || tabellaAttuale->tempo < tabellaConfronto->tempo)
+    if (tabellaAttuale->tempo == 0 || tabellaAttuale->tempo <
+            tabellaConfronto->tempo)
         return false;
 
     for (int i = 0; i < (dimx + 2) * (dimy + 2); i++)
@@ -257,9 +271,9 @@ bool PilaMatrici::timeTrip(int tempoDesiderato)
 
     /*
       * Se il tempo desiderato è maggiore di 0 (controllo precedente) e minore
-      * del tempo attuale, allora la matrice esiste e aggiorno la matrice attuale
-      * a quella precedente fino a che non arrivo alla condizione in cui il
-      * tempo desiderato è uguale al tempo attuale.
+      * del tempo attuale, allora la matrice esiste e aggiorno la matrice
+      * attuale a quella precedente fino a che non arrivo alla condizione
+      * in cui il tempo desiderato è uguale al tempo attuale.
       */
     else if (posizioneAttuale->tempo > tempoDesiderato) {
         if (posizioneAttuale->prec == NULL) {
@@ -306,7 +320,8 @@ void PilaMatrici::patternModeSelector(int selector)
         break;
 
     default:
-        cout<<"[patternModeSelector] errore: numero pattern non corretto "<<selector<<endl;
+        cerr<<"[patternModeSelector] errore: numero pattern non corretto "<<
+              selector<<endl;
         exit(-1);
     }
 }

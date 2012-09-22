@@ -6,7 +6,6 @@
 int MASK = 0;
 int LOGMASK = 0;
 
-#ifdef DEBUG_MODE
 
 Debug::Debug(QWidget *parent) :
   QWidget(parent)
@@ -20,8 +19,10 @@ Debug::Debug(QWidget *parent) :
     maskValue->setValue(0);
     maskValue->setMinimum(0);
     maskValue->setMaximum(15);
-    connect(maskValue, SIGNAL(valueChanged(int)),this,SLOT(changeMaskValue(int)));
-    GD2(cout<<"[Debug::Debug] ho inizializzato lo spinbox e connesso i segnali"<<endl);
+    connect(maskValue,SIGNAL(valueChanged(int)),this,
+            SLOT(changeMaskValue(int)));
+    GD2(cout<<"[Debug::Debug] ho inizializzato lo spinbox e connesso i segnali"
+        <<endl);
 
     QLabel * LDBGLabel = new QLabel;
     LDBGLabel->setText("Livello di Log (0 - 1)");
@@ -31,8 +32,10 @@ Debug::Debug(QWidget *parent) :
     logMaskValue->setValue(0);
     logMaskValue->setMinimum(0);
     logMaskValue->setMaximum(1);
-    connect(logMaskValue, SIGNAL(valueChanged(int)), this,SLOT(changeLogMaskValue(int)));
-    GD2(cout<<"[Debug::Debug] ho inizializzato lo spinbox  e connesso i segnali"<<endl);
+    connect(logMaskValue,SIGNAL(valueChanged(int)),this,
+            SLOT(changeLogMaskValue(int)));
+    GD2(cout<<"[Debug::Debug] ho inizializzato lo spinbox  e connesso i segnali"
+        <<endl);
 
     QVBoxLayout * layout = new QVBoxLayout();
     layout->addWidget(DBGLabel);
@@ -72,4 +75,4 @@ void Debug::changeLogMaskValue(int value)
 }
 
 #endif
-#endif
+

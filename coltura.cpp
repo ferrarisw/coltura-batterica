@@ -44,13 +44,13 @@ Coltura::Coltura(int x, int y, int pattern, QWidget *parent) :
         cout<<endl;
     }
 )
-    GD2(cout<<"[Coltura::Coltura] stampo la matrice utilizzando pila.stampa: "<<endl;
+    GD2(cout<<"[Coltura::Coltura] chiamo PilaMatrici::stampa: "<<endl;
         pila->stampa());
 
 }
 
 Coltura::~Coltura()
-{//TODO a posto
+{
     delete pila;
     delete timer;
     delete timeSlider;
@@ -68,7 +68,8 @@ void Coltura::setMagnifier()
      *  1 è verificata solo la prima (x>266 && x<400)
      *  2 sono verificate entrambe (x>400)
      */
-    GD1(cout<<"[Coltura::Coltura] X valore dell'espressione: "<<(3*x>800) + (2*x>800)<<endl);
+    GD1(cout<<"[Coltura::Coltura] X valore dell'espressione: "
+        <<(3*x>800) + (2*x>800)<<endl);
     switch((int)(3*x>800) + (2*x>800))
     {
     case 0:
@@ -89,11 +90,13 @@ void Coltura::setMagnifier()
      *  1 è verificata solo la prima (y>133 && y<200)
      *  2 sono verificate entrambe (y>200)
      */
-    GD1(cout<<"[Coltura::Coltura] Y valore dell'espressione: "<<(3*y>400) + (2*y>400)<<endl);
+    GD1(cout<<"[Coltura::Coltura] Y valore dell'espressione: "<<
+        (3*y>400) + (2*y>400)<<endl);
+
     switch((int)(3*y>400) + (2*y>400))
     {
     case 0:
-        //non devo effettuare nessuna azione, in ogni caso è impostato correttamente
+        //non devo effettuare nessuna azione, è impostato correttamente
         break;
     case 1:
         //devo cambiare livello se e solo se magnifier == 3
@@ -169,7 +172,7 @@ void Coltura::paintColtura(QPainter * painter,QPaintEvent *event)
     painter->restore();
 }
 
-void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *)
+void Coltura::paintColtura(QPainter *painter, QPaintEvent *event, const char *)
 {
 
     const QRect *recta = &event->rect();
@@ -203,7 +206,9 @@ void Coltura::paintColtura(QPainter * painter, QPaintEvent *event, const char *)
 
 void Coltura::draw(QPainter * painter)
 {
-
+    /* se devo disegnare le cellule come singoli pixel, tolgo il bordo
+     *(drawrect crea una cornice larga 1 px)
+     */
     if((2*x>800) || (2*y>400))
         painter->fillRect(-0.5,-0.5,1,1,colore);
     else
@@ -245,14 +250,17 @@ int Coltura::getMinTime()
 
 void Coltura::play(int scatti)
 {
+    //la funzione utilizzata è una parabola: -x^2/c + c
+    int time = -((1./maxTime)*scatti*scatti)+maxTime;
+
     if (scatti == 0)
         timer->stop();
-    else {
-        timer->start(-((1./maxTime)*scatti*scatti)+maxTime);
+    else
+    {
+        timer->start(time);
 
-        GD1(cout<<"[Coltura::play] millisecondi "<<
-            (-((1./maxTime)*scatti*scatti)+maxTime)<<
-            "\tvalore slider "<<scatti<<endl);
+        GD1(cout<<"[Coltura::play] millisecondi "<<time
+            <<"\tvalore slider "<<scatti<<endl);
     }
 
 }

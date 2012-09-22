@@ -14,17 +14,6 @@
 #include "starter.h"
 #include "debug.h"
 
-//*************************************
-//TODO: lista
-/*riguardare documentazione
- *eliminare tutti i todo
- *testare la release version
- *controllare cose strane
- *controllare make debug
- *about con le regole che avevamo visto al tempo da valente (quelle non dell'esame)
- *guardare la manpage del moc
- */
-
 extern int screenX;
 extern int screenY;
 

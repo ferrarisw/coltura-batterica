@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-//TODO problemi ad usare assieme play e timetrip
+
 #include "pilamatrici.h"
 #include "coltura.h"
 #include "closingalert.h"
@@ -28,7 +28,7 @@ class Coltura;
  *  I private slots sono:
  *      - void play(bool toggled), che gestisce il bottone playButton
  *      - void newGame(), che crea una nuova partita, eliminando l'attuale
- *      - void save(), che salva la coltura attuale su un file .runner //TODO cartella sbagliata
+ *      - void save(), che salva la coltura attuale su un file .runner
  *      - void closing(), che gestisce la chiusura del programma
  *      - void openAbout(), che mostra informazioni sul programma
  *

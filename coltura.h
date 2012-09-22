@@ -159,8 +159,8 @@ private:
      * pilaMatrici->next.
      * @param painter
      * @param event
-     * In particolare, prende l'oggetto locale matrice e lo scorre fino alla fine,
-     * impostando il pennello a seconda del valore della cella.
+     * In particolare, prende l'oggetto locale matrice e lo scorre fino alla
+     * fine, impostando il pennello a seconda del valore della cella.
      *
      */
     void paintColtura(QPainter *, QPaintEvent *);
