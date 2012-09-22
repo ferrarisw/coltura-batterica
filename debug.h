@@ -8,33 +8,33 @@
 using namespace std;
 
 /**
- *  The WDebug class.
+ *  The Debug class.
  *
  * La parte pubblica contiene:
- *      - WDebug(Qwidget *parent = 0), costruttore
- *      - ~WDebug(), decostruttore
+ *      - Debug(Qwidget *parent = 0), costruttore
+ *      - ~Debug(), decostruttore
  * I public slots sono:
  *      - void changeMaskValue(int value), che cambia il livello di debug
  *      - void changeLogMaskValue(int value), che attiva/disattiva il log
  */
-class WDebug : public QWidget
+class Debug : public QWidget
 {
     Q_OBJECT
 public:
     /**
-     *  Costruttore della classe WDebug
+     *  Costruttore della classe Debug
      * @param parent 0
      *
-     * Il costruttore della classe WDebug inizializza la finestra che permette
+     * Il costruttore della classe Debug inizializza la finestra che permette
      * di attivare, disattivare o modificare le funzionalita' di debug.
      */
-    explicit WDebug(QWidget *parent = 0);
+    explicit Debug(QWidget *parent = 0);
 
-    ~WDebug();
+    ~Debug();
 
 public slots:
     /**
-     *  Settaggio del valore della maschera di bit per il WDebug
+     *  Settaggio del valore della maschera di bit per il Debug
      * @param value valore da assegnare alla maschera
      *
      * Chiamando questo slot si ha la possibilita' di settare il valore

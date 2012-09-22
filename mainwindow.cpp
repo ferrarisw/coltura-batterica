@@ -11,6 +11,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     GD1(cout<<"[MainWindow::MainWindow] dimensioni della matrice: "<<x<<" "<<y<<endl) ;
 
     closingalert = new ClosingAlert();
+    about = new About();
 
     this->coltura = new Coltura(x,y,pattern);
     GD1(cout<<"[MainWindow::MainWindow] ho creato il nuovo oggetto coltura"<<endl) ;
@@ -22,7 +23,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     file->addAction(tr("&Chiudi"),          this,   SLOT(closing()  ));
 
     help = menuBar()->addMenu(tr("&Aiuto"));
-    help->addAction(tr("&About"),          this,   SLOT(about()     ));
+    help->addAction(tr("&About"),          this,   SLOT(openAbout()     ));
 
     
     stepByStep = new QPushButton(tr("passo passo"));
@@ -50,7 +51,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
     central = new QWidget();
 
 #ifdef DEBUG_MODE
-    WDebug * debug = new WDebug();
+    Debug * debug = new Debug();
 
     QHBoxLayout * setting = new QHBoxLayout();
     setting->addLayout(layout);
@@ -62,6 +63,7 @@ MainWindow::MainWindow(int x, int y, int pattern, QWidget *parent):
 #endif
 
     this->setCentralWidget(central);
+    coltura->resize(coltura->minimumSize());
     this->resize(minimumSize());
 
     setWindowTitle(tr("Coltura batterica"));
@@ -78,6 +80,7 @@ MainWindow::~MainWindow()
     delete buttonLayout;
     delete layout;
     delete closingalert;
+    delete about;
     delete central;
     GD1(cout<<"[WDebug:~WDebug] oggetto deallocato correttamente"<<endl);
 }
@@ -122,22 +125,9 @@ bool MainWindow::load()
     return ret;
 }
 
-void MainWindow::about()
+void MainWindow::openAbout()
 {
-    QWidget * about = new QWidget();
-    about->move(screenX + this->width()/2,  screenY - this->height()/4);
-    QLabel * label = new QLabel(tr("Life Runner (v 1.0)\n"
-                                   "Davide Ferrari e Serena Ziviani."));
-    QPushButton * ok = new QPushButton(tr("ok"));
-    connect(ok,SIGNAL(clicked()),about,SLOT(deleteLater()));
-
-    QVBoxLayout layout;
-    layout.addWidget(label);
-    layout.addWidget(ok);
-
-    about->setLayout(&layout);
     about->show();
-
 }
 
 void MainWindow::closeEvent(QCloseEvent * closeEvent)

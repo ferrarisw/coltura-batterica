@@ -54,7 +54,7 @@ Coltura::~Coltura()
     delete pila;
     delete timer;
     delete timeSlider;
-    GD1(cout<<"[WDebug:~WDebug] oggetto deallocato correttamente"<<endl);
+    GD1(cout<<"[Coltura:~Coltura] oggetto deallocato correttamente"<<endl);
 }
 
 void Coltura::setMagnifier()
@@ -108,7 +108,7 @@ void Coltura::setMagnifier()
     default:
         cerr<<"errore di dimensionamento, secondo livello"<<endl;
     }
-
+    GD3(cout<<"[Coltura::setMagnifier] magnifier: "<<magnifier<<endl);
 }
 
 void Coltura::paintEvent(QPaintEvent *event)
@@ -121,7 +121,8 @@ void Coltura::paintEvent(QPaintEvent *event)
 #ifdef DEBUG_MODE
     if(MASK>=8)//livello GD3 attivo
     {
-        this->resize(magnifier*(x+2),magnifier*(y+2));
+        cout<<"G3 [Coltura::paintEvent] magnifier: "<<magnifier<<endl;
+        this->setMinimumSize(magnifier*(x+2),magnifier*(y+2));
         paintColtura(&painter, event, "debug");
     }
     else
@@ -214,11 +215,12 @@ void Coltura::draw(QPainter * painter)
 
 void Coltura::aggiorna()
 {
-    matrice=pila->next();
+    matrice = pila->next();
+
     int value=timeSlider->value();
     int max=timeSlider->maximum();
 
-    if(value==max)
+    if(value==max && !(timeSlider->isSliderDown()))
     {
         timeSlider->setMaximum(++max);
         timeSlider->setValue(++value);

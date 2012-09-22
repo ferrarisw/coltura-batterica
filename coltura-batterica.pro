@@ -17,12 +17,16 @@ SOURCES += main.cpp\
     coltura_IO.cpp \
     closingalert.cpp \
     starter.cpp \
-    wdebug.cpp
+    debug.cpp \
+    about.cpp
 
 HEADERS  += mainwindow.h \
     coltura.h \
     pilamatrici.h \
     closingalert.h \
     starter.h \
-    wdebug.h \
-    main.h
+    main.h \
+    debug.h \
+    about.h
+
+FORMS +=

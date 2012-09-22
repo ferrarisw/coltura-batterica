@@ -4,6 +4,7 @@
 #include "pilamatrici.h"
 #include "coltura.h"
 #include "closingalert.h"
+#include "about.h"
 #include <QtGui>
 #include <iostream>
 using namespace std;
@@ -29,7 +30,7 @@ class Coltura;
  *      - void newGame(), che crea una nuova partita, eliminando l'attuale
  *      - void save(), che salva la coltura attuale su un file .runner //TODO cartella sbagliata
  *      - void closing(), che gestisce la chiusura del programma
- *      - void about(), che mostra informazioni sul programma
+ *      - void openAbout(), che mostra informazioni sul programma
  *
  *  I public slots sono:
  *      - void load(), che carica una coltura da un file .runner
@@ -37,12 +38,14 @@ class Coltura;
  *  La parte privata contiene:
  *      - QSlider * slider
  *      - ClosingAlert * closingalert
+ *      - About * about
  *      - Coltura * coltura
  *      - QMenu * file
  *      - QMenu * help
  *      - QPushButton * stepByStep
  *      - QPushButton * playButton
  *      - QHBoxLayout * buttonLayout
+ *      - QWidget * central;
  *      - int x,y
  *      - bool playing
  */
@@ -100,7 +103,7 @@ private slots:
     /**
      *  Mostra informazioni sul programma.
      */
-    void about();
+    void openAbout();
 
 public slots:
     /**
@@ -110,6 +113,7 @@ public slots:
 
 private:
     ClosingAlert * closingalert;
+    About * about;
     QSlider * slider;
     Coltura * coltura;
     QMenu * file;
@@ -121,6 +125,7 @@ private:
     QVBoxLayout * layout;
     int x,y;
     bool playing;
+
 };
 
 #endif // MAINWINDOW_H

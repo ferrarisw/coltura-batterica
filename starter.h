@@ -6,12 +6,13 @@
 #include "mainwindow.h"
 #include "main.h"
 #include "cassert"
-#include "wdebug.h"
+#include "debug.h"
 #include "closingalert.h"
+#include "about.h"
 
 class MainWindow;
 #ifdef DEBUG_MODE
-class WDebug;
+class Debug;
 #endif
 
 /**
@@ -29,7 +30,7 @@ class WDebug;
  *      - void changeYDimension(int), che imposta l'altezza della coltura
  *      - void setPattern(int), che imposta il pattern
  *      - void load(), che carica una coltura da file
- *      - void about(), che visualizza le informazioni sul programma
+ *      - void openAbout(), che visualizza le informazioni sul programma
  *      - void closing(), che gestisce la terminazione del programma
  *
  * La parte protected contiene:
@@ -41,7 +42,8 @@ class WDebug;
  *      - int y;
  *      - int pattern;
  *      - ClosingAlert * closingalert;
- *      - WDebug * debug, solo se in modalità debug
+ *      - About * about;
+ *      - Debug * debug, (!solo se in modalità debug!)
  */
 class Starter : public QMainWindow
 {
@@ -87,7 +89,7 @@ private slots:
     /**
      *  Visualizza le informazioni sul programma.
      */
-    void about();
+    void openAbout();
 
     /**
      *  Gestisce la chiusura del programma.
@@ -103,9 +105,10 @@ private:
     int y;
     int pattern;
     ClosingAlert * closingalert;
+    About * about;
     QMenu * file;
 #ifdef DEBUG_MODE
-    WDebug * debug;
+    Debug * debug;
 #endif
 
     

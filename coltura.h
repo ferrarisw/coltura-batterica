@@ -36,8 +36,9 @@ class PilaMatrici;
  *       - int x,y, le dimensioni della coltura.
  *       - int pattern, il tipo di coltura che voglio ottenere.
  *       - int * matrice, la rappresentazione in 0 e 1 della coltura.
- *       - int magnifier, la "dimensione" delle singole caselle.
  *       - PilaMatrici * pila, variabile della classe PilaMatrici.
+ *       - int magnifier, la "dimensione" delle singole caselle.
+ *       - void setMagnifier(), che determina le dimensioni delle cellule
  *       - void paintColtura(QPainter * painter, QPaintEvent * event),
  *          che gestisce la visualizzazione grafica della coltura.
  *       - void paintColtura(QPainter * painter, QPaintEvent * event,
@@ -69,7 +70,7 @@ public:
 
     ~Coltura();
 
-    /**
+     /**
       *  Ritorna la velocità massima di play
       * @return maxTime
       */
@@ -153,28 +154,29 @@ private:
     int * matrice;
     int magnifier;
     void setMagnifier();
-    /*
+    /**
+     *  Funzione che disegna la coltura in base alla matrice generata da
+     * pilaMatrici->next.
      * @param painter
      * @param event
-     * Funzione che disegna la coltura in base alla matrice generata da
-     * pilaMatrici->next.
      * In particolare, prende l'oggetto locale matrice e lo scorre fino alla fine,
      * impostando il pennello a seconda del valore della cella.
      *
      */
     void paintColtura(QPainter *, QPaintEvent *);
     void paintColtura(QPainter *, QPaintEvent *, const char *);
+    /*
+     *  Funzione di appoggio a paintColtura.
+     * Gestisce i dettagli riguardanti la modalità di disegno delle cellule.
+     * (!!pre-alpha!!)
+     */
+    void draw(QPainter *);
     PilaMatrici *pila;
     QBrush colore;
     QTimer *timer;
     int minTime;
     int maxTime;
-    /*
-     *  Funzione di appoggio a paintColtura.
-     * Gestisce i dettagli riguardanti le dimensioni del widget sullo schermo.
-     * (!!pre-alpha!!)
-     */
-    void draw(QPainter *);
+
 };
 
 #endif // COLTURA_H
