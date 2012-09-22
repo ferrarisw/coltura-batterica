@@ -1,5 +1,6 @@
 #include "starter.h"
-#include "wdebug.h"
+#include "debug.h"
+#include "about.h"
 
 Starter::Starter(QWidget *parent) :
     QMainWindow(parent)
@@ -9,6 +10,7 @@ Starter::Starter(QWidget *parent) :
     this->move(screenX,screenY);
 
     closingalert = new ClosingAlert();
+    about = new About();
 
     this->x=50;
     this->y=50;
@@ -16,10 +18,10 @@ Starter::Starter(QWidget *parent) :
 
     file = new QMenu();
     file = menuBar()->addMenu(tr("&File"));
-    file->addAction(tr("&Carica"),       this,   SLOT(load()     ));
-    file->addAction(tr("&Chiudi"),       this,   SLOT(closing()  ));
+    file->addAction(tr("&Carica"),      this,   SLOT(load()     ));
+    file->addAction(tr("&Chiudi"),      this,   SLOT(closing()  ));
 
-    menuBar()->addAction(tr("&About"),          this,   SLOT(about()     ));
+    menuBar()->addAction(tr("&About"),  this,   SLOT(openAbout()   ));
 
     QLabel      * descrizione   =   new QLabel;
     descrizione->setText(tr("Inserisci le dimensioni della coltura"));
@@ -92,7 +94,7 @@ Starter::Starter(QWidget *parent) :
     QHBoxLayout * setting       =   new QHBoxLayout();
     setting->addLayout(layout);
 #ifdef DEBUG_MODE
-    debug = new WDebug();
+    debug = new Debug();
     setting->addWidget(debug);
 #endif
 
@@ -110,6 +112,7 @@ Starter::Starter(QWidget *parent) :
 Starter::~Starter()
 {//TODO a posto
     delete closingalert;
+    delete about;
     delete file;
     GD1(cout<<"[Starter:~Starter] oggetto deallocato correttamente"<<endl);
 }
@@ -162,23 +165,9 @@ void Starter::load()
     }
 }
 
-//TODO lo trasformo in widget?
-void Starter::about()
+
+void Starter::openAbout()
 {
-    QWidget * about = new QWidget();
-
-    about->move(screenX + this->width()/2,  screenY - this->height()/2);
-
-    QLabel * label = new QLabel(tr("Life Runner (v 1.0)\n"
-                                   "Davide Ferrari e Serena Ziviani."));
-    QPushButton * ok = new QPushButton(tr("OK"));
-    connect(ok,SIGNAL(clicked()),about,SLOT(deleteLater()));
-
-    QVBoxLayout layout;
-    layout.addWidget(label);
-    layout.addWidget(ok);
-
-    about->setLayout(&layout);
     about->show();
 }
 
@@ -187,7 +176,6 @@ void Starter::closeEvent(QCloseEvent * closeEvent)
     closeEvent->ignore();
 
     TRACE("[Starter::closeEvent]");
-
 
     connect(closingalert->buttons,SIGNAL(accepted()),this,SLOT(closing()));
     connect(closingalert->buttons,SIGNAL(rejected()),closingalert,SLOT(close()));
@@ -200,5 +188,6 @@ void Starter::closing()
 {
     this->deleteLater();
     closingalert->deleteLater();
+    about->deleteLater();
 }
 

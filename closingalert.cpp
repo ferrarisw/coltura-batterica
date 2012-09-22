@@ -7,7 +7,7 @@ ClosingAlert::ClosingAlert(QWidget * parent):
 {
     this->move(screenX,screenY);
 
-    QLabel * label = new QLabel(tr("Vuoi veramente chiudere l'applicazione?"));
+    QLabel * label = new QLabel(tr("Chiudere l'applicazione?"));
 
     buttons = new QDialogButtonBox(QDialogButtonBox::Ok |
                                    QDialogButtonBox::Cancel);

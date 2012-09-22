@@ -1,6 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#ifndef DEBUG_MODE
+#define NDEBUG
+#endif
+
 #include <iostream>
 #include <fstream>
 #include <QtGui>
@@ -8,7 +12,7 @@
 #include "pilamatrici.h"
 #include "coltura.h"
 #include "starter.h"
-#include "wdebug.h"
+#include "debug.h"
 
 //*************************************
 //TODO: lista
@@ -17,7 +21,6 @@
  *testare la release version
  *controllare cose strane
  *controllare make debug
- *questione del javadoc compatible spazio in pi# in pilamatrici
  *about con le regole che avevamo visto al tempo da valente (quelle non dell'esame)
  *guardare la manpage del moc
  */
@@ -64,7 +67,7 @@ extern int MASK;
 /*############################################################################*/
 
  /*
-  * Definisco una modalit di log che stampa sul terminale i dati statistici
+  * Definisco una modalità di log che stampa sul terminale i dati statistici
   * del programma.
   */
 #ifdef DEBUG_MODE

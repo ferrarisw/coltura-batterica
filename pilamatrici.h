@@ -13,7 +13,7 @@ using namespace std;
         - Un costruttore e un decostruttore per la pila di matrici
         - Una funzione next che crea la prossima matrice apportando le giuste
             modifiche in base alla matrice precedente.
-        - Una funzione stampa con funzionalita' di WDebug.
+        - Una funzione stampa con funzionalita' di Debug.
         - Due funzioni getDimx e getDimy che ritornano la dimensione sull'asse
             x e y della matrice.
         - Una funzione Salva e una Carica per gestire i file.

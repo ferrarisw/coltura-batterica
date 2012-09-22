@@ -1,9 +1,9 @@
 # lista dei sorgenti separati da spazi
-SOURCES = main.cpp mainwindow.cpp pilamatrici.cpp pilamatrici_IO.cpp starter.cpp coltura.cpp coltura_IO.cpp debug.cpp closingalert.cpp 
+SOURCES = main.cpp mainwindow.cpp pilamatrici.cpp pilamatrici_IO.cpp starter.cpp coltura.cpp coltura_IO.cpp debug.cpp closingalert.cpp about.cpp
 OBJ = $(SOURCES:.cpp=.o)
-MOC = coltura_moc.cpp starter_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp
-DMOC = coltura_dmoc.cpp starter_dmoc.cpp mainwindow_dmoc.cpp debug_dmoc.cpp closingalert_dmoc.cpp
-MOCOBJ = coltura_moc.o starter_moc.o mainwindow_moc.o debug_moc.o closingalert_moc.o
+MOC = coltura_moc.cpp starter_moc.cpp mainwindow_moc.cpp debug_moc.cpp closingalert_moc.cpp about_moc.cpp
+DMOC = coltura_dmoc.cpp starter_dmoc.cpp mainwindow_dmoc.cpp debug_dmoc.cpp closingalert_dmoc.cpp about_dmoc.cpp
+MOCOBJ = $(MOC:.cpp=.o)
 
 
 QTLIBS = `pkg-config --libs QtGui`
@@ -29,6 +29,9 @@ coltura_moc.cpp : coltura.cpp coltura.h
 
 debug_moc.cpp : debug.cpp debug.h
 	moc debug.h -o debug_moc.cpp
+
+about_moc.cpp : about.cpp about.o
+	moc about.h -o about_moc.cpp
         
 closingalert_moc.cpp : closingalert.cpp closingalert.h
 	moc closingalert.h -o closingalert_moc.cpp
@@ -45,6 +48,9 @@ coltura_dmoc.cpp : coltura.cpp coltura.h
 
 debug_dmoc.cpp : debug.cpp debug.h
 	moc $(DFLAG) debug.h -o debug_dmoc.cpp
+
+about_dmoc.cpp : about.cpp about.o
+	moc $(DFLAG) about.h -o about_dmoc.cpp
         
 closingalert_dmoc.cpp : closingalert.cpp closingalert.h
 	moc $(DFLAG) closingalert.h -o closingalert_dmoc.cpp
