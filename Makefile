@@ -77,5 +77,4 @@ depend: *.cpp
 	g++ -MM $(shell ls *.cpp | grep -v '.*moc.cpp') > dependencies
 
 debug: $(shell ls *.cpp | grep -v '.*_moc.cpp') $(DMOC)
-	rm -f *_moc.cpp
-	g++ -g $(DFLAG) -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) $(SRC)
+	g++ -g $(DFLAG) -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) $(SOURCES) $(DMOC)
