@@ -8,7 +8,7 @@
 #include "pilamatrici.h"
 #include "coltura.h"
 #include "starter.h"
-#include "debug.h"
+#include "wdebug.h"
 
 //*************************************
 //TODO: lista
@@ -64,7 +64,7 @@ extern int MASK;
 /*############################################################################*/
 
  /*
-  * Definisco una modalità di log che stampa sul terminale i dati statistici
+  * Definisco una modalit di log che stampa sul terminale i dati statistici
   * del programma.
   */
 #ifdef DEBUG_MODE

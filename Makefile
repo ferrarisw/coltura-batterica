@@ -13,21 +13,9 @@ CXXFLAGS = $(QTFLAG) -Wall
 LDFLAGS = $(QTLIBS)
 DFLAG = -D DEBUG_MODE
         
-colturabatterica : $(OBJ) $(MOCOBJ)
+liferunner : $(OBJ) $(MOCOBJ)
 	g++ -export-dynamic -o liferunner $+ $(LDFLAGS)
 
--include dependencies
-
-#moc.o
-mainwindow_moc.o : mainwindow_moc.cpp main.h mainwindow.h coltura.h
-
-starter_moc.o : starter_moc.cpp starter.h main.h
-
-coltura_moc.o : coltura_moc.cpp main.h coltura.h pilamatrici.h
-
-debug_moc.o : debug_moc.cpp debug.h
-
-closingalert_moc.o : closingalert_moc.cpp closingalert.h
 
 #moc.cpp
 mainwindow_moc.cpp : mainwindow.cpp mainwindow.h
@@ -67,7 +55,7 @@ clean :
 	rm -f *.o *moc.cpp
 
 cleanall:
-	rm -f -r colturabatterica dependencies *.o *moc.cpp doc
+	rm -f -r liferunner dependencies *.o *moc.cpp doc
 
 doc: clean
 	doxygen Doxyfile
@@ -76,5 +64,5 @@ depend: *.cpp
 	#creo la parte relativa ai "normali" file oggetto
 	g++ -MM $(shell ls *.cpp | grep -v '.*moc.cpp') > dependencies
 
-debug: $(shell ls *.cpp | grep -v '.*_moc.cpp') $(DMOC)
-	g++ -g $(DFLAG) -export-dynamic -o colturabatterica $(LDFLAGS) $(CXXFLAGS) $(SOURCES) $(DMOC)
+debug: $(SOURCES) $(DMOC)
+	g++ -g $(DFLAG) -export-dynamic -o liferunner $(LDFLAGS) $(CXXFLAGS) $(SOURCES) $(DMOC)

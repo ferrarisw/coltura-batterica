@@ -55,7 +55,7 @@ PilaMatrici::~PilaMatrici()
             delete posizioneAttuale->tabella;
             delete posizioneAttuale;
     }
-    GD1(cout<<"[Debug:~Debug] oggetto deallocato correttamente"<<endl);
+    GD1(cout<<"[WDebug:~WDebug] oggetto deallocato correttamente"<<endl);
 }
 
 
