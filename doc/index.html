@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Life Runner: Il gioco della Vita: Natura e Matematica</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Batteri.jpg"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Life Runner
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Il Gioco della Vita</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.2 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li class="current"><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Tipi enumerati (enum)</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Valori del tipo enumerato</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pagine</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Il gioco della Vita: Natura e Matematica </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Questo programma utilizza l'algoritmo della vita ideato da John Conway verso la fine degli anni sessanta. Sfrutta semplici calcoli matematici per simulare l'evoluzione e la crescita di una coltura cellulare dalle semplici regole.<br/>
+ Si veda il <a class="el" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main.">main</a> per cominciare a navigare nel programma.<br/>
+ In una matrice cellulare costituita da cellule vive e morte, ad ogni istante la configurazione cambia a seconda della configurazione precedente.<br/>
+ Le transizioni di stato dipendono unicamente dal numero di vicini vivi:<br/>
+</p>
+<ul>
+<li>Una cella morta con esattamente 3 vicini vivi nasce, diventando viva.</li>
+<li>Una cella viva con 2 o 3 vicini vivi sopravvive; altrimenti muore. Queste transizioni vengono implementate in <a class="el" href="classPilaMatrici.html#a0ea12c7a63432eb38362b5adc9959d2d" title="Permette di avanzare alla matrice successiva.">PilaMatrici::next</a></li>
+</ul>
+<p>Il programma utilizza una matrice di numeri interi rappresentanti le cellule vive (1) e morte (0), descritte da una semplice interfaccia grafica a quadri, disegnata da <a class="el" href="classColtura.html#a976d085e83a55beefb51614745c183f9" title="Funzione che disegna la coltura in base alla matrice generata da pilaMatrici-&gt;next.">Coltura::paintColtura</a><br/>
+ Questa versione del programma include diverse funzionalità che permettono di agire sulla coltura di cellule. Con la possibilità di scegliere la dimensione della coltura (<a class="el" href="classStarter.html" title="The Starter class.">Starter</a>) e la velocità con cui questa si aggiornerà nel corso della riproduzione, abbiamo anche aggiunto una funzionalità che permette di tornare indietro nel tempo tramite uno slider, così da poter ripercorrere tutta l'evoluzione della coltura ad elaborazione già avvenuta.</p>
+<p>Sono presenti anche le funzionalità di salvataggio (<a class="el" href="classPilaMatrici.html#ae6acf13fe85f6e4c8b050932c7c109c0" title="Salvataggio su File della matrice.">PilaMatrici::salva</a>) su file e di caricamento.<br/>
+ Il salvataggio scrive su file le dimensioni della coltura e la configurazione intera.<br/>
+ Il caricamento (<a class="el" href="classPilaMatrici.html#ac37116f0525280353fccac6e1bbd7543" title="Caricamento da File della matrice.">PilaMatrici::carica</a>) li ripristina nel programma e crea una nuova coltura di quelle dimensioni e di quella configurazione.<br/>
+ Utilizzando il caricamento da file, è anche possibile importare configurazioni non casuali corrispondenti a pattern grafici interessanti.<br/>
+ Legati ai pattern, abbiamo introdotto la possibilita' di iniziare una coltura con configurazioni semplici come linee oblique o verticali simmetriche e no (<a class="el" href="classPilaMatrici.html#ae04b8c2af5ccc24233d8936d333a9830">PilaMatrici::patternModeSelector</a>).<br/>
+ Questo permette di ricreare effetti grafici semplici indipendentemente dalla dimensione della coltura.<br/>
+ </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato Ven 16 Nov 2012 15:59:35 per Life Runner da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.2
+</small></address>
+</body>
+</html>
